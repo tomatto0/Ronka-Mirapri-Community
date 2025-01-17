@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function Home() {
+  console.log(process.env.NEXT_PUBLIC_GOOGLE_CLIENT_KEY);
   return (
     <div className={styles.page}>
       <main className={styles.main}>
