@@ -1,6 +1,6 @@
 "use client";
 
-import { signIn, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
 
 const SignupPage = () => {
@@ -9,31 +9,6 @@ const SignupPage = () => {
   const [nickname, set_nickname] = useState<string>("");
   const [sns, set_sns] = useState<string>("");
   const is_user_load = useRef<boolean>(false);
-
-  const is_exist_email = (email: string): Promise<boolean> => {
-    return fetch(`/db/users?email=${email}`, {
-      method: "GET",
-    })
-      .then((response) => {
-        if (!response.ok) {
-          return Promise.reject("failed to fetch user data");
-        }
-        return response.json();
-      })
-      .then((res) => {
-        if (res.success === false) {
-          return false;
-        }
-        if (res.data === null) {
-          return false;
-        }
-        return true;
-      })
-      .catch((error) => {
-        console.error(error);
-        return false;
-      });
-  };
 
   const login_handler = async () => {
     if (!nickname) {
@@ -51,22 +26,24 @@ const SignupPage = () => {
     if (res.success === false) {
       return false;
     }
-    console.log(res);
-    window.location.href = "/";
+    signOut().then(() => {
+      window.location.href = "/";
+    });
     return true;
   };
 
   useEffect(() => {
-    if (status === "loading") {
-      is_user_load.current = false;
-    } else if (session?.user?.email) {
-      is_exist_email(session.user.email).then((is_exist) => {
-        if (is_exist) {
+    if (status !== "loading") {
+      if (session && session.user) {
+        console.log(session.user);
+        set_email(session.user.email as string);
+        if ("nickname" in session.user) {
+          console.log(session?.user);
           window.location.href = "/";
         } else {
           is_user_load.current = true;
         }
-      });
+      }
     }
   }, [status]);
 

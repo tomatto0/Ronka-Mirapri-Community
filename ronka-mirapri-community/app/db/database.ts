@@ -23,7 +23,7 @@ function is_validation_error(e: unknown): e is MongooseError {
 
 const user_schema = new Schema({
   email: { type: String, required: true, unique: true },
-  nickname: { type: String, required: true },
+  nickname: { type: String, required: true, unique: true },
   sns: { type: String, required: false },
   created_at: { type: Date, default: Date.now },
 });

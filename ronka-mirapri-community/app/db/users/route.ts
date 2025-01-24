@@ -6,16 +6,23 @@ import {
   User,
 } from "../database";
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const email = url.searchParams.get("email");
+  const session = await getServerSession(authOptions);
 
   try {
+    if (email && session?.user?.email !== email) {
+      throw new Error("not valid email");
+    }
     await connectDB();
-    const users = email
-      ? await User.findOne({ email }).exec()
-      : await User.find().exec();
+    const users = await User.findOne({ email }).exec();
+    if (!users) {
+      return NextResponse.json({ success: false, error: "User not found." });
+    }
     return NextResponse.json({ success: true, data: users });
   } catch (e) {
     console.error("MongoDB Failed to read users error:", e);
@@ -33,7 +40,11 @@ export async function POST(request: Request) {
   await connectDB();
   try {
     const body = await request.json();
+    const session = await getServerSession(authOptions);
 
+    if (session?.user?.email !== body.email) {
+      throw new Error("not valid email");
+    }
     const user = new User({
       email: body.email,
       nickname: body.nickname,
@@ -47,7 +58,7 @@ export async function POST(request: Request) {
     let error_message: string = "";
 
     if (is_duplicated_error(e)) {
-      console.log("duplicated Error");
+      console.log("duplicated Error", e);
       error_message = "duplicated Error";
     } else if (is_validation_error(e)) {
       console.log("validation Error");
@@ -67,6 +78,11 @@ export async function PATCH(request: Request) {
   await connectDB();
   try {
     const body = await request.json();
+    const session = await getServerSession(authOptions);
+
+    if (session?.user?.email !== body.email) {
+      throw new Error("not valid email");
+    }
 
     for (const field of ["email"]) {
       if (!body[field]) {
@@ -120,6 +136,11 @@ export async function DELETE(request: Request) {
   await connectDB();
   try {
     const body = await request.json();
+    const session = await getServerSession(authOptions);
+
+    if (session?.user?.email !== body.email) {
+      throw new Error("not valid email");
+    }
 
     for (const field of ["email"]) {
       if (!body[field]) {
