@@ -47,18 +47,18 @@ export const authOptions: AuthOptions = {
       return true;
     },
     async jwt({ token, user }) {
-      if (user?.email) {
+      if (token?.login === undefined) {
         await connectDB();
-        const users = await User.findOne({ email: user.email }).exec();
+        const users = await User.findOne({ email: token.email }).exec();
         if (users) {
-          const { email, nickname, sns } = users;
+          const { _id, email, nickname, sns } = users;
           token.encrypted = encrypt_payload(
-            JSON.stringify({ email, nickname, sns }),
+            JSON.stringify({ _id, email, nickname, sns }),
             process.env.JWT_ENCRYPTION_KEY!
           );
         } else {
           token.encrypted = encrypt_payload(
-            JSON.stringify({ email: user?.email }),
+            JSON.stringify({ email: token?.email }),
             process.env.JWT_ENCRYPTION_KEY!
           );
         }

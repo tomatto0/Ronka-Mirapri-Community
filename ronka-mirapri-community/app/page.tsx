@@ -7,20 +7,16 @@ export default function Home() {
   const { data: session, status } = useSession();
 
   useEffect(() => {
-    if (status !== "loading") {
-      if (session?.user && "nickname" in session.user) {
-        console.log(session);
-      }
-    }
+    console.log(session);
   }, [status]);
   if (status === "loading") {
     return <div>Loading...</div>;
   }
   return (
     <div>
-      {session?.user && "nickname" in session.user ? (
+      {session?.user ? (
         <div>
-          <p>Welcome, {session.user?.email}</p>
+          <p>Welcome, {session.user?.nickname}</p>
           <button onClick={() => signOut()}>Sign out</button>
         </div>
       ) : (

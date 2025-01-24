@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import {
   connectDB,
   is_duplicated_error,
@@ -11,25 +10,37 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const email = url.searchParams.get("email");
-  const session = await getServerSession(authOptions);
+  const id = url.searchParams.get("id");
 
   try {
-    if (email && session?.user?.email !== email) {
-      throw new Error("not valid email");
+    if (!id) {
+      return NextResponse.json(
+        { success: false, error: "Invalid request" },
+        { status: 400 }
+      );
+    }
+    const session = await getServerSession(authOptions);
+    if (session?.user?._id !== id) {
+      return NextResponse.json(
+        { success: false, error: "Forbidden access" },
+        { status: 403 }
+      );
     }
     await connectDB();
-    const users = await User.findOne({ email }).exec();
-    if (!users) {
-      return NextResponse.json({ success: false, error: "User not found." });
+    const user = await User.findById(id).exec();
+    if (!user) {
+      return NextResponse.json(
+        { success: false, error: "User not found" },
+        { status: 404 }
+      );
     }
-    return NextResponse.json({ success: true, data: users });
+    return NextResponse.json({ success: true, data: user });
   } catch (e) {
     console.error("MongoDB Failed to read users error:", e);
     return NextResponse.json(
       {
         success: false,
-        error: "Failed to read users",
+        error: "Unknown error",
       },
       { status: 500 }
     );
@@ -37,13 +48,22 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  await connectDB();
   try {
+    await connectDB();
     const body = await request.json();
     const session = await getServerSession(authOptions);
 
     if (session?.user?.email !== body.email) {
-      throw new Error("not valid email");
+      return NextResponse.json(
+        { success: false, error: "Invalid request" },
+        { status: 400 }
+      );
+    }
+    if (!body.nickname) {
+      return NextResponse.json(
+        { success: false, error: "Invalid request" },
+        { status: 400 }
+      );
     }
     const user = new User({
       email: body.email,
@@ -54,20 +74,18 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true, data: created_user });
   } catch (e) {
-    console.error("MongoDB Failed to create users:");
-    let error_message: string = "";
-
+    console.error("MongoDB Failed to create users:", e);
+    let error_message = "Unknown error";
     if (is_duplicated_error(e)) {
-      console.log("duplicated Error", e);
       error_message = "duplicated Error";
     } else if (is_validation_error(e)) {
-      console.log("validation Error");
       error_message = "validation Error";
     }
+    console.log(error_message);
     return NextResponse.json(
       {
         success: false,
-        error: "Failed to create users: " + error_message,
+        error: error_message,
       },
       { status: 500 }
     );
@@ -75,37 +93,38 @@ export async function POST(request: Request) {
 }
 
 export async function PATCH(request: Request) {
-  await connectDB();
   try {
     const body = await request.json();
     const session = await getServerSession(authOptions);
 
-    if (session?.user?.email !== body.email) {
-      throw new Error("not valid email");
+    if (!session?.user?._id) {
+      return NextResponse.json(
+        { success: false, error: "Need to login" },
+        { status: 400 }
+      );
+    }
+    if (!body.id || session?.user?._id !== body.id) {
+      return NextResponse.json(
+        { success: false, error: "Invalid request" },
+        { status: 400 }
+      );
     }
 
-    for (const field of ["email"]) {
-      if (!body[field]) {
-        const error = new mongoose.Error.ValidationError();
-        error.addError(
-          field,
-          new mongoose.Error.ValidatorError({
-            message: `${field} is required`,
-          })
-        );
-        throw error;
+    await connectDB();
+
+    const update_field: Partial<{ nickname: string; sns: string }> = {};
+
+    const keys: (keyof typeof update_field)[] = ["nickname", "sns"];
+    keys.forEach((key) => {
+      if (body[key] !== undefined) {
+        update_field[key] = body[key];
       }
-    }
+    });
 
-    const updated_user = await User.findOneAndUpdate(
-      { email: body.email },
-      {
-        email: body.email,
-        nickname: body.nickname,
-        sns: body.sns,
-      },
-      { new: true, runValidators: true }
-    ).exec();
+    const updated_user = await User.findByIdAndUpdate(body.id, update_field, {
+      new: true,
+      runValidators: true,
+    }).exec();
     if (!updated_user) {
       return NextResponse.json(
         { sucess: false, error: "user not found" },
@@ -114,18 +133,18 @@ export async function PATCH(request: Request) {
     }
     return NextResponse.json({ success: true, data: updated_user });
   } catch (e) {
-    console.error("MongoDB Failed to update users:");
-    let error_message: string = "unknown error";
+    console.error("MongoDB Failed to update users:", e);
+    let error_message = "Unknown error";
     if (is_duplicated_error(e)) {
-      error_message = "duplicated Error: This email is already use";
+      error_message = "duplicated Error";
     } else if (is_validation_error(e)) {
-      error_message = "validation Error: one or more field is needs";
+      error_message = "validation Error";
     }
     console.log(error_message);
     return NextResponse.json(
       {
         success: false,
-        error: "Failed to update users: " + error_message,
+        error: error_message,
       },
       { status: 500 }
     );
@@ -133,51 +152,46 @@ export async function PATCH(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-  await connectDB();
   try {
     const body = await request.json();
     const session = await getServerSession(authOptions);
 
-    if (session?.user?.email !== body.email) {
-      throw new Error("not valid email");
+    if (!session?.user?._id) {
+      return NextResponse.json(
+        { success: false, error: "Need to login" },
+        { status: 400 }
+      );
+    }
+    if (!body.id || session?.user?._id !== body.id) {
+      return NextResponse.json(
+        { success: false, error: "Invalid request" },
+        { status: 400 }
+      );
     }
 
-    for (const field of ["email"]) {
-      if (!body[field]) {
-        const error = new mongoose.Error.ValidationError();
-        error.addError(
-          field,
-          new mongoose.Error.ValidatorError({
-            message: `${field} is required`,
-          })
-        );
-        throw error;
-      }
-    }
+    await connectDB();
 
-    const deleted_user = await User.findOneAndDelete({
-      email: body.email,
-    }).exec();
+    const deleted_user = await User.findByIdAndDelete(body.id).exec();
 
     if (!deleted_user) {
       return NextResponse.json(
-        { sucess: false, error: "user not found" },
+        { success: false, error: "user not found" },
         { status: 404 }
       );
     }
 
     return NextResponse.json({ success: true, data: deleted_user });
   } catch (e) {
-    console.error("MongoDB Failed to delete users:");
+    console.error("MongoDB Failed to delete users:", e);
     let error_message: string = "unknown error";
     if (is_validation_error(e)) {
-      error_message = "validation Error: one or more field is needs";
+      error_message = "validation Error";
     }
     console.log(error_message);
     return NextResponse.json(
       {
         success: false,
-        error: "Failed to delete users: " + error_message,
+        error: error_message,
       },
       { status: 500 }
     );

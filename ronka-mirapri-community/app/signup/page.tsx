@@ -1,6 +1,6 @@
 "use client";
 
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
 
 const SignupPage = () => {
@@ -26,9 +26,7 @@ const SignupPage = () => {
     if (res.success === false) {
       return false;
     }
-    signOut().then(() => {
-      window.location.href = "/";
-    });
+    window.location.href = "/";
     return true;
   };
 

@@ -25,9 +25,19 @@ const user_schema = new Schema({
   email: { type: String, required: true, unique: true },
   nickname: { type: String, required: true, unique: true },
   sns: { type: String, required: false },
+  posts: [{ type: Schema.Types.ObjectId, ref: "post" }],
+  created_at: { type: Date, default: Date.now },
+});
+
+const post_schema = new Schema({
+  title: { type: String, required: true },
+  content: { type: String, required: true },
+  tags: { type: [String] },
+  author: { type: Schema.Types.ObjectId, ref: "user", required: true },
   created_at: { type: Date, default: Date.now },
 });
 
 const User = mongoose.models.User || model("User", user_schema);
+const Post = mongoose.models.Post || model("Post", post_schema);
 
-export { connectDB, is_duplicated_error, is_validation_error, User };
+export { connectDB, is_duplicated_error, is_validation_error, User, Post };
