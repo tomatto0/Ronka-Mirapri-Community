@@ -15,7 +15,7 @@ export async function GET(request: Request) {
       );
     }
     await connectDB();
-    const post = await Post.findById(id).exec();
+    const post = await Post.findById(id).lean();
     if (!post) {
       return NextResponse.json(
         { success: false, error: "Post not found" },

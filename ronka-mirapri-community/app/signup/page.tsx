@@ -3,14 +3,14 @@
 import { signIn, useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
 
-const SignupPage = () => {
+export default function signup_page() {
   const { data: session, status } = useSession();
   const [email, set_email] = useState<string>(session?.user?.email || "");
   const [nickname, set_nickname] = useState<string>("");
   const [sns, set_sns] = useState<string>("");
   const is_user_load = useRef<boolean>(false);
 
-  const login_handler = async () => {
+  const signup_handler = async () => {
     if (!nickname) {
       return false;
     }
@@ -33,7 +33,6 @@ const SignupPage = () => {
   useEffect(() => {
     if (status !== "loading") {
       if (session && session.user) {
-        console.log(session.user);
         set_email(session.user.email as string);
         if ("nickname" in session.user) {
           console.log(session?.user);
@@ -77,7 +76,7 @@ const SignupPage = () => {
           }}
         />
         <br />
-        <button onClick={login_handler}>sign up</button>
+        <button onClick={signup_handler}>sign up</button>
       </div>
     );
   }
@@ -90,6 +89,4 @@ const SignupPage = () => {
       </button>
     </div>
   );
-};
-
-export default SignupPage;
+}

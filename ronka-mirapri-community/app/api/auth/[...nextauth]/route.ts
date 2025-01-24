@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import crypto from "crypto";
 import { connectDB, User } from "@/app/db/database";
 
+//jwt를 암호화
 const encrypt_payload = (data: string, encryption_key: string): string => {
   const iv = crypto.randomBytes(16);
   const cipher = crypto.createCipheriv(
@@ -14,6 +15,7 @@ const encrypt_payload = (data: string, encryption_key: string): string => {
   encrypted += cipher.final("base64");
   return iv.toString("base64") + ":" + encrypted;
 };
+//암호화된 jwt를 복호화
 const decrypt_payload = (encrypted_data: string, encryption_key: string) => {
   const [iv_base64, encrypted] = encrypted_data.split(":");
   const iv = Buffer.from(iv_base64, "base64");
@@ -27,6 +29,7 @@ const decrypt_payload = (encrypted_data: string, encryption_key: string) => {
   return decrypted;
 };
 
+//next-auth 보안 설정
 export const authOptions: AuthOptions = {
   providers: [
     GoogleProvider({
@@ -40,33 +43,40 @@ export const authOptions: AuthOptions = {
     secret: process.env.JWT_SECRET,
   },
   callbacks: {
+    //구글 인증을 받았을 때 동작, 제대로 profile과 email을 받았는지 확인
     async signIn({ user, account, profile }) {
       if (!profile || !profile.email) {
         return false;
       }
       return true;
     },
+    //토큰을 보낼 때/세션을 요청받았을 때 동작
     async jwt({ token, user }) {
-      if (token?.login === undefined) {
+      if (token?.login === undefined || token?.login === false) {
         await connectDB();
         const users = await User.findOne({ email: token.email }).exec();
         if (users) {
+          //계정이 있는 사용자인 경우 > 사용자 정보를 jwt에 저장
           const { _id, email, nickname, sns } = users;
           token.encrypted = encrypt_payload(
             JSON.stringify({ _id, email, nickname, sns }),
             process.env.JWT_ENCRYPTION_KEY!
           );
+          token.login = true;
         } else {
+          //계정이 없는 사용자의 경우 > email만 jwt에 저장, 비로그인 취급
           token.encrypted = encrypt_payload(
             JSON.stringify({ email: token?.email }),
             process.env.JWT_ENCRYPTION_KEY!
           );
+          token.login = false;
         }
       }
-      return token;
+      return token; //encrypted로 암호화된 정보를 저장해 전송
     },
     async session({ session, token }) {
       try {
+        //token.encrypted를 복호화해 session으로 전달
         if (token?.encrypted && typeof token.encrypted === "string") {
           session.user = JSON.parse(
             decrypt_payload(token.encrypted, process.env.JWT_ENCRYPTION_KEY!)

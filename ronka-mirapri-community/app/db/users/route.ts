@@ -2,6 +2,7 @@ import {
   connectDB,
   is_duplicated_error,
   is_validation_error,
+  Post,
   User,
 } from "../database";
 import { NextResponse } from "next/server";
@@ -27,7 +28,8 @@ export async function GET(request: Request) {
       );
     }
     await connectDB();
-    const user = await User.findById(id).exec();
+    const user = await User.findById(id).lean();
+    console.log("lean:", user);
     if (!user) {
       return NextResponse.json(
         { success: false, error: "User not found" },
@@ -171,7 +173,7 @@ export async function DELETE(request: Request) {
 
     await connectDB();
 
-    const deleted_user = await User.findByIdAndDelete(body.id).exec();
+    const deleted_user = await User.findOneAndDelete({ _id: body.id }).exec();
 
     if (!deleted_user) {
       return NextResponse.json(
