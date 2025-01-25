@@ -1,0 +1,111 @@
+div.item-search-modal-back {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #424a602b;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.item-search-modal-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 3px;
+}
+
+div.item-search-modal {
+  width: 348px;
+  height: 581px;
+  background-color: white;
+  padding: 20px 16px 20px 16px;
+  border-radius: 12px;
+  font-size: 1.7rem;
+  color: #475467;
+  font-weight: 600;
+  letter-spacing: -0.51px;
+  position: relative;
+
+  input[type="text"] {
+    margin-top: 11px;
+    width: 100%;
+    height: 40px;
+    border-radius: 12px;
+    background-color: #f2f4f7;
+    padding: 12px 12px 12px 40px;
+    border: none;
+    color: #475467;
+    letter-spacing: -0.39px;
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+  input[type="text"]:hover {
+    background-color: #e4e7ec;
+  }
+
+  input[type="text"]:focus {
+    outline: none;
+    background-color: #ffffff;
+    border-color: #15b79e;
+    box-shadow: 0 0 0 1px #15b79e;
+  }
+  input::placeholder {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+}
+
+.item-search-container {
+  position: relative;
+
+  .search-icon {
+    position: absolute;
+    height: 22px;
+    width: 22px;
+    top: 19px;
+    left: 10px;
+  }
+}
+
+.data-version {
+  position: absolute;
+  bottom: 10px;
+  left: 17px;
+  font-weight: 500;
+  font-size: 1.2rem;
+  color: #7883a6;
+}
+
+@media (min-width: 1075px) {
+  div.item-search-modal-back {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 141px;
+    padding-left: calc(50% + 140px);
+  }
+
+  div.item-search-modal {
+    width: 396px;
+    height: 608px;
+    font-size: 1.8rem;
+    font-weight: 600;
+
+    input[type="text"] {
+      height: 44px;
+      letter-spacing: -0.39px;
+    }
+  }
+
+  .item-search-container {
+    .search-icon {
+      top: 21px;
+    }
+  }
+}

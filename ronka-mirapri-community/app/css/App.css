@@ -1,0 +1,124 @@
+.App {
+  width: fit-content;
+}
+
+button.image {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  height: 18px;
+}
+
+img.item-icon {
+  width: 80px;
+  height: 80px;
+}
+
+div.header {
+  height: 60px;
+  padding: 1.5rem 1.5rem;
+  position: relative;
+
+  img#title {
+    display: block;
+    height: 33px;
+    content: url("../../public/img/title_mobile.svg");
+  }
+}
+
+div.main-container {
+  text-align: center;
+  margin: auto;
+  justify-content: center;
+  width: fit-content;
+  position: relative;
+}
+div.footer {
+  color: #50b1a8;
+  font-size: 10px;
+  text-align: center;
+  padding: 4rem 0 2rem 0;
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@media (min-width: 1075px) {
+  div.header {
+    height: 100px;
+    /* --height: min(15vh, 112px);
+    height: var(--height); */
+    padding-top: 2.2rem;
+    padding-bottom: 3.3rem;
+    /* position: relative; */
+    margin-top: 40px;
+
+    img#title {
+      display: block;
+      margin: auto;
+      height: 53px;
+      min-height: 50px;
+      content: url("../../public/img/title.svg");
+    }
+  }
+
+  div.main-container {
+    text-align: center;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    position: relative;
+    max-height: 608px;
+    min-height: 608px;
+  }
+  div.footer {
+    color: #50b1a8;
+    font-size: 1rem;
+    text-align: center;
+    padding-top: 3rem;
+    width: 100%;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+}
+
+@media (min-width: 1087px) {
+  div.header::after {
+    content: "";
+    position: absolute;
+    top: calc(20% - 6px);
+    left: -6px;
+    width: calc(100% + 12px);
+    height: calc(80% + 12px);
+
+    background-image: url("../../public/img/plus.svg"),
+      url("../../public/img/plus.svg");
+    background-size: 12px 12px;
+    background-position: top left, top right;
+    background-repeat: no-repeat;
+  }
+
+  div.main-container::before {
+    content: "";
+
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    width: calc(100% + 12px);
+    height: calc(100% + 12px);
+
+    background-image: url("../../public/img/plus.svg"),
+      url("../../public/img/plus.svg"), url("../../public/img/plus.svg"),
+      url("../../public/img/plus.svg"), url("../../public/img/plus.svg");
+    background-size: 12px 12px;
+    background-position: top left, top right, center right, bottom left,
+      bottom right;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "1": {
+    "Head": 0,
+    "Body": 0,
+    "Gloves": 0,
+    "Legs": 0,
+    "Feet": 0,
+    "Slot": 5
+  },
+  "2": {
+    "Head": 0,
+    "Body": 0,
+    "Gloves": 0,
+    "Legs": 0,
+    "Feet": 0,
+    "Slot": 5
+  },
+  "3": {
+    "Head": 1,
+    "Body": 0,
+    "Gloves": 0,
+    "Legs": 0,
+    "Feet": 0,
+    "Slot": 0
+  },
+  "4": {
+    "Head": 0,
+    "Body": 1,
+    "Gloves": 0,
+    "Legs": 0,
+    "Feet": 0,
+    "Slot": 1
+  },
+  "5": {
+    "Head": 0,
+    "Body": 0,
+    "Gloves": 1,
+    "Legs": 0,
+    "Feet": 0,
+    "Slot": 2
+  },
+  "6": {
+    "Head": 0,
+    "Body": 0,
+    "Gloves": 0,
+    "Legs": 0,
+    "Feet": 0,
+    "Slot": 5
+  },
+  "7": {
+    "Head": 0,
+    "Body": 0,
+    "Gloves": 0,
+    "Legs": 1,
+    "Feet": 0,
+    "Slot": 3
+  },
+  "8": {
+    "Head": 0,
+    "Body": 0,
+    "Gloves": 0,
+    "Legs": 0,
+    "Feet": 1,
+    "Slot": 4
+  },
+  "9": {
+    "Head": 0,
+    "Body": 0,
+    "Gloves": 0,
+    "Legs": 0,
+    "Feet": 0,
+    "Slot": 5
+  },
+  "10": {
+    "Head": 0,
+    "Body": 0,
+    "Gloves": 0,
+    "Legs": 0,
+    "Feet": 0,
+    "Slot": 5
+  },
+  "11": {
+    "Head": 0,
+    "Body": 0,
+    "Gloves": 0,
+    "Legs": 0,
+    "Feet": 0,
+    "Slot": 5
+  },
+  "12": {
+    "Head": 0,
+    "Body": 0,
+    "Gloves": 0,
+    "Legs": 0,
+    "Feet": 0,
+    "Slot": 5
+  },
+  "13": {
+    "Head": 0,
+    "Body": 0,
+    "Gloves": 0,
+    "Legs": 0,
+    "Feet": 0,
+    "Slot": 5
+  },
+  "14": {
+    "Head": 0,
+    "Body": 0,
+    "Gloves": 0,
+    "Legs": 0,
+    "Feet": 0,
+    "Slot": 5
+  },
+  "15": {
+    "Head": -1,
+    "Body": 1,
+    "Gloves": 0,
+    "Legs": 0,
+    "Feet": 0,
+    "Slot": 1
+  },
+  "16": {
+    "Head": 0,
+    "Body": 1,
+    "Gloves": -1,
+    "Legs": -1,
+    "Feet": -1,
+    "Slot": 1
+  },
+  "17": {
+    "Head": 0,
+    "Body": 0,
+    "Gloves": 0,
+    "Legs": 0,
+    "Feet": 0,
+    "Slot": 5
+  },
+  "18": {
+    "Head": 0,
+    "Body": 0,
+    "Gloves": 0,
+    "Legs": 1,
+    "Feet": -1,
+    "Slot": 3
+  },
+  "19": {
+    "Head": -1,
+    "Body": 1,
+    "Gloves": -1,
+    "Legs": -1,
+    "Feet": -1,
+    "Slot": 1
+  },
+  "20": {
+    "Head": 0,
+    "Body": 1,
+    "Gloves": -1,
+    "Legs": -1,
+    "Feet": 0,
+    "Slot": 1
+  },
+  "21": {
+    "Head": 0,
+    "Body": 1,
+    "Gloves": 0,
+    "Legs": -1,
+    "Feet": -1,
+    "Slot": 1
+  },
+  "22": {
+    "Head": 0,
+    "Body": 1,
+    "Gloves": -1,
+    "Legs": 0,
+    "Feet": 0,
+    "Slot": 1
+  },
+  "23": {
+    "Head": 0,
+    "Body": 0,
+    "Gloves": 0,
+    "Legs": 0,
+    "Feet": 0,
+    "Slot": 5
+  },
+  "24": {
+    "Head": 0,
+    "Body": 0,
+    "Gloves": 0,
+    "Legs": 0,
+    "Feet": 0,
+    "Slot": 5
+  }
+}

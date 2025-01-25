@@ -1,0 +1,71 @@
+div.canvas-container {
+  width: 100%;
+
+  canvas.user-canvas {
+    width: 100%;
+  }
+
+  div.input-container {
+    width: calc(5400% / 117);
+    aspect-ratio: 540/1080;
+    position: absolute;
+    pointer-events: none;
+
+    label.canvas-input-label {
+      display: block;
+      width: 100%;
+      height: 100%;
+      pointer-events: all;
+    }
+
+    input.user-canvas-input {
+      display: none;
+    }
+
+    div.image-delete {
+      position: absolute;
+      top: 1.5vh;
+      right: 1.5vh;
+      pointer-events: all;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: #b9c0d4;
+      display: flex;
+      align-items: center;
+
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    div.image-delete::after {
+      content: "";
+      display: inline-block;
+      background-image: url("../../public/img/image_delete.svg");
+      background-size: 3vh 3vh;
+      width: 3vh;
+      height: 3vh;
+      background-size: cover;
+      background-position: center;
+      margin-left: 0.5vh;
+    }
+  }
+}
+
+@media (min-width: 1075px) {
+  div.canvas-container {
+    height: min(70vh, 608px);
+    width: auto;
+
+    canvas.user-canvas {
+      width: auto;
+      height: min(70vh, 608px);
+      min-height: 608px;
+    }
+
+    div.input-container {
+      height: 100%;
+      width: auto;
+    }
+  }
+}

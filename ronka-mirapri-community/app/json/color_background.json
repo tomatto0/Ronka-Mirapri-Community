@@ -1,0 +1,758 @@
+[
+  {
+    "color_id": 0,
+    "name": "\uae30\ubcf8\uc0c9",
+    "background_color": "FFFFFF",
+    "text_color": "black"
+  },
+  {
+    "color_id": 1,
+    "name": "\ud558\uc580\ub208\uc0c9",
+    "background_color": "E4DFD1",
+    "text_color": "black"
+  },
+  {
+    "color_id": 2,
+    "name": "\ud68c\uc0c9",
+    "background_color": "ADA9A3",
+    "text_color": "black"
+  },
+  {
+    "color_id": 3,
+    "name": "\uad6c\ubd80 \ud68c\uc0c9",
+    "background_color": "8A8885",
+    "text_color": "black"
+  },
+  {
+    "color_id": 4,
+    "name": "\uc9c4\ud68c\uc0c9",
+    "background_color": "666666",
+    "text_color": "white"
+  },
+  {
+    "color_id": 5,
+    "name": "\ud0c4\ud68c\uc0c9",
+    "background_color": "494843",
+    "text_color": "white"
+  },
+  {
+    "color_id": 6,
+    "name": "\uc22f\uac80\uc815\uc0c9",
+    "background_color": "2C2A24",
+    "text_color": "white"
+  },
+  {
+    "color_id": 7,
+    "name": "\uc7a5\ubbf8\uc0c9",
+    "background_color": "E6A097",
+    "text_color": "black"
+  },
+  {
+    "color_id": 8,
+    "name": "\ub77c\uc77c\ub77d\uc0c9",
+    "background_color": "846A6A",
+    "text_color": "white"
+  },
+  {
+    "color_id": 9,
+    "name": "\ub864\ub780\ubca0\ub9ac\uc0c9",
+    "background_color": "5D182A",
+    "text_color": "white"
+  },
+  {
+    "color_id": 10,
+    "name": "\ub2ec\ub77c\uac00\ube0c\uc0c9",
+    "background_color": "791B1B",
+    "text_color": "white"
+  },
+  {
+    "color_id": 11,
+    "name": "\ub179\uc2a8 \ube68\uac04\uc0c9",
+    "background_color": "632307",
+    "text_color": "white"
+  },
+  {
+    "color_id": 12,
+    "name": "\ud3ec\ub3c4\uc8fc\uc0c9",
+    "background_color": "461612",
+    "text_color": "white"
+  },
+  {
+    "color_id": 13,
+    "name": "\uc0b0\ud638\uc0c9",
+    "background_color": "CD6D60",
+    "text_color": "black"
+  },
+  {
+    "color_id": 14,
+    "name": "\uc120\ud64d\uc0c9",
+    "background_color": "923C28",
+    "text_color": "white"
+  },
+  {
+    "color_id": 15,
+    "name": "\uc5f0\uc5b4\uc0c9",
+    "background_color": "E4AB8B",
+    "text_color": "black"
+  },
+  {
+    "color_id": 16,
+    "name": "\ud64d\uc625\uc0c9",
+    "background_color": "E40012",
+    "text_color": "white"
+  },
+  {
+    "color_id": 17,
+    "name": "\uaf43\ubd84\ud64d\uc0c9",
+    "background_color": "F5389C",
+    "text_color": "black"
+  },
+  {
+    "color_id": 18,
+    "name": "\ub178\uc744\uc0c9",
+    "background_color": "B85E2E",
+    "text_color": "white"
+  },
+  {
+    "color_id": 19,
+    "name": "\ud669\uc57c\uc758 \ubd89\uc740\uc0c9",
+    "background_color": "7E3A06",
+    "text_color": "white"
+  },
+  {
+    "color_id": 20,
+    "name": "\ub098\ubb34\uaecd\uc9c8\uc0c9",
+    "background_color": "6B4C38",
+    "text_color": "white"
+  },
+  {
+    "color_id": 21,
+    "name": "\ucd08\ucf5c\ub9bf\uc0c9",
+    "background_color": "6F3E25",
+    "text_color": "white"
+  },
+  {
+    "color_id": 22,
+    "name": "\uc801\uac08\uc0c9",
+    "background_color": "502E24",
+    "text_color": "white"
+  },
+  {
+    "color_id": 23,
+    "name": "\ucf54\ubcfc\ub4dc\uc0c9",
+    "background_color": "31221C",
+    "text_color": "white"
+  },
+  {
+    "color_id": 24,
+    "name": "\ucf54\ub974\ud06c\uc0c9",
+    "background_color": "CA9257",
+    "text_color": "black"
+  },
+  {
+    "color_id": 25,
+    "name": "\ud0a4\ud0a4\ub8ec\uc0c9",
+    "background_color": "9A6F40",
+    "text_color": "black"
+  },
+  {
+    "color_id": 26,
+    "name": "\uc624\ud3ec\uc624\ud3ec\uc0c9",
+    "background_color": "7C5E2E",
+    "text_color": "white"
+  },
+  {
+    "color_id": 27,
+    "name": "\ud070\ubfd4\uc5fc\uc18c\uc0c9",
+    "background_color": "A3885E",
+    "text_color": "black"
+  },
+  {
+    "color_id": 28,
+    "name": "\ub299\uc740\ud638\ubc15\uc0c9",
+    "background_color": "C67525",
+    "text_color": "black"
+  },
+  {
+    "color_id": 29,
+    "name": "\ub3c4\ud1a0\ub9ac\uc0c9",
+    "background_color": "8F591C",
+    "text_color": "white"
+  },
+  {
+    "color_id": 30,
+    "name": "\uacfc\uc218\uc6d0 \ud759\uc0c9",
+    "background_color": "654317",
+    "text_color": "white"
+  },
+  {
+    "color_id": 31,
+    "name": "\ubc24\uc0c9",
+    "background_color": "3E2A0E",
+    "text_color": "white"
+  },
+  {
+    "color_id": 32,
+    "name": "\uace0\ube14\ub9b0\uc0c9",
+    "background_color": "BAA58A",
+    "text_color": "black"
+  },
+  {
+    "color_id": 33,
+    "name": "\ucc30\ud759\uc0c9",
+    "background_color": "93826D",
+    "text_color": "white"
+  },
+  {
+    "color_id": 34,
+    "name": "\ub450\ub354\uc9c0\uc0c9",
+    "background_color": "625346",
+    "text_color": "white"
+  },
+  {
+    "color_id": 35,
+    "name": "\ube44\uc625\ud1a0\uc0c9",
+    "background_color": "40342A",
+    "text_color": "white"
+  },
+  {
+    "color_id": 36,
+    "name": "\uc0c1\uc544\uc0c9",
+    "background_color": "EBD4A1",
+    "text_color": "black"
+  },
+  {
+    "color_id": 37,
+    "name": "\uc6b8\ub2e4\ud558 \uac08\uc0c9",
+    "background_color": "B8A471",
+    "text_color": "black"
+  },
+  {
+    "color_id": 38,
+    "name": "\uc0ac\ub9c9\ub178\ub780\uc0c9",
+    "background_color": "DCB558",
+    "text_color": "black"
+  },
+  {
+    "color_id": 39,
+    "name": "\uafc0\uc0c9",
+    "background_color": "FAC72C",
+    "text_color": "black"
+  },
+  {
+    "color_id": 40,
+    "name": "\uc625\uc218\uc218\uc0c9",
+    "background_color": "E49F35",
+    "text_color": "black"
+  },
+  {
+    "color_id": 41,
+    "name": "\ucee4\uc5bc\uc0c9",
+    "background_color": "BD8904",
+    "text_color": "black"
+  },
+  {
+    "color_id": 42,
+    "name": "\ud06c\ub9bc\uc0c9",
+    "background_color": "F2D871",
+    "text_color": "black"
+  },
+  {
+    "color_id": 43,
+    "name": "\ud560\ub77c\ud0c8\ub9ac \ub178\ub780\uc0c9",
+    "background_color": "A68531",
+    "text_color": "black"
+  },
+  {
+    "color_id": 44,
+    "name": "\uac74\ud3ec\ub3c4\uc0c9",
+    "background_color": "413412",
+    "text_color": "white"
+  },
+  {
+    "color_id": 45,
+    "name": "\uce74\ub098\ub9ac\uc544\uc0c9",
+    "background_color": "FEF865",
+    "text_color": "black"
+  },
+  {
+    "color_id": 46,
+    "name": "\ubc14\ub2d0\ub77c\uc0c9",
+    "background_color": "FBF1B5",
+    "text_color": "black"
+  },
+  {
+    "color_id": 47,
+    "name": "\uc2b5\uc9c0 \ub179\uc0c9",
+    "background_color": "595331",
+    "text_color": "white"
+  },
+  {
+    "color_id": 48,
+    "name": "\uc2e4\ud504\uc0c9",
+    "background_color": "BCBC8B",
+    "text_color": "black"
+  },
+  {
+    "color_id": 49,
+    "name": "\ub77c\uc784\uc0c9",
+    "background_color": "ACB155",
+    "text_color": "black"
+  },
+  {
+    "color_id": 50,
+    "name": "\uc774\ub07c\uc0c9",
+    "background_color": "717427",
+    "text_color": "white"
+  },
+  {
+    "color_id": 51,
+    "name": "\ud480\uc0c9",
+    "background_color": "8C9D64",
+    "text_color": "black"
+  },
+  {
+    "color_id": 52,
+    "name": "\uc62c\ub9ac\ube0c\uc0c9",
+    "background_color": "4C5333",
+    "text_color": "white"
+  },
+  {
+    "color_id": 53,
+    "name": "\ub2aa\uc9c0 \ub179\uc0c9",
+    "background_color": "333722",
+    "text_color": "white"
+  },
+  {
+    "color_id": 54,
+    "name": "\ud48b\uc0ac\uacfc\uc0c9",
+    "background_color": "9CB464",
+    "text_color": "black"
+  },
+  {
+    "color_id": 55,
+    "name": "\uc120\uc778\uc7a5\uc0c9",
+    "background_color": "668342",
+    "text_color": "black"
+  },
+  {
+    "color_id": 56,
+    "name": "\uc9c4\ub179\uc0c9",
+    "background_color": "294C2D",
+    "text_color": "white"
+  },
+  {
+    "color_id": 57,
+    "name": "\uc624\uce04\uc0c9",
+    "background_color": "41643A",
+    "text_color": "white"
+  },
+  {
+    "color_id": 58,
+    "name": "\uae08\uac15\uac70\ubd81\uc0c9",
+    "background_color": "607659",
+    "text_color": "black"
+  },
+  {
+    "color_id": 59,
+    "name": "\ub178\ud53c\uce74\uc758 \ub179\uc0c9",
+    "background_color": "3C4E3D",
+    "text_color": "white"
+  },
+  {
+    "color_id": 60,
+    "name": "\ubc00\ub9bc \ub179\uc0c9",
+    "background_color": "1F2B22",
+    "text_color": "white"
+  },
+  {
+    "color_id": 61,
+    "name": "\uc605\uc740 \uccad\ub85d\uc0c9",
+    "background_color": "97BEBA",
+    "text_color": "black"
+  },
+  {
+    "color_id": 62,
+    "name": "\ud130\ud0a4\uc11d\uc0c9",
+    "background_color": "447373",
+    "text_color": "white"
+  },
+  {
+    "color_id": 63,
+    "name": "\ubab0\ubcfc\uc0c9",
+    "background_color": "204747",
+    "text_color": "white"
+  },
+  {
+    "color_id": 64,
+    "name": "\uc605\uc740 \ud558\ub298\uc0c9",
+    "background_color": "B3C5CF",
+    "text_color": "black"
+  },
+  {
+    "color_id": 65,
+    "name": "\ud558\ub298\uc0c9",
+    "background_color": "84B1D3",
+    "text_color": "black"
+  },
+  {
+    "color_id": 66,
+    "name": "\ubc14\ub2e4\uc548\uac1c\uc0c9",
+    "background_color": "6582A1",
+    "text_color": "black"
+  },
+  {
+    "color_id": 67,
+    "name": "\uacf5\uc7a3\uae43 \ud30c\ub780\uc0c9",
+    "background_color": "3C6987",
+    "text_color": "white"
+  },
+  {
+    "color_id": 68,
+    "name": "\ub85c\ud0c0\ub178 \ubc14\ub2e4\uc0c9",
+    "background_color": "1D3E55",
+    "text_color": "white"
+  },
+  {
+    "color_id": 69,
+    "name": "\uc880\ube44\uc758 \uc5bc\uad74\uc0c9",
+    "background_color": "8F9CAD",
+    "text_color": "black"
+  },
+  {
+    "color_id": 70,
+    "name": "\uccad\ub9b0\uc218\uc0c9",
+    "background_color": "505867",
+    "text_color": "white"
+  },
+  {
+    "color_id": 71,
+    "name": "\ucabd\ube5b \ud30c\ub780\uc0c9",
+    "background_color": "303952",
+    "text_color": "white"
+  },
+  {
+    "color_id": 72,
+    "name": "\uac80\ud478\ub978\uc0c9",
+    "background_color": "1B2028",
+    "text_color": "white"
+  },
+  {
+    "color_id": 73,
+    "name": "\ub78d\ud1a0\ub974\uc0c9",
+    "background_color": "5D80C1",
+    "text_color": "black"
+  },
+  {
+    "color_id": 74,
+    "name": "\uc624\uc0ac\ub4dc \ubc14\ub2e4\uc0c9",
+    "background_color": "30598A",
+    "text_color": "white"
+  },
+  {
+    "color_id": 75,
+    "name": "\uc120\uba85\ud55c \ud30c\ub780\uc0c9",
+    "background_color": "244273",
+    "text_color": "white"
+  },
+  {
+    "color_id": 76,
+    "name": "\ubcf4\uc774\ub4dc\uc758 \ud30c\ub780\uc0c9",
+    "background_color": "122A45",
+    "text_color": "white"
+  },
+  {
+    "color_id": 77,
+    "name": "\uac10\uccad\uc0c9",
+    "background_color": "283168",
+    "text_color": "white"
+  },
+  {
+    "color_id": 78,
+    "name": "\ubc24\ud558\ub298\uc0c9",
+    "background_color": "191A38",
+    "text_color": "white"
+  },
+  {
+    "color_id": 79,
+    "name": "\uccad\ud68c\uc0c9",
+    "background_color": "383848",
+    "text_color": "white"
+  },
+  {
+    "color_id": 80,
+    "name": "\uccad\ubcf4\ub77c\uc0c9",
+    "background_color": "322E60",
+    "text_color": "white"
+  },
+  {
+    "color_id": 81,
+    "name": "\uc0c8\ud30c\ub780\uc0c9",
+    "background_color": "000FA3",
+    "text_color": "white"
+  },
+  {
+    "color_id": 82,
+    "name": "\ub2f4\uccad\uc0c9",
+    "background_color": "04B0CE",
+    "text_color": "black"
+  },
+  {
+    "color_id": 83,
+    "name": "\ub77c\ubca4\ub354\uc0c9",
+    "background_color": "8880AF",
+    "text_color": "black"
+  },
+  {
+    "color_id": 84,
+    "name": "\uc5b4\ub450\uc6b4 \ubcf4\ub77c\uc0c9",
+    "background_color": "524661",
+    "text_color": "white"
+  },
+  {
+    "color_id": 85,
+    "name": "\uba38\ub8e8\uc0c9",
+    "background_color": "332D3C",
+    "text_color": "white"
+  },
+  {
+    "color_id": 86,
+    "name": "\ubd93\uaf43\uc0c9",
+    "background_color": "B89FBD",
+    "text_color": "black"
+  },
+  {
+    "color_id": 87,
+    "name": "\ud3ec\ub3c4\uc0c9",
+    "background_color": "3C2B3E",
+    "text_color": "white"
+  },
+  {
+    "color_id": 88,
+    "name": "\uc5f0\uaf43\uc0c9",
+    "background_color": "FECFF5",
+    "text_color": "black"
+  },
+  {
+    "color_id": 89,
+    "name": "\ucf5c\ub9ac\ube0c\ub9ac\uc0c9",
+    "background_color": "DD9CCB",
+    "text_color": "black"
+  },
+  {
+    "color_id": 90,
+    "name": "\ub9e4\ud654\uc0c9",
+    "background_color": "7A536D",
+    "text_color": "white"
+  },
+  {
+    "color_id": 91,
+    "name": "\uc790\uc8fc\uc0c9",
+    "background_color": "67314F",
+    "text_color": "white"
+  },
+  {
+    "color_id": 92,
+    "name": "\uc21c\ubc31\uc0c9",
+    "background_color": "FFFFFF",
+    "text_color": "black"
+  },
+  {
+    "color_id": 93,
+    "name": "\uce60\ud751\uc0c9",
+    "background_color": "1F1F1F",
+    "text_color": "white"
+  },
+  {
+    "color_id": 94,
+    "name": "\ubd80\ub4dc\ub7ec\uc6b4 \uc5f0\ubd84\ud64d",
+    "background_color": "FDC9C7",
+    "text_color": "black"
+  },
+  {
+    "color_id": 95,
+    "name": "\uc9d9\uc740 \ube68\uac15",
+    "background_color": "331A1A",
+    "text_color": "white"
+  },
+  {
+    "color_id": 96,
+    "name": "\uc9d9\uc740 \uac08\uc0c9",
+    "background_color": "29221D",
+    "text_color": "white"
+  },
+  {
+    "color_id": 97,
+    "name": "\ubd80\ub4dc\ub7ec\uc6b4 \uc5f0\ub179\uc0c9",
+    "background_color": "BBD0AB",
+    "text_color": "black"
+  },
+  {
+    "color_id": 98,
+    "name": "\uc9d9\uc740 \ub179\uc0c9",
+    "background_color": "162D2D",
+    "text_color": "white"
+  },
+  {
+    "color_id": 99,
+    "name": "\ubd80\ub4dc\ub7ec\uc6b4 \uc5f0\ud30c\ub791",
+    "background_color": "97A5DA",
+    "text_color": "black"
+  },
+  {
+    "color_id": 100,
+    "name": "\uc9d9\uc740 \ud30c\ub791",
+    "background_color": "13202E",
+    "text_color": "white"
+  },
+  {
+    "color_id": 101,
+    "name": "\ubd80\ub4dc\ub7ec\uc6b4 \uc5f0\ubcf4\ub77c",
+    "background_color": "BCB6DB",
+    "text_color": "black"
+  },
+  {
+    "color_id": 102,
+    "name": "\uc9d9\uc740 \uc790\uc8fc\uc0c9",
+    "background_color": "242127",
+    "text_color": "white"
+  },
+  {
+    "color_id": 103,
+    "name": "\ubc18\uc9dd\uc774\ub294 \uc740\uc0c9",
+    "background_color": "A7A7A7",
+    "text_color": "black"
+  },
+  {
+    "color_id": 104,
+    "name": "\ubc18\uc9dd\uc774\ub294 \uae08\uc0c9",
+    "background_color": "ECEA41",
+    "text_color": "black"
+  },
+  {
+    "color_id": 105,
+    "name": "\uae08\uc18d\uc9c8 \ube68\uac04\uc0c9",
+    "background_color": "C61445",
+    "text_color": "white"
+  },
+  {
+    "color_id": 106,
+    "name": "\uae08\uc18d\uc9c8 \uc8fc\ud669\uc0c9",
+    "background_color": "E9990F",
+    "text_color": "black"
+  },
+  {
+    "color_id": 107,
+    "name": "\uae08\uc18d\uc9c8 \ub178\ub780\uc0c9",
+    "background_color": "F4DA46",
+    "text_color": "black"
+  },
+  {
+    "color_id": 108,
+    "name": "\uae08\uc18d\uc9c8 \ub179\uc0c9",
+    "background_color": "1AA552",
+    "text_color": "white"
+  },
+  {
+    "color_id": 109,
+    "name": "\uae08\uc18d\uc9c8 \ud558\ub298\uc0c9",
+    "background_color": "5ED4E6",
+    "text_color": "black"
+  },
+  {
+    "color_id": 110,
+    "name": "\uae08\uc18d\uc9c8 \ud30c\ub780\uc0c9",
+    "background_color": "4447C4",
+    "text_color": "white"
+  },
+  {
+    "color_id": 111,
+    "name": "\uae08\uc18d\uc9c8 \ubcf4\ub77c\uc0c9",
+    "background_color": "C445D7",
+    "text_color": "white"
+  },
+  {
+    "color_id": 112,
+    "name": "\uac74\uba54\ud0c8\uc0c9",
+    "background_color": "454545",
+    "text_color": "white"
+  },
+  {
+    "color_id": 113,
+    "name": "\uc9c4\uc8fc\uc0c9",
+    "background_color": "E9E3DA",
+    "text_color": "black"
+  },
+  {
+    "color_id": 114,
+    "name": "\ud669\ub3d9\uc0c9",
+    "background_color": "E7D197",
+    "text_color": "black"
+  },
+  {
+    "color_id": 115,
+    "name": "\uc740\uc0c9",
+    "background_color": "D6D6D6",
+    "text_color": "black"
+  },
+  {
+    "color_id": 116,
+    "name": "\uae08\uc0c9",
+    "background_color": "ECEA41",
+    "text_color": "black"
+  },
+  {
+    "color_id": 117,
+    "name": "\uac80\uc740\uc0c9",
+    "background_color": "1F1F1F",
+    "text_color": "white"
+  },
+  {
+    "color_id": 118,
+    "name": "\ud770\uc0c9",
+    "background_color": "FFFFFF",
+    "text_color": "black"
+  },
+  {
+    "color_id": 119,
+    "name": "\ud68c\uc0c9",
+    "background_color": "BABABA",
+    "text_color": "black"
+  },
+  {
+    "color_id": 120,
+    "name": "\ube68\uac04\uc0c9",
+    "background_color": "E73013",
+    "text_color": "white"
+  },
+  {
+    "color_id": 121,
+    "name": "\ud30c\ub780\uc0c9",
+    "background_color": "403CA1",
+    "text_color": "white"
+  },
+  {
+    "color_id": 122,
+    "name": "\ucd08\ub85d\uc0c9",
+    "background_color": "409320",
+    "text_color": "white"
+  },
+  {
+    "color_id": 123,
+    "name": "\uad6c\ub9ac\uc0c9",
+    "background_color": "E7D197",
+    "text_color": "black"
+  },
+  {
+    "color_id": 124,
+    "name": "\ubcf4\ub77c\uc0c9",
+    "background_color": "7A536D",
+    "text_color": "white"
+  },
+  {
+    "color_id": 125,
+    "name": "\uac08\uc0c9",
+    "background_color": "B85E2E",
+    "text_color": "white"
+  }
+]
