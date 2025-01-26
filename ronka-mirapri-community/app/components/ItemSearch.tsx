@@ -20,8 +20,9 @@ export default function ItemSearch({
   set_is_item_select: (is: boolean) => void;
 }) {
   const item_list: Item[] = item_list_raw as Item[];
+
   const slot_category: { [key: number]: EquipSlot } = equip_slot_categories;
-  const input_ref = useRef<HTMLInputElement>(null);
+  const input_ref = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (input_ref.current) {

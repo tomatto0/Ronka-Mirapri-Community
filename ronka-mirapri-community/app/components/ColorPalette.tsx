@@ -3,6 +3,7 @@ import { ColorInfo } from "../types/ColorInfo";
 import Color_background_list_raw from "../json/color_background.json";
 import { useRef, useState, useEffect } from "react";
 import { Item } from "../types/Item";
+import { item_null } from "../utils/constants";
 
 export default function ColorPalette({
   item,
@@ -15,16 +16,6 @@ export default function ColorPalette({
   edit_equiped_item: (slot: number, item: Item) => void;
   modal_close: () => void;
 }) {
-  const item_null = {
-    Id: 0,
-    Name: "",
-    Icon: "/img/item_slot.svg",
-    EquipSlotCategory: 6,
-    ClassJobCategory: 0,
-    DyeCount: 0,
-    DyeFirst: 0,
-    DyeSecond: 0,
-  };
   const Color_background_list: ColorInfo[] =
     Color_background_list_raw as ColorInfo[];
   const itemRef = useRef<Item>(item);

@@ -1,31 +1,76 @@
 import { useState } from "react";
+import {
+  gender_category,
+  race_category,
+  job_category,
+} from "../utils/constants";
 
 export default function Editor() {
-  const [gender, set_gender] = useState<string>("unisex");
+  const [gender, set_gender] = useState<string>("공용");
+  const [race, set_race] = useState<string | null>(null);
+  const [job, set_job] = useState<string[]>(["모든 클래스"]);
+
   function gender_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
     set_gender(e.target.value);
   }
-  const GenderInput = ({
+  function race_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
+    set_race(e.target.value);
+  }
+  function job_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
+    console.log(e.target.value);
+    set_job(
+      job.includes(e.target.value)
+        ? job.filter((i) => i !== e.target.value)
+        : [...job, e.target.value]
+    );
+  }
+  const InputBox = ({
     name,
     value,
-    gender,
-    gender_change_handler,
+    category,
+    change_handler,
   }: {
     name: string;
-    value: string;
-    gender: string;
-    gender_change_handler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    value: string | null;
+    category: string;
+    change_handler: (e: React.ChangeEvent<HTMLInputElement>) => void;
   }) => {
     return (
-      <label htmlFor={`gender-${value}`}>
-        <span>{name + (gender == value ? "O" : "")}</span>
+      <label htmlFor={`${category}-${name.replace(" ", "-")}`}>
+        <span>{name + (value == name ? "O" : "")}</span>
         <input
           type="radio"
-          id={`gender-${value}`}
-          name="gender"
-          value={value}
-          checked={gender == value}
-          onChange={gender_change_handler}
+          id={`${category}-${name.replace(" ", "-")}`}
+          name={category}
+          value={name}
+          checked={value == name}
+          onChange={change_handler}
+          style={{ display: "none" }}
+        />
+      </label>
+    );
+  };
+  const CheckBox = ({
+    name,
+    value,
+    category,
+    change_handler,
+  }: {
+    name: string;
+    value: string[];
+    category: string;
+    change_handler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  }) => {
+    return (
+      <label htmlFor={`${category}-${name.replace(" ", "-")}`}>
+        <span>{name + (value.includes(name) ? "O" : "")}</span>
+        <input
+          type="checkbox"
+          id={`${category}-${name.replace(" ", "-")}`}
+          name={category}
+          value={name}
+          checked={value.includes(name)}
+          onChange={change_handler}
           style={{ display: "none" }}
         />
       </label>
@@ -46,24 +91,39 @@ export default function Editor() {
       <input type="text" id="sns" />
       <br />
       <p>검색 필터 설정</p>
-      <GenderInput
-        name="공용"
-        value="unisex"
-        gender={gender}
-        gender_change_handler={gender_change_handler}
-      />
-      <GenderInput
-        name="여성"
-        value="female"
-        gender={gender}
-        gender_change_handler={gender_change_handler}
-      />
-      <GenderInput
-        name="남성"
-        value="male"
-        gender={gender}
-        gender_change_handler={gender_change_handler}
-      />
+      <hr />
+      {gender_category.map((i) => (
+        <InputBox
+          category="gender"
+          name={i}
+          value={gender}
+          change_handler={gender_change_handler}
+          key={i}
+        />
+      ))}
+      <p>종족</p>
+      {race_category.map((i) => (
+        <InputBox
+          category="race"
+          name={i}
+          value={race}
+          change_handler={race_change_handler}
+          key={i}
+        />
+      ))}
+      <p>직업 (중복 선택 가능)</p>
+      {job_category.map((i) => (
+        <CheckBox
+          category="job"
+          name={i}
+          value={job}
+          change_handler={job_change_handler}
+          key={i}
+        />
+      ))}
+      <br />
+      <label htmlFor="tag">태그: </label>
+      <input type="text" id="tag" />
     </div>
   );
 }

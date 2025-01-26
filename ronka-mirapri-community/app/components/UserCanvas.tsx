@@ -22,12 +22,10 @@ export default function UserCanvas({
   image_src,
   equiped_item,
   set_image_src,
-  image_thumbnail,
 }: {
   image_src: string;
   equiped_item: Item[];
   set_image_src: (image_src: string) => void;
-  image_thumbnail: () => string;
 }) {
   const imageRef = useRef<HTMLCanvasElement | null>(null); // 캔버스 참조
   const user_image = useRef<HTMLImageElement | null>(null); // 사용자 이미지 Ref
@@ -438,7 +436,7 @@ export default function UserCanvas({
   };
 
   const image_delete = () => {
-    set_image_src(image_thumbnail());
+    set_image_src(process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail.svg");
     set_is_selected(false);
   };
 

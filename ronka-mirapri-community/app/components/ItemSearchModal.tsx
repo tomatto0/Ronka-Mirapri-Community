@@ -57,7 +57,6 @@ export default function ItemSearchModal({
     set_is_open(false);
     set_search_result([]);
     set_keyword("");
-    // set_is_item_select(false);
   };
 
   const reset_keyword = () => {
