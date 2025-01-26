@@ -35,8 +35,9 @@ export default function signup_page() {
       if (session && session.user) {
         set_email(session.user.email as string);
         if ("nickname" in session.user) {
-          console.log(session?.user);
-          window.location.href = "/";
+          window.location.href =
+            sessionStorage.getItem("login_callback") || "/";
+          sessionStorage.setItem("login_callback", "/");
         } else {
           is_user_load.current = true;
         }
@@ -45,7 +46,7 @@ export default function signup_page() {
   }, [status]);
 
   if (!is_user_load.current) {
-    return <div>Loading...</div>;
+    return;
   }
 
   if (session && session.user && session.user.email) {

@@ -51,7 +51,7 @@ export default function ItemSearch({
     <div className="item-search-container">
       <img
         className="search-icon"
-        src={process.env.PUBLIC_URL + "/img/search.svg"}
+        src={process.env.NEXT_PUBLIC_BASE_URL + "/img/search.svg"}
         alt="search icon"
       />
       <input

@@ -35,7 +35,7 @@ export default function SearchResult({
       >
         <img
           className="item-icon"
-          src={process.env.PUBLIC_URL + item.Icon}
+          src={process.env.NEXT_PUBLIC_BASE_URL + item.Icon}
           alt={item.Name}
         />
         <span>{item.Name}</span>

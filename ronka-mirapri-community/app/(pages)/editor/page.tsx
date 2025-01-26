@@ -1,19 +1,25 @@
-import "../css/App.css";
-import React, { useState, useCallback, useEffect, useMemo } from "react";
-import { Item } from "../types/Item";
-import { EquipSlot } from "../types/EquipSlot";
-import equip_slot_categories from "../json/equip_slot_categories.json";
-import UserCanvas from "../components/UserCanvas.tsx";
-import ItemInformation from "../components/ItemInformation.tsx";
-import ItemSearchModal from "../components/ItemSearchModal.tsx";
+"use client";
 
-function App() {
+import "../../css/mirapri.css";
+import ItemInformation from "@/app/components/ItemInformation";
+import ItemSearchModal from "@/app/components/ItemSearchModal";
+import UserCanvas from "@/app/components/UserCanvas";
+import equip_slot_categories from "../../json/equip_slot_categories.json";
+import { EquipSlot } from "@/app/types/EquipSlot";
+import { Item } from "@/app/types/Item";
+import { signIn, useSession } from "next-auth/react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import Editor from "@/app/components/editor";
+
+export default function editor() {
+  const { data: session, status } = useSession();
+
+  function sign_in_handler() {
+    sessionStorage.setItem("login_callback", "/editor");
+    signIn("google", { callbackUrl: "/signup" });
+  }
   const image_thumbnail = () => {
-    if (document.documentElement.clientWidth >= 1024) {
-      return process.env.PUBLIC_URL + "/img/thumbnail.svg";
-    } else {
-      return process.env.PUBLIC_URL + "/img/thumbnail.svg";
-    }
+    return process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail.svg";
   };
   const [image_src, set_image_src] = useState<string>(image_thumbnail());
   const [is_open, set_is_open] = useState<boolean>(false);
@@ -103,11 +109,19 @@ function App() {
     };
   }, [image_src]);
 
-  return (
-    <div className="App">
-      <div className="header">
-        <img alt="FFXIV-KOR MIRAPRI GENERATOR" id="title" />
+  if (status === "loading") {
+    return;
+  }
+  if (!session?.user?.login) {
+    return (
+      <div>
+        <p>You are not signed in</p>
+        <button onClick={sign_in_handler}>Sign in with Google</button>
       </div>
+    );
+  }
+  return (
+    <div>
       <div className="main-container">
         <UserCanvas
           image_src={image_src}
@@ -123,11 +137,7 @@ function App() {
           reset_equiped_item={reset_equiped_item}
         />
       </div>
-      <div className="footer">
-        <a href="https://ronkacloset.com">https://ronkacloset.com</a>
-        <br />
-        <p>© SQUARE ENIX Published in Korea by Actoz Soft CO., LTD.</p>
-      </div>
+      <Editor />
       <ItemSearchModal
         slot={modal_slot}
         is_open={is_open}
@@ -138,5 +148,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

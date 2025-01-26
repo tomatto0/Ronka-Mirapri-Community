@@ -1,7 +1,7 @@
 import NextAuth, { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import crypto from "crypto";
-import { connectDB, User } from "@/app/db/database";
+import { connectDB, User } from "@/app/api/db/database";
 
 //jwt를 암호화
 const encrypt_payload = (data: string, encryption_key: string): string => {
@@ -81,6 +81,8 @@ export const authOptions: AuthOptions = {
           session.user = JSON.parse(
             decrypt_payload(token.encrypted, process.env.JWT_ENCRYPTION_KEY!)
           );
+          session.user.login =
+            typeof token?.login == "boolean" ? token.login : undefined;
         }
       } catch (e) {
         session.user = {};

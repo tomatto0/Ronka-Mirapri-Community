@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef, useState, useEffect, useCallback } from "react";
 import { ColorInfo } from "../types/ColorInfo";
 import Color_background_list_raw from "../json/color_background.json";
@@ -28,9 +30,14 @@ export default function UserCanvas({
   image_thumbnail: () => string;
 }) {
   const imageRef = useRef<HTMLCanvasElement | null>(null); // 캔버스 참조
-  const user_image = useRef<HTMLImageElement>(new Image()); // 사용자 이미지 Ref
-  const item_background_image = useRef<HTMLImageElement>(new Image()); //아이템 배경 이미지 Ref
-  const item_placeholder_image = useRef<HTMLImageElement>(new Image()); //아이템 플레이스홀더 이미지 Ref
+  const user_image = useRef<HTMLImageElement | null>(null); // 사용자 이미지 Ref
+  const item_background_image = useRef<HTMLImageElement | null>(null); //아이템 배경 이미지 Ref
+  const item_placeholder_image = useRef<HTMLImageElement | null>(null); //아이템 플레이스홀더 이미지 Ref
+  useEffect(() => {
+    user_image.current = new Image();
+    item_background_image.current = new Image();
+    item_placeholder_image.current = new Image();
+  }, []);
   const is_user_image_loaded = useRef<boolean>(false);
   const is_image_loaded = useRef<boolean>(false); //아이템 배경, 플레이스 홀더 로드 완료 여부
   const isDown = useRef<boolean>(false); // 마우스 클릭 여부 확인
@@ -56,6 +63,7 @@ export default function UserCanvas({
       if (!is_user_image_loaded.current) return;
       const user_canvas = imageRef.current;
       const image = user_image.current;
+      if (!image) return;
       if (user_canvas) {
         const ctx = user_canvas.getContext("2d");
         if (ctx) {
@@ -81,6 +89,8 @@ export default function UserCanvas({
   // 장착된 아이템을 그리는 함수
   const user_item_draw = useCallback(
     (item_list: Item[]) => {
+      if (!item_background_image.current) return;
+      if (!item_placeholder_image.current) return;
       if (!is_image_loaded.current) return;
       const user_canvas = imageRef.current;
       if (user_canvas) {
@@ -335,13 +345,17 @@ export default function UserCanvas({
 
   // 아이템 배경 이미지 로드 및 초기화
   useEffect(() => {
+    if (!item_background_image.current) return;
+    if (!item_placeholder_image.current) return;
     is_image_loaded.current = false;
     item_background_image.current.src =
-      process.env.PUBLIC_URL + "/img/item_background.svg";
+      process.env.NEXT_PUBLIC_BASE_URL + "/img/item_background.svg";
     item_placeholder_image.current.src =
-      process.env.PUBLIC_URL + "/img/placeholder.svg";
+      process.env.NEXT_PUBLIC_BASE_URL + "/img/placeholder.svg";
 
     const onload_handler = () => {
+      if (!item_background_image.current) return;
+      if (!item_placeholder_image.current) return;
       if (
         item_background_image.current.complete &&
         item_placeholder_image.current.complete
@@ -356,12 +370,13 @@ export default function UserCanvas({
 
   // 사용자 이미지 로드 및 초기화
   useEffect(() => {
+    if (!user_image.current) return;
     is_user_image_loaded.current = false;
     x.current = 0;
     // y.current = 0;
     user_image.current.src = image_src;
-    console.log(image_src);
     const onload_handler = () => {
+      if (!user_image.current) return;
       is_user_image_loaded.current = true;
       image_width.current = user_image.current.width;
       image_height.current = user_image.current.height;
@@ -385,7 +400,7 @@ export default function UserCanvas({
 
     try {
       const promises = equiped_item_ref.current.map((item) =>
-        image_load(item.Id, process.env.PUBLIC_URL + "/" + item.Icon)
+        image_load(item.Id, process.env.NEXT_PUBLIC_BASE_URL + "/" + item.Icon)
       );
       item_images.current = await Promise.all(promises);
     } catch (error) {

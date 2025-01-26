@@ -33,8 +33,9 @@ export default function ItemInformation({
 
   function is_null_equiped_item(equiped_item: Item[]): boolean {
     if (
-      image_src === process.env.PUBLIC_URL + "/img/thumbnail_mobile.svg" ||
-      image_src === process.env.PUBLIC_URL + "/img/thumbnail.svg"
+      image_src ===
+        process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail_mobile.svg" ||
+      image_src === process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail.svg"
     ) {
       return true;
     }
@@ -104,7 +105,7 @@ export default function ItemInformation({
       <div className="item-slot">
         <span>{slot_name}</span>
         <img
-          src={process.env.PUBLIC_URL + src}
+          src={process.env.NEXT_PUBLIC_BASE_URL + src}
           alt={slot_name + "아이콘"}
           onClick={item_search_modal_open}
         />
@@ -115,7 +116,7 @@ export default function ItemInformation({
               style={
                 item.DyeFirst === 0
                   ? {
-                      backgroundImage: `url(${process.env.PUBLIC_URL}/img/base_color.svg)`,
+                      backgroundImage: `url(${process.env.NEXT_PUBLIC_BASE_URL}/img/base_color.svg)`,
                       backgroundPosition: "center",
                     }
                   : {
@@ -132,7 +133,7 @@ export default function ItemInformation({
               style={
                 item.DyeSecond === 0
                   ? {
-                      backgroundImage: `url(${process.env.PUBLIC_URL}/img/base_color.svg)`,
+                      backgroundImage: `url(${process.env.NEXT_PUBLIC_BASE_URL}/img/base_color.svg)`,
                       backgroundPosition: "center",
                     }
                   : {
@@ -163,7 +164,7 @@ export default function ItemInformation({
             <span>코디 정보 입력</span>
             <div className="infomation-icon">
               <img
-                src={process.env.PUBLIC_URL + "/img/help-circle.svg"}
+                src={process.env.NEXT_PUBLIC_BASE_URL + "/img/help-circle.svg"}
                 alt="도움말"
               />
             </div>
@@ -230,7 +231,7 @@ export default function ItemInformation({
           {is_null_equiped_item(equiped_item) && (
             <img
               className="download-info"
-              src={process.env.PUBLIC_URL + "/img/download_info.svg"}
+              src={process.env.NEXT_PUBLIC_BASE_URL + "/img/download_info.svg"}
               alt="예시 이미지와 아이템 등록시 다운로드 가능"
             />
           )}

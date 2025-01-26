@@ -154,6 +154,7 @@ div.palette-container:hover {
 
 .item-submit-button {
   position: absolute;
+  left: 16px;
   bottom: 32px;
   width: 315px;
   padding: 12px 0;

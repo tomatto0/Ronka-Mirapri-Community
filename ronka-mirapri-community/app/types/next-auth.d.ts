@@ -9,5 +9,6 @@ declare module "next-auth" {
       sns?: string;
       login?: boolean;
     };
+    login_callback?: string;
   }
 }
