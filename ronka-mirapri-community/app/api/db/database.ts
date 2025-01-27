@@ -48,6 +48,22 @@ user_schema.pre("findOneAndDelete", async function (next) {
 });
 
 const post_schema = new Schema({
+  image_url: { type: String, required: true },
+  equiped_item: {
+    type: [
+      {
+        Id: { type: Number, required: true },
+        Name: { type: String, required: true },
+        Icon: { type: String, required: true },
+        EquipSlotCategory: { type: Number, required: true },
+        ClassJobCategory: { type: Number, required: true },
+        DyeCount: { type: Number, required: true },
+        DyeFirst: { type: Number, required: true },
+        DyeSecond: { type: Number, required: true },
+      },
+    ],
+    required: true,
+  },
   title: { type: String, required: true },
   content: { type: String, required: true },
   tags: { type: [String], default: [] },

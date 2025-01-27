@@ -1,19 +1,21 @@
 "use client";
 
-import "../../css/mirapri.css";
+import "../../css/editor.css";
 import ItemInformation from "@/app/components/ItemInformation";
 import ItemSearchModal from "@/app/components/ItemSearchModal";
 import UserCanvas from "@/app/components/UserCanvas";
+import Editor from "@/app/components/Editor";
 import equip_slot_categories from "../../json/equip_slot_categories.json";
 import { EquipSlot } from "@/app/types/EquipSlot";
 import { Item } from "@/app/types/Item";
 import { signIn, useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { item_null } from "@/app/utils/constants";
-import Editor from "@/app/components/Editor";
+import { LocalDB } from "@/app/utils/localDB";
 
 export default function editor() {
   const { data: session, status } = useSession();
+  const localDB = new LocalDB("post_data", "user_image", false);
 
   function sign_in_handler() {
     sessionStorage.setItem("login_callback", "/editor");
@@ -27,10 +29,11 @@ export default function editor() {
   const [slot_active, set_slot_active] = useState<boolean[]>(
     new Array(8).fill(true)
   );
-
   const [equiped_item, set_equiped_item] = useState<Item[]>(
     new Array(8).fill(item_null)
   );
+  const imageRef = useRef<HTMLCanvasElement | null>(null); // 캔버스 참조
+  const x = useRef<number>(0);
 
   const edit_equiped_item = (slot: number, item: Item) => {
     set_equiped_item((items) => {
@@ -67,15 +70,46 @@ export default function editor() {
       return new_equiped_item;
     });
   };
-
   const reset_equiped_item = () => {
     set_equiped_item(new Array(8).fill(item_null));
   };
-
   const open_modal = (slot: number) => {
     set_is_open(true);
     set_modal_slot(slot);
   };
+
+  //indexedDB에 저장되있는 이미지 불러오기
+  useEffect(() => {
+    localDB.open(1.0).then(() => {
+      localDB.get(1).then((i) => {
+        if (i) {
+          const item = i as {
+            image: Blob;
+            x: number;
+            equiped_item: Item[];
+            id: number;
+          };
+          const objectURL = URL.createObjectURL(item.image);
+          set_image_src(objectURL);
+          set_equiped_item(item.equiped_item);
+          x.current = item.x;
+        }
+      });
+    });
+  }, []);
+
+  //
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      localDB.open(1.0).then(() => {
+        localDB.put({ x: x.current, equiped_item: equiped_item }, 1);
+      });
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [x.current, equiped_item]);
 
   if (status === "loading") {
     return;
@@ -87,6 +121,8 @@ export default function editor() {
           image_src={image_src}
           equiped_item={equiped_item}
           set_image_src={set_image_src}
+          x={x}
+          imageRef={imageRef}
         />
         <ItemInformation
           image_src={image_src}
@@ -97,7 +133,11 @@ export default function editor() {
         />
       </div>
       {session?.user?.login ? (
-        <Editor />
+        <Editor
+          image_src={image_src}
+          equiped_item={equiped_item}
+          imageRef={imageRef}
+        />
       ) : (
         <div>
           <p>You are not signed in</p>

@@ -55,6 +55,8 @@ export async function POST(request: Request) {
     await connectDB();
 
     const post = new Post({
+      image_url: body.image_url,
+      equiped_item: body.equiped_item,
       title: body.title,
       content: body.content,
       tags: body.tags,

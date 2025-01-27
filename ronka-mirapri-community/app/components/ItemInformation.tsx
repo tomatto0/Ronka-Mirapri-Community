@@ -32,11 +32,7 @@ export default function ItemInformation({
   const [is_jpg, set_is_jpg] = useState<boolean>(true);
 
   function is_null_equiped_item(equiped_item: Item[]): boolean {
-    if (
-      image_src ===
-        process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail_mobile.svg" ||
-      image_src === process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail.svg"
-    ) {
+    if (image_src === process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail.svg") {
       return true;
     }
     for (let item of equiped_item) {

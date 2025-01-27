@@ -1,18 +1,18 @@
 "use client";
 
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback, RefObject } from "react";
 import { ColorInfo } from "../types/ColorInfo";
 import Color_background_list_raw from "../json/color_background.json";
 import { Item } from "../types/Item";
 import "../css/UserCanvas.css";
+import { LocalDB } from "../utils/localDB";
 
 type ItemImage = {
   Id: number;
   Image: HTMLImageElement;
 };
 
-// 마우스와 터치 범위 설정시 사용하는
-// 값을 최소와 최대 범위로 제한하는 함수
+// 마우스와 터치 범위 설정시 사용하는 값을 최소와 최대 범위로 제한하는 함수
 function clamp(min: number, val: number, max: number) {
   min = min > max ? max : min;
   return val < min ? min : val > max ? max : val;
@@ -22,12 +22,15 @@ export default function UserCanvas({
   image_src,
   equiped_item,
   set_image_src,
+  imageRef,
+  x,
 }: {
   image_src: string;
   equiped_item: Item[];
   set_image_src: (image_src: string) => void;
+  x: RefObject<number>;
+  imageRef: RefObject<HTMLCanvasElement | null>;
 }) {
-  const imageRef = useRef<HTMLCanvasElement | null>(null); // 캔버스 참조
   const user_image = useRef<HTMLImageElement | null>(null); // 사용자 이미지 Ref
   const item_background_image = useRef<HTMLImageElement | null>(null); //아이템 배경 이미지 Ref
   const item_placeholder_image = useRef<HTMLImageElement | null>(null); //아이템 플레이스홀더 이미지 Ref
@@ -41,7 +44,7 @@ export default function UserCanvas({
   const isDown = useRef<boolean>(false); // 마우스 클릭 여부 확인
   const startX = useRef<number>(0); // 마우스 시작 X좌표
   // const startY = useRef<number>(0);
-  const x = useRef<number>(0); // 이미지의 X좌표 위치
+  // const x = useRef<number>(0); // 이미지의 X좌표 위치
   // const y = useRef<number>(0);
   const image_width = useRef<number>(0); // 이미지의 너비
   const image_height = useRef<number>(0); // 이미지의 높이
@@ -53,7 +56,10 @@ export default function UserCanvas({
   const Color_background_list: ColorInfo[] =
     Color_background_list_raw as ColorInfo[];
   const dyeFirstWidthRef = useRef<number>(0); // Ref로 선언
-  const [is_selected, set_is_selected] = useState<boolean>(false);
+  const [is_selected, set_is_selected] = useState<boolean>(
+    image_src !== process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail.svg"
+  );
+  const localDB = new LocalDB("post_data", "user_image", false);
 
   // 사용자의 이미지를 그리는 함수
   const user_image_draw = useCallback(
@@ -370,18 +376,28 @@ export default function UserCanvas({
   useEffect(() => {
     if (!user_image.current) return;
     is_user_image_loaded.current = false;
-    x.current = 0;
-    // y.current = 0;
     user_image.current.src = image_src;
     const onload_handler = () => {
       if (!user_image.current) return;
       is_user_image_loaded.current = true;
       image_width.current = user_image.current.width;
       image_height.current = user_image.current.height;
-      user_image_draw(0, 0); // 초기 이미지 그리기
+      user_image_draw(x.current, 0); // 초기 이미지 그리기
     };
-
+    const onerror_handler = () => {
+      set_image_src(process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail.svg");
+      set_is_selected(false);
+      x.current = 0;
+    };
     user_image.current.onload = onload_handler;
+    user_image.current.onerror = onerror_handler;
+
+    return () => {
+      if (user_image.current) {
+        user_image.current.onload = null;
+        user_image.current.onerror = null;
+      }
+    };
   }, [image_src, user_image_draw]);
 
   // 아이템 이미지 로드 확인
@@ -415,20 +431,20 @@ export default function UserCanvas({
 
   const image_validate = (e: React.ChangeEvent<HTMLInputElement>) => {
     // 입력된 파일의 확장자 추출
-    const ext = e.target.value
-      .substring(e.target.value.lastIndexOf(".") + 1, e.target.value.length)
-      .toLowerCase();
-
+    const ext = e.target.value.split(".").pop()?.toLowerCase();
     if (
-      ["bmp", "png", "jpeg", "jpg"].includes(ext) &&
+      ["bmp", "png", "jpeg", "jpg"].includes(ext ?? "") &&
       e.target.files !== null
     ) {
-      const reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
-      reader.onloadend = () => {
-        set_image_src(reader.result as string);
-        set_is_selected(true);
-      };
+      URL.revokeObjectURL(image_src);
+      const file = e.target.files[0];
+      const objectUrl = URL.createObjectURL(file);
+      localDB.open(1.0).then(() => {
+        localDB.put(file, 1);
+      });
+      set_image_src(objectUrl);
+      set_is_selected(true);
+      x.current = 0;
     } else {
       console.log("유효하지 않은 이미지");
       e.target.value = "";
@@ -436,8 +452,14 @@ export default function UserCanvas({
   };
 
   const image_delete = () => {
+    URL.revokeObjectURL(image_src);
+    localDB.open(1.0).then(() => {
+      localDB.clear();
+    });
+
     set_image_src(process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail.svg");
     set_is_selected(false);
+    x.current = 0;
   };
 
   function CanvasClickLayer({ is_selected }: { is_selected: boolean }) {

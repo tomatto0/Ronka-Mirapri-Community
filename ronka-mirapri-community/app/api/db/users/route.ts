@@ -2,7 +2,6 @@ import {
   connectDB,
   is_duplicated_error,
   is_validation_error,
-  Post,
   User,
 } from "../database";
 import { NextResponse } from "next/server";

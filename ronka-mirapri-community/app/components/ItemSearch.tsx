@@ -35,7 +35,7 @@ export default function ItemSearch({
     const searcher = new Hangul.Searcher(input_keyword);
     const eslot = slot > 4 ? 5 : slot;
 
-    if (input_keyword === "" || input_keyword === " ") {
+    if (input_keyword === "") {
       set_search_result([]);
       return false;
     }
