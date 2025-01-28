@@ -1,8 +1,46 @@
 import { connectDB, is_validation_error, Like } from "../database";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
+export async function GET(request: NextRequest) {
+  try {
+    const url = new URL(request.url);
+    const id = url.searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Invalid request",
+        },
+        { status: 400 }
+      );
+    }
+    const session = await getServerSession(authOptions);
+    if (!session?.user.login) {
+      return NextResponse.json(
+        { success: false, error: "need to login" },
+        { status: 404 }
+      );
+    }
+    await connectDB();
+    const like = await Like.findOne({
+      post: id,
+      user: session.user._id,
+    }).lean();
+    return NextResponse.json({ success: true, data: like });
+  } catch (e) {
+    console.error("MongoDB Failed to read likes error:", e);
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Unknown error",
+      },
+      { status: 500 }
+    );
+  }
+}
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -57,7 +95,7 @@ export async function DELETE(request: Request) {
         { status: 400 }
       );
     }
-    if (!body.id) {
+    if (!body.post) {
       return NextResponse.json(
         { success: false, error: "Invalid request" },
         { status: 400 }
@@ -65,8 +103,8 @@ export async function DELETE(request: Request) {
     }
     await connectDB();
     const deleted_like = await Like.findOneAndDelete({
-      _id: body.id,
-      author: session.user._id,
+      post: body.post,
+      user: session.user._id,
     }).exec();
     if (!deleted_like) {
       return NextResponse.json(

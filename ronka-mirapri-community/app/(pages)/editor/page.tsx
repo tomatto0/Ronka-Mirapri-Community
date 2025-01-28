@@ -78,39 +78,6 @@ export default function editor() {
     set_modal_slot(slot);
   };
 
-  //indexedDB에 저장되있는 이미지 불러오기
-  useEffect(() => {
-    localDB.open(1.0).then(() => {
-      localDB.get(1).then((i) => {
-        if (i) {
-          const item = i as {
-            image: Blob;
-            x: number;
-            equiped_item: Item[];
-            id: number;
-          };
-          const objectURL = URL.createObjectURL(item.image);
-          set_image_src(objectURL);
-          set_equiped_item(item.equiped_item);
-          x.current = item.x;
-        }
-      });
-    });
-  }, []);
-
-  //
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      localDB.open(1.0).then(() => {
-        localDB.put({ x: x.current, equiped_item: equiped_item }, 1);
-      });
-    };
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [x.current, equiped_item]);
-
   if (status === "loading") {
     return;
   }
@@ -135,7 +102,10 @@ export default function editor() {
       {session?.user?.login ? (
         <Editor
           image_src={image_src}
+          set_image_src={set_image_src}
+          x={x}
           equiped_item={equiped_item}
+          set_equiped_item={set_equiped_item}
           imageRef={imageRef}
         />
       ) : (

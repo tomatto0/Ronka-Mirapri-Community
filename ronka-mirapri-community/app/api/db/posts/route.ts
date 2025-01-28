@@ -6,16 +6,19 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const id = url.searchParams.get("id");
+  const index = url.searchParams.get("index");
 
   try {
-    if (!id) {
+    if (!id && !index) {
       return NextResponse.json(
         { success: false, error: "Invalid request" },
         { status: 400 }
       );
     }
     await connectDB();
-    const post = await Post.findById(id).lean();
+    const post = id
+      ? await Post.findById(id).populate("author").lean()
+      : await Post.findOne({ index: index }).populate("author").lean();
     if (!post) {
       return NextResponse.json(
         { success: false, error: "Post not found" },
@@ -53,13 +56,9 @@ export async function POST(request: Request) {
       );
     }
     await connectDB();
-
+    console.log(body);
     const post = new Post({
-      image_url: body.image_url,
-      equiped_item: body.equiped_item,
-      title: body.title,
-      content: body.content,
-      tags: body.tags,
+      ...body,
       author: session.user._id,
     });
 

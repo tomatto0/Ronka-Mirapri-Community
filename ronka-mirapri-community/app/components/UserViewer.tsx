@@ -1,24 +1,17 @@
 "use client";
 
-import { useRef, useState, useEffect, useCallback, RefObject } from "react";
+import { useRef, useEffect, useCallback, RefObject } from "react";
 import { ColorInfo } from "../types/ColorInfo";
 import Color_background_list_raw from "../json/color_background.json";
 import { Item } from "../types/Item";
 import "../css/UserCanvas.css";
-import { LocalDB } from "../utils/localDB";
 
 type ItemImage = {
   Id: number;
   Image: HTMLImageElement;
 };
 
-// 마우스와 터치 범위 설정시 사용하는 값을 최소와 최대 범위로 제한하는 함수
-function clamp(min: number, val: number, max: number) {
-  min = min > max ? max : min;
-  return val < min ? min : val > max ? max : val;
-}
-
-export default function UserCanvas({
+export default function UserViewer({
   image_src,
   equiped_item,
   set_image_src,
@@ -41,11 +34,6 @@ export default function UserCanvas({
   }, []);
   const is_user_image_loaded = useRef<boolean>(false);
   const is_image_loaded = useRef<boolean>(false); //아이템 배경, 플레이스 홀더 로드 완료 여부
-  const isDown = useRef<boolean>(false); // 마우스 클릭 여부 확인
-  const startX = useRef<number>(0); // 마우스 시작 X좌표
-  // const startY = useRef<number>(0);
-  // const x = useRef<number>(0); // 이미지의 X좌표 위치
-  // const y = useRef<number>(0);
   const image_width = useRef<number>(0); // 이미지의 너비
   const image_height = useRef<number>(0); // 이미지의 높이
   const ratio = 540 / 1080;
@@ -56,10 +44,6 @@ export default function UserCanvas({
   const Color_background_list: ColorInfo[] =
     Color_background_list_raw as ColorInfo[];
   const dyeFirstWidthRef = useRef<number>(0); // Ref로 선언
-  const [is_selected, set_is_selected] = useState<boolean>(
-    image_src !== process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail.svg"
-  );
-  const localDB = new LocalDB("post_data", "user_image", false);
 
   // 사용자의 이미지를 그리는 함수
   const user_image_draw = useCallback(
@@ -230,123 +214,6 @@ export default function UserCanvas({
     [Color_background_list, box_width]
   );
 
-  // 캔버스 이벤트 등록
-  useEffect(() => {
-    const user_canvas = imageRef.current;
-    if (user_canvas == null) {
-      return;
-    }
-
-    const mousedown_handler = (e: MouseEvent) => {
-      if (!(user_canvas.offsetParent instanceof HTMLElement)) {
-        return;
-      }
-
-      startX.current = e.pageX - user_canvas.offsetParent.offsetLeft; // 클릭 시작 X좌표 저장
-      // startY.current = e.pageY -user_canvas.offsetTop;
-
-      if (startX.current <= ratio * user_canvas.offsetHeight) {
-        isDown.current = true;
-      }
-    };
-    const mouseup_handler = (e: MouseEvent) => {
-      isDown.current = false;
-      e.preventDefault();
-    };
-    const mousemove_handler = (e: MouseEvent) => {
-      if (!isDown.current) {
-        return;
-      }
-      if (!(user_canvas.offsetParent instanceof HTMLElement)) {
-        return;
-      }
-      e.preventDefault();
-
-      // 이미지 이동 계산
-      x.current +=
-        (e.pageX - user_canvas.offsetParent.offsetLeft - startX.current) *
-        (image_height.current / box_height);
-      x.current = clamp(
-        box_width * (image_height.current / box_height) - image_width.current,
-        x.current,
-        0
-      );
-
-      startX.current = e.pageX - user_canvas.offsetParent.offsetLeft; // 현재 X좌표 갱신
-      user_image_draw(x.current, 0);
-    };
-
-    // 터치 이벤트 처리
-    const touchstart_handler = (e: TouchEvent) => {
-      if (e.touches.length > 0) {
-        if (!(user_canvas.offsetParent instanceof HTMLElement)) {
-          return;
-        }
-
-        const touch = e.touches[0];
-        startX.current = touch.pageX - user_canvas.offsetParent.offsetLeft;
-
-        if (startX.current <= ratio * user_canvas.offsetHeight) {
-          isDown.current = true;
-        }
-      }
-    };
-
-    const touchend_handler = (e: TouchEvent) => {
-      isDown.current = false;
-      e.preventDefault();
-    };
-
-    const touchcancel_handler = () => {
-      isDown.current = false;
-    };
-
-    const touchmove_handler = (e: TouchEvent) => {
-      if (!isDown.current || e.touches.length === 0) {
-        return;
-      }
-      if (!(user_canvas.offsetParent instanceof HTMLElement)) {
-        return;
-      }
-      e.preventDefault();
-      const touch = e.touches[0];
-
-      // 터치로 이미지 이동 계산
-      x.current +=
-        (touch.pageX - user_canvas.offsetParent.offsetLeft - startX.current) *
-        (image_height.current / box_height);
-      x.current = clamp(
-        box_width * (image_height.current / box_height) - image_width.current,
-        x.current,
-        0
-      );
-      startX.current = touch.pageX - user_canvas.offsetParent.offsetLeft;
-      user_image_draw(x.current, 0);
-    };
-
-    // 마우스 및 터치 이벤트 등록
-    user_canvas.addEventListener("mousedown", mousedown_handler);
-    window.addEventListener("mouseup", mouseup_handler);
-    window.addEventListener("mousemove", mousemove_handler);
-
-    user_canvas.addEventListener("touchstart", touchstart_handler);
-    user_canvas.addEventListener("touchend", touchend_handler);
-    user_canvas.addEventListener("touchcancel", touchcancel_handler);
-    user_canvas.addEventListener("touchmove", touchmove_handler);
-
-    return () => {
-      // 이벤트 해제
-      user_canvas.removeEventListener("mousedown", mousedown_handler);
-      window.removeEventListener("mouseup", mouseup_handler);
-      window.removeEventListener("mousemove", mousemove_handler);
-
-      user_canvas.removeEventListener("touchstart", touchstart_handler);
-      user_canvas.removeEventListener("touchend", touchend_handler);
-      user_canvas.removeEventListener("touchcancel", touchcancel_handler);
-      user_canvas.removeEventListener("touchmove", touchmove_handler);
-    };
-  }, [box_width, ratio, user_image_draw]);
-
   // 아이템 배경 이미지 로드 및 초기화
   useEffect(() => {
     if (!item_background_image.current) return;
@@ -383,16 +250,9 @@ export default function UserCanvas({
       image_width.current = user_image.current.width;
       image_height.current = user_image.current.height;
       user_image_draw(x.current, 0); // 초기 이미지 그리기
-      if (
-        image_src !==
-        process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail.svg"
-      ) {
-        set_is_selected(true);
-      }
     };
     const onerror_handler = () => {
       set_image_src(process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail.svg");
-      set_is_selected(false);
       x.current = 0;
     };
     user_image.current.onload = onload_handler;
@@ -435,66 +295,8 @@ export default function UserCanvas({
     image_load_check();
   }, [equiped_item, image_load_check]);
 
-  const image_validate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // 입력된 파일의 확장자 추출
-    const ext = e.target.value.split(".").pop()?.toLowerCase();
-    if (
-      ["bmp", "png", "jpeg", "jpg"].includes(ext ?? "") &&
-      e.target.files !== null
-    ) {
-      URL.revokeObjectURL(image_src);
-      const file = e.target.files[0];
-      const objectUrl = URL.createObjectURL(file);
-      localDB.open(1.0).then(() => {
-        localDB.put({ image: file }, 1);
-      });
-      set_image_src(objectUrl);
-      x.current = 0;
-    } else {
-      console.log("유효하지 않은 이미지");
-      e.target.value = "";
-    }
-  };
-
-  const image_delete = () => {
-    URL.revokeObjectURL(image_src);
-    localDB.open(1.0).then(() => {
-      localDB.clear();
-    });
-
-    set_image_src(process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail.svg");
-    set_is_selected(false);
-    x.current = 0;
-  };
-
-  function CanvasClickLayer({ is_selected }: { is_selected: boolean }) {
-    if (!is_selected) {
-      return (
-        <div className="input-container">
-          <label htmlFor="canvas-input" className="canvas-input-label" />
-          <input
-            className="user-canvas-input"
-            type="file"
-            accept="image/bmp, image/png, image/jpeg"
-            id="canvas-input"
-            onChange={image_validate}
-          />
-        </div>
-      );
-    } else {
-      return (
-        <div className="input-container">
-          <div className="image-delete" onClick={image_delete}>
-            이미지 삭제
-          </div>
-        </div>
-      );
-    }
-  }
-
   return (
     <div className="canvas-container">
-      <CanvasClickLayer is_selected={is_selected} />
       <canvas
         className="user-canvas"
         width={box_width + 630}

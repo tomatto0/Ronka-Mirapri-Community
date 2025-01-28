@@ -2,21 +2,30 @@ import {
   gender_category,
   race_category,
   job_category,
+  item_null,
 } from "../utils/constants";
 import { useSession } from "next-auth/react";
 import { Item } from "../types/Item";
 import React, { RefObject, useEffect, useState } from "react";
+import { LocalDB } from "../utils/localDB";
 
 export default function Editor({
   image_src,
+  set_image_src,
+  x,
   equiped_item,
+  set_equiped_item,
   imageRef,
 }: {
   image_src: string;
+  set_image_src: (image_src: string) => void;
+  x: RefObject<number>;
   equiped_item: Item[];
+  set_equiped_item: (equiped_item: Item[]) => void;
   imageRef: RefObject<HTMLCanvasElement | null>;
 }) {
   const { data: session, status } = useSession();
+  const localDB = new LocalDB("post_data", "user_image", false);
 
   const [title, set_title] = useState<string>("");
   const [content, set_content] = useState<string>("");
@@ -69,6 +78,7 @@ export default function Editor({
     if (!ctx) {
       return;
     }
+
     const image_data = ctx.getImageData(0, 0, 540, 1080);
     const cropped_canvas = document.createElement("canvas");
     cropped_canvas.width = 540;
@@ -80,12 +90,16 @@ export default function Editor({
     cropped_ctx.putImageData(image_data, 0, 0);
     try {
       const blob = await new Promise<Blob>((resolve, reject) => {
-        cropped_canvas.toBlob((blob) => {
-          if (blob) {
-            return resolve(blob);
-          }
-          return reject(new Error("Blob 생성 실패"));
-        }, "image/png");
+        cropped_canvas.toBlob(
+          (blob) => {
+            if (blob) {
+              return resolve(blob);
+            }
+            return reject(new Error("Blob 생성 실패"));
+          },
+          "image/webp",
+          1.0
+        );
       });
       const form = new FormData();
       form.append("image", blob);
@@ -98,7 +112,6 @@ export default function Editor({
       }
       const img_res = await img_response.json();
       const image_url = img_res.image_url;
-
       const post_response = await fetch("/api/db/posts", {
         method: "POST",
         body: JSON.stringify({
@@ -106,13 +119,20 @@ export default function Editor({
           equiped_item: equiped_item,
           title: title,
           content: content,
-          tags: tag,
+          sns: sns,
+          gender: gender,
+          race: race,
+          job: job,
+          tag: tag,
         }),
       });
       if (!post_response.ok) {
         return;
       }
       const post_res = await post_response.json();
+      localDB.open(1.0).then(() => {
+        localDB.clear();
+      });
       console.log(post_res);
     } catch (e) {
       console.error(e);
@@ -183,6 +203,81 @@ export default function Editor({
       set_sns(session.user.sns ?? "");
     }
   }, [status]);
+
+  //indexedDB에 저장되있는 이미지 정보 불러오기
+  useEffect(() => {
+    localDB.open(1.0).then(() => {
+      localDB.get(1).then((i) => {
+        if (i) {
+          const item = i as {
+            image: Blob;
+            x: number;
+            equiped_item: Item[];
+            title: string;
+            content: string;
+            sns: string;
+            gender: string;
+            race: string;
+            job: string[];
+            tag: string[];
+          };
+          console.log(item);
+          if (item.image) {
+            const objectURL = URL.createObjectURL(item.image);
+            set_image_src(objectURL);
+          }
+          x.current = item.x;
+          set_equiped_item(item.equiped_item ?? new Array(8).fill(item_null));
+          if (item.title) {
+            set_title(item.title);
+          }
+          if (item.content) {
+            set_content(item.content);
+          }
+          if (item.sns) {
+            set_sns(item.sns);
+          }
+          if (item.gender) {
+            set_gender(item.gender);
+          }
+          if (item.race) {
+            set_race(item.race);
+          }
+          if (item.job) {
+            set_job(item.job);
+          }
+          if (item.tag) {
+            set_tag(item.tag);
+          }
+        }
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      localDB.open(1.0).then(() => {
+        localDB.put(
+          {
+            x: x.current,
+            equiped_item,
+            title,
+            content,
+            sns,
+            gender,
+            race,
+            job,
+            tag,
+          },
+          1
+        );
+      });
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [x.current, equiped_item, title, content, sns, gender, race, job, tag]);
 
   if (status === "loading") {
     return;

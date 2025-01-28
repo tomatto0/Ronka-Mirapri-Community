@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
       .replace(". ", "")
       .replace(". ", "")
       .replace(":", "") +
-    ".png";
+    ".webp";
 
   if (file instanceof Blob) {
     const filepath = path.join(process.cwd(), "/public/uploads", filename);
@@ -35,4 +35,7 @@ export async function POST(request: NextRequest) {
     });
   }
   return NextResponse.json({ success: false });
+}
+export async function DELETE(request: NextRequest) {
+  const body = await request.json();
 }

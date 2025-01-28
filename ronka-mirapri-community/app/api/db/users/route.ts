@@ -20,7 +20,7 @@ export async function GET(request: Request) {
       );
     }
     const session = await getServerSession(authOptions);
-    if (session?.user?._id !== id) {
+    if (session?.user._id !== id) {
       return NextResponse.json(
         { success: false, error: "Forbidden access" },
         { status: 403 }
@@ -28,7 +28,6 @@ export async function GET(request: Request) {
     }
     await connectDB();
     const user = await User.findById(id).lean();
-    console.log("lean:", user);
     if (!user) {
       return NextResponse.json(
         { success: false, error: "User not found" },
