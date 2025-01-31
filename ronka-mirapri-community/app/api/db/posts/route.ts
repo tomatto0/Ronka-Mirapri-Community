@@ -3,41 +3,6 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-export async function GET(request: Request) {
-  const url = new URL(request.url);
-  const id = url.searchParams.get("id");
-  const index = url.searchParams.get("index");
-
-  try {
-    if (!id && !index) {
-      return NextResponse.json(
-        { success: false, error: "Invalid request" },
-        { status: 400 }
-      );
-    }
-    await connectDB();
-    const post = id
-      ? await Post.findById(id).populate("author").lean()
-      : await Post.findOne({ index: index }).populate("author").lean();
-    if (!post) {
-      return NextResponse.json(
-        { success: false, error: "Post not found" },
-        { status: 404 }
-      );
-    }
-    return NextResponse.json({ success: true, data: post });
-  } catch (e) {
-    console.error("MongoDB Failed to read posts error:", e);
-    return NextResponse.json(
-      {
-        success: false,
-        error: "Unknown error",
-      },
-      { status: 500 }
-    );
-  }
-}
-
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -56,7 +21,6 @@ export async function POST(request: Request) {
       );
     }
     await connectDB();
-    console.log(body);
     const post = new Post({
       ...body,
       author: session.user._id,

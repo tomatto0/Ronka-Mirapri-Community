@@ -76,6 +76,7 @@ div.header {
     display: block;
     height: 33px;
     content: url("../public/img/title_mobile.svg");
+    cursor: pointer;
   }
 }
 
@@ -133,5 +134,7 @@ div.footer {
     background-size: 12px 12px;
     background-position: top left, top right;
     background-repeat: no-repeat;
+
+    z-index: -1;
   }
 }

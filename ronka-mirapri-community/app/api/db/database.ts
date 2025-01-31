@@ -81,6 +81,7 @@ const post_schema = new Schema({
   index: { type: Number },
   created_at: { type: Date, default: Date.now },
 });
+post_schema.index({ index: -1 });
 //post가 findOneAndDelete로 삭제될 때 post _id를 가진 Like를 삭제
 post_schema.pre("findOneAndDelete", async function (next) {
   try {

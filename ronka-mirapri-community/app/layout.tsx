@@ -8,6 +8,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  function onclick_handler() {
+    window.location.href = "/";
+  }
   return (
     <html lang="ko">
       <head>
@@ -70,7 +73,11 @@ export default function RootLayout({
         <div id="root">
           <div className="App">
             <div className="header">
-              <img alt="FFXIV-KOR MIRAPRI GENERATOR" id="title" />
+              <img
+                alt="FFXIV-KOR MIRAPRI GENERATOR"
+                id="title"
+                onClick={onclick_handler}
+              />
             </div>
             <SessionProvider>{children}</SessionProvider>
             <div className="footer">

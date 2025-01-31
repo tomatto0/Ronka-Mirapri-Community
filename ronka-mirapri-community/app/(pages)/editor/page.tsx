@@ -9,7 +9,7 @@ import equip_slot_categories from "../../json/equip_slot_categories.json";
 import { EquipSlot } from "@/app/types/EquipSlot";
 import { Item } from "@/app/types/Item";
 import { signIn, useSession } from "next-auth/react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { item_null } from "@/app/utils/constants";
 import { LocalDB } from "@/app/utils/localDB";
 

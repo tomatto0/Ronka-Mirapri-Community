@@ -1,0 +1,14 @@
+.post-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.post-box {
+  width: 25%;
+  height: fit-content;
+  position: relative;
+  margin-bottom: 50px;
+}
+.post-thumbnail {
+  width: 100%;
+  aspect-ratio: 540/1080;
+}

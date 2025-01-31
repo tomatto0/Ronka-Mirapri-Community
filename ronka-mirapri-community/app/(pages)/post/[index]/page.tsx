@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 
 export default function UserPage() {
   const { data: session, status } = useSession();
+  const [author, set_author] = useState<string>("");
   const [post_id, set_post_id] = useState<string>("");
   const [image_src, set_image_src] = useState<string>("");
   const [equiped_item, set_equiped_item] = useState<Item[]>([]);
@@ -25,27 +26,34 @@ export default function UserPage() {
   const pathname = usePathname();
   const index = pathname.split("/").pop();
 
-  function post_data_fetch() {
-    fetch(`/api/db/posts?index=${index}`, { method: "GET" }).then(
-      (response) => {
-        response.json().then((res) => {
-          set_post_id(res.data._id);
-          set_image_src(res.data.image_url);
-          set_equiped_item(res.data.equiped_item);
-          set_title(res.data.title);
-          set_content(res.data.content);
-          set_sns(res.data.sns);
-          set_gender(res.data.gender);
-          set_race(res.data.race);
-          set_job(res.data.job);
-          set_tag(res.data.tag);
-          set_like(res.data.likes.length);
-          set_is_loaded(true);
-          console.log(res);
-        });
-      }
-    );
+  async function post_data_fetch() {
+    const response = await fetch(`/api/db/posts/index?index=${index}`, {
+      method: "GET",
+    });
+    const res = await response.json();
+    console.log(res);
+    set_author(res.data.author.nickname);
+    set_post_id(res.data._id);
+    set_image_src(res.data.image_url);
+    set_equiped_item(res.data.equiped_item);
+    set_title(res.data.title);
+    set_content(res.data.content);
+    set_sns(res.data.sns);
+    set_gender(res.data.gender);
+    set_race(res.data.race);
+    set_job(res.data.job);
+    set_tag(res.data.tag);
+    set_is_loaded(true);
   }
+  async function like_data_fetch() {
+    const response = await fetch(`/api/db/posts/index/likes?index=${index}`, {
+      method: "GET",
+    });
+    const res = await response.json();
+    console.log(res);
+    set_like(res.data.like_count);
+  }
+
   async function like_onclick_handler() {
     if (!session?.user.login) {
       return;
@@ -54,27 +62,24 @@ export default function UserPage() {
       method: "GET",
     });
     const res = await response.json();
-    console.log(res);
     if (res.data) {
-      console.log(post_id);
       const like_response = await fetch(`/api/db/likes`, {
         method: "DELETE",
         body: JSON.stringify({ post: post_id }),
       });
-      const like_res = await like_response.json();
-      console.log(like_res);
     } else {
       const like_response = await fetch(`/api/db/likes`, {
         method: "POST",
         body: JSON.stringify({ post: post_id }),
       });
-      const like_res = await like_response.json();
-      console.log(like_res);
     }
-    post_data_fetch();
+    like_data_fetch();
   }
 
-  useEffect(post_data_fetch, []);
+  useEffect(() => {
+    post_data_fetch();
+    like_data_fetch();
+  }, []);
 
   if (!is_loaded) {
     return;
@@ -90,6 +95,8 @@ export default function UserPage() {
           imageRef={imageRef}
         ></UserViewer>
       </div>
+      <p>작성자: {author}</p>
+      <hr />
       <p>제목: {title}</p>
       <p>내용: {content}</p>
       <p>sns: {sns}</p>
