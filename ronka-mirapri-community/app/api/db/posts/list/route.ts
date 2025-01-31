@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import { connectDB, Post } from "../../database";
+import { connectDB, Like, Post } from "../../database";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export async function GET(request: Request) {
   try {
@@ -7,6 +9,8 @@ export async function GET(request: Request) {
     const index = Number(url.searchParams.get("index")) || 0;
     const size = Number(url.searchParams.get("size")) || 12;
 
+    const session = await getServerSession(authOptions);
+    const is_login = session?.user.login;
     connectDB();
 
     function response_handler(post: any[]) {
@@ -29,6 +33,19 @@ export async function GET(request: Request) {
           },
         },
       ]);
+      if (is_login) {
+        for (let post of posts) {
+          const like = await Like.findOne({
+            post: post._id,
+            user: session.user._id,
+          }).lean();
+          post.is_liked = like !== null;
+        }
+      } else {
+        for (let post of posts) {
+          post.is_liked = false;
+        }
+      }
       return response_handler(posts);
     } else {
       const posts = await Post.aggregate([

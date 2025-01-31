@@ -13,7 +13,7 @@ import { useRef, useState } from "react";
 import { item_null } from "@/app/utils/constants";
 import { LocalDB } from "@/app/utils/localDB";
 
-export default function editor() {
+export default function Page_editor() {
   const { data: session, status } = useSession();
   const localDB = new LocalDB("post_data", "user_image", false);
 

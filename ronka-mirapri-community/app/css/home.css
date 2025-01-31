@@ -1,6 +1,7 @@
 .post-container {
   display: flex;
   flex-wrap: wrap;
+  width: 1000px;
 }
 .post-box {
   width: 25%;

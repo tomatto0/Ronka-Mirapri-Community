@@ -2,11 +2,12 @@
 
 import UserViewer from "@/app/components/UserViewer";
 import { Item } from "@/app/types/Item";
+import { like_toggle } from "@/app/utils/clientfunction";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-export default function UserPage() {
+export default function Page_post() {
   const { data: session, status } = useSession();
   const [author, set_author] = useState<string>("");
   const [post_id, set_post_id] = useState<string>("");
@@ -58,21 +59,7 @@ export default function UserPage() {
     if (!session?.user.login) {
       return;
     }
-    const response = await fetch(`/api/db/likes?id=${post_id}`, {
-      method: "GET",
-    });
-    const res = await response.json();
-    if (res.data) {
-      const like_response = await fetch(`/api/db/likes`, {
-        method: "DELETE",
-        body: JSON.stringify({ post: post_id }),
-      });
-    } else {
-      const like_response = await fetch(`/api/db/likes`, {
-        method: "POST",
-        body: JSON.stringify({ post: post_id }),
-      });
-    }
+    like_toggle(post_id);
     like_data_fetch();
   }
 

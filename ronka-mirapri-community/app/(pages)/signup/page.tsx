@@ -3,7 +3,7 @@
 import { signIn, useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
 
-export default function signup_page() {
+export default function Page_sign_up() {
   const { data: session, status } = useSession();
   const [email, set_email] = useState<string>(session?.user?.email || "");
   const [nickname, set_nickname] = useState<string>("");
