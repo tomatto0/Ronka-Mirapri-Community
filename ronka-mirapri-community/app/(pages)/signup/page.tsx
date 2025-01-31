@@ -15,7 +15,7 @@ export default function Page_sign_up() {
       return false;
     }
     const user = { email, nickname, sns };
-    const response = await fetch("/db/users", {
+    const response = await fetch("/api/db/users", {
       method: "POST",
       body: JSON.stringify(user),
     });
@@ -45,13 +45,13 @@ export default function Page_sign_up() {
     }
   }, [status]);
 
-  if (!is_user_load.current) {
-    return;
+  if (status === "loading") {
+    return <main></main>;
   }
 
   if (session && session.user && session.user.email) {
     return (
-      <div>
+      <main>
         <p>Welcome! Please complete your sign-up process.</p>
         <label htmlFor="email">email: </label>
         <input type="text" disabled value={email} id="email" />
@@ -78,16 +78,16 @@ export default function Page_sign_up() {
         />
         <br />
         <button onClick={signup_handler}>sign up</button>
-      </div>
+      </main>
     );
   }
 
   return (
-    <div>
+    <main>
       <p>Please log in to sign up.</p>
       <button onClick={() => signIn("google", { callbackUrl: "/signup" })}>
         Sign in with Google
       </button>
-    </div>
+    </main>
   );
 }

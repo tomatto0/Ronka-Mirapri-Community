@@ -79,10 +79,10 @@ export default function Page_editor() {
   };
 
   if (status === "loading") {
-    return;
+    return <main></main>;
   }
   return (
-    <div>
+    <main>
       <div className="main-container">
         <UserCanvas
           image_src={image_src}
@@ -121,6 +121,6 @@ export default function Page_editor() {
         set_is_open={set_is_open}
         edit_equiped_item={edit_equiped_item}
       />
-    </div>
+    </main>
   );
 }

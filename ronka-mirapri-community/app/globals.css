@@ -66,6 +66,11 @@ body {
   display: flex;
   justify-content: center;
 }
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
 div.header {
   height: 60px;
@@ -78,6 +83,10 @@ div.header {
     content: url("../public/img/title_mobile.svg");
     cursor: pointer;
   }
+}
+
+main {
+  flex-grow: 1;
 }
 
 div.footer {

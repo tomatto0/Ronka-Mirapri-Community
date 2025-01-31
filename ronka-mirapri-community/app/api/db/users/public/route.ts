@@ -15,11 +15,14 @@ export async function GET(request: Request) {
       );
     }
     await connectDB();
-    const user = await User.findById(id).lean<{
-      _id: String;
-      nickname: String;
-      sns: String;
-    }>();
+    const user = await User.findOne({ nickname: id })
+      .select("_id, nickname, sns, posts")
+      .lean<{
+        _id: string;
+        nickname: string;
+        sns: string;
+        posts: string[];
+      }>();
     if (!user) {
       return NextResponse.json(
         { success: false, error: "User not found" },
@@ -28,11 +31,7 @@ export async function GET(request: Request) {
     }
     return NextResponse.json({
       success: true,
-      data: {
-        _id: user._id,
-        nickname: user.nickname,
-        sns: user.sns,
-      },
+      data: user,
     });
   } catch (e) {
     console.error("MongoDB Failed to read users error:", e);

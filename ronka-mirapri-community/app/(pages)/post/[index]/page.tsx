@@ -69,10 +69,11 @@ export default function Page_post() {
   }, []);
 
   if (!is_loaded) {
-    return;
+    return <main></main>;
   }
+
   return (
-    <div>
+    <main>
       <div className="main-container">
         <UserViewer
           image_src={image_src}
@@ -94,6 +95,6 @@ export default function Page_post() {
       <p>
         좋아요: {like} <button onClick={like_onclick_handler}>+</button>
       </p>
-    </div>
+    </main>
   );
 }
