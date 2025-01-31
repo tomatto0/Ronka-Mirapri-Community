@@ -1,7 +1,16 @@
-"use client";
-
+import type { Metadata } from "next";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
+import ReactQueryConfigContext from "@/provider/ReactQueryConfigContext";
+import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
+
+export const metadata: Metadata = {
+  title: "롱카의 투영기록?",
+  description: "파판14 코디 커뮤니티",
+  icons: {
+    icon: "/logo/favicon.png",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -20,35 +29,6 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
-        <meta
-          name="description"
-          content="파판14 코디(투영세트) 이미지 생성기"
-        />
-        <title>롱카의 투영기록?</title>
-        {/* <!-- Google Tag Manager --> */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;j.src="https://www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f)})(window,document,"script","dataLayer","GTM-NTZXPT4C");`,
-          }}
-        />
-        {/* <!-- End Google Tag Manager --> */}
-
-        {/* Google Analytics */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-0B330M6050"
-        ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-0B330M6050');
-          `,
-          }}
-        />
-        {/* End Google Analytics */}
       </head>
       <body>
         {/* <!-- Google Tag Manager (noscript) --> */}
@@ -74,12 +54,14 @@ export default function RootLayout({
           <div className="App">
             <div className="header">
               <img
-                alt="FFXIV-KOR MIRAPRI GENERATOR"
+                alt="Ronka LookBook logo"
                 id="title"
                 onClick={onclick_handler}
               />
             </div>
-            <SessionProvider>{children}</SessionProvider>
+            <SessionProvider>
+              <ReactQueryConfigContext>{children}</ReactQueryConfigContext>
+            </SessionProvider>
             <div className="footer">
               <a href="https://ronkacloset.com">https://ronkacloset.com</a>
               <br />
@@ -88,6 +70,12 @@ export default function RootLayout({
           </div>
         </div>
       </body>
+      {/* Google Analytics */}
+      <GoogleAnalytics gaId="G-0B330M6050" />
+      {/* End Google Analytics */}
+      {/* <!-- Google Tag Manager --> */}
+      <GoogleTagManager gtmId="GTM-NTZXPT4C" />
+      {/* <!-- End Google Tag Manager --> */}
     </html>
   );
 }
