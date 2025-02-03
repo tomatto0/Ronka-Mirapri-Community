@@ -6,33 +6,15 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 export async function GET(request: Request) {
   try {
     const url = new URL(request.url);
-    const index = Number(url.searchParams.get("index")) || 0;
+    const page = Number(url.searchParams.get("page")) || 0;
     const size = Number(url.searchParams.get("size")) || 12;
-
+    const filter = JSON.parse(url.searchParams.get("filter") ?? "[]");
+    const order = url.searchParams.get("order") === "fav";
     const session = await getServerSession(authOptions);
     const is_login = session?.user.login;
     connectDB();
 
-    function response_handler(post: any[]) {
-      if (!post || post.length == 0) {
-        return NextResponse.json({ success: false, error: "No more posts" });
-      }
-      return NextResponse.json({ success: true, data: post });
-    }
-
-    if (!index) {
-      const posts = await Post.aggregate([
-        { $sort: { index: -1 } },
-        { $limit: size },
-        {
-          $project: {
-            index: 1,
-            title: 1,
-            image_url: 1,
-            like_count: { $size: "$likes" },
-          },
-        },
-      ]);
+    async function response_handler(posts: any[]) {
       if (is_login) {
         for (let post of posts) {
           const like = await Like.findOne({
@@ -46,24 +28,37 @@ export async function GET(request: Request) {
           post.is_liked = false;
         }
       }
-      return response_handler(posts);
-    } else {
-      const posts = await Post.aggregate([
-        { $match: { index: { $lt: index } } },
-        { $sort: { index: -1 } },
-        { $limit: size },
-        {
-          $project: {
-            index: 1,
-            title: 1,
-            image_url: 1,
-            like_count: { $size: "$likes" },
-          },
-        },
-      ]);
-      return response_handler(posts);
+      if (!posts || posts.length == 0) {
+        return NextResponse.json({ success: false, error: "No more posts" });
+      }
+      return NextResponse.json({ success: true, data: posts });
     }
+
+    const posts = await Post.aggregate([
+      {
+        $match: {
+          $and: [{ index: { $gte: 1 } }, filter],
+        },
+      },
+      {
+        $addFields: {
+          like_count: { $size: "$likes" },
+        },
+      },
+      { $sort: order ? { like_count: -1 } : { index: -1 } },
+      { $skip: page },
+      { $limit: size },
+      {
+        $project: {
+          index: 1,
+          title: 1,
+          image_url: 1,
+          like_count: 1,
+        },
+      },
+    ]);
+    return await response_handler(posts);
   } catch (e) {
-    return NextResponse.json({ success: false });
+    return NextResponse.json({ success: false, error: e });
   }
 }

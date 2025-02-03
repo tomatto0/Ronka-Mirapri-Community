@@ -6,17 +6,12 @@ import Color_background_list_raw from "../json/color_background.json";
 import { Item } from "../types/Item";
 import "../css/UserCanvas.css";
 import { LocalDB } from "../utils/localDB";
+import { clamp } from "../utils/clamp";
 
 type ItemImage = {
   Id: number;
   Image: HTMLImageElement;
 };
-
-// 마우스와 터치 범위 설정시 사용하는 값을 최소와 최대 범위로 제한하는 함수
-function clamp(min: number, val: number, max: number) {
-  min = min > max ? max : min;
-  return val < min ? min : val > max ? max : val;
-}
 
 export default function UserCanvas({
   image_src,
@@ -230,7 +225,7 @@ export default function UserCanvas({
     [Color_background_list, box_width]
   );
 
-  // 캔버스 이벤트 등록
+  // 캔버스 마우스 이벤트 등록
   useEffect(() => {
     const user_canvas = imageRef.current;
     if (user_canvas == null) {
@@ -377,6 +372,7 @@ export default function UserCanvas({
     if (!user_image.current) return;
     is_user_image_loaded.current = false;
     user_image.current.src = image_src;
+
     const onload_handler = () => {
       if (!user_image.current) return;
       is_user_image_loaded.current = true;
@@ -467,7 +463,8 @@ export default function UserCanvas({
     x.current = 0;
   };
 
-  function CanvasClickLayer({ is_selected }: { is_selected: boolean }) {
+  //component
+  const CanvasClickLayer = ({ is_selected }: { is_selected: boolean }) => {
     if (!is_selected) {
       return (
         <div className="input-container">
@@ -490,7 +487,7 @@ export default function UserCanvas({
         </div>
       );
     }
-  }
+  };
 
   return (
     <div className="canvas-container">

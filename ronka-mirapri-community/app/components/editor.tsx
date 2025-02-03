@@ -2,14 +2,24 @@ import {
   gender_category,
   race_category,
   job_category,
+  editor_init_state,
   item_null,
+  job_category_group,
 } from "../utils/constants";
 import { useSession } from "next-auth/react";
 import { Item } from "../types/Item";
-import React, { RefObject, useEffect, useState } from "react";
+import React, {
+  ActionDispatch,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { LocalDB } from "../utils/localDB";
 
 export default function Editor({
+  data,
+  dispatch,
   image_src,
   set_image_src,
   x,
@@ -17,6 +27,16 @@ export default function Editor({
   set_equiped_item,
   imageRef,
 }: {
+  data: typeof editor_init_state;
+  dispatch: ActionDispatch<
+    [
+      action: {
+        type: "UPDATE_FIELD";
+        field: string;
+        value: string | string[];
+      }
+    ]
+  >;
   image_src: string;
   set_image_src: (image_src: string) => void;
   x: RefObject<number>;
@@ -26,59 +46,131 @@ export default function Editor({
 }) {
   const { data: session, status } = useSession();
   const localDB = new LocalDB("post_data", "user_image", false);
-
-  const [title, set_title] = useState<string>("");
-  const [content, set_content] = useState<string>("");
-  const [sns, set_sns] = useState<string>("");
-  const [gender, set_gender] = useState<string>("공용");
-  const [race, set_race] = useState<string | null>(null);
-  const [job, set_job] = useState<string[]>(["모든 클래스"]);
-  const [tag, set_tag] = useState<string[]>([]);
   const [tag_input, set_tag_input] = useState<string>("");
+  const is_posted = useRef<boolean>(false);
 
+  //#region setter
   function title_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
-    set_title(e.target.value);
+    dispatch({
+      type: "UPDATE_FIELD",
+      field: "title",
+      value: e.target.value.trim(),
+    });
   }
   function content_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
-    set_content(e.target.value);
+    dispatch({
+      type: "UPDATE_FIELD",
+      field: "content",
+      value: e.target.value.trim(),
+    });
   }
   function sns_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
-    set_sns(e.target.value);
+    dispatch({
+      type: "UPDATE_FIELD",
+      field: "sns",
+      value: e.target.value.trim(),
+    });
   }
   function gender_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
-    set_gender(e.target.value);
+    dispatch({ type: "UPDATE_FIELD", field: "gender", value: e.target.value });
   }
   function race_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
-    set_race(e.target.value);
+    dispatch({ type: "UPDATE_FIELD", field: "race", value: e.target.value });
   }
   function job_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
-    set_job(
-      job.includes(e.target.value)
-        ? job.filter((i) => i !== e.target.value)
-        : [...job, e.target.value]
-    );
+    function job_groupize(job: string[]) {
+      const groups = Object.keys(job_category_group);
+      groups.forEach((group) => {
+        if (job_category_group[group].every((i) => job.includes(i))) {
+          if (!job.includes(group)) {
+            job = [...job, group];
+          }
+        } else {
+          job = job.filter((i) => i !== group);
+        }
+      });
+      return job;
+    }
+    if (Object.keys(job_category_group).includes(e.target.value)) {
+      const new_job = data.job.includes(e.target.value)
+        ? data.job.filter(
+            (i) =>
+              !job_category_group[e.target.value].includes(i) &&
+              i !== e.target.value
+          )
+        : [
+            ...data.job,
+            ...job_category_group[e.target.value].filter(
+              (i) => !data.job.includes(i)
+            ),
+            e.target.value,
+          ];
+      dispatch({
+        type: "UPDATE_FIELD",
+        field: "job",
+        value: job_groupize(new_job),
+      });
+    } else {
+      const new_job = data.job.includes(e.target.value)
+        ? data.job.filter((i) => i !== e.target.value)
+        : [...data.job.filter((i) => i !== "모든 클래스"), e.target.value];
+      dispatch({
+        type: "UPDATE_FIELD",
+        field: "job",
+        value: job_groupize(new_job),
+      });
+    }
   }
   function tag_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
     let tag_input = e.target.value;
     if (tag_input.slice(-1) === " ") {
-      if (!tag.includes(tag_input.trim())) {
-        set_tag([...tag, tag_input.trim()]);
+      if (!data.tag.includes(tag_input.trim())) {
+        dispatch({
+          type: "UPDATE_FIELD",
+          field: "tag",
+          value: [...data.tag, tag_input.trim()],
+        });
       }
       set_tag_input("");
     } else {
       set_tag_input(tag_input);
     }
   }
+  //#endregion
 
+  //#region function
+  //글 작성 동작
   async function post() {
     if (!imageRef.current) {
+      return;
+    }
+    function post_validate(equiped_item: Item[]): boolean {
+      if (
+        image_src ===
+        process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail.svg"
+      ) {
+        return false;
+      }
+      if (data.title === "") {
+        return false;
+      }
+      if (data.race === null) {
+        return false;
+      }
+      for (let item of equiped_item) {
+        if (item.Id !== 0) {
+          return true;
+        }
+      }
+      return false;
+    }
+    if (!post_validate(equiped_item)) {
       return;
     }
     const ctx = imageRef.current.getContext("2d");
     if (!ctx) {
       return;
     }
-
     const image_data = ctx.getImageData(0, 0, 540, 1080);
     const cropped_canvas = document.createElement("canvas");
     cropped_canvas.width = 540;
@@ -117,13 +209,7 @@ export default function Editor({
         body: JSON.stringify({
           image_url: image_url,
           equiped_item: equiped_item,
-          title: title,
-          content: content,
-          sns: sns,
-          gender: gender,
-          race: race,
-          job: job,
-          tag: tag,
+          ...data,
         }),
       });
       if (!post_response.ok) {
@@ -133,13 +219,17 @@ export default function Editor({
       localDB.open(1.0).then(() => {
         localDB.clear();
       });
-      console.log(post_res);
+      console.log("res", post_res);
+      is_posted.current = true;
+      window.location.href = `/post/${post_res.data.index}`;
     } catch (e) {
       console.error(e);
     }
   }
+  //#endregion
 
-  const InputBox = ({
+  //#region component
+  const RadioBox = ({
     name,
     value,
     category,
@@ -193,19 +283,25 @@ export default function Editor({
   };
   const TagBox = ({ value }: { value: string }) => {
     const click_handler = () => {
-      set_tag(tag.filter((i) => i !== value));
+      dispatch({
+        type: "UPDATE_FIELD",
+        field: "tag",
+        value: data.tag.filter((i) => i !== value),
+      });
     };
     return <button onClick={click_handler}>{value} X</button>;
   };
+  //#endregion
 
+  //indexedDB에서 정보 불러오기
   useEffect(() => {
-    if (sns === "" && session?.user) {
-      set_sns(session.user.sns ?? "");
+    if (data.sns === "" && session?.user) {
+      dispatch({
+        type: "UPDATE_FIELD",
+        field: "sns",
+        value: session.user.sns ?? "",
+      });
     }
-  }, [status]);
-
-  //indexedDB에 저장되있는 이미지 정보 불러오기
-  useEffect(() => {
     localDB.open(1.0).then(() => {
       localDB.get(1).then((i) => {
         if (i) {
@@ -221,53 +317,48 @@ export default function Editor({
             job: string[];
             tag: string[];
           };
-          console.log(item);
+          console.log("local db loaded", item);
           if (item.image) {
             const objectURL = URL.createObjectURL(item.image);
             set_image_src(objectURL);
           }
           x.current = item.x;
           set_equiped_item(item.equiped_item ?? new Array(8).fill(item_null));
-          if (item.title) {
-            set_title(item.title);
-          }
-          if (item.content) {
-            set_content(item.content);
-          }
+
+          dispatch({ type: "UPDATE_FIELD", field: "title", value: item.title });
+          dispatch({
+            type: "UPDATE_FIELD",
+            field: "content",
+            value: item.content,
+          });
+          dispatch({
+            type: "UPDATE_FIELD",
+            field: "gender",
+            value: item.gender,
+          });
+          dispatch({ type: "UPDATE_FIELD", field: "race", value: item.race });
+          dispatch({ type: "UPDATE_FIELD", field: "job", value: item.job });
+          dispatch({ type: "UPDATE_FIELD", field: "tag", value: item.tag });
           if (item.sns) {
-            set_sns(item.sns);
-          }
-          if (item.gender) {
-            set_gender(item.gender);
-          }
-          if (item.race) {
-            set_race(item.race);
-          }
-          if (item.job) {
-            set_job(item.job);
-          }
-          if (item.tag) {
-            set_tag(item.tag);
+            dispatch({ type: "UPDATE_FIELD", field: "sns", value: item.sns });
           }
         }
       });
     });
-  }, []);
+  }, [status]);
 
+  //indexedDB에 정보 저장하기
   useEffect(() => {
     const handleBeforeUnload = () => {
+      if (is_posted) {
+        return;
+      }
       localDB.open(1.0).then(() => {
         localDB.put(
           {
             x: x.current,
             equiped_item,
-            title,
-            content,
-            sns,
-            gender,
-            race,
-            job,
-            tag,
+            ...data,
           },
           1
         );
@@ -277,7 +368,7 @@ export default function Editor({
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, [x.current, equiped_item, title, content, sns, gender, race, job, tag]);
+  }, [x.current, equiped_item, data, is_posted]);
 
   if (status === "loading") {
     return;
@@ -291,7 +382,7 @@ export default function Editor({
       <input
         type="text"
         id="title"
-        value={title}
+        value={data.title}
         onChange={title_change_handler}
         autoComplete="off"
       />
@@ -300,7 +391,7 @@ export default function Editor({
       <input
         type="text"
         id="content"
-        value={content}
+        value={data.content}
         onChange={content_change_handler}
         autoComplete="off"
       />
@@ -309,7 +400,7 @@ export default function Editor({
       <input
         type="text"
         id="sns"
-        value={sns}
+        value={data.sns}
         onChange={sns_change_handler}
         autoComplete="off"
       />
@@ -317,20 +408,20 @@ export default function Editor({
       <p>검색 필터 설정</p>
       <hr />
       {gender_category.map((i) => (
-        <InputBox
+        <RadioBox
           category="gender"
           name={i}
-          value={gender}
+          value={data.gender}
           change_handler={gender_change_handler}
           key={i}
         />
       ))}
       <p>종족</p>
       {race_category.map((i) => (
-        <InputBox
+        <RadioBox
           category="race"
           name={i}
-          value={race}
+          value={data.race}
           change_handler={race_change_handler}
           key={i}
         />
@@ -340,14 +431,20 @@ export default function Editor({
         <CheckBox
           category="job"
           name={i}
-          value={job}
+          value={data.job}
           change_handler={job_change_handler}
           key={i}
         />
       ))}
+      {/* <CheckBox
+        group={job_category_group}
+        category="job"
+        value={data.job}
+        change_handler={job_change_handler}
+      /> */}
       <br />
       <label htmlFor="tag">태그: </label>
-      {tag.map((tag, i) => (
+      {data.tag.map((tag, i) => (
         <TagBox value={tag} key={i} />
       ))}
       <input

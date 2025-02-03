@@ -4,6 +4,7 @@ import "../css/home.css";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
 import PostThumbnail from "../components/PostThumbnail";
+import FilterSelector from "../components/FilterSelctor";
 
 type PostInform = {
   _id: string;
@@ -19,20 +20,33 @@ export default function Page_home() {
   const [posts, set_posts] = useState<PostInform[]>([]);
   const loader = useRef<HTMLDivElement | null>(null);
   const [is_loading, set_is_loading] = useState<boolean>(false);
+  const [filter, set_filter] = useState<string>("{}");
+  const [order, set_order] = useState<string>("최신순");
   const is_end = useRef<boolean>(false);
 
-  async function post_fetch(index: number) {
-    const response = await fetch(`/api/db/posts/list?index=${index}&size=12`);
+  async function post_fetch(posts: PostInform[]) {
+    console.log(
+      `/api/db/posts/list?page=${posts.length}&size=12&filter=${filter}${
+        order === "인기순" ? "&order=fav" : ""
+      }`
+    );
+    const response = await fetch(
+      `/api/db/posts/list?page=${posts.length}&size=12&filter=${filter}${
+        order === "인기순" ? "&order=fav" : ""
+      }`
+    );
     const res = await response.json();
     if (res.success) {
-      set_posts([...posts, ...res.data]);
+      set_posts((prev) => [...prev, ...res.data]);
     } else if (res.error === "No more posts") {
       is_end.current = true;
     }
   }
   useEffect(() => {
-    post_fetch(0);
-  }, []);
+    set_posts([]);
+    is_end.current = false;
+    post_fetch([]);
+  }, [filter, order]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -42,10 +56,8 @@ export default function Page_home() {
         }
         if (e[0].isIntersecting) {
           if (posts && posts.length > 0) {
-            console.log("observer work!");
             set_is_loading(true);
-            const oldest_index = posts[posts.length - 1].index;
-            post_fetch(oldest_index).then(() => {
+            post_fetch(posts).then(() => {
               set_is_loading(false);
             });
           }
@@ -83,16 +95,21 @@ export default function Page_home() {
         <div>
           <p>Welcome, {session.user?.nickname}</p>
           <button onClick={() => signOut()}>Sign out</button>
-          <div className="post-container">
-            {posts.map((post, i) => (
-              <PostThumbnail post={post} key={i} />
-            ))}
-          </div>
-          <div ref={loader} className="loader">
-            loading
-          </div>
         </div>
       )}
+      <FilterSelector
+        set_filter={set_filter}
+        order={order}
+        set_order={set_order}
+      />
+      <div className="post-container">
+        {posts.map((post, i) => (
+          <PostThumbnail post={post} key={i} />
+        ))}
+      </div>
+      <div ref={loader} className="loader">
+        {!is_end && "loading"}
+      </div>
     </main>
   );
 }

@@ -9,18 +9,13 @@ import equip_slot_categories from "../../json/equip_slot_categories.json";
 import { EquipSlot } from "@/app/types/EquipSlot";
 import { Item } from "@/app/types/Item";
 import { signIn, useSession } from "next-auth/react";
-import { useRef, useState } from "react";
-import { item_null } from "@/app/utils/constants";
+import { useReducer, useRef, useState } from "react";
+import { editor_init_state, item_null } from "@/app/utils/constants";
 import { LocalDB } from "@/app/utils/localDB";
 
 export default function Page_editor() {
   const { data: session, status } = useSession();
   const localDB = new LocalDB("post_data", "user_image", false);
-
-  function sign_in_handler() {
-    sessionStorage.setItem("login_callback", "/editor");
-    signIn("google", { callbackUrl: "/signup" });
-  }
   const [image_src, set_image_src] = useState<string>(
     process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail.svg"
   );
@@ -35,6 +30,34 @@ export default function Page_editor() {
   const imageRef = useRef<HTMLCanvasElement | null>(null); // 캔버스 참조
   const x = useRef<number>(0);
 
+  function editor_reducer(
+    state: typeof editor_init_state,
+    action: {
+      type: "UPDATE_FIELD";
+      field: string;
+      value: string | string[];
+    }
+  ) {
+    switch (action.type) {
+      case "UPDATE_FIELD":
+        return {
+          ...state,
+          [action.field]: action.value,
+        };
+      default:
+        return state;
+    }
+  }
+
+  const [editor_data, editor_dispatch] = useReducer(
+    editor_reducer,
+    editor_init_state
+  );
+
+  const sign_in_handler = () => {
+    sessionStorage.setItem("login_callback", "/editor");
+    signIn("google", { callbackUrl: "/signup" });
+  };
   const edit_equiped_item = (slot: number, item: Item) => {
     set_equiped_item((items) => {
       const new_equiped_item = [...items];
@@ -101,6 +124,8 @@ export default function Page_editor() {
       </div>
       {session?.user?.login ? (
         <Editor
+          data={editor_data}
+          dispatch={editor_dispatch}
           image_src={image_src}
           set_image_src={set_image_src}
           x={x}
