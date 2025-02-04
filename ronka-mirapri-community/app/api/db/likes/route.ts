@@ -68,7 +68,7 @@ export async function POST(request: Request) {
     const created_like = await like.save();
     return NextResponse.json({ success: true, data: created_like });
   } catch (e) {
-    console.error("MongoDB failed to create posts:", e);
+    console.error("MongoDB failed to create likes:", e);
     let error_message = "Unknown error";
     if (is_validation_error(e)) {
       error_message = "Validation Error";

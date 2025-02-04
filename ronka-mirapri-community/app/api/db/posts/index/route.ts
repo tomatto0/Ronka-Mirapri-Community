@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { connectDB, Post } from "../../database";
+import { connectDB, Like, Post } from "../../database";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -16,14 +16,23 @@ export async function GET(request: Request) {
     const post = await Post.findOne({ index: index })
       .select("-likes")
       .populate("author", "nickname")
-      .lean();
+      .lean<{ _id: string }>();
+
     if (!post) {
       return NextResponse.json(
         { success: false, error: "Post not found" },
         { status: 404 }
       );
     }
-    return NextResponse.json({ success: true, data: post });
+
+    const post_like = await Post.findOne({ index: index })
+      .select({ like_count: { $size: "$likes" } })
+      .lean();
+
+    return NextResponse.json({
+      success: true,
+      data: { ...post, ...post_like },
+    });
   } catch (e) {
     console.error("MongoDB Failed to read posts error:", e);
     return NextResponse.json(
