@@ -4,7 +4,6 @@ import UserViewer from "@/app/components/UserViewer";
 import { Item } from "@/app/types/Item";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-async function is_like_fetch(index: number, id: string) {}
 export default function PostPageClient({
   post_data,
 }: {
@@ -24,16 +23,37 @@ export default function PostPageClient({
     like_count: number;
   };
 }) {
-  const { data, isLoading, error, refetch } = useQuery({
+  const like = useQuery({
     queryKey: ["posts", post_data.index],
     queryFn: async () => {
       const response = await fetch(
         `/api/db/posts/index/likes?index=${post_data.index}`
       );
-      return await response.json();
+      return (await response.json()).data;
     },
   });
-  console.log(data);
+  const { mutate } = useMutation({
+    mutationFn: async () => {
+      if (like.isLoading) {
+        return;
+      }
+      if (like.data?.is_liked) {
+        const response = await fetch(`/api/db/likes`, {
+          method: "DELETE",
+          body: JSON.stringify({ post: post_data._id }),
+        });
+        like.refetch();
+        return await response.json();
+      } else {
+        const response = await fetch(`/api/db/likes`, {
+          method: "POST",
+          body: JSON.stringify({ post: post_data._id }),
+        });
+        like.refetch();
+        return await response.json();
+      }
+    },
+  });
   return (
     <main>
       <div className="main-container">
@@ -51,9 +71,14 @@ export default function PostPageClient({
       <p>종족: {post_data.race}</p>
       <p>직업: {post_data.job.join(", ")}</p>
       <p>태그: {post_data.tag.join(", ")}</p>
-
-      <p>좋아요: {!isLoading && data.like_count}</p>
-      <button>like {!isLoading && data.is_liked ? "V" : ""}</button>
+      <p>좋아요: {like.data?.like_count}</p>
+      <button
+        onClick={() => {
+          mutate();
+        }}
+      >
+        like {like.data?.is_liked ? "V" : ""}
+      </button>
     </main>
   );
 }

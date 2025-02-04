@@ -4,10 +4,9 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export async function GET(request: Request) {
-  const url = new URL(request.url);
-  const index = url.searchParams.get("index");
-
   try {
+    const url = new URL(request.url);
+    const index = Number(url.searchParams.get("index"));
     if (!index) {
       return NextResponse.json(
         { success: false, error: "Invalid request" },
@@ -31,13 +30,13 @@ export async function GET(request: Request) {
     const session = await getServerSession(authOptions);
     if (session?.user.login) {
       const like = await Like.findOne({
-        post: post._id,
+        post: post[0]._id,
         user: session.user._id,
       }).lean();
       is_liked = like !== null;
     }
 
-    return NextResponse.json({ success: true, data: { ...post, is_liked } });
+    return NextResponse.json({ success: true, data: { ...post[0], is_liked } });
   } catch (e) {
     console.error("MongoDB Failed to read posts error:", e);
     return NextResponse.json(
