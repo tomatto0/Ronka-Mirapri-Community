@@ -7,6 +7,7 @@ import PostThumbnail from "../components/PostThumbnail";
 import FilterSelector from "../components/FilterSelctor";
 import { usePosts } from "./hooks/usePosts";
 import { useInView } from "react-intersection-observer";
+import { PostInform } from "../types/PostInform";
 // import { useInfiniteQuery } from "@tanstack/react-query";
 
 export default function Page_home() {
@@ -55,7 +56,7 @@ export default function Page_home() {
       {/* 게시물 목록 렌더링 */}
       <div className="post-container">
         {data?.pages.map((page, pageIndex) =>
-          page.map((post, i) => (
+          page.data.map((post: PostInform, i: number) => (
             <PostThumbnail post={post} key={`${pageIndex}-${i}`} />
           ))
         )}

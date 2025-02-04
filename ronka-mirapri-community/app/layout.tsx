@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 import Providers from "./components/Providers";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "롱카의 투영기록?",
@@ -49,13 +50,15 @@ export default function RootLayout({
         <div id="root">
           <div className="App">
             <div className="header">
-              <a href="/">
+              <Link href="/">
                 <img alt="Ronka LookBook logo" id="title" />
-              </a>
+              </Link>
             </div>
             <Providers>{children}</Providers>
             <div className="footer">
-              <a href="https://ronkacloset.com">https://ronkacloset.com</a>
+              <Link href="https://ronkacloset.com">
+                https://ronkacloset.com
+              </Link>
               <br />
               <p>© SQUARE ENIX Published in Korea by Actoz Soft CO., LTD.</p>
             </div>
