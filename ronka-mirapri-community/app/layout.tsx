@@ -4,22 +4,22 @@ import { SessionProvider } from "next-auth/react";
 import ReactQueryConfigContext from "@/provider/ReactQueryConfigContext";
 import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 
-export const metadata: Metadata = {
-  title: "롱카의 투영기록?",
-  description: "파판14 코디 커뮤니티",
-  icons: {
-    icon: "/logo/favicon.png",
-  },
-};
+// export const metadata: Metadata = {
+//   title: "롱카의 투영기록?",
+//   description: "파판14 코디 커뮤니티",
+//   icons: {
+//     icon: "/logo/favicon.png",
+//   },
+// };
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  function onclick_handler() {
-    window.location.href = "/";
-  }
+  // function onclick_handler() {
+  //   window.location.href = "/";
+  // }
   return (
     <html lang="ko">
       <head>
@@ -56,7 +56,7 @@ export default function RootLayout({
               <img
                 alt="Ronka LookBook logo"
                 id="title"
-                onClick={onclick_handler}
+                // onClick={onclick_handler}
               />
             </div>
             <SessionProvider>
