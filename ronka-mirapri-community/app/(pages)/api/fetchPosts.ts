@@ -6,7 +6,7 @@ export const fetchPosts = async (
   order: string
 ) => {
   const response = await fetch(
-    `/api/db/posts/list?page=${page}&size=${size}&filter=${filter}${
+    `/api/db/posts/list?page=${page * 12}&size=${size}&filter=${filter}${
       order === "인기순" ? "&order=fav" : ""
     }`
   );
