@@ -14,16 +14,12 @@ type ItemImage = {
 export default function UserViewer({
   image_src,
   equiped_item,
-  set_image_src,
-  imageRef,
-  x,
 }: {
   image_src: string;
   equiped_item: Item[];
-  set_image_src: (image_src: string) => void;
-  x: RefObject<number>;
-  imageRef: RefObject<HTMLCanvasElement | null>;
 }) {
+  console.log("src", image_src);
+  const imageRef = useRef<HTMLCanvasElement | null>(null);
   const user_image = useRef<HTMLImageElement | null>(null); // 사용자 이미지 Ref
   const item_background_image = useRef<HTMLImageElement | null>(null); //아이템 배경 이미지 Ref
   const item_placeholder_image = useRef<HTMLImageElement | null>(null); //아이템 플레이스홀더 이미지 Ref
@@ -249,11 +245,10 @@ export default function UserViewer({
       is_user_image_loaded.current = true;
       image_width.current = user_image.current.width;
       image_height.current = user_image.current.height;
-      user_image_draw(x.current, 0); // 초기 이미지 그리기
+      user_image_draw(0, 0); // 초기 이미지 그리기
     };
     const onerror_handler = () => {
-      set_image_src(process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail.svg");
-      x.current = 0;
+      image_src = process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail.svg";
     };
     user_image.current.onload = onload_handler;
     user_image.current.onerror = onerror_handler;

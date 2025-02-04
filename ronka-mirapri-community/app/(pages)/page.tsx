@@ -5,6 +5,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
 import PostThumbnail from "../components/PostThumbnail";
 import FilterSelector from "../components/FilterSelctor";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 type PostInform = {
   _id: string;
@@ -81,7 +82,6 @@ export default function Page_home() {
   if (status === "loading") {
     return <main></main>;
   }
-
   return (
     <main>
       {!session?.user.login ? (

@@ -1,4 +1,4 @@
-const gender_category = ["전체", "여성", "남성"];
+const gender_category = ["공용", "여성", "남성"];
 const race_category = [
   "중원 휴런",
   "고원 휴런",

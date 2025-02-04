@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { SessionProvider } from "next-auth/react";
-import ReactQueryConfigContext from "@/provider/ReactQueryConfigContext";
 import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
+import Providers from "./components/Providers";
 
 export const metadata: Metadata = {
   title: "롱카의 투영기록?",
@@ -17,9 +16,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  function onclick_handler() {
-    window.location.href = "/";
-  }
   return (
     <html lang="ko">
       <head>
@@ -53,15 +49,11 @@ export default function RootLayout({
         <div id="root">
           <div className="App">
             <div className="header">
-              <img
-                alt="Ronka LookBook logo"
-                id="title"
-                onClick={onclick_handler}
-              />
+              <a href="/">
+                <img alt="Ronka LookBook logo" id="title" />
+              </a>
             </div>
-            <SessionProvider>
-              <ReactQueryConfigContext>{children}</ReactQueryConfigContext>
-            </SessionProvider>
+            <Providers>{children}</Providers>
             <div className="footer">
               <a href="https://ronkacloset.com">https://ronkacloset.com</a>
               <br />

@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import { connectDB, Post } from "../../../database";
+import { connectDB, Like, Post } from "../../../database";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -13,16 +15,29 @@ export async function GET(request: Request) {
       );
     }
     await connectDB();
-    const post = await Post.findOne({ index: index })
-      .select({ like_count: { $size: "$likes" } })
-      .lean<{ like_count: number }>();
+    const post = await Post.aggregate([
+      { $match: { index: index } },
+      { $project: { _id: 1, like_count: { $size: "$likes" } } },
+    ]);
+
     if (!post) {
       return NextResponse.json(
         { success: false, error: "Post not found" },
         { status: 404 }
       );
     }
-    return NextResponse.json({ success: true, data: post });
+
+    let is_liked = false;
+    const session = await getServerSession(authOptions);
+    if (session?.user.login) {
+      const like = await Like.findOne({
+        post: post._id,
+        user: session.user._id,
+      }).lean();
+      is_liked = like !== null;
+    }
+
+    return NextResponse.json({ success: true, data: { ...post, is_liked } });
   } catch (e) {
     console.error("MongoDB Failed to read posts error:", e);
     return NextResponse.json(
