@@ -1,3 +1,13 @@
+export type Pages = {
+  pageParams: [];
+  pages: Posts[];
+};
+
+export type Posts = {
+  sucess: boolean;
+  data: PostInform[];
+};
+
 export type PostInform = {
   _id: string;
   index: number;

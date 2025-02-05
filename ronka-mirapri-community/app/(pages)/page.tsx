@@ -7,7 +7,7 @@ import PostThumbnail from "../components/PostThumbnail";
 import FilterSelector from "../components/FilterSelctor";
 import { usePosts } from "./hooks/usePosts";
 import { useInView } from "react-intersection-observer";
-import { PostInform } from "../types/PostInform";
+import { Posts, PostInform } from "../types/PostInform";
 // import { useInfiniteQuery } from "@tanstack/react-query";
 
 export default function Page_home() {
@@ -16,11 +16,14 @@ export default function Page_home() {
   const [order, set_order] = useState<string>("최신순");
 
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = usePosts(
-    12,
-    filter,
-    order
-  );
+  const {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    status,
+  } = usePosts(12, filter, order);
 
   // 무한 스크롤 감지해서 다음 페이지 로드
   useEffect(() => {
@@ -50,17 +53,24 @@ export default function Page_home() {
         order={order}
         set_order={set_order}
       />
+      {status === "pending" ? (
+        <p>Loading...</p>
+      ) : status === "error" ? (
+        <p>
+          Error:{" "}
+          {error instanceof Error ? error.message : "An unknown error occurred"}
+        </p>
+      ) : (
+        <div className="post-container">
+          {/* 게시물 목록 렌더링 */}
+          {data?.pages.map((page: Posts, pageIndex: number) =>
+            page.data?.map((post: PostInform, i: number) => (
+              <PostThumbnail post={post} key={`${pageIndex}-${i}`} />
+            ))
+          )}
+        </div>
+      )}
 
-      {/* 게시물 목록 렌더링 */}
-      <div className="post-container">
-        {data?.pages.map((page, pageIndex) =>
-          page.data?.map((post: PostInform, i: number) => (
-            <PostThumbnail post={post} key={`${pageIndex}-${i}`} />
-          ))
-        )}
-      </div>
-
-      {/* 무한 스크롤 로딩 UI */}
       <div ref={ref} className="loader">
         {isFetchingNextPage && <p>Loading more...</p>}
       </div>
