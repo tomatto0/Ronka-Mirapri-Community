@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   gender_category,
   job_category,
   job_category_group as job_category_group_raw,
   race_category,
 } from "../utils/constants";
+import CheckBox from "./CheckBox";
+import RadioBox from "./RadioBox";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function FilterSelector({
   set_filter,
@@ -15,12 +18,23 @@ export default function FilterSelector({
   order: string;
   set_order: (order: string) => void;
 }) {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+  const [search_keyword, set_search_keyword] = useState<string>(
+    searchParams.get("keyword") ?? ""
+  );
+  const [keyword, set_keyword] = useState<string>(
+    searchParams.get("keyword") ?? ""
+  );
+  const keyword_ref = useRef<HTMLInputElement | null>(null);
   const [gender, set_gender] = useState<string>("전체");
   const [race, set_race] = useState<string[]>([]);
   const [job, set_job] = useState<string[]>([]);
-
   const { ["모든 클래스"]: _, ...job_category_group } = job_category_group_raw;
-
+  function keyword_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
+    set_keyword(e.target.value.trimStart());
+  }
   function order_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
     set_order(e.target.value);
   }
@@ -70,61 +84,25 @@ export default function FilterSelector({
       set_job(job_groupize(new_job));
     }
   }
-
-  const RadioBox = ({
-    name,
-    value,
-    category,
-    change_handler,
-  }: {
-    name: string;
-    value: string | null;
-    category: string;
-    change_handler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  }) => {
-    return (
-      <label htmlFor={`${category}-${name.replace(" ", "-")}`}>
-        <span>{name + (value == name ? "O" : "")}</span>
-        <input
-          type="radio"
-          id={`${category}-${name.replace(" ", "-")}`}
-          name={category}
-          value={name}
-          checked={value == name}
-          onChange={change_handler}
-          style={{ display: "none" }}
-        />
-      </label>
-    );
-  };
-  const CheckBox = ({
-    name,
-    value,
-    category,
-    change_handler,
-  }: {
-    name: string;
-    value: string[];
-    category: string;
-    change_handler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  }) => {
-    return (
-      <label htmlFor={`${category}-${name.replace(" ", "-")}`}>
-        <span>{name + (value.includes(name) ? "O" : "")}</span>
-        <input
-          type="checkbox"
-          id={`${category}-${name.replace(" ", "-")}`}
-          name={category}
-          value={name}
-          checked={value.includes(name)}
-          onChange={change_handler}
-          style={{ display: "none" }}
-        />
-      </label>
-    );
-  };
+  function update_params(key: string, value: string) {
+    const params = new URLSearchParams(searchParams);
+    params.set(key, value);
+    router.push(`${pathname}?${params.toString()}`);
+  }
+  function search() {
+    set_search_keyword(keyword.trim());
+    update_params("keyword", keyword);
+  }
 
   useEffect(() => {
+    let keyword_filter = {};
+    if (search_keyword !== "") {
+      keyword_filter = {
+        equiped_item: {
+          $elemMatch: { Name: { $regex: search_keyword, $options: "i" } },
+        },
+      };
+    }
     let gender_filter = {};
     if (gender !== "전체") {
       gender_filter = { gender: gender };
@@ -139,15 +117,24 @@ export default function FilterSelector({
     }
     set_filter(
       JSON.stringify({
+        ...keyword_filter,
         ...gender_filter,
         ...race_filter,
         ...job_filter,
       })
     );
-  }, [gender, race, job]);
+  }, [search_keyword, gender, race, job]);
 
   return (
     <div>
+      <p>검색</p>
+      <input
+        type="text"
+        ref={keyword_ref}
+        value={keyword}
+        onChange={keyword_change_handler}
+      />
+      <button onClick={search}>검색</button>
       <p>정렬</p>
       {["최신순", "인기순"].map((i) => (
         <RadioBox

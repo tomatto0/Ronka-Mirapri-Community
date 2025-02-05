@@ -56,12 +56,8 @@ export default function PostPageClient({
   });
   return (
     <main>
-      <div className="main-container">
-        <UserViewer
-          image_src={post_data.image_url}
-          equiped_item={post_data.equiped_item}
-        ></UserViewer>
-      </div>
+      <img src={post_data.image_url} alt={post_data.title} />
+      <UserViewer equiped_item={post_data.equiped_item} />
       <p>작성자: {post_data.author.nickname}</p>
       <hr />
       <p>제목: {post_data.title}</p>

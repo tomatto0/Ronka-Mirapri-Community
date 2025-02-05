@@ -1,4 +1,4 @@
-import PostPageClient from "@/app/components/PostPageClient";
+import PostPageClient from "@/app/(pages)/post/[index]/pageClient";
 
 export default async function PostPage({
   params,

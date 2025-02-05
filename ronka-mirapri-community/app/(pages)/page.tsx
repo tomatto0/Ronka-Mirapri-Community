@@ -4,11 +4,10 @@ import "../css/home.css";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import PostThumbnail from "../components/PostThumbnail";
-import FilterSelector from "../components/FilterSelctor";
+import FilterSelector from "../components/FilterSelector";
 import { usePosts } from "./hooks/usePosts";
 import { useInView } from "react-intersection-observer";
 import { Posts, PostInform } from "../types/PostInform";
-// import { useInfiniteQuery } from "@tanstack/react-query";
 
 export default function Page_home() {
   const { data: session } = useSession();
@@ -31,6 +30,9 @@ export default function Page_home() {
       fetchNextPage();
     }
   }, [inView, hasNextPage]);
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <main>
