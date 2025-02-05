@@ -5,7 +5,7 @@ import { Pages, Posts } from "@/app/types/PostInform";
 export interface FetchPostsResponse {
   success: boolean;
   data: Pages[];
-  pages: Posts;
+  pages: Posts[];
   error?: string;
 }
 

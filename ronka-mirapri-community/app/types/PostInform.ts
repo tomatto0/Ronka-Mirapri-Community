@@ -16,3 +16,9 @@ export type PostInform = {
   like_count: number;
   is_liked: boolean;
 };
+
+export type Postlike = {
+  _id: string;
+  like_count: number;
+  is_liked: boolean;
+};

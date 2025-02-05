@@ -1,4 +1,3 @@
-/* eslint-disable prefer-const */
 import {
   gender_category,
   race_category,
