@@ -22,8 +22,6 @@ export default function Page_home() {
     order
   );
 
-  console.log("data:", data);
-
   // 무한 스크롤 감지해서 다음 페이지 로드
   useEffect(() => {
     if (inView && hasNextPage) {
@@ -56,7 +54,7 @@ export default function Page_home() {
       {/* 게시물 목록 렌더링 */}
       <div className="post-container">
         {data?.pages.map((page, pageIndex) =>
-          page.data.map((post: PostInform, i: number) => (
+          page.data?.map((post: PostInform, i: number) => (
             <PostThumbnail post={post} key={`${pageIndex}-${i}`} />
           ))
         )}

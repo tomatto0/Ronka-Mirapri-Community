@@ -12,11 +12,14 @@ interface FetchPostsResponse {
 export const usePosts = (size: number, filter: string, order: string) => {
   return useInfiniteQuery<FetchPostsResponse>({
     queryKey: ["posts", size, filter, order],
-    queryFn: ({ pageParam }) => fetchPosts(pageParam, size, filter, order),
+    queryFn: ({ pageParam }) =>
+      fetchPosts(pageParam as number, size, filter, order),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
-      if (!lastPage.success || lastPage.data.length === 0) return undefined;
-      return allPages.length; // 다음 페이지 번호 리턴
+      if (!lastPage.success || lastPage.data.length === 0) {
+        return undefined;
+      }
+      return allPages.reduce((sum, pages) => sum + pages.data.length, 0);
     },
   });
 };
