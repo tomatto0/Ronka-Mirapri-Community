@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { is_like, like_toggle } from "../utils/clientfunction";
+import { like_toggle } from "../utils/clientfunction";
+import { useRouter } from "next/navigation";
 
 type PostInform = {
   _id: string;
@@ -11,14 +12,16 @@ type PostInform = {
 };
 
 export default function PostThumbnail({ post }: { post: PostInform }) {
+  const router = useRouter();
   const [is_liked, set_is_liked] = useState<boolean>(post.is_liked);
+
   const like_handler = async () => {
+    set_is_liked(prev => !prev);
     await like_toggle(post._id);
-    set_is_liked(await is_like(post._id));
   };
 
   const post_click_handler = () => {
-    window.location.href = `/post/${post.index}`;
+    router.push(`/post/${post.index}`);
   };
 
   return (
