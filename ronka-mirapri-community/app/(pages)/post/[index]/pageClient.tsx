@@ -2,7 +2,7 @@
 
 import UserViewer from "@/app/components/UserViewer";
 import { Item } from "@/app/types/Item";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useAddLike, useDeleteLike, useGetPostLikes } from "./hooks/useLike";
 
 export default function PostPageClient({
   post_data,
@@ -23,37 +23,24 @@ export default function PostPageClient({
     like_count: number;
   };
 }) {
-  const like = useQuery({
-    queryKey: ["posts", post_data.index],
-    queryFn: async () => {
-      const response = await fetch(
-        `/api/db/posts/index/likes?index=${post_data.index}`
-      );
-      return (await response.json()).data;
-    },
-  });
-  const { mutate } = useMutation({
-    mutationFn: async () => {
-      if (like.isLoading) {
-        return;
-      }
-      if (like.data?.is_liked) {
-        const response = await fetch(`/api/db/likes`, {
-          method: "DELETE",
-          body: JSON.stringify({ post: post_data._id }),
-        });
-        like.refetch();
-        return await response.json();
-      } else {
-        const response = await fetch(`/api/db/likes`, {
-          method: "POST",
-          body: JSON.stringify({ post: post_data._id }),
-        });
-        like.refetch();
-        return await response.json();
-      }
-    },
-  });
+  const postIndex = post_data.index;
+  const postId = post_data._id;
+
+  const { data, isLoading, isError } = useGetPostLikes(postIndex);
+  const { deleteLikeMutation } = useDeleteLike(postIndex);
+  const { addLikeMutation } = useAddLike(postIndex);
+
+  const toggleLike = () => {
+    if (data?.is_liked) {
+      deleteLikeMutation(postId);
+    } else {
+      addLikeMutation(postId);
+    }
+  };
+
+  if (isLoading) return <div>로딩 중...</div>;
+  if (isError) return <div>에러 발생</div>;
+
   return (
     <main>
       <img src={post_data.image_url} alt={post_data.title} />
@@ -67,13 +54,13 @@ export default function PostPageClient({
       <p>종족: {post_data.race}</p>
       <p>직업: {post_data.job.join(", ")}</p>
       <p>태그: {post_data.tag.join(", ")}</p>
-      <p>좋아요: {like.data?.like_count}</p>
+      <p>좋아요: {data?.like_count}</p>
       <button
         onClick={() => {
-          mutate();
+          toggleLike();
         }}
       >
-        like {like.data?.is_liked ? "V" : ""}
+        like {data?.is_liked ? "V" : ""}
       </button>
     </main>
   );
