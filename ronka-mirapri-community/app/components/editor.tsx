@@ -84,13 +84,13 @@ export default function Editor({
   function job_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
     function job_groupize(job: string[]) {
       const groups = Object.keys(job_category_group);
-      groups.forEach((group) => {
-        if (job_category_group[group].every((i) => job.includes(i))) {
+      groups.forEach(group => {
+        if (job_category_group[group].every(i => job.includes(i))) {
           if (!job.includes(group)) {
             job = [...job, group];
           }
         } else {
-          job = job.filter((i) => i !== group);
+          job = job.filter(i => i !== group);
         }
       });
       return job;
@@ -98,14 +98,14 @@ export default function Editor({
     if (Object.keys(job_category_group).includes(e.target.value)) {
       const new_job = post_data.job.includes(e.target.value)
         ? post_data.job.filter(
-            (i) =>
+            i =>
               !job_category_group[e.target.value].includes(i) &&
               i !== e.target.value
           )
         : [
             ...post_data.job,
             ...job_category_group[e.target.value].filter(
-              (i) => !post_data.job.includes(i)
+              i => !post_data.job.includes(i)
             ),
             e.target.value,
           ];
@@ -116,8 +116,8 @@ export default function Editor({
       });
     } else {
       const new_job = post_data.job.includes(e.target.value)
-        ? post_data.job.filter((i) => i !== e.target.value)
-        : [...post_data.job.filter((i) => i !== "모든 클래스"), e.target.value];
+        ? post_data.job.filter(i => i !== e.target.value)
+        : [...post_data.job.filter(i => i !== "모든 클래스"), e.target.value];
       dispatch({
         type: "UPDATE_FIELD",
         field: "job",
@@ -187,7 +187,7 @@ export default function Editor({
     try {
       const blob = await new Promise<Blob>((resolve, reject) => {
         cropped_canvas.toBlob(
-          (blob) => {
+          blob => {
             if (blob) {
               return resolve(blob);
             }
@@ -238,7 +238,7 @@ export default function Editor({
       dispatch({
         type: "UPDATE_FIELD",
         field: "tag",
-        value: post_data.tag.filter((i) => i !== value),
+        value: post_data.tag.filter(i => i !== value),
       });
     };
     return <button onClick={click_handler}>{value} X</button>;
@@ -255,7 +255,7 @@ export default function Editor({
       });
     }
     localDB.open(1.0).then(() => {
-      localDB.get(1).then((i) => {
+      localDB.get(1).then(i => {
         if (i) {
           const item = i as {
             image: Blob;
@@ -374,7 +374,7 @@ export default function Editor({
       <br />
       <p>검색 필터 설정</p>
       <hr />
-      {gender_category.map((i) => (
+      {gender_category.map(i => (
         <RadioBox
           category="gender"
           name={i}
@@ -384,7 +384,7 @@ export default function Editor({
         />
       ))}
       <p>종족</p>
-      {race_category.map((i) => (
+      {race_category.map(i => (
         <RadioBox
           category="race"
           name={i}
@@ -394,7 +394,7 @@ export default function Editor({
         />
       ))}
       <p>직업 (중복 선택 가능)</p>
-      {job_category.map((i) => (
+      {job_category.map(i => (
         <CheckBox
           category="job"
           name={i}

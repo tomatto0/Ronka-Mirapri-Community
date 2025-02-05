@@ -31,6 +31,8 @@ export default function FilterSelector({
   const [gender, set_gender] = useState<string>("전체");
   const [race, set_race] = useState<string[]>([]);
   const [job, set_job] = useState<string[]>([]);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { ["모든 클래스"]: _, ...job_category_group } = job_category_group_raw;
   function keyword_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
     set_keyword(e.target.value.trimStart());
@@ -42,22 +44,22 @@ export default function FilterSelector({
     set_gender(e.target.value);
   }
   function race_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
-    set_race((prev) =>
+    set_race(prev =>
       prev.includes(e.target.value)
-        ? prev.filter((i) => i !== e.target.value)
+        ? prev.filter(i => i !== e.target.value)
         : [...prev, e.target.value]
     );
   }
   function job_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
     function job_groupize(job: string[]) {
       const groups = Object.keys(job_category_group);
-      groups.forEach((group) => {
-        if (job_category_group[group].every((i) => job.includes(i))) {
+      groups.forEach(group => {
+        if (job_category_group[group].every(i => job.includes(i))) {
           if (!job.includes(group)) {
             job = [...job, group];
           }
         } else {
-          job = job.filter((i) => i !== group);
+          job = job.filter(i => i !== group);
         }
       });
       return job;
@@ -65,22 +67,20 @@ export default function FilterSelector({
     if (Object.keys(job_category_group).includes(e.target.value)) {
       const new_job = job.includes(e.target.value)
         ? job.filter(
-            (i) =>
+            i =>
               !job_category_group[e.target.value].includes(i) &&
               i !== e.target.value
           )
         : [
             ...job,
-            ...job_category_group[e.target.value].filter(
-              (i) => !job.includes(i)
-            ),
+            ...job_category_group[e.target.value].filter(i => !job.includes(i)),
             e.target.value,
           ];
       set_job(job_groupize(new_job));
     } else {
       const new_job = job.includes(e.target.value)
-        ? job.filter((i) => i !== e.target.value)
-        : [...job.filter((i) => i !== "모든 클래스"), e.target.value];
+        ? job.filter(i => i !== e.target.value)
+        : [...job.filter(i => i !== "모든 클래스"), e.target.value];
       set_job(job_groupize(new_job));
     }
   }
@@ -136,7 +136,7 @@ export default function FilterSelector({
       />
       <button onClick={search}>검색</button>
       <p>정렬</p>
-      {["최신순", "인기순"].map((i) => (
+      {["최신순", "인기순"].map(i => (
         <RadioBox
           category="order"
           name={i}
@@ -146,7 +146,7 @@ export default function FilterSelector({
         />
       ))}
       <p>성별</p>
-      {gender_category.map((i) => (
+      {gender_category.map(i => (
         <RadioBox
           category="gender"
           name={i}
@@ -156,7 +156,7 @@ export default function FilterSelector({
         />
       ))}
       <p>종족 (중복 선택 가능)</p>
-      {race_category.map((i) => (
+      {race_category.map(i => (
         <CheckBox
           category="race"
           name={i}
@@ -166,7 +166,7 @@ export default function FilterSelector({
         />
       ))}
       <p>직업 (중복 선택 가능)</p>
-      {job_category.map((i) => (
+      {job_category.map(i => (
         <CheckBox
           category="job"
           name={i}
