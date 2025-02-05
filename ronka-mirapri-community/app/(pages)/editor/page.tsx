@@ -12,11 +12,9 @@ import { Item } from "@/app/types/Item";
 import { signIn, useSession } from "next-auth/react";
 import { useReducer, useRef, useState } from "react";
 import { editor_init_state, item_null } from "@/app/utils/constants";
-import { LocalDB } from "@/app/utils/localDB";
 
 export default function Page_editor() {
   const { data: session, status } = useSession();
-  const localDB = new LocalDB("post_data", "user_image", false);
   const [image_src, set_image_src] = useState<string>(
     process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail.svg"
   );
@@ -60,7 +58,7 @@ export default function Page_editor() {
     signIn("google", { callbackUrl: "/signup" });
   };
   const edit_equiped_item = (slot: number, item: Item) => {
-    set_equiped_item(items => {
+    set_equiped_item((items) => {
       const new_equiped_item = [...items];
       new_equiped_item[slot] = item;
 
@@ -125,7 +123,7 @@ export default function Page_editor() {
       </div>
       {session?.user?.login ? (
         <Editor
-          data={editor_data}
+          post_data={editor_data}
           dispatch={editor_dispatch}
           image_src={image_src}
           set_image_src={set_image_src}

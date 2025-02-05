@@ -1,3 +1,5 @@
+"use client";
+
 import {
   gender_category,
   race_category,
@@ -16,9 +18,11 @@ import React, {
   useState,
 } from "react";
 import { LocalDB } from "../utils/localDB";
+import CheckBox from "./CheckBox";
+import RadioBox from "./RadioBox";
 
 export default function Editor({
-  data,
+  post_data,
   dispatch,
   image_src,
   set_image_src,
@@ -27,7 +31,7 @@ export default function Editor({
   set_equiped_item,
   imageRef,
 }: {
-  data: typeof editor_init_state;
+  post_data: typeof editor_init_state;
   dispatch: ActionDispatch<
     [
       action: {
@@ -54,7 +58,7 @@ export default function Editor({
     dispatch({
       type: "UPDATE_FIELD",
       field: "title",
-      value: e.target.value.trim(),
+      value: e.target.value.trimStart(),
     });
   }
   function content_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
@@ -92,16 +96,16 @@ export default function Editor({
       return job;
     }
     if (Object.keys(job_category_group).includes(e.target.value)) {
-      const new_job = data.job.includes(e.target.value)
-        ? data.job.filter(
+      const new_job = post_data.job.includes(e.target.value)
+        ? post_data.job.filter(
             i =>
               !job_category_group[e.target.value].includes(i) &&
               i !== e.target.value
           )
         : [
-            ...data.job,
+            ...post_data.job,
             ...job_category_group[e.target.value].filter(
-              i => !data.job.includes(i)
+              i => !post_data.job.includes(i)
             ),
             e.target.value,
           ];
@@ -111,9 +115,9 @@ export default function Editor({
         value: job_groupize(new_job),
       });
     } else {
-      const new_job = data.job.includes(e.target.value)
-        ? data.job.filter(i => i !== e.target.value)
-        : [...data.job.filter(i => i !== "모든 클래스"), e.target.value];
+      const new_job = post_data.job.includes(e.target.value)
+        ? post_data.job.filter(i => i !== e.target.value)
+        : [...post_data.job.filter(i => i !== "모든 클래스"), e.target.value];
       dispatch({
         type: "UPDATE_FIELD",
         field: "job",
@@ -124,11 +128,11 @@ export default function Editor({
   function tag_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
     const tag_input = e.target.value;
     if (tag_input.slice(-1) === " ") {
-      if (!data.tag.includes(tag_input.trim())) {
+      if (!post_data.tag.includes(tag_input.trim())) {
         dispatch({
           type: "UPDATE_FIELD",
           field: "tag",
-          value: [...data.tag, tag_input.trim()],
+          value: [...post_data.tag, tag_input.trim()],
         });
       }
       set_tag_input("");
@@ -151,10 +155,10 @@ export default function Editor({
       ) {
         return false;
       }
-      if (data.title === "") {
+      if (post_data.title === "") {
         return false;
       }
-      if (data.race === null) {
+      if (post_data.race === null) {
         return false;
       }
       for (let item of equiped_item) {
@@ -209,7 +213,7 @@ export default function Editor({
         body: JSON.stringify({
           image_url: image_url,
           equiped_item: equiped_item,
-          ...data,
+          ...post_data,
         }),
       });
       if (!post_response.ok) {
@@ -229,64 +233,12 @@ export default function Editor({
   //#endregion
 
   //#region component
-  const RadioBox = ({
-    name,
-    value,
-    category,
-    change_handler,
-  }: {
-    name: string;
-    value: string | null;
-    category: string;
-    change_handler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  }) => {
-    return (
-      <label htmlFor={`${category}-${name.replace(" ", "-")}`}>
-        <span>{name + (value == name ? "O" : "")}</span>
-        <input
-          type="radio"
-          id={`${category}-${name.replace(" ", "-")}`}
-          name={category}
-          value={name}
-          checked={value == name}
-          onChange={change_handler}
-          style={{ display: "none" }}
-        />
-      </label>
-    );
-  };
-  const CheckBox = ({
-    name,
-    value,
-    category,
-    change_handler,
-  }: {
-    name: string;
-    value: string[];
-    category: string;
-    change_handler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  }) => {
-    return (
-      <label htmlFor={`${category}-${name.replace(" ", "-")}`}>
-        <span>{name + (value.includes(name) ? "O" : "")}</span>
-        <input
-          type="checkbox"
-          id={`${category}-${name.replace(" ", "-")}`}
-          name={category}
-          value={name}
-          checked={value.includes(name)}
-          onChange={change_handler}
-          style={{ display: "none" }}
-        />
-      </label>
-    );
-  };
   const TagBox = ({ value }: { value: string }) => {
     const click_handler = () => {
       dispatch({
         type: "UPDATE_FIELD",
         field: "tag",
-        value: data.tag.filter(i => i !== value),
+        value: post_data.tag.filter(i => i !== value),
       });
     };
     return <button onClick={click_handler}>{value} X</button>;
@@ -295,7 +247,7 @@ export default function Editor({
 
   //indexedDB에서 정보 불러오기
   useEffect(() => {
-    if (data.sns === "" && session?.user) {
+    if (post_data.sns === "" && session?.user) {
       dispatch({
         type: "UPDATE_FIELD",
         field: "sns",
@@ -317,7 +269,7 @@ export default function Editor({
             job: string[];
             tag: string[];
           };
-          console.log("local db loaded", item);
+          console.log({ item });
           if (item.image) {
             const objectURL = URL.createObjectURL(item.image);
             set_image_src(objectURL);
@@ -325,20 +277,36 @@ export default function Editor({
           x.current = item.x;
           set_equiped_item(item.equiped_item ?? new Array(8).fill(item_null));
 
-          dispatch({ type: "UPDATE_FIELD", field: "title", value: item.title });
+          dispatch({
+            type: "UPDATE_FIELD",
+            field: "title",
+            value: item.title ?? "",
+          });
           dispatch({
             type: "UPDATE_FIELD",
             field: "content",
-            value: item.content,
+            value: item.content ?? "",
           });
           dispatch({
             type: "UPDATE_FIELD",
             field: "gender",
-            value: item.gender,
+            value: item.gender ?? "공용",
           });
-          dispatch({ type: "UPDATE_FIELD", field: "race", value: item.race });
-          dispatch({ type: "UPDATE_FIELD", field: "job", value: item.job });
-          dispatch({ type: "UPDATE_FIELD", field: "tag", value: item.tag });
+          dispatch({
+            type: "UPDATE_FIELD",
+            field: "race",
+            value: item.race ?? null,
+          });
+          dispatch({
+            type: "UPDATE_FIELD",
+            field: "job",
+            value: item.job ?? [],
+          });
+          dispatch({
+            type: "UPDATE_FIELD",
+            field: "tag",
+            value: item.tag ?? [],
+          });
           if (item.sns) {
             dispatch({ type: "UPDATE_FIELD", field: "sns", value: item.sns });
           }
@@ -350,7 +318,7 @@ export default function Editor({
   //indexedDB에 정보 저장하기
   useEffect(() => {
     const handleBeforeUnload = () => {
-      if (is_posted) {
+      if (is_posted.current) {
         return;
       }
       localDB.open(1.0).then(() => {
@@ -358,7 +326,7 @@ export default function Editor({
           {
             x: x.current,
             equiped_item,
-            ...data,
+            ...post_data,
           },
           1
         );
@@ -368,12 +336,11 @@ export default function Editor({
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, [x.current, equiped_item, data, is_posted]);
+  }, [x.current, equiped_item, post_data, is_posted.current]);
 
   if (status === "loading") {
     return;
   }
-
   return (
     <div className="editor-container">
       <p>게시글 내용</p>
@@ -382,7 +349,7 @@ export default function Editor({
       <input
         type="text"
         id="title"
-        value={data.title}
+        value={post_data.title}
         onChange={title_change_handler}
         autoComplete="off"
       />
@@ -391,7 +358,7 @@ export default function Editor({
       <input
         type="text"
         id="content"
-        value={data.content}
+        value={post_data.content}
         onChange={content_change_handler}
         autoComplete="off"
       />
@@ -400,7 +367,7 @@ export default function Editor({
       <input
         type="text"
         id="sns"
-        value={data.sns}
+        value={post_data.sns}
         onChange={sns_change_handler}
         autoComplete="off"
       />
@@ -411,7 +378,7 @@ export default function Editor({
         <RadioBox
           category="gender"
           name={i}
-          value={data.gender}
+          value={post_data.gender}
           change_handler={gender_change_handler}
           key={i}
         />
@@ -421,7 +388,7 @@ export default function Editor({
         <RadioBox
           category="race"
           name={i}
-          value={data.race}
+          value={post_data.race}
           change_handler={race_change_handler}
           key={i}
         />
@@ -431,20 +398,14 @@ export default function Editor({
         <CheckBox
           category="job"
           name={i}
-          value={data.job}
+          value={post_data.job}
           change_handler={job_change_handler}
           key={i}
         />
       ))}
-      {/* <CheckBox
-        group={job_category_group}
-        category="job"
-        value={data.job}
-        change_handler={job_change_handler}
-      /> */}
       <br />
-      <label htmlFor="tag">태그: </label>
-      {data.tag.map((tag, i) => (
+      <label htmlFor="tag">태그: ??</label>
+      {post_data.tag.map((tag, i) => (
         <TagBox value={tag} key={i} />
       ))}
       <input
