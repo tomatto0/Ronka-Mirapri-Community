@@ -1,5 +1,6 @@
 "use client";
 
+import "../../../css/home.css";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import PostThumbnail from "../../../components/PostThumbnail";
@@ -14,6 +15,8 @@ export default function Page_user() {
   const { data: session } = useSession();
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
 
+  console.log({ params, userName });
+
   const {
     data,
     error,
@@ -21,7 +24,9 @@ export default function Page_user() {
     hasNextPage,
     isFetchingNextPage,
     status,
-  } = useUserPosts(userName);
+  } = useUserPosts(userName, 12);
+
+  console.log({ data });
 
   // 무한 스크롤 감지해서 다음 페이지 로드
   useEffect(() => {
