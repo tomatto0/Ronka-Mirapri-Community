@@ -1,6 +1,6 @@
 "use client";
 
-import "../../../css/home.css";
+import "../../css/home.css";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import PostThumbnail from "../../../components/PostThumbnail";
