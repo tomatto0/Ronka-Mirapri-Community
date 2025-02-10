@@ -14,8 +14,8 @@ export default function Page_home() {
   const { data: session } = useSession();
   const [filter, set_filter] = useState<string>("{}");
   const [order, set_order] = useState<string>("최신순");
-
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
+
   const {
     data,
     error,
