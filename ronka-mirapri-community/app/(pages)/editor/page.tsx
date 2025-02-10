@@ -58,7 +58,7 @@ export default function Page_editor() {
     signIn("google", { callbackUrl: "/signup" });
   };
   const edit_equiped_item = (slot: number, item: Item) => {
-    set_equiped_item((items) => {
+    set_equiped_item(items => {
       const new_equiped_item = [...items];
       new_equiped_item[slot] = item;
 
