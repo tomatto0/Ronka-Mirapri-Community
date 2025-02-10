@@ -1,18 +1,14 @@
 "use client";
 
-import "../css/home.css";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import PostThumbnail from "../components/PostThumbnail";
-import FilterSelector from "../components/FilterSelector";
-import { usePosts } from "./hooks/usePosts";
+import { usePosts } from "../../hooks/usePosts";
+import PostThumbnail from "../../../components/PostThumbnail";
 import { useInView } from "react-intersection-observer";
-import { Posts, PostInform } from "../types/PostInform";
+import { Posts, PostInform } from "../../../types/PostInform";
 
-export default function Page_home() {
+export default function Page_user() {
   const { data: session } = useSession();
-  const [filter, set_filter] = useState<string>("{}");
-  const [order, set_order] = useState<string>("최신순");
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
 
   const {
@@ -34,6 +30,8 @@ export default function Page_home() {
     console.log(data);
   }, [data]);
 
+  // 개인탐라 / like 타임라인 toggle
+
   return (
     <main>
       {!session?.user?.login ? (
@@ -50,11 +48,6 @@ export default function Page_home() {
         </div>
       )}
 
-      <FilterSelector
-        set_filter={set_filter}
-        order={order}
-        set_order={set_order}
-      />
       {status === "pending" ? (
         <p>Loading...</p>
       ) : status === "error" ? (
@@ -72,7 +65,6 @@ export default function Page_home() {
           )}
         </div>
       )}
-
       <div ref={ref} className="loader">
         {isFetchingNextPage && <p>Loading more...</p>}
       </div>
