@@ -3,7 +3,7 @@ import { connectDB, Like, Post } from "../../database";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-// 조건에 맞는 여러 개의 게시물 조회
+// 조건에 맞는 다중 게시물 조회
 export async function GET(request: Request) {
   try {
     // 요청 URL을 파싱하여 필요한 정보를 추출

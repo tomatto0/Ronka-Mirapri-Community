@@ -1,4 +1,4 @@
-//메인페이지에서 1개 post의 like count를 불러옴
+//메인페이지에서 단일 post의 like count를 불러옴
 export const getPostLikes = async (postIndex: number) => {
   try {
     const response = await fetch(
