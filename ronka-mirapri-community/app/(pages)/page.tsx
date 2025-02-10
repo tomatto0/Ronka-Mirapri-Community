@@ -8,6 +8,7 @@ import FilterSelector from "../components/FilterSelector";
 import { usePosts } from "./hooks/usePosts";
 import { useInView } from "react-intersection-observer";
 import { Posts, PostInform } from "../types/PostInform";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Page_home() {
   const { data: session } = useSession();
@@ -30,9 +31,27 @@ export default function Page_home() {
       fetchNextPage();
     }
   }, [inView, hasNextPage]);
+  // useEffect(() => {
+  //   console.log(data);
+  // }, [data]);
+  const fetch_item_rank = async () => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/db/items/ranking`
+    );
+    const res = await response.json();
+    const item_name = [];
+    for (let item of res.data) {
+      item_name.push(item[0]);
+    }
+    return item_name;
+  };
+  const item_rank = useQuery({
+    queryKey: ["item_rank"],
+    queryFn: fetch_item_rank,
+  });
   useEffect(() => {
-    console.log(data);
-  }, [data]);
+    console.log(item_rank.data);
+  }, [item_rank.data]);
 
   return (
     <main>
@@ -64,12 +83,25 @@ export default function Page_home() {
         </p>
       ) : (
         <div className="post-container">
+          {data?.pages[0].data
+            ?.slice(0, 4)
+            .map((post: PostInform, i: number) => (
+              <PostThumbnail post={post} key={`${0}-${i}`} />
+            ))}
+          {/*여기에 주간 인기 넣기*/}
+          {data?.pages[0].data
+            ?.slice(4, 12)
+            .map((post: PostInform, i: number) => (
+              <PostThumbnail post={post} key={`${0}-${i}`} />
+            ))}
           {/* 게시물 목록 렌더링 */}
-          {data?.pages.map((page: Posts, pageIndex: number) =>
-            page.data?.map((post: PostInform, i: number) => (
-              <PostThumbnail post={post} key={`${pageIndex}-${i}`} />
-            ))
-          )}
+          {data?.pages
+            .slice(1, data.pages.length)
+            .map((page: Posts, pageIndex: number) =>
+              page.data?.map((post: PostInform, i: number) => (
+                <PostThumbnail post={post} key={`${pageIndex}-${i}`} />
+              ))
+            )}
         </div>
       )}
 

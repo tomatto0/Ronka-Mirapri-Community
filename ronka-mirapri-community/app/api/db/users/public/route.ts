@@ -1,21 +1,19 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { connectDB, User } from "../../database";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const id = url.searchParams.get("id");
+  const name = url.searchParams.get("name");
 
   try {
-    if (!id) {
+    if (!name) {
       return NextResponse.json(
         { success: false, error: "Invalid request" },
         { status: 400 }
       );
     }
     await connectDB();
-    const user = await User.findOne({ nickname: id })
+    const user = await User.findOne({ nickname: name })
       .select("_id, nickname, sns, posts")
       .lean<{
         _id: string;
