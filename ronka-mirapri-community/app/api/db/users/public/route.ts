@@ -13,14 +13,10 @@ export async function GET(request: Request) {
       );
     }
     await connectDB();
-    const user = await User.findOne({ nickname: name })
-      .select("_id, nickname, sns, posts")
-      .lean<{
-        _id: string;
-        nickname: string;
-        sns: string;
-        posts: string[];
-      }>();
+    const user = await User.aggregate([
+      { $match: { nickname: name } },
+      { $project: { _id: 0, nickname: 1, sns: 1 } },
+    ]);
     if (!user) {
       return NextResponse.json(
         { success: false, error: "User not found" },
