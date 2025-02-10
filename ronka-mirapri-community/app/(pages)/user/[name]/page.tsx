@@ -6,39 +6,32 @@ import { useEffect, useState } from "react";
 import PostThumbnail from "../../../components/PostThumbnail";
 import { useInView } from "react-intersection-observer";
 import { Posts, PostInform } from "../../../types/PostInform";
-import { useUserPosts } from "./hooks/useUserPosts";
+import { useUserPosts, useUserLikedPosts } from "./hooks/useUserPosts";
 import { useParams } from "next/navigation";
+import { useGetUserInfo } from "./hooks/useUserInfo";
 
 export default function Page_user() {
   const params = useParams<{ name: string }>();
   const userName = params.name;
   const { data: session } = useSession();
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
+  const [timeline, set_timeline] = useState<string>("userPosts");
 
-  console.log({ params, userName });
-
-  const {
-    data,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    status,
-  } = useUserPosts(userName, 12);
-
-  console.log({ data });
+  const userInfo = useGetUserInfo(userName);
+  const userPosts = useUserPosts(userName, 12);
+  const userLikedPosts = useUserLikedPosts(userName, 12);
 
   // 무한 스크롤 감지해서 다음 페이지 로드
   useEffect(() => {
-    if (inView && hasNextPage) {
-      fetchNextPage();
+    if (inView && userPosts.hasNextPage) {
+      userPosts.fetchNextPage();
     }
-  }, [inView, hasNextPage]);
+  }, [inView, userPosts.hasNextPage]);
   useEffect(() => {
-    console.log(data);
-  }, [data]);
+    console.log(userPosts.data);
+  }, [userPosts.data]);
 
-  // 개인탐라 / like 타임라인 toggle
+  console.log(userInfo?.data?.[0]);
 
   return (
     <main>
@@ -53,28 +46,79 @@ export default function Page_user() {
         <div>
           <p>Welcome, {session.user?.nickname}</p>
           <button onClick={() => signOut()}>Sign out</button>
+          <div className="tlToggle">
+            <h3
+              className={timeline === "userPosts" ? "active" : ""}
+              onClick={() => {
+                set_timeline("userPosts");
+              }}
+            >
+              POST
+            </h3>
+            {session.user.nickname === userInfo?.data?.[0]?.nickname && (
+              <h3
+                className={timeline === "userPosts" ? "" : "active"}
+                onClick={() => {
+                  set_timeline("likedPosts");
+                }}
+              >
+                LIKE
+              </h3>
+            )}
+          </div>
         </div>
       )}
 
-      {status === "pending" ? (
+      {userInfo.status === "pending" ? (
         <p>Loading...</p>
-      ) : status === "error" ? (
+      ) : userInfo.status === "error" ? (
         <p>
           Error:{" "}
-          {error instanceof Error ? error.message : "An unknown error occurred"}
+          {userInfo.error instanceof Error
+            ? userInfo.error.message
+            : "An unknown error occurred"}
         </p>
+      ) : (
+        <div>
+          <p>{userInfo?.data?.[0]?.nickname}</p>
+          <p>{userInfo?.data?.[0]?.sns}</p>
+        </div>
+      )}
+
+      {userPosts.status === "pending" ? (
+        <p>Loading...</p>
+      ) : userPosts.status === "error" ? (
+        <p>
+          Error:{" "}
+          {userPosts.error instanceof Error
+            ? userPosts.error.message
+            : "An unknown error occurred"}
+        </p>
+      ) : timeline === "userPosts" ? (
+        <div className="post-container">
+          {/* 게시물 목록 렌더링 */}
+          {userPosts.data?.pages.map((page: Posts, pageIndex: number) =>
+            page.data?.map((post: PostInform, i: number) => (
+              <PostThumbnail post={post} key={`${pageIndex}-${i}`} />
+            ))
+          )}
+        </div>
       ) : (
         <div className="post-container">
           {/* 게시물 목록 렌더링 */}
-          {data?.pages.map((page: Posts, pageIndex: number) =>
-            page.data?.map((post: PostInform, i: number) => (
+          {userLikedPosts.data?.pages.map((page: Posts, pageIndex: number) =>
+            page?.data?.map((post: PostInform, i: number) => (
               <PostThumbnail post={post} key={`${pageIndex}-${i}`} />
             ))
           )}
         </div>
       )}
       <div ref={ref} className="loader">
-        {isFetchingNextPage && <p>Loading more...</p>}
+        {userPosts.isFetchingNextPage && <p>Loading more...</p>}
+      </div>
+
+      <div ref={ref} className="loader">
+        {userLikedPosts.isFetchingNextPage && <p>Loading more...</p>}
       </div>
     </main>
   );
