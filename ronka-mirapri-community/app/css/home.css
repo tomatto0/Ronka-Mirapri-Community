@@ -13,3 +13,21 @@
   width: 100%;
   aspect-ratio: 540/1080;
 }
+
+.tlToggle {
+  display: flex;
+  font-size: 17px;
+  line-height: normal;
+  margin-bottom: 30px;
+  gap: 10px;
+}
+
+.active {
+  color: #4f938d;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: 10%; /* 1.7px */
+  text-underline-offset: 25%; /* 4.25px */
+  text-underline-position: from-font;
+}

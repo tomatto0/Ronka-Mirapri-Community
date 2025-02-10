@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { like_toggle } from "../utils/clientfunction";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 
 type PostInform = {
   _id: string;
@@ -13,11 +14,15 @@ type PostInform = {
 
 export default function PostThumbnail({ post }: { post: PostInform }) {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const [is_liked, set_is_liked] = useState<boolean>(post.is_liked);
 
   const like_handler = async () => {
     set_is_liked(prev => !prev);
     await like_toggle(post._id);
+
+    // ✅ 좋아요 변경 후 userLikedPosts 쿼리 갱신
+    queryClient.invalidateQueries({ queryKey: ["userLikedPosts"] });
   };
 
   const post_click_handler = () => {
