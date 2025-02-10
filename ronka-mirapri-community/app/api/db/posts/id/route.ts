@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { connectDB, Post } from "../../database";
 
+// 특정 id에 해당하는 단일 게시물 조회
+// 작성자의 닉네임을 함께 반환
+
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const id = url.searchParams.get("id");
