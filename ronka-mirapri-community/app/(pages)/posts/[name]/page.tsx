@@ -2,12 +2,15 @@
 
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { usePosts } from "../../hooks/usePosts";
 import PostThumbnail from "../../../components/PostThumbnail";
 import { useInView } from "react-intersection-observer";
 import { Posts, PostInform } from "../../../types/PostInform";
+import { useUserPosts } from "./hooks/useUserPosts";
+import { useParams } from "next/navigation";
 
 export default function Page_user() {
+  const params = useParams<{ name: string }>();
+  const userName = params.name;
   const { data: session } = useSession();
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
 
@@ -18,7 +21,7 @@ export default function Page_user() {
     hasNextPage,
     isFetchingNextPage,
     status,
-  } = usePosts(12, filter, order);
+  } = useUserPosts(userName);
 
   // 무한 스크롤 감지해서 다음 페이지 로드
   useEffect(() => {
