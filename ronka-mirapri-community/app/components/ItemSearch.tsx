@@ -41,7 +41,7 @@ export default function ItemSearch({
     }
     set_is_item_select(false);
     const result = item_list.filter(
-      (item) =>
+      item =>
         searcher.search(item.Name) >= 0 &&
         slot_category[item.EquipSlotCategory]["Slot"] === eslot
     );
