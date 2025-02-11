@@ -27,11 +27,13 @@ export default function Page_user() {
       userPosts.fetchNextPage();
     }
   }, [inView, userPosts.hasNextPage]);
-  useEffect(() => {
-    console.log(userPosts.data);
-  }, [userPosts.data]);
+  // useEffect(() => {
+  //   console.log(userPosts.data);
+  // }, [userPosts.data]);
 
-  console.log(userInfo?.data?.[0]);
+  useEffect(() => {
+    console.log("liked", userLikedPosts.data);
+  }, [userLikedPosts.data]);
 
   return (
     <main>
@@ -55,7 +57,7 @@ export default function Page_user() {
             >
               POST
             </h3>
-            {session.user.nickname === userInfo?.data?.[0]?.nickname && (
+            {session.user.nickname === userInfo?.data?.nickname && (
               <h3
                 className={timeline === "userPosts" ? "" : "active"}
                 onClick={() => {
@@ -80,8 +82,8 @@ export default function Page_user() {
         </p>
       ) : (
         <div>
-          <p>{userInfo?.data?.[0]?.nickname}</p>
-          <p>{userInfo?.data?.[0]?.sns}</p>
+          <p>{userInfo?.data?.nickname}</p>
+          <p>{userInfo?.data?.sns}</p>
         </div>
       )}
 
@@ -99,7 +101,7 @@ export default function Page_user() {
           {/* 게시물 목록 렌더링 */}
           {userPosts.data?.pages.map((page: Posts, pageIndex: number) =>
             page.data?.map((post: PostInform, i: number) => (
-              <PostThumbnail post={post} key={`${pageIndex}-${i}`} />
+              <PostThumbnail post={post} key={`post-${pageIndex}-${i}`} />
             ))
           )}
         </div>
@@ -108,7 +110,7 @@ export default function Page_user() {
           {/* 게시물 목록 렌더링 */}
           {userLikedPosts.data?.pages.map((page: Posts, pageIndex: number) =>
             page?.data?.map((post: PostInform, i: number) => (
-              <PostThumbnail post={post} key={`${pageIndex}-${i}`} />
+              <PostThumbnail post={post} key={`like-${pageIndex}-${i}`} />
             ))
           )}
         </div>

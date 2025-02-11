@@ -50,9 +50,6 @@ export default function Page_home() {
     queryKey: ["item_rank"],
     queryFn: fetch_item_rank,
   });
-  // useEffect(() => {
-  //   console.log(item_rank.data);
-  // }, [item_rank.data]);
 
   return (
     <main>
@@ -87,13 +84,13 @@ export default function Page_home() {
           {data?.pages[0].data
             ?.slice(0, 4)
             .map((post: PostInform, i: number) => (
-              <PostThumbnail post={post} key={`${0}-${i}`} />
+              <PostThumbnail post={post} key={`0-${i}`} />
             ))}
           {/*여기에 주간 인기 넣기*/}
           {data?.pages[0].data
             ?.slice(4, 12)
             .map((post: PostInform, i: number) => (
-              <PostThumbnail post={post} key={`${0}-${i}`} />
+              <PostThumbnail post={post} key={`0-${i}`} />
             ))}
           {/* 게시물 목록 렌더링 */}
           {data?.pages

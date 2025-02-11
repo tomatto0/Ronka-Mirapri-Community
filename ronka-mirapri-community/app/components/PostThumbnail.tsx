@@ -16,7 +16,6 @@ export default function PostThumbnail({ post }: { post: PostInform }) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const [is_liked, set_is_liked] = useState<boolean>(post.is_liked);
-
   const like_handler = async () => {
     set_is_liked(prev => !prev);
     await like_toggle(post._id);
