@@ -1,7 +1,11 @@
 import { generateUUID } from "@/app/utils/uuid";
-import fs from "fs";
+import { Storage } from "@google-cloud/storage";
 import { NextRequest, NextResponse } from "next/server";
-import path from "path";
+
+const storage = new Storage();
+const bucketname = "ronka_closet_community";
+const bucket = storage.bucket(bucketname);
+
 export async function POST(request: NextRequest) {
   const formdata = await request.formData();
   const file = formdata.get("image");
@@ -26,13 +30,18 @@ export async function POST(request: NextRequest) {
     ".webp";
 
   if (file instanceof Blob) {
-    const filepath = path.join(process.cwd(), "/public/uploads", filename);
     const buffer = await file.arrayBuffer();
-    fs.writeFileSync(filepath, Buffer.from(buffer));
-    return NextResponse.json({
-      success: true,
-      image_url: "/uploads/" + filename,
-    });
+    const file_buffer = Buffer.from(buffer);
+    try {
+      const upload = bucket.file(filename);
+      await upload.save(file_buffer, {
+        contentType: "image/webp",
+      });
+      const image_url = `${process.env.NEXT_PUBLIC_CDN_URL}/${filename}`;
+      return NextResponse.json({ success: true, image_url: image_url });
+    } catch (e) {
+      return NextResponse.json({ success: false, error: e });
+    }
   }
   return NextResponse.json({ success: false });
 }

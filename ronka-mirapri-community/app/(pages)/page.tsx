@@ -9,6 +9,7 @@ import { usePosts } from "./hooks/usePosts";
 import { useInView } from "react-intersection-observer";
 import { Posts, PostInform } from "../types/PostInform";
 import { useQuery } from "@tanstack/react-query";
+import Itemrank from "../components/Itemrank";
 
 export default function Page_home() {
   const { data: session } = useSession();
@@ -31,10 +32,10 @@ export default function Page_home() {
       fetchNextPage();
     }
   }, [inView, hasNextPage]);
-  // useEffect(() => {
-  //   console.log(data);
-  // }, [data]);
-  const fetch_item_rank = async () => {
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+  const fetch_item_rank = async (): Promise<string[]> => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/db/items/ranking`
     );
@@ -49,9 +50,9 @@ export default function Page_home() {
     queryKey: ["item_rank"],
     queryFn: fetch_item_rank,
   });
-  useEffect(() => {
-    console.log(item_rank.data);
-  }, [item_rank.data]);
+  // useEffect(() => {
+  //   console.log(item_rank.data);
+  // }, [item_rank.data]);
 
   return (
     <main>

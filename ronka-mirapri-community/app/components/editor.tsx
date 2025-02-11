@@ -65,7 +65,7 @@ export default function Editor({
     dispatch({
       type: "UPDATE_FIELD",
       field: "content",
-      value: e.target.value.trim(),
+      value: e.target.value.trimStart(),
     });
   }
   function sns_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
@@ -207,6 +207,7 @@ export default function Editor({
         return;
       }
       const img_res = await img_response.json();
+      console.log(img_res);
       const image_url = img_res.image_url;
       const post_response = await fetch("/api/db/posts", {
         method: "POST",
@@ -404,7 +405,7 @@ export default function Editor({
         />
       ))}
       <br />
-      <label htmlFor="tag">태그: ??</label>
+      <label htmlFor="tag">태그:</label>
       {post_data.tag.map((tag, i) => (
         <TagBox value={tag} key={i} />
       ))}

@@ -15,7 +15,7 @@ export const getUserPosts = async (
     }
 
     const res = await response.json();
-    return res.data;
+    return res;
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(error.message || "유저 포스트 리스트 조회 실패");

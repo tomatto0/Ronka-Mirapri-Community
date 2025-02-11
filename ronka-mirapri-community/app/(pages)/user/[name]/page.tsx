@@ -15,28 +15,17 @@ export default function Page_user() {
   const { data: session } = useSession();
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
 
-  console.log({ params, userName });
-
-  const {
-    data,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    status,
-  } = useUserPosts(userName, 12);
-
-  console.log({ data });
+  const user_post = useUserPosts(userName, 12);
 
   // 무한 스크롤 감지해서 다음 페이지 로드
   useEffect(() => {
-    if (inView && hasNextPage) {
-      fetchNextPage();
+    if (inView && user_post.hasNextPage) {
+      user_post.fetchNextPage();
     }
-  }, [inView, hasNextPage]);
+  }, [inView, user_post.hasNextPage]);
   useEffect(() => {
-    console.log(data);
-  }, [data]);
+    console.log({ data: user_post.data });
+  }, [user_post.data]);
 
   // 개인탐라 / like 타임라인 toggle
 
@@ -61,12 +50,14 @@ export default function Page_user() {
       ) : status === "error" ? (
         <p>
           Error:{" "}
-          {error instanceof Error ? error.message : "An unknown error occurred"}
+          {user_post.error instanceof Error
+            ? user_post.error.message
+            : "An unknown error occurred"}
         </p>
       ) : (
         <div className="post-container">
           {/* 게시물 목록 렌더링 */}
-          {data?.pages.map((page: Posts, pageIndex: number) =>
+          {user_post.data?.pages.map((page: Posts, pageIndex: number) =>
             page.data?.map((post: PostInform, i: number) => (
               <PostThumbnail post={post} key={`${pageIndex}-${i}`} />
             ))
@@ -74,7 +65,7 @@ export default function Page_user() {
         </div>
       )}
       <div ref={ref} className="loader">
-        {isFetchingNextPage && <p>Loading more...</p>}
+        {user_post.isFetchingNextPage && <p>Loading more...</p>}
       </div>
     </main>
   );
