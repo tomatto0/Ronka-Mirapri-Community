@@ -3,15 +3,14 @@
 import "../../css/editor.css";
 import ItemInformation from "@/app/components/ItemInformation";
 import ItemSearchModal from "@/app/components/ItemSearchModal";
-import UserCanvas from "@/app/css/UserCanvas";
 import Editor from "@/app/components/Editor";
+import UserCanvas from "@/app/components/UserCanvas";
 import equip_slot_categories from "../../json/equip_slot_categories.json";
 import { EquipSlot } from "@/app/types/EquipSlot";
 import { Item } from "@/app/types/Item";
 import { signIn, useSession } from "next-auth/react";
 import { useReducer, useRef, useState } from "react";
 import { editor_init_state, item_null } from "@/app/utils/constants";
-
 export default function Page_editor() {
   const { data: session, status } = useSession();
   const [image_src, set_image_src] = useState<string>(
