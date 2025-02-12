@@ -1,42 +1,105 @@
 @font-face {
   font-family: "Pretendard";
-  src: url("./fonts/Pretendard-Light.woff") format("woff");
+  src: url("/fonts/Pretendard-Light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Pretendard";
-  src: url("./fonts/Pretendard-Regular.woff") format("woff");
+  src: url("/fonts/Pretendard-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Pretendard";
-  src: url("./fonts/Pretendard-Medium.woff") format("woff");
+  src: url("/fonts/Pretendard-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Pretendard";
-  src: url("./fonts/Pretendard-SemiBold.woff") format("woff");
+  src: url("/fonts/Pretendard-SemiBold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Pretendard";
-  src: url("./fonts/Pretendard-Bold.woff") format("woff");
+  src: url("/fonts/Pretendard-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Pretendard";
-  src: url("./fonts/Pretendard-ExtraBold.woff") format("woff");
+  src: url("/fonts/Pretendard-ExtraBold.woff") format("woff");
   font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "REM";
+  src: url("/fonts/REM-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "REM";
+  src: url("/fonts/REM-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "REM";
+  src: url("/fonts/REM-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "REM";
+  src: url("/fonts/REM-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "REM";
+  src: url("/fonts/REM-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "REM";
+  src: url("/fonts/REM-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "REM";
+  src: url("/fonts/REM-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "REM";
+  src: url("/fonts/REM-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "REM";
+  src: url("/fonts/REM-Black.ttf") format("truetype");
+  font-weight: 900;
   font-style: normal;
 }
 
@@ -44,7 +107,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "Pretendard", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+  font-family: "REM", "Pretendard", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -72,19 +135,6 @@ body {
   flex-direction: column;
 }
 
-div.header {
-  height: 60px;
-  padding: 1.5rem 1.5rem;
-  position: relative;
-
-  img#title {
-    display: block;
-    height: 33px;
-    content: url("../public/img/title_mobile.svg");
-    cursor: pointer;
-  }
-}
-
 main {
   flex-grow: 1;
 }
@@ -101,20 +151,6 @@ div.footer {
 }
 
 @media (min-width: 1075px) {
-  div.header {
-    height: 100px;
-    padding-top: 2.2rem;
-    padding-bottom: 3.3rem;
-    margin-top: 40px;
-
-    img#title {
-      display: block;
-      margin: auto;
-      height: 53px;
-      min-height: 50px;
-      content: url("../public/img/title.svg");
-    }
-  }
   div.footer {
     color: #50b1a8;
     font-size: 1rem;

@@ -1,3 +1,5 @@
+import "../css/FilterSelector.css";
+
 export default function RadioBox({
   name,
   value,
@@ -11,7 +13,11 @@ export default function RadioBox({
 }) {
   return (
     <label htmlFor={`${category}-${name.replace(" ", "-")}`}>
-      <span>{name + (value == name ? "O" : "")}</span>
+      <p
+        className={`filter_item ${value === name ? "filter_item_active" : ""}`}
+      >
+        {name}
+      </p>
       <input
         type="radio"
         id={`${category}-${name.replace(" ", "-")}`}

@@ -16,6 +16,7 @@ export default function Page_home() {
   const [filter, set_filter] = useState<string>("{}");
   const [order, set_order] = useState<string>("최신순");
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
+  const [is_open, set_is_open] = useState<boolean>(false);
 
   const {
     data,
@@ -35,6 +36,7 @@ export default function Page_home() {
   useEffect(() => {
     console.log(data);
   }, [data]);
+
   const fetch_item_rank = async (): Promise<string[]> => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/db/items/ranking`
@@ -46,27 +48,22 @@ export default function Page_home() {
     }
     return item_name;
   };
+
   const item_rank = useQuery({
     queryKey: ["item_rank"],
     queryFn: fetch_item_rank,
   });
 
+  // const modal_close = () => {
+  //   set_is_open(false);
+  // };
+
   return (
     <main>
-      {!session?.user?.login ? (
-        <div>
-          <p>You are not signed in</p>
-          <button onClick={() => signIn("google", { callbackUrl: "/signup" })}>
-            Sign in with Google
-          </button>
-        </div>
-      ) : (
-        <div>
-          <p>Welcome, {session.user?.nickname}</p>
-          <button onClick={() => signOut()}>Sign out</button>
-        </div>
-      )}
-
+      <div>{filter}</div>
+      {/* {filter !== "{}" ? (filter.map((filterItem, i) => (
+        <p key={i}>{filterItem}</p>
+      )) : ''} */}
       <FilterSelector
         set_filter={set_filter}
         order={order}
