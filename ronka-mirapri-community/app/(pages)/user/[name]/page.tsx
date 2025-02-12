@@ -27,50 +27,17 @@ export default function Page_user() {
       userPosts.fetchNextPage();
     }
   }, [inView, userPosts.hasNextPage]);
-  // useEffect(() => {
-  //   console.log(userPosts.data);
-  // }, [userPosts.data]);
 
   useEffect(() => {
-    console.log("liked", userLikedPosts.data);
-  }, [userLikedPosts.data]);
+    console.log(userInfo.data);
+  }, [userInfo.data]);
+
+  // useEffect(() => {
+  //   console.log("liked", userLikedPosts.data);
+  // }, [userLikedPosts.data]);
 
   return (
     <main>
-      {!session?.user?.login ? (
-        <div>
-          <p>You are not signed in</p>
-          <button onClick={() => signIn("google", { callbackUrl: "/signup" })}>
-            Sign in with Google
-          </button>
-        </div>
-      ) : (
-        <div>
-          <p>Welcome, {session.user?.nickname}</p>
-          <button onClick={() => signOut()}>Sign out</button>
-          <div className="tlToggle">
-            <h3
-              className={timeline === "userPosts" ? "active" : ""}
-              onClick={() => {
-                set_timeline("userPosts");
-              }}
-            >
-              POST
-            </h3>
-            {session.user.nickname === userInfo?.data?.nickname && (
-              <h3
-                className={timeline === "userPosts" ? "" : "active"}
-                onClick={() => {
-                  set_timeline("likedPosts");
-                }}
-              >
-                LIKE
-              </h3>
-            )}
-          </div>
-        </div>
-      )}
-
       {userInfo.status === "pending" ? (
         <p>Loading...</p>
       ) : userInfo.status === "error" ? (
@@ -84,8 +51,32 @@ export default function Page_user() {
         <div>
           <p>{userInfo?.data?.nickname}</p>
           <p>{userInfo?.data?.sns}</p>
+          <p>{userInfo?.data?.like_count}</p>
         </div>
       )}
+
+      <div>
+        <div className="tlToggle">
+          <h3
+            className={timeline === "userPosts" ? "active" : ""}
+            onClick={() => {
+              set_timeline("userPosts");
+            }}
+          >
+            POST
+          </h3>
+          {session?.user.nickname === userInfo?.data?.nickname && (
+            <h3
+              className={timeline === "userPosts" ? "" : "active"}
+              onClick={() => {
+                set_timeline("likedPosts");
+              }}
+            >
+              LIKE
+            </h3>
+          )}
+        </div>
+      </div>
 
       {userPosts.status === "pending" ? (
         <p>Loading...</p>

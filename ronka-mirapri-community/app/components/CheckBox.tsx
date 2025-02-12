@@ -1,3 +1,5 @@
+import "../css/FilterSelector.css";
+
 export default function CheckBox({
   name,
   value,
@@ -11,7 +13,13 @@ export default function CheckBox({
 }) {
   return (
     <label htmlFor={`${category}-${name.replace(" ", "-")}`}>
-      <span>{name + (value.includes(name) ? "O" : "")}</span>
+      <p
+        className={`filter_item ${
+          value.includes(name) ? "filter_item_active" : ""
+        }`}
+      >
+        {name}
+      </p>
       <input
         type="checkbox"
         id={`${category}-${name.replace(" ", "-")}`}
