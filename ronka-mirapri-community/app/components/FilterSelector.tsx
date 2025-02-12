@@ -1,3 +1,5 @@
+import "../css/FilterSelector.css";
+
 import { useEffect, useRef, useState } from "react";
 import {
   gender_category,
@@ -31,6 +33,8 @@ export default function FilterSelector({
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
+
+  //키워드 세팅관련 변수 선언
   const [search_keyword, set_search_keyword] = useState<string>(
     searchParams.get("keyword") ?? ""
   );
@@ -42,7 +46,6 @@ export default function FilterSelector({
   const [race, set_race] = useState<string[]>([]);
   const [job, set_job] = useState<string[]>([]);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { ["모든 클래스"]: _, ...job_category_group } = job_category_group_raw;
   function keyword_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
     set_keyword(e.target.value.trimStart());
@@ -114,11 +117,13 @@ export default function FilterSelector({
       });
     }
   }
+
   function update_params(key: string, value: string) {
     const params = new URLSearchParams(searchParams);
     params.set(key, value);
     router.push(`${pathname}?${params.toString()}`);
   }
+
   function search() {
     set_search_keyword(keyword.trim());
     update_params("keyword", keyword);
@@ -161,55 +166,125 @@ export default function FilterSelector({
   }, [search_keyword, gender, race, job]);
 
   return (
-    <div>
-      <p>검색</p>
+    <div className="filter_wrap">
+      <div className="filter_modal_title">
+        <h3>검색 필터</h3>
+        <button className="modal_close">
+          <img
+            src={process.env.NEXT_PUBLIC_BASE_URL + "/img/cancle.svg"}
+            alt="modal close button"
+          />
+        </button>
+      </div>
+      <img
+        className="search-icon"
+        src={process.env.NEXT_PUBLIC_BASE_URL + "/img/search.svg"}
+        alt="search icon"
+      />
       <input
         type="text"
         ref={keyword_ref}
         value={keyword}
         onChange={keyword_change_handler}
       />
-      <button onClick={search}>검색</button>
-      <p>정렬</p>
-      {["최신순", "인기순"].map(i => (
-        <RadioBox
-          category="order"
-          name={i}
-          value={order}
-          change_handler={order_change_handler}
-          key={i}
-        />
-      ))}
-      <p>성별</p>
-      {gender_category.map(i => (
-        <RadioBox
-          category="gender"
-          name={i}
-          value={gender}
-          change_handler={gender_change_handler}
-          key={i}
-        />
-      ))}
-      <p>종족 (중복 선택 가능)</p>
-      {race_category.map(i => (
-        <CheckBox
-          category="race"
-          name={i}
-          value={race}
-          change_handler={race_change_handler}
-          key={i}
-        />
-      ))}
-      <p>직업 (중복 선택 가능)</p>
-      {job_category.map(i => (
-        <CheckBox
-          category="job"
-          name={i}
-          value={job}
-          change_handler={job_change_handler}
-          key={i}
-        />
-      ))}
+      {/* <button onClick={search}>검색</button> */}
+
+      {/* 정렬 및 성별 필터 */}
+      <div className="filter_scroll">
+        <div className="filter_top">
+          <div className={`filter_layout_block align`}>
+            <p className="filter_title">정렬</p>
+            <div className="filter_item_align">
+              {["최신순", "인기순"].map(i => (
+                <RadioBox
+                  category="order"
+                  name={i}
+                  value={order}
+                  change_handler={order_change_handler}
+                  key={i}
+                />
+              ))}
+            </div>
+          </div>
+          <div className={`filter_layout_block sex`}>
+            <p className="filter_title">성별</p>
+            <div className="filter_item_align">
+              {gender_category.map(i => (
+                <RadioBox
+                  category="gender"
+                  name={i}
+                  value={gender}
+                  change_handler={gender_change_handler}
+                  key={i}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* 검색어 필터 */}
+        <div className="filter_layout_block">
+          <p className="filter_title">검색어</p>
+          <div className="filter_item_align">
+            {["최신순", "인기순"].map(i => (
+              <RadioBox
+                category="order"
+                name={i}
+                value={order}
+                change_handler={order_change_handler}
+                key={i}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* 직업 필터 */}
+        <div className="filter_layout_block">
+          <p className="filter_title">
+            직업<span className="filter_title_sub">중복선택가능</span>
+          </p>
+          <div className={`filter_item_align jobs`}>
+            {job_category.map(i => (
+              <CheckBox
+                category="job"
+                name={i}
+                value={job}
+                change_handler={job_change_handler}
+                key={i}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* 종족 필터 */}
+        <div className="filter_layout_block">
+          <p className="filter_title">
+            종족<span className="filter_title_sub">중복선택가능</span>
+          </p>
+          <div className="filter_item_align">
+            {race_category.map(i => (
+              <CheckBox
+                category="race"
+                name={i}
+                value={race}
+                change_handler={race_change_handler}
+                key={i}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="submit_button_wrap">
+        <button className="filter_reset_button">
+          <img
+            src={process.env.NEXT_PUBLIC_BASE_URL + "/img/refresh.svg"}
+            alt="modal close button"
+          />
+          초기화
+        </button>
+        <button className="filter_submit_button">필터적용</button>
+      </div>
     </div>
   );
 }

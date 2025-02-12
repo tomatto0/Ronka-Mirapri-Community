@@ -20,7 +20,7 @@ export default function PostThumbnail({ post }: { post: PostInform }) {
     set_is_liked(prev => !prev);
     await like_toggle(post._id);
 
-    // ✅ 좋아요 변경 후 userLikedPosts 쿼리 갱신
+    // 좋아요 변경 후 userLikedPosts 쿼리 갱신
     queryClient.invalidateQueries({ queryKey: ["userLikedPosts"] });
   };
 
