@@ -2,7 +2,7 @@ import "../css/ItemSearchModal.css";
 import ItemSearch from "./ItemSearch";
 import SearchResult from "./SearchResult";
 import { Item } from "../types/Item";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import ColorPalette from "./ColorPalette.tsx";
 
 export default function ItemSearchModal({
@@ -35,6 +35,7 @@ export default function ItemSearchModal({
   const [is_item_select, set_is_item_select] = useState<boolean>(
     selected_item.Id !== 0
   );
+
   useEffect(() => {
     if (selected_item !== equiped_item[slot]) {
       set_selected_item(equiped_item[slot]);
@@ -44,15 +45,11 @@ export default function ItemSearchModal({
     }
   }, [is_item_select, selected_item, equiped_item, slot]);
 
-  const select_item = useCallback(
-    (slot: number, item: Item) => {
-      edit_equiped_item(slot, item);
-      set_selected_item(item);
-      set_is_item_select(true);
-    },
-    [edit_equiped_item]
-  );
-
+  const select_item = (slot: number, item: Item) => {
+    edit_equiped_item(slot, item);
+    set_selected_item(item);
+    set_is_item_select(true);
+  };
   const modal_close = () => {
     set_is_open(false);
     set_search_result([]);
@@ -94,7 +91,7 @@ export default function ItemSearchModal({
           set_is_item_select={set_is_item_select}
           slot={slot}
         />
-        {!is_item_select && search_result.length > 0 && (
+        {search_result.length > 0 && (
           <SearchResult
             slot={slot}
             search_result={search_result}
@@ -102,7 +99,7 @@ export default function ItemSearchModal({
             reset_keyword={reset_keyword}
           />
         )}
-        {is_item_select && (
+        {is_item_select && keyword.trim() === "" && (
           <ColorPalette
             slot={slot}
             item={selected_item}

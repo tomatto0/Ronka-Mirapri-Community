@@ -8,7 +8,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import cursed_word_check from "@/app/utils/cursed_word_check";
-import nickname_check from "@/app/utils/nickname_check";
+import nickname_validate from "@/app/utils/nickname_check";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -65,7 +65,7 @@ export async function POST(request: Request) {
       user_message.email_message =
         "유효하지 않은 이메일입니다. 처음부터 다시 시도해주세요.";
     }
-    user_message.nickname_message = nickname_check(body.nickname);
+    user_message.nickname_message = nickname_validate(body.nickname);
     if (user_message.nickname_message !== "") {
       user_message.is_invalid = true;
     }
@@ -84,21 +84,13 @@ export async function POST(request: Request) {
       sns: body.sns,
     });
     const created_user = await user.save();
-
     return NextResponse.json({ success: true, data: created_user });
   } catch (e) {
     console.error("MongoDB Failed to create users:", e);
-    let error_message = "Unknown error";
-    if (is_duplicated_error(e)) {
-      error_message = "duplicated Error";
-    } else if (is_validation_error(e)) {
-      error_message = "validation Error";
-    }
-    console.log(error_message);
     return NextResponse.json(
       {
         success: false,
-        error: error_message,
+        error: "Unknown error",
       },
       { status: 500 }
     );

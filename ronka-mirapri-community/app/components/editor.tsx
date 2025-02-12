@@ -14,12 +14,15 @@ import React, {
   ActionDispatch,
   RefObject,
   useEffect,
+  useReducer,
   useRef,
   useState,
 } from "react";
 import { LocalDB } from "../utils/localDB";
 import CheckBox from "./CheckBox";
 import RadioBox from "./RadioBox";
+import cursed_word_check from "../utils/cursed_word_check";
+import Swal from "sweetalert2";
 
 export default function Editor({
   post_data,
@@ -52,6 +55,13 @@ export default function Editor({
   const localDB = new LocalDB("post_data", "user_image", false);
   const [tag_input, set_tag_input] = useState<string>("");
   const is_posted = useRef<boolean>(false);
+
+  const [title_message, set_title_message] = useState<string>("");
+  const [content_message, set_content_message] = useState<string>("");
+  const [sns_message, set_sns_message] = useState<string>("");
+  const [race_message, set_race_message] = useState<string>("");
+  const [job_message, set_job_message] = useState<string>("");
+  const [tag_message, set_tag_message] = useState<string>("");
 
   //#region setter
   function title_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
@@ -88,6 +98,11 @@ export default function Editor({
         if (job_category_group[group].every(i => job.includes(i))) {
           if (!job.includes(group)) {
             job = [...job, group];
+          }
+          if (job_category_group["모든 클래스"].every(i => job.includes(i))) {
+            if (!job.includes("모든 클래스")) {
+              job = [...job, "모든 클래스"];
+            }
           }
         } else {
           job = job.filter(i => i !== group);
@@ -148,43 +163,93 @@ export default function Editor({
     if (!imageRef.current) {
       return;
     }
-    function post_validate(equiped_item: Item[]): boolean {
+    function post_validate() {
+      const message = {
+        is_validate: true,
+        image: "",
+        item: "",
+        title: "",
+        content: "",
+        sns: "",
+        race: "",
+        job: "",
+        tag: "",
+      };
       if (
         image_src ===
         process.env.NEXT_PUBLIC_BASE_URL + "/img/thumbnail.svg"
       ) {
-        return false;
+        message.is_validate = false;
+        message.image = "이미지가 필요합니다.";
+      }
+      if (equiped_item.every(i => i.Id === 0)) {
+        message.is_validate = false;
+        message.item = "아이템을 선택해주세요.";
       }
       if (post_data.title === "") {
-        return false;
+        message.is_validate = false;
+        message.title = "제목을 입력해주세요.";
+      }
+      if (cursed_word_check(post_data.title)) {
+        message.is_validate = false;
+        message.title =
+          "제목에 부적절한 단어가 포함되어있습니다. 부적절한 내용을 작성할 경우 통보없이 수정, 탈퇴처리 될 수 있습니다.";
+      }
+      if (cursed_word_check(post_data.content)) {
+        message.is_validate = false;
+        message.content =
+          "내용에 부적절한 단어가 포함되어있습니다. 부적절한 내용을 작성할 경우 통보없이 수정, 탈퇴처리 될 수 있습니다.";
+      }
+      if (cursed_word_check(post_data.sns)) {
+        message.is_validate = false;
+        message.sns =
+          "SNS에 부적절한 단어가 포함되어있습니다. 부적절한 내용을 작성할 경우 통보없이 수정, 탈퇴처리 될 수 있습니다.";
+      }
+      if (post_data.tag.some(i => cursed_word_check(i))) {
+        message.is_validate = false;
+        message.tag =
+          "태그에 부적절한 단어가 포함되어있습니다. 부적절한 내용을 작성할 경우 통보없이 수정, 탈퇴처리 될 수 있습니다.";
       }
       if (post_data.race === null) {
-        return false;
+        message.is_validate = false;
+        message.race = "종족을 선택해주세요.";
       }
-      for (let item of equiped_item) {
-        if (item.Id !== 0) {
-          return true;
-        }
+      if (post_data.job.length === 0) {
+        message.is_validate = false;
+        message.job = "직업을 선택해주세요.";
       }
-      return false;
+      return message;
     }
-    if (!post_validate(equiped_item)) {
+    const { is_validate, ...post_message } = post_validate();
+    if (!is_validate) {
+      set_title_message(post_message.title);
+      set_content_message(post_message.content);
+      set_sns_message(post_message.sns);
+      set_race_message(post_message.race);
+      set_job_message(post_message.job);
+      set_tag_message(post_message.tag);
+      if (post_message.image || post_message.item) {
+        Swal.fire({
+          html: [post_message.image, post_message.item].join("<br/>"),
+          icon: "error",
+        });
+      }
       return;
     }
-    const ctx = imageRef.current.getContext("2d");
-    if (!ctx) {
-      return;
-    }
-    const image_data = ctx.getImageData(0, 0, 540, 1080);
-    const cropped_canvas = document.createElement("canvas");
-    cropped_canvas.width = 540;
-    cropped_canvas.height = 1080;
-    const cropped_ctx = cropped_canvas.getContext("2d");
-    if (!cropped_ctx) {
-      return;
-    }
-    cropped_ctx.putImageData(image_data, 0, 0);
     try {
+      const ctx = imageRef.current.getContext("2d");
+      if (!ctx) {
+        throw new Error("canvas context 생성에 실패했습니다.");
+      }
+      const image_data = ctx.getImageData(0, 0, 540, 1080);
+      const cropped_canvas = document.createElement("canvas");
+      cropped_canvas.width = 540;
+      cropped_canvas.height = 1080;
+      const cropped_ctx = cropped_canvas.getContext("2d");
+      if (!cropped_ctx) {
+        throw new Error("canvas context 생성에 실패했습니다.");
+      }
+      cropped_ctx.putImageData(image_data, 0, 0);
       const blob = await new Promise<Blob>((resolve, reject) => {
         cropped_canvas.toBlob(
           blob => {
@@ -354,7 +419,7 @@ export default function Editor({
         onChange={title_change_handler}
         autoComplete="off"
       />
-      <br />
+      <p>{title_message}</p>
       <label htmlFor="content">내용: </label>
       <input
         type="text"
@@ -363,7 +428,7 @@ export default function Editor({
         onChange={content_change_handler}
         autoComplete="off"
       />
-      <br />
+      <p>{content_message}</p>
       <label htmlFor="sns">SNS Url: </label>
       <input
         type="text"
@@ -372,9 +437,10 @@ export default function Editor({
         onChange={sns_change_handler}
         autoComplete="off"
       />
-      <br />
+      <p>{sns_message}</p>
       <p>검색 필터 설정</p>
       <hr />
+      <p>성별</p>
       {gender_category.map(i => (
         <RadioBox
           category="gender"
@@ -394,6 +460,7 @@ export default function Editor({
           key={i}
         />
       ))}
+      <p>{race_message}</p>
       <p>직업 (중복 선택 가능)</p>
       {job_category.map(i => (
         <CheckBox
@@ -404,7 +471,7 @@ export default function Editor({
           key={i}
         />
       ))}
-      <br />
+      <p>{job_message}</p>
       <label htmlFor="tag">태그:</label>
       {post_data.tag.map((tag, i) => (
         <TagBox value={tag} key={i} />
@@ -417,6 +484,7 @@ export default function Editor({
         onChange={tag_change_handler}
       />
       <p>태그 입력 후 스페이스바로 태그 추가</p>
+      <p>{tag_message}</p>
       <button onClick={post}>글 작성</button>
     </div>
   );

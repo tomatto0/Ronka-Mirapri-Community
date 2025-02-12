@@ -45,7 +45,7 @@ const job_category = [
   "채집가",
 ];
 const job_category_group: { [key: string]: string[] } = {
-  "모든 클래스": job_category.filter((i) => i !== "모든 클래스"),
+  "모든 클래스": job_category.filter(i => i !== "모든 클래스"),
   수호자: ["나이트", "전사", "암흑기사", "건브레이커"],
   학살자: ["용기사", "리퍼"],
   타격대: ["몽크", "사무라이"],

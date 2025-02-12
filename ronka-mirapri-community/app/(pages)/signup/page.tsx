@@ -1,10 +1,11 @@
 "use client";
 
 import cursed_word_check from "@/app/utils/cursed_word_check";
-import nickname_check from "@/app/utils/nickname_check";
+import nickname_validate from "@/app/utils/nickname_check";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import Swal from "sweetalert2";
 
 export default function Page_sign_up() {
   const { data: session, status } = useSession();
@@ -19,7 +20,7 @@ export default function Page_sign_up() {
 
   const signup_handler = async () => {
     set_is_error(false);
-    const nickname_message = nickname_check(nickname);
+    const nickname_message = nickname_validate(nickname);
     if (nickname_message !== "") {
       set_nickname_error(nickname_message);
       set_is_error(true);
@@ -43,10 +44,16 @@ export default function Page_sign_up() {
     }
     const res = await response.json();
     if (res.success === false) {
-      console.log(res.error);
       set_email_error(res.error.email_message);
       set_nickname_error(res.error.nickname_message);
       set_sns_error(res.error.sns_message);
+      if (res.error === "Unknown error") {
+        Swal.fire({
+          html: "알수없는 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
+        }).then(() => {
+          signIn("google", { callbackUrl: "/signup" });
+        });
+      }
       return false;
     }
     window.location.href = "/";

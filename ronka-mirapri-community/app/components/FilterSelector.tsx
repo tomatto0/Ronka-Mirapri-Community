@@ -107,7 +107,7 @@ export default function FilterSelector({
     } else {
       const new_job = job.includes(e.target.value)
         ? job.filter(i => i !== e.target.value)
-        : [...job.filter(i => i !== "모든 클래스"), e.target.value];
+        : [...job, e.target.value];
       set_job(job_groupize(new_job));
       set_filter_tag(prev => {
         return { ...prev, job: job_groupize(new_job) };
@@ -146,7 +146,9 @@ export default function FilterSelector({
     }
     let job_filter = {};
     if (job.length > 0) {
-      job_filter = { job: { $in: job } };
+      job_filter = job.includes("모든 클래스")
+        ? { job: { $in: job } }
+        : { job: { $in: job, $nin: ["모든 클래스"] } };
     }
     set_filter(
       JSON.stringify({

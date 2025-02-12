@@ -20,7 +20,6 @@ export default function ItemSearch({
   set_is_item_select: (is: boolean) => void;
 }) {
   const item_list: Item[] = item_list_raw as Item[];
-
   const slot_category: { [key: number]: EquipSlot } = equip_slot_categories;
   const input_ref = useRef<HTMLInputElement | null>(null);
 
@@ -39,7 +38,6 @@ export default function ItemSearch({
       set_search_result([]);
       return false;
     }
-    set_is_item_select(false);
     const result = item_list.filter(
       item =>
         searcher.search(item.Name) >= 0 &&

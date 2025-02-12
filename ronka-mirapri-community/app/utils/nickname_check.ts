@@ -1,6 +1,6 @@
 import cursed_word_check from "./cursed_word_check";
 
-export default function nickname_check(text: string): string {
+export default function nickname_validate(text: string): string {
   if (!text) {
     return "닉네임이 필요합니다.";
   }
