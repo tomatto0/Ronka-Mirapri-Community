@@ -11,9 +11,24 @@ import { Posts, PostInform } from "../types/PostInform";
 import { useQuery } from "@tanstack/react-query";
 import Itemrank from "../components/Itemrank";
 
+interface FilterTag {
+  order: string;
+  keyword: string;
+  gender: string;
+  race: string[];
+  job: string[];
+}
+
 export default function Page_home() {
   const { data: session } = useSession();
   const [filter, set_filter] = useState<string>("{}");
+  const [filter_tag, set_filter_tag] = useState<FilterTag>({
+    order: "",
+    keyword: "",
+    gender: "",
+    race: [],
+    job: [],
+  });
   const [order, set_order] = useState<string>("최신순");
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
 
@@ -32,9 +47,9 @@ export default function Page_home() {
       fetchNextPage();
     }
   }, [inView, hasNextPage]);
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  // useEffect(() => {
+  //   console.log(data);
+  // }, [data]);
   const fetch_item_rank = async (): Promise<string[]> => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/db/items/ranking`
@@ -66,9 +81,12 @@ export default function Page_home() {
           <button onClick={() => signOut()}>Sign out</button>
         </div>
       )}
-
+      <p>
+        {filter_tag.race.join(", ")}, {filter_tag.job.join(", ")}
+      </p>
       <FilterSelector
         set_filter={set_filter}
+        set_filter_tag={set_filter_tag}
         order={order}
         set_order={set_order}
       />

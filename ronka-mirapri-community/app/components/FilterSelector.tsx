@@ -11,12 +11,22 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function FilterSelector({
   set_filter,
+  set_filter_tag,
   order,
   set_order,
 }: {
-  set_filter: (filter: string) => void;
+  set_filter: React.Dispatch<React.SetStateAction<string>>;
+  set_filter_tag: React.Dispatch<
+    React.SetStateAction<{
+      order: string;
+      keyword: string;
+      gender: string;
+      race: string[];
+      job: string[];
+    }>
+  >;
   order: string;
-  set_order: (order: string) => void;
+  set_order: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -39,9 +49,15 @@ export default function FilterSelector({
   }
   function order_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
     set_order(e.target.value);
+    set_filter_tag(prev => {
+      return { ...prev, order: e.target.value };
+    });
   }
   function gender_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
     set_gender(e.target.value);
+    set_filter_tag(prev => {
+      return { ...prev, gender: e.target.value };
+    });
   }
   function race_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
     set_race(prev =>
@@ -49,6 +65,14 @@ export default function FilterSelector({
         ? prev.filter(i => i !== e.target.value)
         : [...prev, e.target.value]
     );
+    set_filter_tag(prev => {
+      return {
+        ...prev,
+        race: race.includes(e.target.value)
+          ? race.filter(i => i !== e.target.value)
+          : [...race, e.target.value],
+      };
+    });
   }
   function job_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
     function job_groupize(job: string[]) {
@@ -77,11 +101,17 @@ export default function FilterSelector({
             e.target.value,
           ];
       set_job(job_groupize(new_job));
+      set_filter_tag(prev => {
+        return { ...prev, job: job_groupize(new_job) };
+      });
     } else {
       const new_job = job.includes(e.target.value)
         ? job.filter(i => i !== e.target.value)
         : [...job.filter(i => i !== "모든 클래스"), e.target.value];
       set_job(job_groupize(new_job));
+      set_filter_tag(prev => {
+        return { ...prev, job: job_groupize(new_job) };
+      });
     }
   }
   function update_params(key: string, value: string) {
@@ -92,6 +122,9 @@ export default function FilterSelector({
   function search() {
     set_search_keyword(keyword.trim());
     update_params("keyword", keyword);
+    set_filter_tag(prev => {
+      return { ...prev, keyword: keyword.trim() };
+    });
   }
 
   useEffect(() => {
