@@ -29,14 +29,11 @@ div.logo {
     text-transform: uppercase;
   }
 
-  ul {
+  ul.menus {
+    display: flex;
     list-style: none;
-    display: flex;
-    gap: 20px;
-  }
 
-  .menus {
-    display: flex;
+    gap: 20px;
   }
 
   .menu {

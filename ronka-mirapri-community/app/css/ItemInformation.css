@@ -18,7 +18,7 @@ div.item-information {
         font-weight: bold;
         font-size: 1.5rem;
         letter-spacing: -0.42px;
-        color: #4a5578;
+        color: #006351;
         margin-right: 6px;
       }
 
@@ -71,9 +71,9 @@ div.item-information {
     }
     button {
       font-size: 1.4rem;
-      color: #7d89b0;
+      color: #4f938d;
       border: 0;
-      background-color: #e3e9fc;
+      background-color: #e6f6f3;
       cursor: pointer;
       padding: 5px;
       border-radius: 4px;
@@ -83,7 +83,7 @@ div.item-information {
     button::before {
       content: "";
       display: inline-block;
-      background-image: url("../../public/img/refresh.svg");
+      background-image: url("../../public/img/refresh_green.svg");
       width: 1.5rem;
       height: 1.5rem;
       background-size: cover;
@@ -95,7 +95,7 @@ div.item-information {
 
   hr {
     margin: 2rem 0;
-    border: 1px #96a2ca solid;
+    border: 1px #b2c6cd solid;
   }
 
   .item-slot-container {
@@ -115,7 +115,7 @@ div.item-information {
         span {
           text-align: left;
           font-size: 1.3rem;
-          color: #5d6b98;
+          color: #667085;
           margin-bottom: 10px;
           letter-spacing: -0.39px;
         }
@@ -146,7 +146,7 @@ div.item-information {
     }
   }
   p.description {
-    color: #5d6b98;
+    color: #667085;
     font-size: 1.2rem;
     text-align: start;
     line-height: 19px;
@@ -179,7 +179,7 @@ div.item-information {
       padding: 11px 0;
 
       font-weight: bold;
-      color: #344054;
+      color: #667085;
       font-size: 1.6rem;
       font-family: inherit;
     }
@@ -243,7 +243,7 @@ div.item-information {
         font-weight: 700;
         font-size: 1.6rem;
         letter-spacing: -0.48px;
-        color: #4a5578;
+        color: #667085;
       }
 
       button {
