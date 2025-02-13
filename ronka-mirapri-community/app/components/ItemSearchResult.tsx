@@ -2,7 +2,7 @@ import "../css/SearchResult.css";
 import { useRef, useState, useEffect } from "react";
 import { Item } from "../types/Item";
 
-export default function SearchResult({
+export default function ItemSearchResult({
   slot,
   search_result,
   edit_equiped_item,
@@ -65,7 +65,7 @@ export default function SearchResult({
       return;
     }
     const observer = new IntersectionObserver(
-      (e) => {
+      e => {
         if (e[0].isIntersecting && !is_loading) {
           set_is_loading(true);
           set_show_result(search_result.slice(0, (page + 1) * 10));
@@ -95,7 +95,7 @@ export default function SearchResult({
   return (
     <div className="search-result-container">
       <div>
-        {show_result.map((item) => (
+        {show_result.map(item => (
           <SearchedItem
             key={item.Id}
             slot={slot}

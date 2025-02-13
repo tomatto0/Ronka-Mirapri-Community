@@ -10,6 +10,11 @@ import {
 import CheckBox from "./CheckBox";
 import RadioBox from "./RadioBox";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Item } from "../types/Item";
+import ItemSearch from "./ItemSearch";
+import ItemSearchResult from "./ItemSearchResult";
+import UserSearch from "./UserSearch";
+import UserSearchResult from "./UserSearchResult";
 
 export default function FilterSelector({
   set_filter,
@@ -38,13 +43,15 @@ export default function FilterSelector({
   const [search_keyword, set_search_keyword] = useState<string>(
     searchParams.get("keyword") ?? ""
   );
-  const [keyword, set_keyword] = useState<string>(
-    searchParams.get("keyword") ?? ""
-  );
+  const [keyword, set_keyword] = useState<string>("");
   const keyword_ref = useRef<HTMLInputElement | null>(null);
   const [gender, set_gender] = useState<string>("전체");
   const [race, set_race] = useState<string[]>([]);
   const [job, set_job] = useState<string[]>([]);
+
+  const [search_category, set_search_category] = useState<string>("item");
+  const [item_search_result, set_item_search_result] = useState<Item[]>([]);
+  const [user_search_result, set_user_search_result] = useState<string[]>([]);
 
   const { ["모든 클래스"]: _, ...job_category_group } = job_category_group_raw;
   function keyword_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
@@ -124,7 +131,7 @@ export default function FilterSelector({
     router.push(`${pathname}?${params.toString()}`);
   }
 
-  function search() {
+  function search(keyword: string) {
     set_search_keyword(keyword.trim());
     update_params("keyword", keyword);
     set_filter_tag(prev => {
@@ -176,105 +183,143 @@ export default function FilterSelector({
           />
         </button>
       </div>
-      <img
-        className="search-icon"
-        src={process.env.NEXT_PUBLIC_BASE_URL + "/img/search.svg"}
-        alt="search icon"
-      />
-      <input
-        type="text"
-        ref={keyword_ref}
-        value={keyword}
-        onChange={keyword_change_handler}
-      />
-      {/* <button onClick={search}>검색</button> */}
-
+      {search_category === "item" ? (
+        <ItemSearch
+          keyword={keyword}
+          set_keyword={set_keyword}
+          set_search_result={set_item_search_result}
+          placeholder=""
+        />
+      ) : (
+        <UserSearch
+          keyword={keyword}
+          set_keyword={set_keyword}
+          set_search_result={set_user_search_result}
+          placeholder=""
+        />
+      )}
+      {keyword.trim() !== "" && (
+        <div>
+          <div
+            onClick={() => {
+              set_search_category("item");
+            }}
+          >
+            아이템
+          </div>
+          <div
+            onClick={() => {
+              set_search_category("user");
+            }}
+          >
+            유저
+          </div>
+        </div>
+      )}
+      {keyword.trim() !== "" &&
+        (search_category === "item" ? (
+          <ItemSearchResult
+            slot={-1}
+            search_result={item_search_result}
+            edit_equiped_item={(slot: number, item: Item) => {
+              search(item.Name);
+            }}
+            reset_keyword={() => {
+              set_keyword("");
+            }}
+          />
+        ) : (
+          // <div></div>
+          <UserSearchResult search_result={user_search_result} />
+        ))}
       {/* 정렬 및 성별 필터 */}
-      <div className="filter_scroll">
-        <div className="filter_top">
-          <div className={`filter_layout_block align`}>
-            <p className="filter_title">정렬</p>
-            <div className="filter_item_align">
-              {["최신순", "인기순"].map(i => (
-                <RadioBox
-                  category="order"
+      {keyword.trim() === "" && (
+        <div className="filter_scroll">
+          <div className="filter_top">
+            <div className={`filter_layout_block align`}>
+              <p className="filter_title">정렬</p>
+              <div className="filter_item_align">
+                {["최신순", "인기순"].map(i => (
+                  <RadioBox
+                    category="order"
+                    name={i}
+                    value={order}
+                    change_handler={order_change_handler}
+                    key={i}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className={`filter_layout_block sex`}>
+              <p className="filter_title">성별</p>
+              <div className="filter_item_align">
+                {["전체", ...gender_category].map(i => (
+                  <RadioBox
+                    category="gender"
+                    name={i}
+                    value={gender}
+                    change_handler={gender_change_handler}
+                    key={i}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* 검색어 필터 */}
+          {search_keyword !== "" && (
+            <div className="filter_layout_block">
+              <p className="filter_title">검색어</p>
+              <div className="filter_item_align">
+                <p
+                  className="filter_item filter_item_active"
+                  onClick={() => {
+                    search("");
+                  }}
+                >
+                  {search_keyword} X
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* 직업 필터 */}
+          <div className="filter_layout_block">
+            <p className="filter_title">
+              직업<span className="filter_title_sub">중복선택가능</span>
+            </p>
+            <div className={`filter_item_align jobs`}>
+              {job_category.map(i => (
+                <CheckBox
+                  category="job"
                   name={i}
-                  value={order}
-                  change_handler={order_change_handler}
+                  value={job}
+                  change_handler={job_change_handler}
                   key={i}
                 />
               ))}
             </div>
           </div>
-          <div className={`filter_layout_block sex`}>
-            <p className="filter_title">성별</p>
+
+          {/* 종족 필터 */}
+          <div className="filter_layout_block">
+            <p className="filter_title">
+              종족<span className="filter_title_sub">중복선택가능</span>
+            </p>
             <div className="filter_item_align">
-              {gender_category.map(i => (
-                <RadioBox
-                  category="gender"
+              {race_category.map(i => (
+                <CheckBox
+                  category="race"
                   name={i}
-                  value={gender}
-                  change_handler={gender_change_handler}
+                  value={race}
+                  change_handler={race_change_handler}
                   key={i}
                 />
               ))}
             </div>
           </div>
         </div>
-
-        {/* 검색어 필터 */}
-        <div className="filter_layout_block">
-          <p className="filter_title">검색어</p>
-          <div className="filter_item_align">
-            {["최신순", "인기순"].map(i => (
-              <RadioBox
-                category="order"
-                name={i}
-                value={order}
-                change_handler={order_change_handler}
-                key={i}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* 직업 필터 */}
-        <div className="filter_layout_block">
-          <p className="filter_title">
-            직업<span className="filter_title_sub">중복선택가능</span>
-          </p>
-          <div className={`filter_item_align jobs`}>
-            {job_category.map(i => (
-              <CheckBox
-                category="job"
-                name={i}
-                value={job}
-                change_handler={job_change_handler}
-                key={i}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* 종족 필터 */}
-        <div className="filter_layout_block">
-          <p className="filter_title">
-            종족<span className="filter_title_sub">중복선택가능</span>
-          </p>
-          <div className="filter_item_align">
-            {race_category.map(i => (
-              <CheckBox
-                category="race"
-                name={i}
-                value={race}
-                change_handler={race_change_handler}
-                key={i}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-
+      )}
       <div className="submit_button_wrap">
         <button className="filter_reset_button">
           <img

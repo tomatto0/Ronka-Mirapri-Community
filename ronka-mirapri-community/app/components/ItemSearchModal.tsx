@@ -1,6 +1,6 @@
 import "../css/ItemSearchModal.css";
 import ItemSearch from "./ItemSearch";
-import SearchResult from "./SearchResult";
+import ItemSearchResult from "./ItemSearchResult.tsx";
 import { Item } from "../types/Item";
 import { useState, useEffect } from "react";
 import ColorPalette from "./ColorPalette.tsx";
@@ -88,11 +88,10 @@ export default function ItemSearchModal({
           keyword={keyword}
           set_keyword={set_keyword}
           set_search_result={set_search_result}
-          set_is_item_select={set_is_item_select}
           slot={slot}
         />
         {search_result.length > 0 && (
-          <SearchResult
+          <ItemSearchResult
             slot={slot}
             search_result={search_result}
             edit_equiped_item={select_item}

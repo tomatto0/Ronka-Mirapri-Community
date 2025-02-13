@@ -9,39 +9,46 @@ import Hangul from "hangul-js";
 export default function ItemSearch({
   keyword,
   set_keyword,
-  slot,
   set_search_result,
-  set_is_item_select,
+  slot = -1,
+  placeholder = "아이템을 검색하세요",
 }: {
   keyword: string;
   set_keyword: (keyword: string) => void;
-  slot: number;
   set_search_result: (items: Item[]) => void;
-  set_is_item_select: (is: boolean) => void;
+  slot?: number;
+  placeholder?: string;
 }) {
   const item_list: Item[] = item_list_raw as Item[];
   const slot_category: { [key: number]: EquipSlot } = equip_slot_categories;
   const input_ref = useRef<HTMLInputElement | null>(null);
-
   useEffect(() => {
     if (input_ref.current) {
       input_ref.current.focus();
     }
   }, [input_ref]);
+  useEffect(() => {
+    const handler = setTimeout(search, 200);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [keyword]);
   const keyword_update = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const input_keyword = e.target.value.trim();
     set_keyword(e.target.value);
-    const searcher = new Hangul.Searcher(input_keyword);
-    const eslot = slot > 4 ? 5 : slot;
-
-    if (input_keyword === "") {
+  };
+  const search = () => {
+    if (keyword.trim() === "") {
       set_search_result([]);
       return false;
     }
+
+    const searcher = new Hangul.Searcher(keyword.trim());
+    const eslot = slot > 4 ? 5 : slot;
+
     const result = item_list.filter(
       item =>
         searcher.search(item.Name) >= 0 &&
-        slot_category[item.EquipSlotCategory]["Slot"] === eslot
+        (slot_category[item.EquipSlotCategory]["Slot"] === eslot || slot == -1)
     );
     result.reverse();
     set_search_result(result);
@@ -55,7 +62,7 @@ export default function ItemSearch({
       />
       <input
         type="text"
-        placeholder="아이템을 검색하세요"
+        placeholder={placeholder}
         value={keyword}
         onChange={keyword_update}
         ref={input_ref}
