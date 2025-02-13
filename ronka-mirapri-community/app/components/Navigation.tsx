@@ -48,7 +48,7 @@ export default function Navigation() {
           {session?.user?.login ? (
             <div onClick={() => signOut()}>LOGOUT</div>
           ) : (
-            <ul>
+            <ul className="menus">
               <li onClick={() => signIn("google", { callbackUrl: "/signup" })}>
                 LOGIN
               </li>

@@ -22,6 +22,31 @@ div.main-container {
   position: relative;
 }
 
+.write_button_wrap {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.2rem;
+  color: #667085;
+}
+
+.login_to_write_button {
+  width: 140px;
+  border: 1px solid #006351;
+  background-color: inherit;
+  color: #006351;
+  padding: 10px;
+  border-radius: 30px;
+  font-size: 1.6rem;
+}
+
+.login_to_write_button:hover {
+  background-color: #006351;
+  color: white;
+}
+
 @media (min-width: 1075px) {
   div.main-container {
     text-align: center;

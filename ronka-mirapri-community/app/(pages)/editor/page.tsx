@@ -131,9 +131,11 @@ export default function Page_editor() {
           imageRef={imageRef}
         />
       ) : (
-        <div>
-          <p>You are not signed in</p>
-          <button onClick={sign_in_handler}>Sign in with Google</button>
+        <div className="write_button_wrap">
+          <button className="login_to_write_button" onClick={sign_in_handler}>
+            LOGIN
+          </button>
+          <p>로그인시 글작성 가능</p>
         </div>
       )}
       <ItemSearchModal
