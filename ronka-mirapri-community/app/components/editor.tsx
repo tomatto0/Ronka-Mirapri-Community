@@ -291,7 +291,7 @@ export default function Editor({
       });
       console.log("res", post_res);
       is_posted.current = true;
-      window.location.href = `/post/${post_res.data.index}`;
+      // window.location.href = `/post/${post_res.data.index}`;
     } catch (e) {
       console.error(e);
     }

@@ -136,13 +136,16 @@
   color: #7e889d;
   line-height: 1.2;
 }
+.filter_item.category {
+  color: black;
+}
 
 .filter_item:hover {
   background-color: #f2f4f7;
   border: 1px solid #d0d5dd;
 }
 
-.filter_item_active {
+.filter_item.filter_item_active {
   color: #0e9384;
   background-color: #f0fdf9;
   border: 1px solid #0e9384;

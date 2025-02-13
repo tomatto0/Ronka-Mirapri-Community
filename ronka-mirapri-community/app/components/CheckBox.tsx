@@ -5,18 +5,22 @@ export default function CheckBox({
   value,
   category,
   change_handler,
+  className = "",
 }: {
   name: string;
   value: string[];
   category: string;
   change_handler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
 }) {
   return (
     <label htmlFor={`${category}-${name.replace(" ", "-")}`}>
       <p
-        className={`filter_item ${
-          value.includes(name) ? "filter_item_active" : ""
-        }`}
+        className={[
+          "filter_item",
+          className,
+          value.includes(name) ? "filter_item_active" : "",
+        ].join(" ")}
       >
         {name}
       </p>

@@ -72,7 +72,7 @@ export async function PATCH(request: Request) {
     }> = {};
 
     const keys: (keyof typeof update_field)[] = ["title", "content", "tags"];
-    keys.forEach((key) => {
+    keys.forEach(key => {
       if (body[key] !== undefined) {
         update_field[key] = body[key];
       }
@@ -89,6 +89,7 @@ export async function PATCH(request: Request) {
         runValidators: true,
       }
     ).exec();
+
     if (!updated_post) {
       return NextResponse.json(
         { sucess: false, error: "Post not found" },

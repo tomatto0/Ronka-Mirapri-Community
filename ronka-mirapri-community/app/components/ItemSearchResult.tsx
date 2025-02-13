@@ -5,12 +5,12 @@ import { Item } from "../types/Item";
 export default function ItemSearchResult({
   slot,
   search_result,
-  edit_equiped_item,
+  result_click_handler,
   reset_keyword,
 }: {
   slot: number;
   search_result: Item[];
-  edit_equiped_item: (slot: number, item: Item) => void;
+  result_click_handler: (slot: number, item: Item) => void;
   reset_keyword: () => void;
 }) {
   const SearchedItem = ({
@@ -55,7 +55,7 @@ export default function ItemSearchResult({
       DyeFirst: 0,
       DyeSecond: 0,
     };
-    edit_equiped_item(slot, dye_item);
+    result_click_handler(slot, dye_item);
     reset_keyword();
     set_show_result([]);
   };

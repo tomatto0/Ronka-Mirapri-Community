@@ -10,25 +10,14 @@ import { useInView } from "react-intersection-observer";
 import { Posts, PostInform } from "../types/PostInform";
 import { useQuery } from "@tanstack/react-query";
 import Itemrank from "../components/Itemrank";
-
-interface FilterTag {
-  order: string;
-  keyword: string;
-  gender: string;
-  race: string[];
-  job: string[];
-}
+import { filter_tag_init_state } from "../utils/constants";
 
 export default function Page_home() {
   const { data: session } = useSession();
   const [filter, set_filter] = useState<string>("{}");
-  const [filter_tag, set_filter_tag] = useState<FilterTag>({
-    order: "",
-    keyword: "",
-    gender: "",
-    race: [],
-    job: [],
-  });
+  const [filter_tag, set_filter_tag] = useState<typeof filter_tag_init_state>(
+    filter_tag_init_state
+  );
   const [order, set_order] = useState<string>("최신순");
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
   const [is_open, set_is_open] = useState<boolean>(false);
@@ -75,12 +64,20 @@ export default function Page_home() {
 
   return (
     <main>
-      <div>{filter}</div>
-      {/* {filter !== "{}" ? (filter.map((filterItem, i) => (
-        <p key={i}>{filterItem}</p>
-      )) : ''} */}
+      <p>{filter}</p>
+      <p>
+        {[
+          filter_tag.order,
+          filter_tag.gender,
+          filter_tag.keyword,
+          filter_tag.job.join(", "),
+          filter_tag.race.join(", "),
+        ].join(", ")}
+      </p>
       <FilterSelector
+        filter={filter}
         set_filter={set_filter}
+        filter_tag={filter_tag}
         set_filter_tag={set_filter_tag}
         order={order}
         set_order={set_order}
@@ -97,20 +94,20 @@ export default function Page_home() {
           {data?.pages[0].data
             ?.slice(0, 4)
             .map((post: PostInform, i: number) => (
-              <PostThumbnail post={post} key={`0-${i}`} />
+              <PostThumbnail post={post} key={`post-${post.index}`} />
             ))}
           {/*여기에 주간 인기 넣기*/}
           {data?.pages[0].data
             ?.slice(4, 12)
             .map((post: PostInform, i: number) => (
-              <PostThumbnail post={post} key={`0-${i}`} />
+              <PostThumbnail post={post} key={`post-${post.index}`} />
             ))}
           {/* 게시물 목록 렌더링 */}
           {data?.pages
             .slice(1, data.pages.length)
             .map((page: Posts, pageIndex: number) =>
               page.data?.map((post: PostInform, i: number) => (
-                <PostThumbnail post={post} key={`${pageIndex}-${i}`} />
+                <PostThumbnail post={post} key={`post-${post.index}`} />
               ))
             )}
         </div>

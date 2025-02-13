@@ -23,18 +23,18 @@ export default function Page_user() {
 
   // 무한 스크롤 감지해서 다음 페이지 로드
   useEffect(() => {
-    if (inView && userPosts.hasNextPage) {
-      userPosts.fetchNextPage();
+    if (inView) {
+      if (timeline === "userPosts" && userPosts.hasNextPage) {
+        userPosts.fetchNextPage();
+      } else if (timeline === "likedPosts" && userLikedPosts.hasNextPage) {
+        userLikedPosts.fetchNextPage();
+      }
     }
   }, [inView, userPosts.hasNextPage]);
 
   useEffect(() => {
     console.log(userInfo.data);
   }, [userInfo.data]);
-
-  // useEffect(() => {
-  //   console.log("liked", userLikedPosts.data);
-  // }, [userLikedPosts.data]);
 
   return (
     <main>
@@ -92,7 +92,12 @@ export default function Page_user() {
           {/* 게시물 목록 렌더링 */}
           {userPosts.data?.pages.map((page: Posts, pageIndex: number) =>
             page.data?.map((post: PostInform, i: number) => (
-              <PostThumbnail post={post} key={`post-${pageIndex}-${i}`} />
+              <PostThumbnail
+                post={post}
+                queryKey={["userPosts", userName]}
+                index={[pageIndex, i]}
+                key={`post-${post.index}`}
+              />
             ))
           )}
         </div>
@@ -101,7 +106,12 @@ export default function Page_user() {
           {/* 게시물 목록 렌더링 */}
           {userLikedPosts.data?.pages.map((page: Posts, pageIndex: number) =>
             page?.data?.map((post: PostInform, i: number) => (
-              <PostThumbnail post={post} key={`like-${pageIndex}-${i}`} />
+              <PostThumbnail
+                post={post}
+                queryKey={["userLikedPosts", userName]}
+                index={[pageIndex, i]}
+                key={`post-${post.index}`}
+              />
             ))
           )}
         </div>

@@ -84,6 +84,20 @@ const editor_init_state: {
   tag: [],
 };
 
+const filter_tag_init_state: {
+  order: string;
+  keyword: string;
+  gender: string;
+  race: string[];
+  job: string[];
+} = {
+  order: "최신순",
+  gender: "전체",
+  keyword: "",
+  race: [],
+  job: [],
+};
+
 export {
   gender_category,
   race_category,
@@ -91,4 +105,5 @@ export {
   job_category_group,
   item_null,
   editor_init_state,
+  filter_tag_init_state,
 };

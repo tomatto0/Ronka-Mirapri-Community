@@ -1,7 +1,8 @@
 import "../css/FilterSelector.css";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
+  filter_tag_init_state,
   gender_category,
   job_category,
   job_category_group as job_category_group_raw,
@@ -17,12 +18,22 @@ import UserSearch from "./UserSearch";
 import UserSearchResult from "./UserSearchResult";
 
 export default function FilterSelector({
+  filter,
   set_filter,
+  filter_tag,
   set_filter_tag,
   order,
   set_order,
 }: {
+  filter: string;
   set_filter: React.Dispatch<React.SetStateAction<string>>;
+  filter_tag: {
+    order: string;
+    keyword: string;
+    gender: string;
+    race: string[];
+    job: string[];
+  };
   set_filter_tag: React.Dispatch<
     React.SetStateAction<{
       order: string;
@@ -44,28 +55,28 @@ export default function FilterSelector({
     searchParams.get("keyword") ?? ""
   );
   const [keyword, set_keyword] = useState<string>("");
-  const keyword_ref = useRef<HTMLInputElement | null>(null);
   const [gender, set_gender] = useState<string>("전체");
   const [race, set_race] = useState<string[]>([]);
   const [job, set_job] = useState<string[]>([]);
+
+  const [selected_filter, set_selected_filter] = useState<string>(filter);
+  const [selected_filter_tag, set_selected_filter_tag] =
+    useState<typeof filter_tag_init_state>(filter_tag);
 
   const [search_category, set_search_category] = useState<string>("item");
   const [item_search_result, set_item_search_result] = useState<Item[]>([]);
   const [user_search_result, set_user_search_result] = useState<string[]>([]);
 
   const { ["모든 클래스"]: _, ...job_category_group } = job_category_group_raw;
-  function keyword_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
-    set_keyword(e.target.value.trimStart());
-  }
   function order_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
     set_order(e.target.value);
-    set_filter_tag(prev => {
+    set_selected_filter_tag(prev => {
       return { ...prev, order: e.target.value };
     });
   }
   function gender_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
     set_gender(e.target.value);
-    set_filter_tag(prev => {
+    set_selected_filter_tag(prev => {
       return { ...prev, gender: e.target.value };
     });
   }
@@ -75,7 +86,7 @@ export default function FilterSelector({
         ? prev.filter(i => i !== e.target.value)
         : [...prev, e.target.value]
     );
-    set_filter_tag(prev => {
+    set_selected_filter_tag(prev => {
       return {
         ...prev,
         race: race.includes(e.target.value)
@@ -111,7 +122,7 @@ export default function FilterSelector({
             e.target.value,
           ];
       set_job(job_groupize(new_job));
-      set_filter_tag(prev => {
+      set_selected_filter_tag(prev => {
         return { ...prev, job: job_groupize(new_job) };
       });
     } else {
@@ -119,7 +130,7 @@ export default function FilterSelector({
         ? job.filter(i => i !== e.target.value)
         : [...job, e.target.value];
       set_job(job_groupize(new_job));
-      set_filter_tag(prev => {
+      set_selected_filter_tag(prev => {
         return { ...prev, job: job_groupize(new_job) };
       });
     }
@@ -130,13 +141,29 @@ export default function FilterSelector({
     params.set(key, value);
     router.push(`${pathname}?${params.toString()}`);
   }
-
   function search(keyword: string) {
     set_search_keyword(keyword.trim());
     update_params("keyword", keyword);
-    set_filter_tag(prev => {
+    set_selected_filter_tag(prev => {
       return { ...prev, keyword: keyword.trim() };
     });
+  }
+  function update_filter() {
+    set_filter(selected_filter);
+    set_filter_tag(selected_filter_tag);
+  }
+  function reset_filter() {
+    // set_filter("{}");
+    // set_filter_tag(filter_tag_init_state);
+
+    set_selected_filter("{}");
+    set_selected_filter_tag(filter_tag_init_state);
+
+    set_order(filter_tag_init_state.order);
+    set_gender(filter_tag_init_state.gender);
+    set_race(filter_tag_init_state.race);
+    set_job(filter_tag_init_state.job);
+    search(filter_tag_init_state.keyword);
   }
 
   useEffect(() => {
@@ -162,7 +189,7 @@ export default function FilterSelector({
         ? { job: { $in: job } }
         : { job: { $in: job, $nin: ["모든 클래스"] } };
     }
-    set_filter(
+    set_selected_filter(
       JSON.stringify({
         ...keyword_filter,
         ...gender_filter,
@@ -188,6 +215,12 @@ export default function FilterSelector({
           keyword={keyword}
           set_keyword={set_keyword}
           set_search_result={set_item_search_result}
+          keydown_handler={(e: React.KeyboardEvent<HTMLInputElement>) => {
+            if (e.key === "Enter") {
+              search(e.currentTarget.value);
+              set_keyword("");
+            }
+          }}
           placeholder=""
         />
       ) : (
@@ -221,7 +254,7 @@ export default function FilterSelector({
           <ItemSearchResult
             slot={-1}
             search_result={item_search_result}
-            edit_equiped_item={(slot: number, item: Item) => {
+            result_click_handler={(slot: number, item: Item) => {
               search(item.Name);
             }}
             reset_keyword={() => {
@@ -229,7 +262,6 @@ export default function FilterSelector({
             }}
           />
         ) : (
-          // <div></div>
           <UserSearchResult search_result={user_search_result} />
         ))}
       {/* 정렬 및 성별 필터 */}
@@ -295,6 +327,7 @@ export default function FilterSelector({
                   name={i}
                   value={job}
                   change_handler={job_change_handler}
+                  className={i in job_category_group ? "category" : ""}
                   key={i}
                 />
               ))}
@@ -321,14 +354,16 @@ export default function FilterSelector({
         </div>
       )}
       <div className="submit_button_wrap">
-        <button className="filter_reset_button">
+        <button className="filter_reset_button" onClick={reset_filter}>
           <img
             src={process.env.NEXT_PUBLIC_BASE_URL + "/img/refresh.svg"}
             alt="modal close button"
           />
           초기화
         </button>
-        <button className="filter_submit_button">필터적용</button>
+        <button className="filter_submit_button" onClick={update_filter}>
+          필터적용
+        </button>
       </div>
     </div>
   );

@@ -94,7 +94,7 @@ export default function ItemSearchModal({
           <ItemSearchResult
             slot={slot}
             search_result={search_result}
-            edit_equiped_item={select_item}
+            result_click_handler={select_item}
             reset_keyword={reset_keyword}
           />
         )}

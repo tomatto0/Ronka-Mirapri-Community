@@ -12,12 +12,14 @@ export default function ItemSearch({
   set_search_result,
   slot = -1,
   placeholder = "아이템을 검색하세요",
+  keydown_handler = () => {},
 }: {
   keyword: string;
   set_keyword: (keyword: string) => void;
   set_search_result: (items: Item[]) => void;
   slot?: number;
   placeholder?: string;
+  keydown_handler?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }) {
   const item_list: Item[] = item_list_raw as Item[];
   const slot_category: { [key: number]: EquipSlot } = equip_slot_categories;
@@ -65,6 +67,7 @@ export default function ItemSearch({
         placeholder={placeholder}
         value={keyword}
         onChange={keyword_update}
+        onKeyDown={keydown_handler}
         ref={input_ref}
       />
     </div>
