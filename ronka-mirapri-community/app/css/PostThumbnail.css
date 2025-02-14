@@ -1,0 +1,38 @@
+.post-box {
+  height: fit-content;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+}
+.post-box:hover .post-box-hover {
+  opacity: 1;
+}
+.post-box-hover {
+  position: absolute;
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  left: 0;
+  bottom: 0;
+  padding: 2rem;
+  background: linear-gradient(to bottom, #ffffff00, #000000);
+  width: 100%;
+  height: 100px;
+  justify-content: space-between;
+  align-items: flex-end;
+  p {
+    color: white;
+    font-size: 2rem;
+  }
+  button {
+    color: white;
+    font-size: 2rem;
+    background: none;
+    border: none;
+  }
+}
+.post-thumbnail {
+  width: 100%;
+  max-width: 250px;
+  aspect-ratio: 540/1080;
+}

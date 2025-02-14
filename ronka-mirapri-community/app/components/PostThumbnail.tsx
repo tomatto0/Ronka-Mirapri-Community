@@ -1,3 +1,4 @@
+import "../css/PostThumbnail.css";
 import { useEffect, useState } from "react";
 import { is_like, like_toggle } from "../utils/clientfunction";
 import { useRouter } from "next/navigation";
@@ -55,9 +56,9 @@ export default function PostThumbnail({
         alt={post.title}
         onClick={post_click_handler}
       />
-      <div>
+      <div className="post-box-hover">
         <p>{post.title}</p>
-        <button onClick={like_handler}>{is_liked ? "O" : "X"}</button>
+        <button onClick={like_handler}>{is_liked ? "♥" : "♡"}</button>
       </div>
     </div>
   );
