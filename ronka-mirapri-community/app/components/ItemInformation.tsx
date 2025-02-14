@@ -112,7 +112,7 @@ export default function ItemInformation({
               style={
                 item.DyeFirst === 0
                   ? {
-                      backgroundImage: `url(${process.env.NEXT_PUBLIC_BASE_URL}/img/base_color.svg)`,
+                      backgroundImage: `url(${process.env.NEXT_PUBLIC_BASE_URL}/img/base-color.svg)`,
                       backgroundPosition: "center",
                     }
                   : {
@@ -129,7 +129,7 @@ export default function ItemInformation({
               style={
                 item.DyeSecond === 0
                   ? {
-                      backgroundImage: `url(${process.env.NEXT_PUBLIC_BASE_URL}/img/base_color.svg)`,
+                      backgroundImage: `url(${process.env.NEXT_PUBLIC_BASE_URL}/img/base-color.svg)`,
                       backgroundPosition: "center",
                     }
                   : {
@@ -196,7 +196,7 @@ export default function ItemInformation({
         <hr />
         <div className="item-slot-container">
           <div className="item-slot-row">
-            {[0, 1, 2, 3].map((i) => (
+            {[0, 1, 2, 3].map(i => (
               <ItemSlot
                 slot_name={slots[i]}
                 open_modal={open_modal}
@@ -208,7 +208,7 @@ export default function ItemInformation({
             ))}
           </div>
           <div className="item-slot-row">
-            {[4, 5, 6, 7].map((i) => (
+            {[4, 5, 6, 7].map(i => (
               <ItemSlot
                 slot_name={slots[i]}
                 open_modal={open_modal}

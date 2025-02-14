@@ -27,6 +27,8 @@ div.logo {
     font-weight: 300;
     line-height: normal;
     text-transform: uppercase;
+
+    border-bottom: 1px solid rgba(30, 102, 89, 0.3);
   }
 
   ul.menus {

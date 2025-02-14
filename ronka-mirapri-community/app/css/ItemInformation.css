@@ -83,7 +83,7 @@ div.item-information {
     button::before {
       content: "";
       display: inline-block;
-      background-image: url("../../public/img/refresh_green.svg");
+      background-image: url("../../public/img/refresh-green.svg");
       width: 1.5rem;
       height: 1.5rem;
       background-size: cover;
