@@ -126,67 +126,106 @@ export default function Page_home() {
 
   return (
     <main>
-      <p>{filter}</p>
-      <button
-        onClick={() => {
-          set_is_open(true);
-        }}
-      >
-        필터 +
-      </button>
-      {filter_tag.order !== "최신순" && (
+      <div className="primary-filter-wrap">
         <button
+          className="primary-filter filter-open"
           onClick={() => {
-            set_filter_tag(prev => ({ ...prev, order: "최신순" }));
+            set_is_open(true);
           }}
         >
-          {filter_tag.order} X
+          <img
+            src={process.env.NEXT_PUBLIC_BASE_URL + "/img/plus-green.svg"}
+            alt="modal open button"
+          />
+          FILTER
         </button>
-      )}
-      {filter_tag.gender !== "전체" && (
-        <button
-          onClick={() => {
-            set_filter_tag(prev => ({ ...prev, gender: "전체" }));
-          }}
-        >
-          {filter_tag.gender} X
+        {filter_tag.order !== "최신순" && (
+          <button
+            className="primary-filte filter-itemsr"
+            onClick={() => {
+              set_filter_tag(prev => ({ ...prev, order: "최신순" }));
+            }}
+          >
+            {filter_tag.order}{" "}
+            <img
+              src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"}
+              alt="modal open button"
+            />
+          </button>
+        )}
+        {filter_tag.gender !== "전체" && (
+          <button
+            className="primary-filter filter-items"
+            onClick={() => {
+              set_filter_tag(prev => ({ ...prev, gender: "전체" }));
+            }}
+          >
+            {filter_tag.gender}{" "}
+            <img
+              src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"}
+              alt="modal open button"
+            />
+          </button>
+        )}
+        {filter_tag.keyword !== "" && (
+          <button
+            className="primary-filter filter-keyword"
+            onClick={() => {
+              set_filter_tag(prev => ({ ...prev, keyword: "" }));
+            }}
+          >
+            검색: {filter_tag.keyword}
+            <img
+              src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_purple.svg"}
+              alt="modal open button"
+            />
+          </button>
+        )}
+        {filter_tag.job.map(job => (
+          <button
+            className="primary-filter filter-items"
+            onClick={() => {
+              set_filter_tag(prev => ({
+                ...prev,
+                job: prev.job.filter(i => i !== job),
+              }));
+            }}
+            key={`filter-${job}`}
+          >
+            {job}{" "}
+            <img
+              src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"}
+              alt="modal open button"
+            />
+          </button>
+        ))}
+        {filter_tag.race.map(race => (
+          <button
+            className="primary-filter filter-items"
+            onClick={() => {
+              set_filter_tag(prev => ({
+                ...prev,
+                race: prev.race.filter(i => i !== race),
+              }));
+            }}
+            key={`filter-${race}`}
+          >
+            {race}{" "}
+            <img
+              src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"}
+              alt="modal open button"
+            />
+          </button>
+        ))}
+        <button className="primary-filter" onClick={reset_filter}>
+          {" "}
+          <img
+            src={process.env.NEXT_PUBLIC_BASE_URL + "/img/refresh-green.svg"}
+            alt="modal open button"
+          />
+          초기화
         </button>
-      )}
-      {filter_tag.keyword !== "" && (
-        <button
-          onClick={() => {
-            set_filter_tag(prev => ({ ...prev, keyword: "" }));
-          }}
-        >
-          검색: {filter_tag.keyword} X
-        </button>
-      )}
-      {filter_tag.job.map(job => (
-        <button
-          onClick={() => {
-            set_filter_tag(prev => ({
-              ...prev,
-              job: prev.job.filter(i => i !== job),
-            }));
-          }}
-          key={`filter-${job}`}
-        >
-          {job} X
-        </button>
-      ))}
-      {filter_tag.race.map(race => (
-        <button
-          onClick={() => {
-            set_filter_tag(prev => ({
-              ...prev,
-              race: prev.race.filter(i => i !== race),
-            }));
-          }}
-          key={`filter-${race}`}
-        >
-          {race} X
-        </button>
-      ))}
+      </div>
       {filter !== "{}" && <button onClick={reset_filter}>초기화</button>}
       <FilterSelector
         filter={filter}
