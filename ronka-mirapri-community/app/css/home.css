@@ -31,3 +31,52 @@
   text-underline-offset: 25%; /* 4.25px */
   text-underline-position: from-font;
 }
+
+.primary-filter-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+
+  border-radius: 60px;
+  margin: 20px 0;
+}
+
+.primary-filter {
+  display: flex;
+  color: #4f938d;
+  border-radius: 60px;
+  border: 1px solid #4f938d;
+  padding: 0 23px 0 19px;
+  background-color: unset;
+  align-items: center;
+  gap: 10px;
+  height: 37px;
+  font-size: 1.5rem;
+}
+
+.primary-filter:hover {
+  background-color: #f6fefc;
+}
+
+.filter-open {
+  color: #4f938d;
+}
+
+.filter-keyword {
+  padding: 0 14px 0 20px;
+  background-color: #ffffff;
+  color: #7a5af8;
+  border: 1px solid #7a5af8;
+}
+
+.filter-keyword:hover {
+  background-color: #f4f3ff;
+}
+.filter-items {
+  background-color: #f6fefc;
+  padding: 0 14px 0 20px;
+}
+
+.filter-items:hover {
+  background-color: #ecfaf6;
+}
