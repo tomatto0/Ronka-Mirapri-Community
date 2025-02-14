@@ -134,6 +134,7 @@ export default function FilterSelector({
   function search(keyword: string) {
     set_selected_filter_tag(prev => ({ ...prev, keyword: keyword.trim() }));
     update_params("keyword", keyword);
+    set_keyword("");
   }
 
   function update_filter() {
@@ -191,7 +192,7 @@ export default function FilterSelector({
       <div className="filter-modal-title">
         <h3>검색 필터</h3>
         <button
-          className="modal_close"
+          className="modal-close"
           onClick={() => {
             set_is_open(false);
           }}
@@ -318,9 +319,9 @@ export default function FilterSelector({
 
           {/* 검색어 필터 */}
           {selected_filter_tag.keyword !== "" && (
-            <div className="filter_layout_block">
-              <p className="filter_title">검색어</p>
-              <div className="filter_item_align">
+            <div className="filter-layout-block">
+              <p className="filter-title">검색어</p>
+              <div className="filter-item-align">
                 <p
                   className="filter-item filter-item-active"
                   onClick={() => {
