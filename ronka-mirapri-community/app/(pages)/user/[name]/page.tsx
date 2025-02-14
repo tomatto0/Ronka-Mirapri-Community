@@ -61,6 +61,7 @@ export default function Page_user() {
             className={timeline === "userPosts" ? "active" : ""}
             onClick={() => {
               set_timeline("userPosts");
+              userPosts.refetch();
             }}
           >
             POST
@@ -70,6 +71,7 @@ export default function Page_user() {
               className={timeline === "userPosts" ? "" : "active"}
               onClick={() => {
                 set_timeline("likedPosts");
+                userLikedPosts.refetch();
               }}
             >
               LIKE

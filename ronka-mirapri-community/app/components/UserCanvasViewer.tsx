@@ -29,13 +29,6 @@ export default function UserCanvasViewer({
   }, []);
   const is_user_image_loaded = useRef<boolean>(false);
   const is_image_loaded = useRef<boolean>(false); //아이템 배경, 플레이스 홀더 로드 완료 여부
-  const isDown = useRef<boolean>(false); // 마우스 클릭 여부 확인
-  const startX = useRef<number>(0); // 마우스 시작 X좌표
-  // const startY = useRef<number>(0);
-  // const x = useRef<number>(0); // 이미지의 X좌표 위치
-  // const y = useRef<number>(0);
-  const image_width = useRef<number>(0); // 이미지의 너비
-  const image_height = useRef<number>(0); // 이미지의 높이
   const ratio = 540 / 1080;
   const box_height = 1080;
   const box_width = box_height * ratio;
@@ -248,8 +241,6 @@ export default function UserCanvasViewer({
     const onload_handler = () => {
       if (!user_image.current) return;
       is_user_image_loaded.current = true;
-      image_width.current = user_image.current.width;
-      image_height.current = user_image.current.height;
       user_image_draw(0, 0); // 초기 이미지 그리기
     };
     user_image.current.onload = onload_handler;

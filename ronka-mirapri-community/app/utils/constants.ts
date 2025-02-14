@@ -66,7 +66,7 @@ const item_null = {
   DyeSecond: 0,
 };
 
-const editor_init_state: {
+const post_init_state: {
   title: string;
   content: string;
   sns: string;
@@ -104,6 +104,6 @@ export {
   job_category,
   job_category_group,
   item_null,
-  editor_init_state,
+  post_init_state,
   filter_tag_init_state,
 };

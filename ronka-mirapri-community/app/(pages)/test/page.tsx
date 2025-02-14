@@ -19,8 +19,6 @@ export default function Page_test() {
       position: "bottom-end",
       timer: 3000,
       showConfirmButton: false,
-      width: 1000,
-      heightAuto: false,
     });
     Toast.fire({ icon: "success", title: "글 작성이 완료되었습니다." });
     router.push("/");

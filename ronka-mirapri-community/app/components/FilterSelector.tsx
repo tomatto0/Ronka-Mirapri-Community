@@ -22,8 +22,8 @@ export default function FilterSelector({
   set_filter,
   filter_tag,
   set_filter_tag,
-  order,
-  set_order,
+  is_open,
+  set_is_open,
 }: {
   filter: string;
   set_filter: React.Dispatch<React.SetStateAction<string>>;
@@ -43,60 +43,43 @@ export default function FilterSelector({
       job: string[];
     }>
   >;
-  order: string;
-  set_order: React.Dispatch<React.SetStateAction<string>>;
+  is_open: boolean;
+  set_is_open: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
 
   //키워드 세팅관련 변수 선언
-  const [search_keyword, set_search_keyword] = useState<string>(
-    searchParams.get("keyword") ?? ""
-  );
   const [keyword, set_keyword] = useState<string>("");
-  const [gender, set_gender] = useState<string>("전체");
-  const [race, set_race] = useState<string[]>([]);
-  const [job, set_job] = useState<string[]>([]);
-
-  const [selected_filter, set_selected_filter] = useState<string>(filter);
-  const [selected_filter_tag, set_selected_filter_tag] =
-    useState<typeof filter_tag_init_state>(filter_tag);
-
   const [search_category, set_search_category] = useState<string>("item");
   const [item_search_result, set_item_search_result] = useState<Item[]>([]);
   const [user_search_result, set_user_search_result] = useState<string[]>([]);
-
+  const [selected_filter_tag, set_selected_filter_tag] =
+    useState<typeof filter_tag>(filter_tag);
   const { ["모든 클래스"]: _, ...job_category_group } = job_category_group_raw;
   function order_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
-    set_order(e.target.value);
-    set_selected_filter_tag(prev => {
-      return { ...prev, order: e.target.value };
-    });
+    set_selected_filter_tag(prev => ({ ...prev, order: e.target.value }));
   }
   function gender_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
-    set_gender(e.target.value);
-    set_selected_filter_tag(prev => {
-      return { ...prev, gender: e.target.value };
-    });
+    set_selected_filter_tag(prev => ({ ...prev, gender: e.target.value }));
   }
   function race_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
-    set_race(prev =>
-      prev.includes(e.target.value)
-        ? prev.filter(i => i !== e.target.value)
-        : [...prev, e.target.value]
-    );
     set_selected_filter_tag(prev => {
-      return {
-        ...prev,
-        race: race.includes(e.target.value)
-          ? race.filter(i => i !== e.target.value)
-          : [...race, e.target.value],
-      };
+      const order_map = new Map(race_category.map((item, i) => [item, i]));
+      const race_list = prev.race.includes(e.target.value)
+        ? prev.race.filter(i => i !== e.target.value)
+        : [...prev.race, e.target.value];
+      race_list.sort(
+        (a, b) =>
+          (order_map.get(a) ?? Infinity) - (order_map.get(b) ?? Infinity)
+      );
+      return { ...prev, race: race_list };
     });
   }
   function job_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
     function job_groupize(job: string[]) {
+      const order_map = new Map(job_category.map((item, i) => [item, i]));
       const groups = Object.keys(job_category_group);
       groups.forEach(group => {
         if (job_category_group[group].every(i => job.includes(i))) {
@@ -107,32 +90,38 @@ export default function FilterSelector({
           job = job.filter(i => i !== group);
         }
       });
+      job.sort(
+        (a, b) =>
+          (order_map.get(a) ?? Infinity) - (order_map.get(b) ?? Infinity)
+      );
       return job;
     }
     if (Object.keys(job_category_group).includes(e.target.value)) {
-      const new_job = job.includes(e.target.value)
-        ? job.filter(
+      const new_job = selected_filter_tag.job.includes(e.target.value)
+        ? selected_filter_tag.job.filter(
             i =>
               !job_category_group[e.target.value].includes(i) &&
               i !== e.target.value
           )
         : [
-            ...job,
-            ...job_category_group[e.target.value].filter(i => !job.includes(i)),
+            ...selected_filter_tag.job,
+            ...job_category_group[e.target.value].filter(
+              i => !selected_filter_tag.job.includes(i)
+            ),
             e.target.value,
           ];
-      set_job(job_groupize(new_job));
-      set_selected_filter_tag(prev => {
-        return { ...prev, job: job_groupize(new_job) };
-      });
+      set_selected_filter_tag(prev => ({
+        ...prev,
+        job: job_groupize(new_job),
+      }));
     } else {
-      const new_job = job.includes(e.target.value)
-        ? job.filter(i => i !== e.target.value)
-        : [...job, e.target.value];
-      set_job(job_groupize(new_job));
-      set_selected_filter_tag(prev => {
-        return { ...prev, job: job_groupize(new_job) };
-      });
+      const new_job = selected_filter_tag.job.includes(e.target.value)
+        ? selected_filter_tag.job.filter(i => i !== e.target.value)
+        : [...selected_filter_tag.job, e.target.value];
+      set_selected_filter_tag(prev => ({
+        ...prev,
+        job: job_groupize(new_job),
+      }));
     }
   }
 
@@ -142,68 +131,69 @@ export default function FilterSelector({
     router.push(`${pathname}?${params.toString()}`);
   }
   function search(keyword: string) {
-    set_search_keyword(keyword.trim());
+    set_selected_filter_tag(prev => ({ ...prev, keyword: keyword.trim() }));
     update_params("keyword", keyword);
-    set_selected_filter_tag(prev => {
-      return { ...prev, keyword: keyword.trim() };
-    });
   }
   function update_filter() {
-    set_filter(selected_filter);
+    // let keyword_filter = {};
+    // if (selected_filter_tag.keyword !== "") {
+    //   keyword_filter = {
+    //     equiped_item: {
+    //       $elemMatch: {
+    //         Name: { $regex: selected_filter_tag.keyword, $options: "i" },
+    //       },
+    //     },
+    //   };
+    // }
+    // let gender_filter = {};
+    // if (selected_filter_tag.gender !== "전체") {
+    //   gender_filter = { gender: selected_filter_tag.gender };
+    // }
+    // let race_filter = {};
+    // if (selected_filter_tag.race.length > 0) {
+    //   race_filter = { race: { $in: selected_filter_tag.race } };
+    // }
+    // let job_filter = {};
+    // if (selected_filter_tag.job.length > 0) {
+    //   job_filter = selected_filter_tag.job.includes("모든 클래스")
+    //     ? { job: { $in: selected_filter_tag.job } }
+    //     : { job: { $in: selected_filter_tag.job, $nin: ["모든 클래스"] } };
+    // }
+    // set_filter(
+    //   JSON.stringify({
+    //     ...keyword_filter,
+    //     ...gender_filter,
+    //     ...race_filter,
+    //     ...job_filter,
+    //   })
+    // );
     set_filter_tag(selected_filter_tag);
+    set_is_open(false);
   }
   function reset_filter() {
-    // set_filter("{}");
-    // set_filter_tag(filter_tag_init_state);
-
-    set_selected_filter("{}");
-    set_selected_filter_tag(filter_tag_init_state);
-
-    set_order(filter_tag_init_state.order);
-    set_gender(filter_tag_init_state.gender);
-    set_race(filter_tag_init_state.race);
-    set_job(filter_tag_init_state.job);
-    search(filter_tag_init_state.keyword);
+    set_filter("{}");
+    set_filter_tag(filter_tag_init_state);
+    set_is_open(false);
   }
 
   useEffect(() => {
-    let keyword_filter = {};
-    if (search_keyword !== "") {
-      keyword_filter = {
-        equiped_item: {
-          $elemMatch: { Name: { $regex: search_keyword, $options: "i" } },
-        },
-      };
-    }
-    let gender_filter = {};
-    if (gender !== "전체") {
-      gender_filter = { gender: gender };
-    }
-    let race_filter = {};
-    if (race.length > 0) {
-      race_filter = { race: { $in: race } };
-    }
-    let job_filter = {};
-    if (job.length > 0) {
-      job_filter = job.includes("모든 클래스")
-        ? { job: { $in: job } }
-        : { job: { $in: job, $nin: ["모든 클래스"] } };
-    }
-    set_selected_filter(
-      JSON.stringify({
-        ...keyword_filter,
-        ...gender_filter,
-        ...race_filter,
-        ...job_filter,
-      })
-    );
-  }, [search_keyword, gender, race, job]);
+    console.log(filter_tag);
+    set_selected_filter_tag(filter_tag);
+  }, [is_open]);
 
+  if (!is_open) {
+    return <div></div>;
+  }
   return (
     <div className="filter_wrap">
       <div className="filter_modal_title">
         <h3>검색 필터</h3>
-        <button className="modal_close">
+        <button
+          className="modal_close"
+          onClick={() => {
+            set_is_open(false);
+          }}
+        >
           <img
             src={process.env.NEXT_PUBLIC_BASE_URL + "/img/cancle.svg"}
             alt="modal close button"
@@ -275,7 +265,7 @@ export default function FilterSelector({
                   <RadioBox
                     category="order"
                     name={i}
-                    value={order}
+                    value={selected_filter_tag.order}
                     change_handler={order_change_handler}
                     key={i}
                   />
@@ -289,7 +279,7 @@ export default function FilterSelector({
                   <RadioBox
                     category="gender"
                     name={i}
-                    value={gender}
+                    value={selected_filter_tag.gender}
                     change_handler={gender_change_handler}
                     key={i}
                   />
@@ -299,7 +289,7 @@ export default function FilterSelector({
           </div>
 
           {/* 검색어 필터 */}
-          {search_keyword !== "" && (
+          {selected_filter_tag.keyword !== "" && (
             <div className="filter_layout_block">
               <p className="filter_title">검색어</p>
               <div className="filter_item_align">
@@ -309,7 +299,7 @@ export default function FilterSelector({
                     search("");
                   }}
                 >
-                  {search_keyword} X
+                  {selected_filter_tag.keyword} X
                 </p>
               </div>
             </div>
@@ -325,9 +315,13 @@ export default function FilterSelector({
                 <CheckBox
                   category="job"
                   name={i}
-                  value={job}
+                  value={selected_filter_tag.job}
                   change_handler={job_change_handler}
-                  className={i in job_category_group ? "category" : ""}
+                  className={
+                    i in { ...job_category_group, 제작자: "_", 채집가: "_" }
+                      ? "category"
+                      : ""
+                  }
                   key={i}
                 />
               ))}
@@ -344,7 +338,7 @@ export default function FilterSelector({
                 <CheckBox
                   category="race"
                   name={i}
-                  value={race}
+                  value={selected_filter_tag.race}
                   change_handler={race_change_handler}
                   key={i}
                 />

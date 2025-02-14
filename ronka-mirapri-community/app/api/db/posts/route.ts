@@ -65,18 +65,7 @@ export async function PATCH(request: Request) {
 
     await connectDB();
 
-    const update_field: Partial<{
-      title: string;
-      content: string;
-      tags: string[];
-    }> = {};
-
-    const keys: (keyof typeof update_field)[] = ["title", "content", "tags"];
-    keys.forEach(key => {
-      if (body[key] !== undefined) {
-        update_field[key] = body[key];
-      }
-    });
+    const { id: _, ...update_field } = body;
 
     const updated_post = await Post.findOneAndUpdate(
       {

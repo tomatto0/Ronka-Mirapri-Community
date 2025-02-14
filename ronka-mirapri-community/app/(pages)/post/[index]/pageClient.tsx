@@ -38,6 +38,29 @@ export default function PostPageClient({
     }
   };
 
+  const share_twitter = () => {
+    const href = "https://twitter.com/intent/tweet?";
+    const text = "롱카의 투영기록?에서 제 새로운 투영을 확인해보세요!";
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/post/${postIndex}`;
+    const hashtags = "롱카의_투영기록";
+    window.open(
+      `${href}text=${encodeURIComponent(text)}&url=${encodeURIComponent(
+        url
+      )}&hashtags=${encodeURIComponent(hashtags)}`,
+      "_blank"
+    );
+  };
+  const share_bluesky = () => {
+    const href = "https://bsky.app/intent/compose?";
+    const text = "롱카의 투영기록?에서 제 새로운 투영을 확인해보세요!";
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/post/${postIndex}`;
+    const hashtags = "롱카의_투영기록";
+    window.open(
+      `${href}text=${encodeURIComponent(`${text} ${url} #${hashtags}`)}`,
+      "_blank"
+    );
+  };
+
   if (isLoading) return <div>로딩 중...</div>;
   if (isError) return <div>에러 발생</div>;
 
@@ -62,6 +85,8 @@ export default function PostPageClient({
       >
         like {data?.is_liked ? "V" : ""}
       </button>
+      <button onClick={share_twitter}>Xwitter</button>
+      <button onClick={share_bluesky}>bluesky</button>
     </main>
   );
 }
