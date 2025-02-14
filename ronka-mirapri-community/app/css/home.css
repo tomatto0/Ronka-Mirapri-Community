@@ -1,17 +1,12 @@
 .post-container {
   display: flex;
   flex-wrap: wrap;
-  width: 1000px;
 }
-.post-box {
-  width: 25%;
-  height: fit-content;
-  position: relative;
-  margin-bottom: 50px;
-}
-.post-thumbnail {
+
+.post-container-row {
+  display: flex;
   width: 100%;
-  aspect-ratio: 540/1080;
+  justify-content: center;
 }
 
 .tlToggle {

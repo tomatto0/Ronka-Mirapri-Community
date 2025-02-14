@@ -22,6 +22,7 @@ export default function Page_home() {
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
   const [is_open, set_is_open] = useState<boolean>(false);
   const searchParams = useSearchParams();
+  const [post_chunk, set_post_chunk] = useState<PostInform[][]>([[]]);
 
   const {
     data,
@@ -78,6 +79,22 @@ export default function Page_home() {
     update_filter();
   }, [filter_tag]);
 
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+    console.log(data?.pages);
+    const post_list = data?.pages.reduce<PostInform[]>((acc, _) => {
+      return [...acc, ...(_.data ?? [])];
+    }, []);
+    const post_chunk = post_list.reduce<PostInform[][]>((acc, _, i) => {
+      if (i % 4 === 0) {
+        acc.push(post_list.slice(i, i + 4));
+      }
+      return acc;
+    }, []);
+    set_post_chunk(post_chunk);
+  }, [data]);
   useEffect(() => {
     set_filter_tag(prev => ({
       ...prev,
@@ -209,6 +226,7 @@ export default function Page_home() {
           초기화
         </button>
       </div>
+      {filter !== "{}" && <button onClick={reset_filter}>초기화</button>}
       <FilterSelector
         filter={filter}
         set_filter={set_filter}
@@ -226,25 +244,24 @@ export default function Page_home() {
         </p>
       ) : (
         <div className="post-container">
-          {data?.pages[0].data
-            ?.slice(0, 4)
-            .map((post: PostInform, i: number) => (
-              <PostThumbnail post={post} key={`post-${post.index}`} />
-            ))}
-          {/*여기에 주간 인기 넣기*/}
-          {data?.pages[0].data
-            ?.slice(4, 12)
-            .map((post: PostInform, i: number) => (
-              <PostThumbnail post={post} key={`post-${post.index}`} />
-            ))}
-          {/* 게시물 목록 렌더링 */}
-          {data?.pages
-            .slice(1, data.pages.length)
-            .map((page: Posts, pageIndex: number) =>
-              page.data?.map((post: PostInform, i: number) => (
+          {post_chunk.length > 0 && (
+            <div className="post-container-row" key={0}>
+              {post_chunk[0].map((post: PostInform, i: number) => (
                 <PostThumbnail post={post} key={`post-${post.index}`} />
-              ))
-            )}
+              ))}
+            </div>
+          )}
+          {/* 게시물 목록 렌더링 */}
+          <Itemrank itemrank={item_rank.data ?? []} />
+          {post_chunk
+            .slice(1, post_chunk.length)
+            .map((chunk: PostInform[], i: number) => (
+              <div className="post-container-row" key={i + 1}>
+                {chunk.map((post: PostInform, i: number) => (
+                  <PostThumbnail post={post} key={`post-${post.index}`} />
+                ))}
+              </div>
+            ))}
         </div>
       )}
       <div ref={ref} className="loader">

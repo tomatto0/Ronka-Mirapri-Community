@@ -138,38 +138,6 @@ export default function FilterSelector({
   }
 
   function update_filter() {
-    // let keyword_filter = {};
-    // if (selected_filter_tag.keyword !== "") {
-    //   keyword_filter = {
-    //     equiped_item: {
-    //       $elemMatch: {
-    //         Name: { $regex: selected_filter_tag.keyword, $options: "i" },
-    //       },
-    //     },
-    //   };
-    // }
-    // let gender_filter = {};
-    // if (selected_filter_tag.gender !== "전체") {
-    //   gender_filter = { gender: selected_filter_tag.gender };
-    // }
-    // let race_filter = {};
-    // if (selected_filter_tag.race.length > 0) {
-    //   race_filter = { race: { $in: selected_filter_tag.race } };
-    // }
-    // let job_filter = {};
-    // if (selected_filter_tag.job.length > 0) {
-    //   job_filter = selected_filter_tag.job.includes("모든 클래스")
-    //     ? { job: { $in: selected_filter_tag.job } }
-    //     : { job: { $in: selected_filter_tag.job, $nin: ["모든 클래스"] } };
-    // }
-    // set_filter(
-    //   JSON.stringify({
-    //     ...keyword_filter,
-    //     ...gender_filter,
-    //     ...race_filter,
-    //     ...job_filter,
-    //   })
-    // );
     set_filter_tag(selected_filter_tag);
     set_is_open(false);
   }
