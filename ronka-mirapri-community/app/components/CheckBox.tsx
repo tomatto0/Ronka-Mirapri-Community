@@ -17,9 +17,9 @@ export default function CheckBox({
     <label htmlFor={`${category}-${name.replace(" ", "-")}`}>
       <p
         className={[
-          "filter_item",
+          "filter-item",
           className,
-          value.includes(name) ? "filter_item_active" : "",
+          value.includes(name) ? "filter-item-active" : "",
         ].join(" ")}
       >
         {name}

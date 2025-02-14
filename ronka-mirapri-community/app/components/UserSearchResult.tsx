@@ -22,7 +22,7 @@ export default function UserSearchResult({
 
     return (
       <div
-        className="search-result"
+        className="search-result-user"
         ref={component}
         onClick={click_handler_container}
       >
@@ -75,7 +75,7 @@ export default function UserSearchResult({
   }, [search_result]);
 
   return (
-    <div className="search-result-container">
+    <div className="search-result-container-user">
       <div>
         {show_result.map(user_name => (
           <SearchedUser

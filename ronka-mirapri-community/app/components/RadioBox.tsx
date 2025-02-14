@@ -14,7 +14,7 @@ export default function RadioBox({
   return (
     <label htmlFor={`${category}-${name.replace(" ", "-")}`}>
       <p
-        className={`filter_item ${value === name ? "filter_item_active" : ""}`}
+        className={`filter-item ${value === name ? "filter-item-active" : ""}`}
       >
         {name}
       </p>

@@ -44,7 +44,7 @@ export default function ColorPalette({
       set_is_f_open(false);
     }
   }
-  function item_cancle() {
+  function item_cancel() {
     edit_equiped_item(slot, item_null);
   }
 
@@ -215,7 +215,7 @@ export default function ColorPalette({
         <div className="color-palette-modal">
           {!is_facewear && (
             <div className="color-category-container">
-              {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+              {[0, 1, 2, 3, 4, 5, 6, 7].map(i => (
                 <ColorCategory
                   category={i}
                   color={color_categories[i]}
@@ -230,7 +230,7 @@ export default function ColorPalette({
           <div className="color-category-detail">
             <p>{Color_background_list[color_id].name}</p>
             <div className="color-category-container">
-              {colors[color_category].map((colorInfo) => (
+              {colors[color_category].map(colorInfo => (
                 <Color
                   colorInfo={colorInfo}
                   color_id={color_id}
@@ -313,7 +313,7 @@ export default function ColorPalette({
       <p className="selected-item-title">선택된 아이템</p>
       <div className="selected-item-name">
         {item.Name}
-        <button className="image" onClick={item_cancle}>
+        <button className="image" onClick={item_cancel}>
           <img
             src={process.env.NEXT_PUBLIC_BASE_URL + "/img/cancle_small.svg"}
             alt="item cancle button"

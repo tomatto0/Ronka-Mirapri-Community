@@ -64,7 +64,6 @@ export default function Page_home() {
 
   return (
     <main>
-      <p>{filter}</p>
       <p>
         {[
           filter_tag.order,

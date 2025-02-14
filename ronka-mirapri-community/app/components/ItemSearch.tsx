@@ -24,20 +24,24 @@ export default function ItemSearch({
   const item_list: Item[] = item_list_raw as Item[];
   const slot_category: { [key: number]: EquipSlot } = equip_slot_categories;
   const input_ref = useRef<HTMLInputElement | null>(null);
+
   useEffect(() => {
     if (input_ref.current) {
       input_ref.current.focus();
     }
   }, [input_ref]);
+
   useEffect(() => {
     const handler = setTimeout(search, 200);
     return () => {
       clearTimeout(handler);
     };
   }, [keyword]);
+
   const keyword_update = (e: React.ChangeEvent<HTMLInputElement>) => {
     set_keyword(e.target.value);
   };
+
   const search = () => {
     if (keyword.trim() === "") {
       set_search_result([]);
@@ -55,6 +59,14 @@ export default function ItemSearch({
     result.reverse();
     set_search_result(result);
   };
+
+  function input_reset() {
+    set_keyword(""); // 검색어 초기화
+    set_search_result([]); // 검색 결과 초기화
+
+    return false;
+  }
+
   return (
     <div className="item-search-container">
       <img
@@ -70,6 +82,16 @@ export default function ItemSearch({
         onKeyDown={keydown_handler}
         ref={input_ref}
       />
+      {keyword !== "" ? (
+        <button className="search-input-reset" onClick={input_reset}>
+          <img
+            src={process.env.NEXT_PUBLIC_BASE_URL + "/img/cancle_small.svg"}
+            alt="item cancle button"
+          />
+        </button>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
