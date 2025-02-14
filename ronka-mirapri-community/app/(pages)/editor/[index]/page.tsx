@@ -11,5 +11,5 @@ export default async function PostPage({
   );
   const res = await response.json();
 
-  return <EditorPageClient post_data={res.data} />;
+  return <EditorPageClient data={res.data} />;
 }
