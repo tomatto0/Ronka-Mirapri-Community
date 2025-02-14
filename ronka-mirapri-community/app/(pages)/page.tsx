@@ -141,7 +141,7 @@ export default function Page_home() {
         </button>
         {filter_tag.order !== "최신순" && (
           <button
-            className="primary-filte filter-itemsr"
+            className="primary-filter filter-items"
             onClick={() => {
               set_filter_tag(prev => ({ ...prev, order: "최신순" }));
             }}
@@ -217,16 +217,17 @@ export default function Page_home() {
             />
           </button>
         ))}
-        <button className="primary-filter" onClick={reset_filter}>
-          {" "}
-          <img
-            src={process.env.NEXT_PUBLIC_BASE_URL + "/img/refresh-green.svg"}
-            alt="modal open button"
-          />
-          초기화
-        </button>
+        {(filter !== "{}" || filter_tag.order !== "최신순") && (
+          <button className="primary-filter" onClick={reset_filter}>
+            {" "}
+            <img
+              src={process.env.NEXT_PUBLIC_BASE_URL + "/img/refresh-green.svg"}
+              alt="modal open button"
+            />
+            초기화
+          </button>
+        )}
       </div>
-      {filter !== "{}" && <button onClick={reset_filter}>초기화</button>}
       <FilterSelector
         filter={filter}
         set_filter={set_filter}
