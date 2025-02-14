@@ -156,211 +156,213 @@ export default function FilterSelector({
     return <div></div>;
   }
   return (
-    <div className="filter-wrap">
-      <div className="filter-modal-title">
-        <h3>검색 필터</h3>
-        <button
-          className="modal-close"
-          onClick={() => {
-            set_is_open(false);
-          }}
-        >
-          <img
-            src={process.env.NEXT_PUBLIC_BASE_URL + "/img/cancle.svg"}
-            alt="modal close button"
-          />
-        </button>
-      </div>
-
-      {/* 검색섹션 - 검색창 */}
-      {search_category === "item" ? (
-        <ItemSearch
-          keyword={keyword}
-          set_keyword={set_keyword}
-          set_search_result={set_item_search_result}
-          keydown_handler={(e: React.KeyboardEvent<HTMLInputElement>) => {
-            if (e.key === "Enter") {
-              search(e.currentTarget.value);
-              set_keyword("");
-            }
-          }}
-          placeholder="검색어를 입력해주세요"
-        />
-      ) : (
-        <UserSearch
-          keyword={keyword}
-          set_keyword={set_keyword}
-          set_search_result={set_user_search_result}
-          placeholder=""
-        />
-      )}
-
-      {/* 검색섹션 - 검색결과 상단바 */}
-      {keyword.trim() !== "" && (
-        <div className="search-result-bar">
-          <div
-            className={[
-              "search-result-title",
-              search_category === "item" ? "search-category-active" : "",
-            ].join(" ")}
+    <div className="filter-background">
+      <div className="filter-wrap">
+        <div className="filter-modal-title">
+          <h3>검색 필터</h3>
+          <button
+            className="modal-close"
             onClick={() => {
-              set_search_category("item");
+              set_is_open(false);
             }}
           >
-            아이템
-          </div>
-          <div
-            className={[
-              "search-result-title",
-              search_category !== "item" ? "search-category-active" : "",
-            ].join(" ")}
-            onClick={() => {
-              set_search_category("user");
-            }}
-          >
-            유저
-          </div>
-        </div>
-      )}
-
-      {/* 검색섹션 - 검색결과 리스트 */}
-      {keyword.trim() !== "" &&
-        (search_category === "item" ? (
-          <div className="item-search-result-main">
-            <div
-              onClick={() => {
-                search(keyword);
-              }}
-              className="item-search-keyword"
-            >
-              {`'${keyword}'이 포함된 룩북 전체보기`}{" "}
-            </div>
-            <ItemSearchResult
-              slot={-1}
-              search_result={item_search_result}
-              result_click_handler={(slot: number, item: Item) => {
-                search(item.Name);
-              }}
-              reset_keyword={() => {
-                set_keyword("");
-              }}
-            />
-          </div>
-        ) : (
-          <div className="item-search-result-main">
-            <UserSearchResult search_result={user_search_result} />
-          </div>
-        ))}
-      {/* 정렬 및 성별 필터 */}
-      {keyword.trim() === "" && (
-        <div className="filter-scroll">
-          <div className="filter-top">
-            <div className={`filter-layout-block align`}>
-              <p className="filter-title">정렬</p>
-              <div className="filter-item-align">
-                {["최신순", "인기순"].map(i => (
-                  <RadioBox
-                    category="order"
-                    name={i}
-                    value={selected_filter_tag.order}
-                    change_handler={order_change_handler}
-                    key={i}
-                  />
-                ))}
-              </div>
-            </div>
-            <div className={`filter-layout-block sex`}>
-              <p className="filter-title">성별</p>
-              <div className="filter-item-align">
-                {["전체", ...gender_category].map(i => (
-                  <RadioBox
-                    category="gender"
-                    name={i}
-                    value={selected_filter_tag.gender}
-                    change_handler={gender_change_handler}
-                    key={i}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* 검색어 필터 */}
-          {selected_filter_tag.keyword !== "" && (
-            <div className="filter-layout-block">
-              <p className="filter-title">검색어</p>
-              <div className="filter-item-align">
-                <p
-                  className="filter-item filter-item-active"
-                  onClick={() => {
-                    search("");
-                  }}
-                >
-                  {selected_filter_tag.keyword} X
-                </p>
-              </div>
-            </div>
-          )}
-
-          {/* 직업 필터 */}
-          <div className="filter-layout-block">
-            <p className="filter-title">
-              직업<span className="filter-title-sub">중복선택가능</span>
-            </p>
-            <div className={`filter-item-align jobs`}>
-              {job_category.map(i => (
-                <CheckBox
-                  category="job"
-                  name={i}
-                  value={selected_filter_tag.job}
-                  change_handler={job_change_handler}
-                  className={
-                    i in { ...job_category_group, 제작자: "_", 채집가: "_" }
-                      ? "category"
-                      : ""
-                  }
-                  key={i}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* 종족 필터 */}
-          <div className="filter-layout-block">
-            <p className="filter-title">
-              종족<span className="filter-title-sub">중복선택가능</span>
-            </p>
-            <div className="filter-item-align">
-              {race_category.map(i => (
-                <CheckBox
-                  category="race"
-                  name={i}
-                  value={selected_filter_tag.race}
-                  change_handler={race_change_handler}
-                  key={i}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {keyword.trim() !== "" ? (
-        ""
-      ) : (
-        <div className="submit-button-wrap">
-          <button className="filter-reset-button" onClick={reset_filter}>
             <img
-              src={process.env.NEXT_PUBLIC_BASE_URL + "/img/refresh.svg"}
+              src={process.env.NEXT_PUBLIC_BASE_URL + "/img/cancle.svg"}
               alt="modal close button"
             />
-            초기화
-          </button>
-          <button className="filter-submit-button" onClick={update_filter}>
-            필터적용
           </button>
         </div>
-      )}
+
+        {/* 검색섹션 - 검색창 */}
+        {search_category === "item" ? (
+          <ItemSearch
+            keyword={keyword}
+            set_keyword={set_keyword}
+            set_search_result={set_item_search_result}
+            keydown_handler={(e: React.KeyboardEvent<HTMLInputElement>) => {
+              if (e.key === "Enter") {
+                search(e.currentTarget.value);
+                set_keyword("");
+              }
+            }}
+            placeholder="검색어를 입력해주세요"
+          />
+        ) : (
+          <UserSearch
+            keyword={keyword}
+            set_keyword={set_keyword}
+            set_search_result={set_user_search_result}
+            placeholder=""
+          />
+        )}
+
+        {/* 검색섹션 - 검색결과 상단바 */}
+        {keyword.trim() !== "" && (
+          <div className="search-result-bar">
+            <div
+              className={[
+                "search-result-title",
+                search_category === "item" ? "search-category-active" : "",
+              ].join(" ")}
+              onClick={() => {
+                set_search_category("item");
+              }}
+            >
+              아이템
+            </div>
+            <div
+              className={[
+                "search-result-title",
+                search_category !== "item" ? "search-category-active" : "",
+              ].join(" ")}
+              onClick={() => {
+                set_search_category("user");
+              }}
+            >
+              유저
+            </div>
+          </div>
+        )}
+
+        {/* 검색섹션 - 검색결과 리스트 */}
+        {keyword.trim() !== "" &&
+          (search_category === "item" ? (
+            <div className="item-search-result-main">
+              <div
+                onClick={() => {
+                  search(keyword);
+                }}
+                className="item-search-keyword"
+              >
+                {`'${keyword}'이 포함된 룩북 전체보기`}{" "}
+              </div>
+              <ItemSearchResult
+                slot={-1}
+                search_result={item_search_result}
+                result_click_handler={(slot: number, item: Item) => {
+                  search(item.Name);
+                }}
+                reset_keyword={() => {
+                  set_keyword("");
+                }}
+              />
+            </div>
+          ) : (
+            <div className="item-search-result-main">
+              <UserSearchResult search_result={user_search_result} />
+            </div>
+          ))}
+        {/* 정렬 및 성별 필터 */}
+        {keyword.trim() === "" && (
+          <div className="filter-scroll">
+            <div className="filter-top">
+              <div className={`filter-layout-block align`}>
+                <p className="filter-title">정렬</p>
+                <div className="filter-item-align">
+                  {["최신순", "인기순"].map(i => (
+                    <RadioBox
+                      category="order"
+                      name={i}
+                      value={selected_filter_tag.order}
+                      change_handler={order_change_handler}
+                      key={i}
+                    />
+                  ))}
+                </div>
+              </div>
+              <div className={`filter-layout-block sex`}>
+                <p className="filter-title">성별</p>
+                <div className="filter-item-align">
+                  {["전체", ...gender_category].map(i => (
+                    <RadioBox
+                      category="gender"
+                      name={i}
+                      value={selected_filter_tag.gender}
+                      change_handler={gender_change_handler}
+                      key={i}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* 검색어 필터 */}
+            {selected_filter_tag.keyword !== "" && (
+              <div className="filter-layout-block">
+                <p className="filter-title">검색어</p>
+                <div className="filter-item-align">
+                  <p
+                    className="filter-item filter-item-active"
+                    onClick={() => {
+                      search("");
+                    }}
+                  >
+                    {selected_filter_tag.keyword} X
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* 직업 필터 */}
+            <div className="filter-layout-block">
+              <p className="filter-title">
+                직업<span className="filter-title-sub">중복선택가능</span>
+              </p>
+              <div className={`filter-item-align jobs`}>
+                {job_category.map(i => (
+                  <CheckBox
+                    category="job"
+                    name={i}
+                    value={selected_filter_tag.job}
+                    change_handler={job_change_handler}
+                    className={
+                      i in { ...job_category_group, 제작자: "_", 채집가: "_" }
+                        ? "category"
+                        : ""
+                    }
+                    key={i}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* 종족 필터 */}
+            <div className="filter-layout-block">
+              <p className="filter-title">
+                종족<span className="filter-title-sub">중복선택가능</span>
+              </p>
+              <div className="filter-item-align">
+                {race_category.map(i => (
+                  <CheckBox
+                    category="race"
+                    name={i}
+                    value={selected_filter_tag.race}
+                    change_handler={race_change_handler}
+                    key={i}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {keyword.trim() !== "" ? (
+          ""
+        ) : (
+          <div className="submit-button-wrap">
+            <button className="filter-reset-button" onClick={reset_filter}>
+              <img
+                src={process.env.NEXT_PUBLIC_BASE_URL + "/img/refresh.svg"}
+                alt="modal close button"
+              />
+              초기화
+            </button>
+            <button className="filter-submit-button" onClick={update_filter}>
+              필터적용
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
