@@ -177,7 +177,7 @@ export default function Editor({
       <p>검색 필터 설정</p>
       <hr />
       <p>성별</p>
-      <div className="filter_item_align">
+      <div className="filter-item-align">
         {gender_category.map(i => (
           <RadioBox
             category="gender"
@@ -189,7 +189,7 @@ export default function Editor({
         ))}
       </div>
       <p>종족</p>
-      <div className="filter_item_align">
+      <div className="filter-item-align">
         {race_category.map(i => (
           <RadioBox
             category="race"
@@ -202,7 +202,7 @@ export default function Editor({
       </div>
       <p>{message.race}</p>
       <p>직업 (중복 선택 가능)</p>
-      <div className="filter_item_align">
+      <div className="filter-item-align">
         {job_category.map(i => (
           <CheckBox
             category="job"

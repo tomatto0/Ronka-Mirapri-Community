@@ -244,26 +244,31 @@ export default function Page_home() {
           {error instanceof Error ? error.message : "An unknown error occurred"}
         </p>
       ) : (
-        <div className="post-container">
-          {post_chunk.length > 0 && (
-            <div className="post-container-row" key={0}>
-              {post_chunk[0].map((post: PostInform, i: number) => (
-                <PostThumbnail post={post} key={`post-${post.index}`} />
-              ))}
-            </div>
-          )}
-          {/* 게시물 목록 렌더링 */}
-          <Itemrank itemrank={item_rank.data ?? []} />
-          {post_chunk
-            .slice(1, post_chunk.length)
-            .map((chunk: PostInform[], i: number) => (
-              <div className="post-container-row" key={i + 1}>
-                {chunk.map((post: PostInform, i: number) => (
+        <>
+          <div className="post-container">
+            {post_chunk.length > 0 && (
+              <div className="post-container-row" key={0}>
+                {post_chunk[0].map((post: PostInform, i: number) => (
                   <PostThumbnail post={post} key={`post-${post.index}`} />
                 ))}
               </div>
-            ))}
-        </div>
+            )}
+          </div>
+          {/* 게시물 목록 렌더링 */}
+          <Itemrank itemrank={item_rank.data ?? []} />
+
+          <div className="post-container">
+            {post_chunk
+              .slice(1, post_chunk.length)
+              .map((chunk: PostInform[], i: number) => (
+                <div className="post-container-row" key={i + 1}>
+                  {chunk.map((post: PostInform, i: number) => (
+                    <PostThumbnail post={post} key={`post-${post.index}`} />
+                  ))}
+                </div>
+              ))}
+          </div>
+        </>
       )}
       <div ref={ref} className="loader">
         {isFetchingNextPage && <p>Loading more...</p>}

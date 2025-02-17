@@ -1,12 +1,18 @@
+main {
+}
+
 .post-container {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .post-container-row {
   display: flex;
   width: 100%;
-  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
 }
 
 .tlToggle {
@@ -30,10 +36,12 @@
 .primary-filter-wrap {
   display: flex;
   justify-content: center;
-  gap: 10px;
-
-  border-radius: 60px;
-  margin: 20px 0;
+  gap: 4px;
+  row-gap: 6px;
+  padding-top: 12px;
+  margin-bottom: 12px;
+  border-top: 1px solid hsla(169, 55%, 26%, 0.3);
+  flex-wrap: wrap;
 }
 
 .primary-filter {
@@ -41,12 +49,17 @@
   color: #4f938d;
   border-radius: 60px;
   border: 1px solid #4f938d;
-  padding: 0 23px 0 19px;
+  padding: 0 10px 0 10px;
   background-color: unset;
   align-items: center;
-  gap: 10px;
-  height: 37px;
-  font-size: 1.5rem;
+  gap: 4px;
+
+  height: 28px;
+  font-size: 1.3rem;
+}
+
+.primary-filter img {
+  width: 14px;
 }
 
 .primary-filter:hover {
@@ -58,7 +71,7 @@
 }
 
 .filter-keyword {
-  padding: 0 14px 0 20px;
+  padding: 0 8px 0 12px;
   background-color: #ffffff;
   color: #7a5af8;
   border: 1px solid #7a5af8;
@@ -67,11 +80,60 @@
 .filter-keyword:hover {
   background-color: #f4f3ff;
 }
+
 .filter-items {
   background-color: #f6fefc;
-  padding: 0 14px 0 20px;
+  padding: 0 8px 0 10px;
 }
 
 .filter-items:hover {
   background-color: #ecfaf6;
+}
+
+@media (min-width: 1075px) {
+  .post-container {
+    margin: 0 auto;
+    max-width: 1076px;
+  }
+
+  .primary-filter-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    border-top: 1px solid hsla(169, 55%, 26%, 0.3);
+    flex-wrap: wrap;
+  }
+
+  .primary-filter {
+    display: flex;
+    color: #4f938d;
+    border-radius: 60px;
+    border: 1px solid #4f938d;
+    padding: 0 23px 0 19px;
+    background-color: unset;
+    align-items: center;
+    gap: 10px;
+    height: 37px;
+    font-size: 1.5rem;
+  }
+
+  .filter-keyword {
+    padding: 0 14px 0 20px;
+  }
+
+  .filter-items {
+    background-color: #f6fefc;
+    padding: 0 14px 0 20px;
+  }
+
+  .primary-filter img {
+    width: 18px;
+  }
+
+  .post-container-row {
+    gap: 18px;
+    margin-bottom: 18px;
+  }
 }

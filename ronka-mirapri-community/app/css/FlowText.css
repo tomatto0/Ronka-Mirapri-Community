@@ -1,0 +1,79 @@
+.flow-text-wrap {
+  display: flex;
+  height: 40px;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  border-top: 1px solid #0e9384;
+  border-bottom: 1px solid #0e9384;
+  margin-bottom: 12px;
+}
+
+.flow-text-container {
+  width: max-content;
+  display: flex;
+  animation: marquee 15s linear infinite;
+  font-family: "Galmuri11";
+  color: #0e9384;
+  font-size: 1.3rem;
+  position: absolute;
+}
+
+.flow-text-half {
+  display: flex;
+  width: 50%;
+}
+
+.flow-text-third {
+  display: flex;
+  width: 50%;
+  display: none;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.flow-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Galmuri11";
+  font-weight: 400;
+  margin-right: 10px;
+}
+
+.flow-text.title {
+  font-weight: 700;
+  /* margin-left: 10px; */
+}
+
+@media (min-width: 1075px) {
+  .flow-text-wrap {
+    margin-bottom: 18px 0;
+  }
+  .flow-text-container {
+    animation: marquee 10s linear infinite;
+    width: 2700px;
+  }
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .flow-text-third {
+    display: flex;
+    width: 50%;
+  }
+}

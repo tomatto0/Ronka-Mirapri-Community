@@ -5,8 +5,7 @@
   background-color: #424a602b;
   width: 100%;
   height: 100%;
-  padding-top: 13vh;
-  padding-left: calc(30%);
+  padding: 76px 16px 0 16px;
   z-index: 100;
 }
 
@@ -14,7 +13,8 @@
   background-color: white;
   border-radius: 12px;
   padding: 20px 16px;
-  width: 400px;
+  width: calc(100% - 32px);
+  min-width: 280px;
   font-size: 1.6rem;
   font-weight: 500;
   letter-spacing: -0.54px;
@@ -62,7 +62,8 @@
   margin-top: 10px;
   height: 52vh;
   overflow: auto;
-  margin-bottom: 8.7vh;
+  margin-bottom: 75px;
+  padding-bottom: 3px;
 
   &::-webkit-scrollbar {
     width: 10px;
@@ -79,6 +80,7 @@
 
 .filter-top {
   display: flex;
+  flex-direction: column;
 }
 
 .filter-layout-block {
@@ -88,7 +90,6 @@
 .filter-layout-block.align {
   margin-top: 18px;
   padding-right: 24px;
-  border-right: 1px solid #e4e7ec;
   margin-right: 24px;
 }
 
@@ -98,6 +99,7 @@
 
 .filter-title {
   margin-bottom: 12px;
+  font-size: 1.5rem;
 }
 
 .filter-title-sub {
@@ -113,19 +115,17 @@
   flex-wrap: wrap;
 }
 
-.filter-item-align.jobs {
-  padding-right: 21px;
-}
-
 .filter-item {
   font-weight: 500;
   display: flex;
-  padding: 7px 18px 7px 17px;
+  padding: 6px 15px 6px 14px;
   border-radius: 4px;
   border: 1px solid #e0e3e9;
   color: #7e889d;
   line-height: 1.2;
+  font-size: 1.4rem;
 }
+
 .filter-item.category {
   background-color: #f7faff;
   color: #6d7586;
@@ -146,7 +146,7 @@
 .submit-button-wrap {
   border-radius: 0 0 12px 12px;
   left: 0;
-  width: inherit;
+  width: -webkit-fill-available;
   position: absolute;
   bottom: 0;
   padding: 15px 16px 21px 16px;
@@ -257,7 +257,46 @@
 }
 
 @media (min-width: 1075px) {
+  .filter-background {
+    padding-top: 13vh;
+    padding-left: calc(30%);
+  }
+
+  .filter-wrap {
+    padding: 20px 16px;
+    width: 400px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: -0.54px;
+    color: #475467;
+    font-family: "pretendard";
+  }
+
   .filter-wrap {
     width: 530px;
+  }
+
+  .filter-top {
+    flex-direction: row;
+  }
+
+  .filter-title {
+    font-size: 1.6rem;
+  }
+  .filter-layout-block.align {
+    border-right: 1px solid #e4e7ec;
+  }
+
+  .filter-item {
+    padding: 7px 18px 7px 17px;
+    font-size: 1.6rem;
+  }
+
+  .filter-item-align.jobs {
+    padding-right: 21px;
+  }
+
+  .submit-button-wrap {
+    width: inherit;
   }
 }

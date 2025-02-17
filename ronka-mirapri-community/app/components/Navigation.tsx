@@ -58,6 +58,7 @@ export default function Navigation() {
             </ul>
           )}
           <img alt="search icon" id="search" />
+          <img alt="hamburger icon" id="menu-bar" />
         </div>
       </div>
     </>
