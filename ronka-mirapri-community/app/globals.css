@@ -137,6 +137,7 @@ body {
 
 main {
   flex-grow: 1;
+  margin: auto;
 }
 
 div.footer {
