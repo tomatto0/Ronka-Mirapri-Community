@@ -16,6 +16,7 @@ div.logo {
 
 @media (min-width: 1075px) {
   .navigation_wrap {
+    width: 100vw;
     display: flex;
     justify-content: space-between;
     align-items: center;

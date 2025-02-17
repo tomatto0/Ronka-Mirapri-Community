@@ -1,0 +1,98 @@
+.item-viewer {
+  .item-viewer-title {
+    color: #006351;
+    font-size: 1.7rem;
+    font-weight: bold;
+  }
+  .item-searcher-list {
+    border: 1px solid #006351;
+    border-radius: 8px;
+    padding: 20px 16px;
+    background-color: #ffffff66;
+    gap: 20px 0;
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    .item-searcher {
+      display: flex;
+      position: relative;
+      font-size: 1.4rem;
+      align-items: center;
+      padding-right: 27px;
+      .item-image {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+      }
+      .item-information {
+        p {
+          color: #006351;
+        }
+        .item-color-information {
+          display: flex;
+          gap: 5px 0;
+          span {
+            border-radius: 2px;
+            padding: 0 4px;
+          }
+        }
+      }
+      .search-button {
+        background: none;
+        border-radius: 50%;
+        border: 1px #99c0b8 solid;
+        width: 2.7rem;
+        height: 2.7rem;
+        position: absolute;
+        right: 0;
+        img#search {
+          height: 14px;
+          content: url("/img/search_header.svg");
+          margin: auto;
+        }
+      }
+    }
+    .item-searcher:not(:first-child)::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: #99c0b8;
+    }
+  }
+}
+
+.search-modal {
+  background-color: white;
+  border: 1px #c6d5da solid;
+  border-radius: 12px;
+  padding: 16px;
+  display: none;
+  flex-direction: column;
+  gap: 20px 0;
+  position: absolute;
+  left: calc(100% + 32px);
+  top: 0;
+  width: max-content;
+  a {
+    color: #006351;
+    font-size: 1.5rem;
+    text-decoration: none;
+    position: relative;
+  }
+  a:not(:first-child)::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #dbe7eb;
+  }
+}
+
+.search-modal.active {
+  display: flex;
+}

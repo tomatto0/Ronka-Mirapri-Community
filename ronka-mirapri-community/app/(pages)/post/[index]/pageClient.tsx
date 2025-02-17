@@ -1,6 +1,7 @@
 "use client";
 
-import UserViewer from "@/app/components/UserViewer";
+import "../../../css/PostPageClient.css";
+import ItemViewer from "@/app/components/ItemViewer";
 import { Item } from "@/app/types/Item";
 import { useAddLike, useDeleteLike, useGetPostLikes } from "./hooks/useLike";
 
@@ -66,8 +67,17 @@ export default function PostPageClient({
 
   return (
     <main>
-      <img src={post_data.image_url} alt={post_data.title} />
-      <UserViewer equiped_item={post_data.equiped_item} />
+      <div className="main-container">
+        <img
+          className="post-image"
+          src={post_data.image_url}
+          alt={post_data.title}
+        />
+        <div>
+          <ItemViewer equiped_item={post_data.equiped_item} />
+          <p>{post_data.tag.join(", ")}</p>
+        </div>
+      </div>
       <p>작성자: {post_data.author.nickname}</p>
       <hr />
       <p>제목: {post_data.title}</p>
@@ -76,7 +86,6 @@ export default function PostPageClient({
       <p>성별: {post_data.gender}</p>
       <p>종족: {post_data.race}</p>
       <p>직업: {post_data.job.join(", ")}</p>
-      <p>태그: {post_data.tag.join(", ")}</p>
       <p>좋아요: {data?.like_count}</p>
       <button
         onClick={() => {

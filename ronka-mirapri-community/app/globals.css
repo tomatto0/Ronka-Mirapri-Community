@@ -166,7 +166,7 @@ div.footer {
 }
 
 @media (min-width: 1087px) {
-  div.header::after {
+  /* div.header::after {
     content: "";
     position: absolute;
     top: calc(20% - 6px);
@@ -181,5 +181,5 @@ div.footer {
     background-repeat: no-repeat;
 
     z-index: -1;
-  }
+  } */
 }

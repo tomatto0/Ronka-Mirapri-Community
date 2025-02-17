@@ -98,14 +98,16 @@ export default function ItemSearchModal({
             reset_keyword={reset_keyword}
           />
         )}
-        {is_item_select && keyword.trim() === "" && (
-          <ColorPalette
-            slot={slot}
-            item={selected_item}
-            edit_equiped_item={edit_equiped_item}
-            modal_close={modal_close}
-          />
-        )}
+        {is_item_select &&
+          keyword.trim() === "" &&
+          search_result.length === 0 && (
+            <ColorPalette
+              slot={slot}
+              item={selected_item}
+              edit_equiped_item={edit_equiped_item}
+              modal_close={modal_close}
+            />
+          )}
         <p className="data-version">현재 적용된 패치 데이터 버전(KOR): V7.05</p>
       </div>
     </div>
