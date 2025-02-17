@@ -4,6 +4,11 @@
   position: relative;
   box-sizing: border-box;
 }
+
+.post-box:hover {
+  outline: 1px solid #15b79e;
+}
+
 .post-box:hover .post-box-hover {
   opacity: 1;
 }
@@ -20,10 +25,12 @@
   height: 100px;
   justify-content: space-between;
   align-items: flex-end;
+
   p {
     color: white;
     font-size: 2rem;
   }
+
   button {
     color: white;
     font-size: 2rem;
@@ -32,7 +39,17 @@
   }
 }
 .post-thumbnail {
-  width: 100%;
-  max-width: 250px;
+  width: calc(50vw - 6px);
   aspect-ratio: 540/1080;
+}
+
+@media (min-width: 702px) and (max-width: 1074px) {
+  .post-thumbnail {
+    width: calc(25vw - 11px);
+  }
+}
+@media (min-width: 1075px) {
+  .post-thumbnail {
+    max-width: 255px;
+  }
 }

@@ -103,6 +103,20 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Galmuri11";
+  src: url("/fonts/Galmuri11.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Galmuri11";
+  src: url("/fonts/Galmuri11-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
 /* 모든 요소의 기본 스타일 초기화 */
 * {
   margin: 0;
@@ -136,6 +150,7 @@ body {
 }
 
 main {
+  width: 100vw;
   flex-grow: 1;
   margin: auto;
 }
