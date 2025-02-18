@@ -67,21 +67,21 @@ export default function Editor({
   }
   function job_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
     function job_groupize(job: string[]) {
+      const order_map = new Map(job_category.map((item, i) => [item, i]));
       const groups = Object.keys(job_category_group);
       groups.forEach(group => {
         if (job_category_group[group].every(i => job.includes(i))) {
           if (!job.includes(group)) {
             job = [...job, group];
           }
-          if (job_category_group["모든 클래스"].every(i => job.includes(i))) {
-            if (!job.includes("모든 클래스")) {
-              job = [...job, "모든 클래스"];
-            }
-          }
         } else {
           job = job.filter(i => i !== group);
         }
       });
+      job.sort(
+        (a, b) =>
+          (order_map.get(a) ?? Infinity) - (order_map.get(b) ?? Infinity)
+      );
       return job;
     }
     if (Object.keys(job_category_group).includes(e.target.value)) {
@@ -167,6 +167,7 @@ export default function Editor({
         autoComplete="off"
       />
       <p>{message.title}</p>
+
       <label className="editor-input-title" htmlFor="content">
         내용{" "}
       </label>

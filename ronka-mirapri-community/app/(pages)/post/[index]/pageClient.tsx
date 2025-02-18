@@ -4,6 +4,7 @@ import "../../../css/PostPageClient.css";
 import ItemViewer from "@/app/components/ItemViewer";
 import { Item } from "@/app/types/Item";
 import { useAddLike, useDeleteLike, useGetPostLikes } from "./hooks/useLike";
+import { job_category, job_category_group } from "@/app/utils/constants";
 
 export default function PostPageClient({
   post_data,
@@ -22,10 +23,29 @@ export default function PostPageClient({
     job: string[];
     tag: string[];
     like_count: number;
+    created_at: string;
   };
 }) {
   const postIndex = post_data.index;
   const postId = post_data._id;
+  const postDate = formatDate(new Date(post_data.created_at));
+  function formatDate(date: Date) {
+    const yyyy = date.getFullYear();
+    const mm = String(date.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1 필요
+    const dd = String(date.getDate()).padStart(2, "0"); // 일
+    return `${yyyy}.${mm}.${dd}`;
+  }
+
+  function job_summary(jobs: string[]) {
+    const summary: string[] = [];
+    for (let job of jobs) {
+      if (job in job_category_group) {
+        job_category_group[job].map(i => summary.push(i));
+      }
+    }
+    return jobs.filter(job => !summary.includes(job));
+  }
+  const jobs = job_summary(post_data.job);
 
   const { data, isLoading, isError } = useGetPostLikes(postIndex);
   const { deleteLikeMutation } = useDeleteLike(postIndex);
@@ -62,40 +82,56 @@ export default function PostPageClient({
     );
   };
 
+  const TagBox = ({ content }: { content: string }) => {
+    return <div className="tag-box">{content}</div>;
+  };
+
   if (isLoading) return <div>로딩 중...</div>;
   if (isError) return <div>에러 발생</div>;
 
   return (
     <main>
-      <div className="main-container">
+      <p className="post-title">{post_data.title}</p>
+      <div className="post-title-box">
+        <div>
+          <p className="post-author">{post_data.author.nickname}</p>
+          <p className="post-date">{postDate}</p>
+        </div>
+        <button className="like-button" onClick={toggleLike}>
+          <span>{data?.is_liked ? "♥" : "♡"}</span>
+          <span>{data?.like_count}</span>
+        </button>
+      </div>
+      <div className="post-main-container">
         <img
           className="post-image"
           src={post_data.image_url}
           alt={post_data.title}
         />
-        <div>
+        <div className="post-information">
           <ItemViewer equiped_item={post_data.equiped_item} />
-          <p>{post_data.tag.join(", ")}</p>
+          <div className="tag-container">
+            <TagBox content={post_data.gender} />
+            <TagBox content={post_data.race} />
+            {jobs.map(job => (
+              <TagBox content={job} key={`job-${job}`} />
+            ))}
+            {post_data.tag.map(tag => (
+              <TagBox content={tag} key={`tag-${tag}`} />
+            ))}
+          </div>
         </div>
       </div>
-      <p>작성자: {post_data.author.nickname}</p>
-      <hr />
-      <p>제목: {post_data.title}</p>
-      <p>내용: {post_data.content}</p>
-      <p>sns: {post_data.sns}</p>
-      <p>성별: {post_data.gender}</p>
-      <p>종족: {post_data.race}</p>
-      <p>직업: {post_data.job.join(", ")}</p>
-      <p>좋아요: {data?.like_count}</p>
-      <button
-        onClick={() => {
-          toggleLike();
-        }}
-      >
-        like {data?.is_liked ? "V" : ""}
+      <p className="post-content">{post_data.content}</p>
+      <p className="post-subtitle">SNS 게시글</p>
+      <p className="post-sns">{post_data.sns}</p>
+      <p className="post-subtitle">공유하기</p>
+      <button className="share-button bluesky" onClick={share_bluesky}>
+        BLUESKY
       </button>
-      <button onClick={share_twitter}>Xwitter</button>
-      <button onClick={share_bluesky}>bluesky</button>
+      <button className="share-button twitter" onClick={share_twitter}>
+        TWITTER
+      </button>
     </main>
   );
 }

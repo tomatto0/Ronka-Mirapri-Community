@@ -10,6 +10,5 @@ export default async function PostPage({
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/db/posts/index?index=${index}`
   );
   const res = await response.json();
-
   return <PostPageClient post_data={res.data} />;
 }
