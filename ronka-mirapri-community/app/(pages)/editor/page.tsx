@@ -48,7 +48,7 @@ export default function Page_editor() {
   const toggleEditorMode = () => {
     set_editor_mode(prev => {
       const newMode = !prev;
-      window.localStorage.setItem("editor_mode", JSON.stringify(newMode));
+      localStorage.setItem("editor_mode", JSON.stringify(newMode));
       return newMode;
     });
   };
@@ -331,6 +331,8 @@ export default function Page_editor() {
         return;
       }
       const img_res = await img_response.json();
+      console.log({ img_res });
+
       const image_url = img_res.image_url;
 
       post_data.title = post_data.title.trim();
