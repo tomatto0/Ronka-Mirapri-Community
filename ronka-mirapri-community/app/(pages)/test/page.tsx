@@ -14,14 +14,11 @@ export default function Page_test() {
     );
   };
   const toast_handler = () => {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: "bottom-end",
-      timer: 3000,
-      showConfirmButton: false,
+    Swal.fire({
+      title: "삭제에 실패했습니다.",
+      text: "알 수 없는 에러",
+      icon: "error",
     });
-    Toast.fire({ icon: "success", title: "글 작성이 완료되었습니다." });
-    router.push("/");
   };
 
   return (

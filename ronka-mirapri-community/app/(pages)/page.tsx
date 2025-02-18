@@ -74,7 +74,6 @@ export default function Page_home() {
       ...job_filter,
     };
     set_filter(JSON.stringify(filter));
-    console.log("update_filter");
     sessionStorage.setItem("filter", JSON.stringify({ filter, filter_tag }));
   }
 

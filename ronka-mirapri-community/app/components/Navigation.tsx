@@ -6,7 +6,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import FilterSelector from "./FilterSelector";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { filter_tag_init_state } from "../utils/constants";
 
 export default function Navigation() {
@@ -18,6 +18,7 @@ export default function Navigation() {
     filter_tag_init_state
   );
   const [is_open, set_is_open] = useState<boolean>(false);
+  const renderingRef = useRef<boolean>(true);
 
   const search = () => {
     if (!is_open) {
@@ -31,8 +32,13 @@ export default function Navigation() {
   };
 
   useEffect(() => {
+    if (renderingRef.current) {
+      renderingRef.current = false;
+      return;
+    }
     if (!is_open) {
       sessionStorage.setItem("filter", JSON.stringify({ filter, filter_tag }));
+      console.log("설마 이거임??");
       router.push(`/search?keyword=${filter_tag.keyword}`);
     }
   }, [filter_tag]);

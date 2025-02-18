@@ -6,7 +6,6 @@ import { useEffect } from "react";
 export default function SearchPage() {
   const searchParams = useSearchParams();
   const keyword = searchParams.get("keyword");
-  console.log("search", keyword);
   const router = useRouter();
   useEffect(() => {
     router.push(`/${keyword ? `?keyword=${keyword}` : ""}`);

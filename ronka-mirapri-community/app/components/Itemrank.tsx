@@ -3,22 +3,46 @@ import "../css/FlowText.css";
 import { useEffect, useRef, useState } from "react";
 
 export default function Itemrank({ itemrank }: { itemrank: string[] }) {
-  const flowRef = useRef<HTMLDivElement | null>(null);
+  const flowRef = useRef<HTMLDivElement[]>([]);
   const [text_iterate_number, set_text_iterate_number] = useState<number>(1);
+  const [view_width, set_view_width] = useState<number>(window.innerWidth);
+
+  function reset_animation() {
+    flowRef.current.forEach(e => {
+      if (e) {
+        e.style.animation = "none";
+        void e.offsetWidth;
+        e.style.animation = "";
+      }
+    });
+  }
 
   useEffect(() => {
-    if (flowRef.current !== null) {
+    if (flowRef.current.length !== 0) {
       const resizeObserver = new ResizeObserver(entries => {
         set_text_iterate_number(
-          Math.ceil(
-            document.documentElement.clientWidth /
-              entries[0].target.getBoundingClientRect().width
-          ) + 1
+          Math.max(
+            Math.ceil(
+              view_width / entries[0].target.getBoundingClientRect().width
+            ) + 1,
+            1
+          )
         );
+        reset_animation();
       });
-      resizeObserver.observe(flowRef.current);
+      resizeObserver.observe(flowRef.current[0]);
       return () => resizeObserver.disconnect();
     }
+  }, [view_width]);
+
+  useEffect(() => {
+    const resize_handler = () => {
+      set_view_width(window.innerWidth);
+    };
+    window.addEventListener("resize", resize_handler);
+    return () => {
+      window.removeEventListener("resize", resize_handler);
+    };
   }, []);
 
   return (
@@ -28,7 +52,11 @@ export default function Itemrank({ itemrank }: { itemrank: string[] }) {
           <div
             className="flow-text-half"
             key={index}
-            ref={index === 0 ? flowRef : null}
+            ref={e => {
+              if (e && !flowRef.current.includes(e)) {
+                flowRef.current[index] = e;
+              }
+            }}
           >
             {itemrank.map(item => (
               <Link href={`/?keyword=${item}`} className="flow-text" key={item}>

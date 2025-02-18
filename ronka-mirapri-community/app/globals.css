@@ -154,6 +154,16 @@ main {
   flex-grow: 1;
   margin: auto;
 }
+.swal2-title {
+  font-size: 2.4rem !important;
+}
+.swal2-html-container {
+  font-size: 1.6rem !important;
+}
+.swal2-confirm,
+.swal2-cancel {
+  font-size: 1.6rem !important;
+}
 
 div.footer {
   color: #50b1a8;

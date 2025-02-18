@@ -1,15 +1,18 @@
 "use client";
 
-import "../css/SignUp.css";
+import "../../css/SignUp.css";
 import cursed_word_check from "@/app/utils/cursed_word_check";
 import nickname_validate from "@/app/utils/nickname_check";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Swal from "sweetalert2";
 
 export default function Page_sign_up() {
   const { data: session, status } = useSession();
+  const router = useRouter();
+
   const [email, set_email] = useState<string>(session?.user?.email || "");
   const [email_error, set_email_error] = useState<string>("");
   const [nickname, set_nickname] = useState<string>("");
@@ -45,42 +48,44 @@ export default function Page_sign_up() {
     }
     const res = await response.json();
     if (res.success === false) {
-      set_email_error(res.error.email_message);
-      set_nickname_error(res.error.nickname_message);
-      set_sns_error(res.error.sns_message);
       if (res.error === "Unknown error") {
         Swal.fire({
-          html: "알수없는 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
+          text: "알수없는 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
         }).then(() => {
           signIn("google", { callbackUrl: "/signup" });
         });
+      } else {
+        set_email_error(res.error.email_message);
+        set_nickname_error(res.error.nickname_message);
+        set_sns_error(res.error.sns_message);
       }
       return false;
     }
-    window.location.href = "/";
     return true;
   };
 
   useEffect(() => {
     if (status !== "loading") {
-      if (session && session.user) {
-        set_email(session.user.email as string);
+      if (session?.user.email) {
+        set_email(session.user.email);
         if ("nickname" in session.user) {
-          window.location.href =
-            sessionStorage.getItem("login_callback") || "/";
-          sessionStorage.setItem("login_callback", "/");
-        } else {
-          is_user_load.current = true;
+          console.log("이미 회원가입됨");
+          // router.push(sessionStorage.getItem("login_callback") || "/");
+          // sessionStorage.removeItem("login_callback");
         }
       }
     }
   }, [status]);
 
   if (status === "loading") {
-    return <main></main>;
+    return (
+      <main>
+        <span className="loading"></span>
+      </main>
+    );
   }
 
-  if (session && session.user && session.user.email) {
+  if (session?.user.email) {
     return (
       <main>
         <div className="signup-wrap">
@@ -93,7 +98,6 @@ export default function Page_sign_up() {
               구글 이메일
             </label>
             <span>*</span>
-
             <input type="text" disabled value={email} id="email" />
             <p>
               <Link

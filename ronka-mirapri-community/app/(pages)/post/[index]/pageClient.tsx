@@ -88,11 +88,13 @@ export default function PostPageClient({
     },
     onSuccess: async res => {
       if (res.success) {
-        await Swal.fire({
-          title: "성공적으로 삭제되었습니다.",
-          icon: "success",
-          timer: 2000,
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "bottom-end",
+          timer: 3000,
+          showConfirmButton: false,
         });
+        Toast.fire({ icon: "success", text: "게시글 삭제가 완료되었습니다." });
         router.push("/");
       } else {
         Swal.fire({

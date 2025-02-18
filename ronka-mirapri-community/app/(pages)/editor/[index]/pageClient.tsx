@@ -7,7 +7,7 @@ import equip_slot_categories from "../../../json/equip_slot_categories.json";
 import { EquipSlot } from "@/app/types/EquipSlot";
 import { Item } from "@/app/types/Item";
 import { useSession } from "next-auth/react";
-import { useReducer, useRef, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { post_init_state, item_null } from "@/app/utils/constants";
 import ItemInformation from "@/app/components/ItemInformation";
 import Swal from "sweetalert2";
@@ -19,7 +19,7 @@ export default function EditorPageClient({
   data,
 }: {
   data: {
-    author: { nickname: string };
+    author: { nickname: string; _id: string };
     _id: string;
     index: number;
     image_url: string;
@@ -212,6 +212,16 @@ export default function EditorPageClient({
       const post_res = await post_response.json();
       console.log("res", post_res);
       is_posted.current = true;
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "bottom-end",
+        timer: 300000,
+        showConfirmButton: false,
+      });
+      Toast.fire({
+        icon: "success",
+        text: "글 수정이 완료되었습니다.",
+      });
       router.push(`/post/${post_res.data.index}`);
     } catch (e) {
       console.error(e);
@@ -239,7 +249,7 @@ export default function EditorPageClient({
           timer: 3000,
           showConfirmButton: false,
         });
-        Toast.fire({ icon: "success", title: "게시글 삭제가 완료되었습니다." });
+        Toast.fire({ icon: "success", text: "게시글 삭제가 완료되었습니다." });
         router.push("/");
       }
     } catch (e) {
@@ -247,38 +257,57 @@ export default function EditorPageClient({
     }
   }
 
+  useEffect(() => {
+    if (status !== "loading" && session?.user._id !== data.author._id) {
+      router.push(`/post/${data.index}`);
+      Swal.fire({
+        title: "작성자만 수정할 수 있습니다.",
+        icon: "error",
+        showConfirmButton: true,
+      });
+    }
+  }, [status]);
+
   if (status === "loading") {
+    return (
+      <main>
+        <span className="loading"></span>
+      </main>
+    );
+  }
+  if (session?.user._id === data.author._id) {
+    return (
+      <main>
+        <div className="main-container">
+          <UserCanvasViewer
+            image_src={data.image_url}
+            equiped_item={data.equiped_item}
+          />
+          <ItemInformation
+            image_src={image_src}
+            open_modal={open_modal}
+            equiped_item={equiped_item}
+            slot_active={slot_active}
+            reset_equiped_item={reset_equiped_item}
+          />
+        </div>
+        <Editor
+          post_data={post_data}
+          dispatch={post_dispatch}
+          message={message_data}
+        />
+        <button onClick={patch}>수정</button>
+        <button onClick={post_delete}>삭제</button>
+        <ItemSearchModal
+          slot={modal_slot}
+          is_open={is_open}
+          equiped_item={equiped_item}
+          set_is_open={set_is_open}
+          edit_equiped_item={edit_equiped_item}
+        />
+      </main>
+    );
+  } else {
     return <main></main>;
   }
-  return (
-    <main>
-      <div className="main-container">
-        <UserCanvasViewer
-          image_src={data.image_url}
-          equiped_item={data.equiped_item}
-        />
-        <ItemInformation
-          image_src={image_src}
-          open_modal={open_modal}
-          equiped_item={equiped_item}
-          slot_active={slot_active}
-          reset_equiped_item={reset_equiped_item}
-        />
-      </div>
-      <Editor
-        post_data={post_data}
-        dispatch={post_dispatch}
-        message={message_data}
-      />
-      <button onClick={patch}>수정</button>
-      <button onClick={post_delete}>삭제</button>
-      <ItemSearchModal
-        slot={modal_slot}
-        is_open={is_open}
-        equiped_item={equiped_item}
-        set_is_open={set_is_open}
-        edit_equiped_item={edit_equiped_item}
-      />
-    </main>
-  );
 }

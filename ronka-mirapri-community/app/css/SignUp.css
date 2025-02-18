@@ -2,6 +2,7 @@ div.signup-wrap {
   background-color: #fafafe;
   color: #006351;
   width: 100%;
+  margin: auto;
   padding: 60px 44px;
   height: 90vh;
 }

@@ -362,7 +362,7 @@ export default function Page_editor() {
         timer: 3000,
         showConfirmButton: false,
       });
-      Toast.fire({ icon: "success", title: "글 작성이 완료되었습니다." });
+      Toast.fire({ icon: "success", text: "글 작성이 완료되었습니다." });
       router.push(`/post/${post_res.data.index}`);
     } catch (e) {
       console.error(e);
