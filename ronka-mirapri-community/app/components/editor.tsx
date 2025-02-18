@@ -1,5 +1,6 @@
 "use client";
 
+import "../css/editor.css";
 import {
   gender_category,
   race_category,
@@ -139,15 +140,25 @@ export default function Editor({
         value: post_data.tag.filter(i => i !== value),
       });
     };
-    return <button onClick={click_handler}>{value} X</button>;
+    return (
+      <button className="editor-tag" onClick={click_handler}>
+        {value}{" "}
+        <img
+          src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"}
+          alt="tag_close button"
+        />
+      </button>
+    );
   };
   //#endregion
 
   return (
     <div className="editor-container">
-      <p>게시글 내용</p>
-      <hr />
-      <label htmlFor="title">제목 *: </label>
+      <h3>게시글 내용</h3>
+      <hr className="editor-divider" />
+      <label className="editor-input-title" htmlFor="title">
+        제목 *
+      </label>
       <input
         type="text"
         id="title"
@@ -156,15 +167,22 @@ export default function Editor({
         autoComplete="off"
       />
       <p>{message.title}</p>
-      <label htmlFor="content">내용: </label>
+
+      <label className="editor-input-title" htmlFor="content">
+        내용{" "}
+      </label>
       <textarea
+        wrap="soft"
+        rows={2}
         id="content"
         value={post_data.content}
         onChange={content_change_handler}
         autoComplete="off"
       />
       <p>{message.content}</p>
-      <label htmlFor="sns">SNS Url: </label>
+      <label className="editor-input-title" htmlFor="sns">
+        SNS URL{" "}
+      </label>
       <input
         type="text"
         id="sns"
@@ -173,9 +191,9 @@ export default function Editor({
         autoComplete="off"
       />
       <p>{message.sns}</p>
-      <p>검색 필터 설정</p>
-      <hr />
-      <p>성별</p>
+      <h3>검색 필터 설정</h3>
+      <hr className="editor-divider" />
+      <h4>착용가능 성별</h4>
       <div className="filter-item-align">
         {gender_category.map(i => (
           <RadioBox
@@ -187,7 +205,7 @@ export default function Editor({
           />
         ))}
       </div>
-      <p>종족</p>
+      <h4>종족 *</h4>
       <div className="filter-item-align">
         {race_category.map(i => (
           <RadioBox
@@ -200,7 +218,9 @@ export default function Editor({
         ))}
       </div>
       <p>{message.race}</p>
-      <p>직업 (중복 선택 가능)</p>
+      <h4>
+        직업 <span>중복 선택 가능</span>
+      </h4>
       <div className="filter-item-align">
         {job_category.map(i => (
           <CheckBox
@@ -218,19 +238,28 @@ export default function Editor({
         ))}
       </div>
       <p>{message.job}</p>
-      <label htmlFor="tag">태그:</label>
-      {post_data.tag.map((tag, i) => (
-        <TagBox value={tag} key={i} />
-      ))}
-      <input
-        type="text"
-        id="tag"
-        autoComplete="off"
-        value={tag_input}
-        onChange={tag_change_handler}
-      />
-      <p>태그 입력 후 스페이스바로 태그 추가</p>
-      <p>{message.tag}</p>
+      <div className="editor-tag-title">
+        <label className="editor-input-title" htmlFor="tag">
+          태그
+        </label>
+        <div className="editor-tag-box">
+          <div className="editor-tags-wrap">
+            {post_data.tag.map((tag, i) => (
+              <TagBox value={tag} key={i} />
+            ))}
+          </div>
+          <input
+            className="tag-input"
+            type="text"
+            id="tag"
+            autoComplete="off"
+            value={tag_input}
+            onChange={tag_change_handler}
+          />
+        </div>
+        <p className="input_subtext">태그 입력 후 스페이스바로 태그 추가</p>
+        <p>{message.tag}</p>
+      </div>
     </div>
   );
 }

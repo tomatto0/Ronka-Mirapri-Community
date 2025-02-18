@@ -1,7 +1,6 @@
 import "../css/FlowText.css";
 
 export default function Itemrank({ itemrank }: { itemrank: string[] }) {
-  console.log(itemrank);
   return (
     <div className="flow-text-wrap">
       <div className="flow-text-container">
