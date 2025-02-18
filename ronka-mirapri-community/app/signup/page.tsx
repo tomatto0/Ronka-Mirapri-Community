@@ -1,5 +1,6 @@
 "use client";
 
+import "../css/SignUp.css";
 import cursed_word_check from "@/app/utils/cursed_word_check";
 import nickname_validate from "@/app/utils/nickname_check";
 import { signIn, useSession } from "next-auth/react";
@@ -82,39 +83,60 @@ export default function Page_sign_up() {
   if (session && session.user && session.user.email) {
     return (
       <main>
-        <p>Welcome! Please complete your sign-up process.</p>
-        <label htmlFor="email">email: </label>
-        <input type="text" disabled value={email} id="email" />
-        <p>
-          <Link
-            href="#"
-            onClick={() => signIn("google", { callbackUrl: "/signup" })}
-          >
-            {email_error}
-          </Link>
-        </p>
-        <label htmlFor="nickname">nickname: </label>
-        <input
-          type="text"
-          id="nickname"
-          value={nickname}
-          onChange={e => {
-            set_nickname(e.target.value);
-          }}
-        />
-        <span>*</span>
-        <p>{nickname_error}</p>
-        <label htmlFor="sns">sns: </label>
-        <input
-          type="text"
-          id="sns"
-          value={sns}
-          onChange={e => {
-            set_sns(e.target.value);
-          }}
-        />
-        <p>{sns_error}</p>
-        <button onClick={signup_handler}>sign up</button>
+        <div className="signup-wrap">
+          <div className="signup-logo">
+            <img alt="Ronka LookBook logo" id="signup-title" />
+          </div>
+          <h3>가입하기</h3>
+          <div className="signup-inputs">
+            <label className="signup-label" htmlFor="email">
+              구글 이메일
+            </label>
+            <span>*</span>
+
+            <input type="text" disabled value={email} id="email" />
+            <p>
+              <Link
+                href="#"
+                onClick={() => signIn("google", { callbackUrl: "/signup" })}
+              >
+                {email_error}
+              </Link>
+            </p>
+            <div className="signup-title">
+              <label className="signup-label" htmlFor="nickname">
+                닉네임
+              </label>
+              <span>*</span>{" "}
+            </div>
+            <input
+              type="text"
+              id="nickname"
+              value={nickname}
+              onChange={e => {
+                set_nickname(e.target.value);
+              }}
+            />
+            <p className="signup-error">{nickname_error}</p>
+            <div className="signup-title">
+              <label className="signup-label" htmlFor="sns">
+                SNS URL
+              </label>
+            </div>
+            <input
+              type="text"
+              id="sns"
+              value={sns}
+              onChange={e => {
+                set_sns(e.target.value);
+              }}
+            />
+            <p className="signup-error">{sns_error}</p>
+          </div>
+          <button className="signup-submit" onClick={signup_handler}>
+            가입하기
+          </button>
+        </div>
       </main>
     );
   }

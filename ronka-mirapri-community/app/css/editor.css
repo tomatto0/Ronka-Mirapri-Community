@@ -221,10 +221,10 @@ div.editor-container {
     content: "";
 
     position: absolute;
-    top: -6px;
-    left: -6px;
-    width: calc(100% + 12px);
-    height: calc(100% + 12px);
+    top: -7px;
+    left: -7px;
+    width: calc(100% + 14px);
+    height: calc(100% + 14px);
 
     background-image: url("../../public/img/plus.svg"),
       url("../../public/img/plus.svg"), url("../../public/img/plus.svg"),
