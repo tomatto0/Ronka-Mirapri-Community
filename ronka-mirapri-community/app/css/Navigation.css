@@ -25,16 +25,22 @@ div.logo {
   align-items: center;
 }
 
+.navigation_right li {
+  cursor: pointer;
+}
+
 img#search {
   display: block;
   height: 24px;
   content: url("/img/search_header.svg");
+  cursor: pointer;
 }
 
 img#menu-bar {
   display: block;
   height: 24px;
   content: url("/img/menu_bar.svg");
+  cursor: pointer;
 }
 
 @media (min-width: 1075px) {

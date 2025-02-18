@@ -32,6 +32,7 @@ div.main-container {
   color: #667085;
 }
 
+/* 로그인시 글쓰기 가능 버튼 */
 .login_to_write_button {
   width: 140px;
   border: 1px solid #006351;
@@ -45,6 +46,152 @@ div.main-container {
 .login_to_write_button:hover {
   background-color: #006351;
   color: white;
+}
+
+/* 에디터 글쓰기 버튼 */
+
+.editor-submit-button {
+  width: min(calc(100vw - 64px), 100%);
+  display: block;
+  margin: 24px auto 0;
+  background-color: #f6fefc;
+  border: 1px #107569 solid;
+  color: #344054;
+  height: 49px;
+  font-size: 1.7rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.editor-submit-button:hover {
+  color: white;
+  background-color: #006351;
+}
+
+/* 글쓰기 */
+
+div.editor-container {
+  width: 100%;
+  color: #006351;
+  padding: 0 32px;
+}
+
+.editor-divider {
+  border: 1px #b2c6cd solid;
+  margin-bottom: 28px;
+}
+
+.editor-container > h3 {
+  margin-top: 40px;
+  margin-bottom: 19px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.48px;
+  line-height: 1.2;
+}
+
+.editor-container > h4 {
+  margin-top: 24px;
+  margin-bottom: 12px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.48px;
+}
+
+.editor-input-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.48px;
+}
+
+.editor-container span {
+  margin-left: 10px;
+}
+
+.editor-container span,
+.input_subtext {
+  color: #667085;
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.editor-container [type="text"],
+.editor-container textarea {
+  width: 100%;
+  background-color: unset;
+  border: 1px solid #4f938d;
+  line-height: 1.5;
+  padding: 10px 20px;
+  margin-top: 10px;
+  margin-bottom: 24px;
+  font-size: 1.6rem;
+  color: #667085;
+  font-weight: 400;
+  font-family: "Pretendard";
+}
+
+.editor-container textarea {
+  padding: 15px 20px;
+  resize: none;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.editor-container [type="text"]:focus {
+  outline: none;
+  background-color: #eef6fc;
+  border-color: #006351;
+  box-shadow: 0 0 0 1px #15b79e;
+}
+
+.editor-container textarea:focus {
+  outline: none;
+  background-color: #eef6fc;
+  border-color: #006351;
+  box-shadow: 0 0 0 1px #15b79e;
+}
+
+.editor-tag-box {
+  width: 100%;
+  border: 1px solid #4f938d;
+  width: 100%;
+  display: flex;
+  height: 46px;
+  padding: 10px 10px;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 6px;
+}
+
+.editor-tag-title {
+  margin-top: 24px;
+}
+
+.editor-container [type="text"].tag-input {
+  margin-bottom: 6px;
+  border: none;
+  padding: 10px 0;
+  background-color: unset;
+  box-shadow: none;
+}
+
+.editor-tags-wrap {
+  display: flex;
+  gap: 10px;
+}
+
+.editor-tag {
+  display: flex;
+  align-items: center;
+  border: none;
+  background-color: #dcede9;
+  color: #337e78;
+  width: max-content;
+  font-size: 1.6rem;
+  gap: 6px;
+  padding: 0 3px 0 5px;
 }
 
 @media (min-width: 1075px) {
@@ -78,5 +225,15 @@ div.main-container {
       bottom right;
     background-repeat: no-repeat;
     z-index: -1;
+  }
+
+  div.editor-container {
+    max-width: 1076px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .editor-submit-button {
+    max-width: 1076px;
   }
 }

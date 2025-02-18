@@ -381,7 +381,9 @@ export default function Page_editor() {
           <p>로그인시 글작성 가능</p>
         </div>
       )}
-      <button onClick={post}>작성</button>
+      <button className="editor-submit-button" onClick={post}>
+        작성
+      </button>
       <ItemSearchModal
         slot={modal_slot}
         is_open={is_open}

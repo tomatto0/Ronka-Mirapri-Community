@@ -76,6 +76,7 @@ div.item-search-modal {
     border-color: #15b79e;
     box-shadow: 0 0 0 1px #15b79e;
   }
+
   input::placeholder {
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -108,7 +109,7 @@ div.item-search-modal {
     font-weight: 600;
 
     input[type="text"] {
-      height: 44px;
+      height: 40px;
       letter-spacing: -0.39px;
     }
   }
