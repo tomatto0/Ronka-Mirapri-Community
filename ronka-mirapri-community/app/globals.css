@@ -151,7 +151,6 @@ body {
 }
 
 main {
-  width: 100vw;
   flex-grow: 1;
   margin: auto;
 }
@@ -164,6 +163,26 @@ div.footer {
   a {
     color: inherit;
     text-decoration: none;
+  }
+}
+span.loading {
+  display: block;
+  margin: auto;
+  width: 32px;
+  height: 32px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  border: 5px solid #15b79e;
+  border-top: 5px solid transparent;
+  animation: loading-rotate 1s ease-in-out infinite;
+}
+
+@keyframes loading-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 

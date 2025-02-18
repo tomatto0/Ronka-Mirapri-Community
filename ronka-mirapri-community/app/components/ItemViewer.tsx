@@ -75,7 +75,7 @@ export default function ItemViewer({ equiped_item }: { equiped_item: Item[] }) {
     is_active: boolean;
   }) => {
     return (
-      <div className={`search-modal ${is_active ? "active" : ""}`}>
+      <div className={`post-search-modal ${is_active ? "modal-active" : ""}`}>
         <Link
           href={`https://guide.ff14.co.kr/lodestone/search?keyword=${item.Name}`}
           target="_blank"
@@ -88,10 +88,7 @@ export default function ItemViewer({ equiped_item }: { equiped_item: Item[] }) {
         >
           롱카의 옷장
         </Link>
-        <Link
-          href={`http://localhost:3000/?keyword=${item.Name}`}
-          target="_blank"
-        >
+        <Link href={`http://localhost:3000/?keyword=${item.Name}`}>
           다른 코디 보기
         </Link>
       </div>

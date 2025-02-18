@@ -4,9 +4,14 @@ import "../css/Navigation.css";
 
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Navigation() {
   const { data: session } = useSession();
+  const router = useRouter();
+  const search = () => {
+    router.push("/search");
+  };
 
   return (
     <>
@@ -57,7 +62,9 @@ export default function Navigation() {
               </li>
             </ul>
           )}
-          <img alt="search icon" id="search" />
+          <button className="search-button" onClick={search}>
+            <img alt="search icon" id="search" />
+          </button>
           <img alt="hamburger icon" id="menu-bar" />
         </div>
       </div>

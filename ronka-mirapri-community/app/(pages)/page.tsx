@@ -1,13 +1,13 @@
 "use client";
 
 import "../css/home.css";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { useEffect, useReducer, useState } from "react";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 import PostThumbnail from "../components/PostThumbnail";
 import FilterSelector from "../components/FilterSelector";
 import { usePosts } from "./hooks/usePosts";
 import { useInView } from "react-intersection-observer";
-import { Posts, PostInform } from "../types/PostInform";
+import { PostInform } from "../types/PostInform";
 import { useQuery } from "@tanstack/react-query";
 import Itemrank from "../components/Itemrank";
 import { filter_tag_init_state } from "../utils/constants";
@@ -23,9 +23,13 @@ export default function Page_home() {
     filter_tag_init_state
   );
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
-  const [is_open, set_is_open] = useState<boolean>(false);
+  const [is_open, set_is_open] = useState<boolean>(
+    sessionStorage.getItem("is_search") === "true"
+  );
   const searchParams = useSearchParams();
   const [post_chunk, set_post_chunk] = useState<PostInform[][]>([[]]);
+
+  sessionStorage.removeItem("is_search");
 
   const {
     data,
@@ -86,7 +90,6 @@ export default function Page_home() {
     if (!data) {
       return;
     }
-    console.log(data?.pages);
     const post_list = data?.pages.reduce<PostInform[]>((acc, _) => {
       return [...acc, ...(_.data ?? [])];
     }, []);
@@ -98,6 +101,7 @@ export default function Page_home() {
     }, []);
     set_post_chunk(post_chunk);
   }, [data]);
+
   useEffect(() => {
     set_filter_tag(prev => ({
       ...prev,
@@ -128,7 +132,7 @@ export default function Page_home() {
   }
 
   return (
-    <main>
+    <main className="home">
       <div className="primary-filter-wrap">
         <button
           className="primary-filter filter-open"
@@ -240,7 +244,9 @@ export default function Page_home() {
         set_is_open={set_is_open}
       />
       {status === "pending" ? (
-        <p>Loading...</p>
+        <div>
+          <span className="loading"></span>
+        </div>
       ) : status === "error" ? (
         <p>
           Error:{" "}
@@ -257,9 +263,8 @@ export default function Page_home() {
               </div>
             )}
           </div>
-          {/* 게시물 목록 렌더링 */}
           <Itemrank itemrank={item_rank.data ?? []} />
-
+          {/* 게시물 목록 렌더링 */}
           <div className="post-container">
             {post_chunk
               .slice(1, post_chunk.length)

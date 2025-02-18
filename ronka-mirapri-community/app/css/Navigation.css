@@ -28,7 +28,12 @@ div.logo {
 .navigation_right li {
   cursor: pointer;
 }
-
+.search-button {
+  background: none;
+  border: none;
+  display: flex;
+  cursor: pointer;
+}
 img#search {
   display: block;
   height: 24px;
@@ -46,9 +51,6 @@ img#menu-bar {
 @media (min-width: 1075px) {
   .navigation_wrap {
     width: 100vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     height: 102px;
 
     color: #006351;

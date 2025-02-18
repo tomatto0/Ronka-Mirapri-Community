@@ -331,8 +331,12 @@ export default function Page_editor() {
         return;
       }
       const img_res = await img_response.json();
-      console.log(img_res);
       const image_url = img_res.image_url;
+
+      post_data.title = post_data.title.trim();
+      post_data.content = post_data.content.trim();
+      post_data.sns = post_data.sns.trim();
+
       const post_response = await fetch("/api/db/posts", {
         method: "POST",
         body: JSON.stringify({

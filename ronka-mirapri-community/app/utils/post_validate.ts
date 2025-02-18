@@ -30,10 +30,18 @@ export default function post_validate(
     message.is_validate = false;
     message.title = "제목을 입력해주세요.";
   }
+  if (post_data.title.length > 20) {
+    message.is_validate = false;
+    message.title = "제목은 20자 이내로 작성해주세요.";
+  }
   if (cursed_word_check(post_data.title)) {
     message.is_validate = false;
     message.title =
       "제목에 부적절한 단어가 포함되어있습니다. 부적절한 내용을 작성할 경우 통보없이 수정, 탈퇴처리 될 수 있습니다.";
+  }
+  if (post_data.content.length > 300) {
+    message.is_validate = false;
+    message.content = "내용은 300자 이내로 작성해주세요.";
   }
   if (cursed_word_check(post_data.content)) {
     message.is_validate = false;

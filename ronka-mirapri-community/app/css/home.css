@@ -1,4 +1,5 @@
-main {
+main.home {
+  width: 100vw;
 }
 
 .post-container {
@@ -13,24 +14,6 @@ main {
   gap: 12px;
   flex-wrap: wrap;
   margin-bottom: 12px;
-}
-
-.tlToggle {
-  display: flex;
-  font-size: 17px;
-  line-height: normal;
-  margin-bottom: 30px;
-  gap: 10px;
-}
-
-.active {
-  color: #4f938d;
-  text-decoration-line: underline;
-  text-decoration-style: solid;
-  text-decoration-skip-ink: auto;
-  text-decoration-thickness: 10%; /* 1.7px */
-  text-underline-offset: 25%; /* 4.25px */
-  text-underline-position: from-font;
 }
 
 .primary-filter-wrap {
