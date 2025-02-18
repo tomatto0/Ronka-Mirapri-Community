@@ -142,6 +142,7 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
+  overflow-x: hidden;
 }
 .App {
   min-height: 100vh;

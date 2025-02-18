@@ -9,7 +9,9 @@ import { PostInform } from "../../../types/PostInform";
 import { useUserPosts, useUserLikedPosts } from "./hooks/useUserPosts";
 import { useParams } from "next/navigation";
 import { useGetUserInfo } from "./hooks/useUserInfo";
+import EditButton from "@/app/components/EditButton";
 import AutoLink from "@/app/components/AutoLink";
+
 
 export default function Page_user() {
   const params = useParams<{ name: string }>();
@@ -166,6 +168,7 @@ export default function Page_user() {
       <div ref={ref} className="loader">
         {userLikedPosts.isFetchingNextPage && <p>Loading more...</p>}
       </div>
+      <EditButton />
     </main>
   );
 }

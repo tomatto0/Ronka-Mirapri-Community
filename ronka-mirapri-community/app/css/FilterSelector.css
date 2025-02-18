@@ -258,8 +258,9 @@
 
 @media (min-width: 1075px) {
   .filter-background {
+    display: flex;
     padding-top: 13vh;
-    padding-left: calc(30%);
+    justify-content: center;
   }
 
   .filter-wrap {
