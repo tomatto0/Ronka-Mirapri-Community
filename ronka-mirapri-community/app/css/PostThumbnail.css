@@ -28,6 +28,7 @@
   align-items: flex-end;
 
   p {
+    padding-right: 10px;
     opacity: 0;
     color: white;
     font-family: "Pretendard";

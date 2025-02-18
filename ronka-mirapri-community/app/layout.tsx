@@ -3,7 +3,6 @@ import "./globals.css";
 import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 import Providers from "./components/Providers";
 import Link from "next/link";
-import Navigation from "./components/Navigation";
 
 export const metadata: Metadata = {
   title: "롱카의 투영기록?",
@@ -50,12 +49,7 @@ export default function RootLayout({
         </noscript>
         <div id="root">
           <div className="App">
-            <Providers>
-              <div className="header">
-                <Navigation />
-              </div>
-              {children}
-            </Providers>
+            <Providers>{children}</Providers>
             <div className="footer">
               <Link href="https://ronkacloset.com">
                 https://ronkacloset.com
