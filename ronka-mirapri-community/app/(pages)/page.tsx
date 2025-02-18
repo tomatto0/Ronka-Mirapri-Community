@@ -18,18 +18,17 @@ import EditButton from "../components/EditButton";
 export default function Page_home() {
   const { data: session } = useSession();
 
-  const [filter, set_filter] = useState<string>("{}");
+  console.log(sessionStorage.getItem("filter") ?? "{}");
+  const [filter, set_filter] = useState<string>(
+    sessionStorage.getItem("filter") ?? "{}"
+  );
   const [filter_tag, set_filter_tag] = useState<typeof filter_tag_init_state>(
     filter_tag_init_state
   );
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
-  const [is_open, set_is_open] = useState<boolean>(
-    sessionStorage.getItem("is_search") === "true"
-  );
+  const [is_open, set_is_open] = useState<boolean>(false);
   const searchParams = useSearchParams();
   const [post_chunk, set_post_chunk] = useState<PostInform[][]>([[]]);
-
-  sessionStorage.removeItem("is_search");
 
   const {
     data,
@@ -65,14 +64,14 @@ export default function Page_home() {
         ? { job: { $in: filter_tag.job } }
         : { job: { $in: filter_tag.job, $nin: ["모든 클래스"] } };
     }
-    set_filter(
-      JSON.stringify({
-        ...keyword_filter,
-        ...gender_filter,
-        ...race_filter,
-        ...job_filter,
-      })
-    );
+    const filter = {
+      ...keyword_filter,
+      ...gender_filter,
+      ...race_filter,
+      ...job_filter,
+    };
+    set_filter(JSON.stringify(filter));
+    sessionStorage.setItem("filter", JSON.stringify(filter));
   }
 
   // 무한 스크롤 감지해서 다음 페이지 로드

@@ -116,6 +116,7 @@ export default function Editor({
   }
   function tag_change_handler(e: React.ChangeEvent<HTMLInputElement>) {
     const tag_input = e.target.value;
+
     if (tag_input.slice(-1) === " ") {
       if (!post_data.tag.includes(tag_input.trim())) {
         dispatch({
@@ -126,7 +127,7 @@ export default function Editor({
       }
       set_tag_input("");
     } else {
-      set_tag_input(tag_input);
+      set_tag_input(tag_input.slice(0, 10));
     }
   }
   //#endregion
@@ -243,11 +244,11 @@ export default function Editor({
           태그
         </label>
         <div className="editor-tag-box">
-          <div className="editor-tags-wrap">
-            {post_data.tag.map((tag, i) => (
-              <TagBox value={tag} key={i} />
-            ))}
-          </div>
+          {/* <div className="editor-tags-wrap"> */}
+          {post_data.tag.map((tag, i) => (
+            <TagBox value={tag} key={i} />
+          ))}
+          {/* </div> */}
           <input
             className="tag-input"
             type="text"

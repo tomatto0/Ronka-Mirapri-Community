@@ -5,12 +5,13 @@ import "../css/Navigation.css";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import FilterSelector from "./FilterSelector";
 
 export default function Navigation() {
   const { data: session } = useSession();
   const router = useRouter();
   const search = () => {
-    router.push("/search");
+    router.push("/");
   };
 
   return (
@@ -27,26 +28,22 @@ export default function Navigation() {
               GALLERY
             </Link>
           </li>
-
           <li>
             <Link href="/editor" className="menu">
               GENERATOR
             </Link>
           </li>
-
           <li>
             <Link href="/" className="menu">
               ABOUT
             </Link>
           </li>
-          {session?.user?.login ? (
+          {session?.user?.login && (
             <li>
               <Link href={`/user/${session?.user.nickname}`} className="menu">
                 MYPAGE
               </Link>
             </li>
-          ) : (
-            ""
           )}
         </ul>
         <div className="navigation_right">

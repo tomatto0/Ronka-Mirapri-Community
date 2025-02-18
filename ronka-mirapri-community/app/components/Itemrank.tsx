@@ -8,11 +8,11 @@ export default function Itemrank({ itemrank }: { itemrank: string[] }) {
 
   useEffect(() => {
     if (flowRef.current !== null) {
-      const resizeObserver = new ResizeObserver(() => {
+      const resizeObserver = new ResizeObserver(entries => {
         set_text_iterate_number(
           Math.ceil(
             document.documentElement.clientWidth /
-              flowRef.current!.getBoundingClientRect().width
+              entries[0].target.getBoundingClientRect().width
           ) + 1
         );
       });

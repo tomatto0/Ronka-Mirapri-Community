@@ -148,7 +148,6 @@ export default function FilterSelector({
   }
 
   useEffect(() => {
-    console.log(filter_tag);
     set_selected_filter_tag(filter_tag);
   }, [is_open]);
 
