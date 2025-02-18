@@ -104,6 +104,13 @@ export default function Page_home() {
       ...prev,
       keyword: searchParams.get("keyword") ?? "",
     }));
+  }, [searchParams]);
+
+  useEffect(() => {
+    set_filter_tag(prev => ({
+      ...prev,
+      keyword: searchParams.get("keyword") ?? "",
+    }));
   }, []);
 
   const fetch_item_rank = async (): Promise<string[]> => {

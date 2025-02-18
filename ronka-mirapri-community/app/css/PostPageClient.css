@@ -7,6 +7,7 @@ main.post {
   align-items: flex-start;
   justify-content: space-between;
   position: relative;
+  margin-bottom: 36px;
   .post-title {
     color: #006351;
     font-weight: 700;
@@ -69,6 +70,7 @@ main.post {
   width: 700px;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 36px;
   .post-author {
     color: #337e78;
     text-decoration: underline;
