@@ -23,7 +23,7 @@ div.main-container {
 }
 
 .write_button_wrap {
-  margin-top: 20px;
+  margin-top: 28px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,6 +48,13 @@ div.main-container {
   color: white;
 }
 
+.write-button-content {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding-left: 5px;
+}
+
 /* 에디터 글쓰기 버튼 */
 
 .editor-submit-button {
@@ -62,6 +69,7 @@ div.main-container {
   font-weight: 600;
   border-radius: 8px;
   cursor: pointer;
+  fill: red;
 }
 
 .editor-submit-button:hover {
@@ -235,5 +243,9 @@ div.editor-container {
 
   .editor-submit-button {
     max-width: 1076px;
+  }
+
+  .write_button_wrap {
+    margin-top: 20px;
   }
 }

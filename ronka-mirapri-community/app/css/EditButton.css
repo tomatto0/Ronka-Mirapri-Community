@@ -1,0 +1,24 @@
+.edit-button {
+  bottom: 15px;
+  right: 15px;
+  position: fixed;
+  background-color: #006351;
+  width: 58px;
+  height: 58px;
+  border-radius: 60px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-button:hover {
+  background-color: #004a3c;
+}
+
+@media (min-width: 1240px) {
+  .edit-button {
+    right: calc(50% - 615px);
+  }
+}
