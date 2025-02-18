@@ -1,12 +1,14 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 export default function SearchPage() {
+  const searchParams = useSearchParams();
+  const keyword = searchParams.get("keyword");
+  console.log("search", keyword);
   const router = useRouter();
   useEffect(() => {
-    sessionStorage.setItem("is_search", "true");
-    router.push("/");
+    router.push(`/${keyword ? `?keyword=${keyword}` : ""}`);
   }, []);
 }

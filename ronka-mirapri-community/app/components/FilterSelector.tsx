@@ -125,15 +125,8 @@ export default function FilterSelector({
     }
   }
 
-  function update_params(key: string, value: string) {
-    const params = new URLSearchParams(searchParams);
-    params.set(key, value);
-    router.push(`${pathname}?${params.toString()}`);
-  }
-
   function search(keyword: string) {
     set_selected_filter_tag(prev => ({ ...prev, keyword: keyword.trim() }));
-    update_params("keyword", keyword);
     set_keyword("");
   }
 

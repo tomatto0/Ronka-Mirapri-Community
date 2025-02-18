@@ -10,20 +10,23 @@ import { useInView } from "react-intersection-observer";
 import { PostInform } from "../types/PostInform";
 import { useQuery } from "@tanstack/react-query";
 import Itemrank from "../components/Itemrank";
-import { filter_tag_init_state } from "../utils/constants";
-import { useSearchParams } from "next/navigation";
+import {
+  filter_tag_init_state,
+  job_category,
+  job_category_group,
+} from "../utils/constants";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import EditButton from "../components/EditButton";
 
 export default function Page_home() {
   const { data: session } = useSession();
+  const router = useRouter();
 
-  console.log(sessionStorage.getItem("filter") ?? "{}");
-  const [filter, set_filter] = useState<string>(
-    sessionStorage.getItem("filter") ?? "{}"
-  );
+  const session_filter = JSON.parse(sessionStorage.getItem("filter") ?? "{}");
+  const [filter, set_filter] = useState<string>(session_filter.filter ?? "{}");
   const [filter_tag, set_filter_tag] = useState<typeof filter_tag_init_state>(
-    filter_tag_init_state
+    session_filter.filter_tag ?? filter_tag_init_state
   );
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
   const [is_open, set_is_open] = useState<boolean>(false);
@@ -71,7 +74,44 @@ export default function Page_home() {
       ...job_filter,
     };
     set_filter(JSON.stringify(filter));
-    sessionStorage.setItem("filter", JSON.stringify(filter));
+    console.log("update_filter");
+    sessionStorage.setItem("filter", JSON.stringify({ filter, filter_tag }));
+  }
+
+  function job_delete(job: string) {
+    function job_groupize(job: string[]) {
+      const order_map = new Map(job_category.map((item, i) => [item, i]));
+      const groups = Object.keys(job_category_group);
+      groups.forEach(group => {
+        if (job_category_group[group].every(i => job.includes(i))) {
+          if (!job.includes(group)) {
+            job = [...job, group];
+          }
+        } else {
+          job = job.filter(i => i !== group);
+        }
+      });
+      job.sort(
+        (a, b) =>
+          (order_map.get(a) ?? Infinity) - (order_map.get(b) ?? Infinity)
+      );
+      return job;
+    }
+    if (Object.keys(job_category_group).includes(job)) {
+      const new_job = filter_tag.job.filter(
+        i => !job_category_group[job].includes(i) && i !== job
+      );
+      set_filter_tag(prev => ({
+        ...prev,
+        job: job_groupize(new_job),
+      }));
+    } else {
+      const new_job = filter_tag.job.filter(i => i !== job);
+      set_filter_tag(prev => ({
+        ...prev,
+        job: job_groupize(new_job),
+      }));
+    }
   }
 
   // 무한 스크롤 감지해서 다음 페이지 로드
@@ -83,6 +123,12 @@ export default function Page_home() {
 
   useEffect(() => {
     update_filter();
+
+    if (filter_tag.keyword !== "") {
+      router.push(`/?keyword=${filter_tag.keyword}`);
+    } else {
+      router.push(`/`);
+    }
   }, [filter_tag]);
 
   useEffect(() => {
@@ -104,14 +150,14 @@ export default function Page_home() {
   useEffect(() => {
     set_filter_tag(prev => ({
       ...prev,
-      keyword: searchParams.get("keyword") ?? "",
+      keyword: searchParams.get("keyword") ?? filter_tag.keyword,
     }));
   }, [searchParams]);
 
   useEffect(() => {
     set_filter_tag(prev => ({
       ...prev,
-      keyword: searchParams.get("keyword") ?? "",
+      keyword: searchParams.get("keyword") ?? filter_tag.keyword,
     }));
   }, []);
 
@@ -182,14 +228,14 @@ export default function Page_home() {
         )}
         {filter_tag.keyword !== "" && (
           <button
-            className="primary-filter filter-keyword"
+            className="primary-filter filter-items"
             onClick={() => {
               set_filter_tag(prev => ({ ...prev, keyword: "" }));
             }}
           >
             검색: {filter_tag.keyword}
             <img
-              src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_purple.svg"}
+              src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"}
               alt="modal open button"
             />
           </button>
@@ -198,10 +244,7 @@ export default function Page_home() {
           <button
             className="primary-filter filter-items"
             onClick={() => {
-              set_filter_tag(prev => ({
-                ...prev,
-                job: prev.job.filter(i => i !== job),
-              }));
+              job_delete(job);
             }}
             key={`filter-${job}`}
           >

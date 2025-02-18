@@ -6,13 +6,36 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import FilterSelector from "./FilterSelector";
+import { useEffect, useState } from "react";
+import { filter_tag_init_state } from "../utils/constants";
 
 export default function Navigation() {
   const { data: session } = useSession();
   const router = useRouter();
+
+  const [filter, set_filter] = useState<string>("{}");
+  const [filter_tag, set_filter_tag] = useState<typeof filter_tag_init_state>(
+    filter_tag_init_state
+  );
+  const [is_open, set_is_open] = useState<boolean>(false);
+
   const search = () => {
-    router.push("/");
+    if (!is_open) {
+      const session_filter = JSON.parse(
+        sessionStorage.getItem("filter") ?? "{}"
+      );
+      set_filter(session_filter.filter ?? "{}");
+      set_filter_tag(session_filter.filter_tag ?? filter_tag_init_state);
+    }
+    set_is_open(prev => !prev);
   };
+
+  useEffect(() => {
+    if (!is_open) {
+      sessionStorage.setItem("filter", JSON.stringify({ filter, filter_tag }));
+      router.push(`/search?keyword=${filter_tag.keyword}`);
+    }
+  }, [filter_tag]);
 
   return (
     <>
@@ -65,6 +88,14 @@ export default function Navigation() {
           <img alt="hamburger icon" id="menu-bar" />
         </div>
       </div>
+      <FilterSelector
+        filter={filter}
+        set_filter={set_filter}
+        filter_tag={filter_tag}
+        set_filter_tag={set_filter_tag}
+        is_open={is_open}
+        set_is_open={set_is_open}
+      />
     </>
   );
 }
