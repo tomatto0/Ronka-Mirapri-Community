@@ -13,8 +13,11 @@ import Itemrank from "../components/Itemrank";
 import { filter_tag_init_state } from "../utils/constants";
 import { useSearchParams } from "next/navigation";
 
+import EditButton from "../components/EditButton";
+
 export default function Page_home() {
   const { data: session } = useSession();
+
   const [filter, set_filter] = useState<string>("{}");
   const [filter_tag, set_filter_tag] = useState<typeof filter_tag_init_state>(
     filter_tag_init_state
@@ -278,6 +281,7 @@ export default function Page_home() {
       <div ref={ref} className="loader">
         {isFetchingNextPage && <p>Loading more...</p>}
       </div>
+      <EditButton />
     </main>
   );
 }
