@@ -194,6 +194,10 @@ export default function EditorPageClient({
       return;
     }
     try {
+      post_data.title = post_data.title.trim();
+      post_data.content = post_data.content.trim();
+      post_data.sns = post_data.sns.trim();
+
       const post_response = await fetch("/api/db/posts", {
         method: "PATCH",
         body: JSON.stringify({

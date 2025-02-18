@@ -1,6 +1,6 @@
 "use client";
-
 import "../../../css/home.css";
+import "../../../css/User.css";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import PostThumbnail from "../../../components/PostThumbnail";
@@ -9,6 +9,7 @@ import { Posts, PostInform } from "../../../types/PostInform";
 import { useUserPosts, useUserLikedPosts } from "./hooks/useUserPosts";
 import { useParams } from "next/navigation";
 import { useGetUserInfo } from "./hooks/useUserInfo";
+import AutoLink from "@/app/components/AutoLink";
 
 export default function Page_user() {
   const params = useParams<{ name: string }>();
@@ -19,7 +20,9 @@ export default function Page_user() {
 
   const userInfo = useGetUserInfo(userName);
   const userPosts = useUserPosts(userName, 12);
+  const [post_chunk, set_post_chunk] = useState<PostInform[][]>([[]]);
   const userLikedPosts = useUserLikedPosts(userName, 12);
+  const [like_chunk, set_like_chunk] = useState<PostInform[][]>([[]]);
 
   // 무한 스크롤 감지해서 다음 페이지 로드
   useEffect(() => {
@@ -33,11 +36,42 @@ export default function Page_user() {
   }, [inView, userPosts.hasNextPage]);
 
   useEffect(() => {
-    console.log(userInfo.data);
-  }, [userInfo.data]);
+    if (!userPosts.data) {
+      return;
+    }
+    const post_list = userPosts.data?.pages.reduce<PostInform[]>((acc, _) => {
+      return [...acc, ...(_.data ?? [])];
+    }, []);
+    const post_chunk = post_list.reduce<PostInform[][]>((acc, _, i) => {
+      if (i % 4 === 0) {
+        acc.push(post_list.slice(i, i + 4));
+      }
+      return acc;
+    }, []);
+    set_post_chunk(post_chunk);
+  }, [userPosts.data]);
+
+  useEffect(() => {
+    if (!userLikedPosts.data) {
+      return;
+    }
+    const post_list = userLikedPosts.data?.pages.reduce<PostInform[]>(
+      (acc, _) => {
+        return [...acc, ...(_.data ?? [])];
+      },
+      []
+    );
+    const post_chunk = post_list.reduce<PostInform[][]>((acc, _, i) => {
+      if (i % 4 === 0) {
+        acc.push(post_list.slice(i, i + 4));
+      }
+      return acc;
+    }, []);
+    set_like_chunk(post_chunk);
+  }, [userLikedPosts.data]);
 
   return (
-    <main>
+    <main className="user">
       {userInfo.status === "pending" ? (
         <p>Loading...</p>
       ) : userInfo.status === "error" ? (
@@ -48,36 +82,42 @@ export default function Page_user() {
             : "An unknown error occurred"}
         </p>
       ) : (
-        <div>
-          <p>{userInfo?.data?.nickname}</p>
-          <p>{userInfo?.data?.sns}</p>
-          <p>{userInfo?.data?.like_count}</p>
+        <div className="user-card">
+          <div>
+            <p className="user-name">{userInfo?.data?.nickname}</p>
+            <AutoLink className="user-sns" target="_blank">
+              {userInfo?.data?.sns.toUpperCase()}
+            </AutoLink>
+            <button className="user-setting">
+              <img alt="setting" id="setting" />
+            </button>
+          </div>
+          <p className="user-like">{userInfo?.data?.like_count}</p>
         </div>
       )}
 
-      <div>
-        <div className="tlToggle">
+      <div className="tlToggle">
+        <h3
+          className={timeline === "userPosts" ? "active" : ""}
+          onClick={() => {
+            set_timeline("userPosts");
+            userPosts.refetch();
+          }}
+        >
+          POST
+        </h3>
+        <div className="vertical-line" />
+        {session?.user.nickname === userInfo?.data?.nickname && (
           <h3
-            className={timeline === "userPosts" ? "active" : ""}
+            className={timeline === "userPosts" ? "" : "active"}
             onClick={() => {
-              set_timeline("userPosts");
-              userPosts.refetch();
+              set_timeline("likedPosts");
+              userLikedPosts.refetch();
             }}
           >
-            POST
+            LIKE
           </h3>
-          {session?.user.nickname === userInfo?.data?.nickname && (
-            <h3
-              className={timeline === "userPosts" ? "" : "active"}
-              onClick={() => {
-                set_timeline("likedPosts");
-                userLikedPosts.refetch();
-              }}
-            >
-              LIKE
-            </h3>
-          )}
-        </div>
+        )}
       </div>
 
       {userPosts.status === "pending" ? (
@@ -92,36 +132,29 @@ export default function Page_user() {
       ) : timeline === "userPosts" ? (
         <div className="post-container">
           {/* 게시물 목록 렌더링 */}
-          {userPosts.data?.pages.map((page: Posts, pageIndex: number) =>
-            page.data?.map((post: PostInform, i: number) => (
-              <PostThumbnail
-                post={post}
-                queryKey={["userPosts", userName]}
-                index={[pageIndex, i]}
-                key={`post-${post.index}`}
-              />
-            ))
-          )}
+          {post_chunk.map((chunk: PostInform[], i: number) => (
+            <div className="post-container-row" key={i + 1}>
+              {chunk.map((post: PostInform, i: number) => (
+                <PostThumbnail post={post} key={`post-${post.index}`} />
+              ))}
+            </div>
+          ))}
         </div>
       ) : (
         <div className="post-container">
           {/* 게시물 목록 렌더링 */}
-          {userLikedPosts.data?.pages.map((page: Posts, pageIndex: number) =>
-            page?.data?.map((post: PostInform, i: number) => (
-              <PostThumbnail
-                post={post}
-                queryKey={["userLikedPosts", userName]}
-                index={[pageIndex, i]}
-                key={`post-${post.index}`}
-              />
-            ))
-          )}
+          {like_chunk.map((chunk: PostInform[], i: number) => (
+            <div className="post-container-row" key={i + 1}>
+              {chunk.map((post: PostInform, i: number) => (
+                <PostThumbnail post={post} key={`post-${post.index}`} />
+              ))}
+            </div>
+          ))}
         </div>
       )}
       <div ref={ref} className="loader">
         {userPosts.isFetchingNextPage && <p>Loading more...</p>}
       </div>
-
       <div ref={ref} className="loader">
         {userLikedPosts.isFetchingNextPage && <p>Loading more...</p>}
       </div>

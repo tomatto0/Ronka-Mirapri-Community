@@ -1,0 +1,93 @@
+main.user {
+  width: 100vw;
+  max-width: 1076px;
+}
+
+.user-card {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  border-bottom: 1px solid #b2c6cd;
+
+  div {
+    display: flex;
+    align-items: center;
+  }
+
+  .user-name {
+    font-size: 3.2rem;
+    font-weight: 600;
+    color: #006351;
+  }
+  .user-sns {
+    font-family: "REM";
+    font-size: 1.1rem;
+    color: #628d85;
+    margin-left: 32px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  .user-setting {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 16px;
+    display: flex;
+    img#setting {
+      height: 1.8rem;
+      content: url("/img/settings.svg");
+      margin: auto;
+    }
+  }
+  .user-like {
+    font-family: "REM";
+    font-size: 1.5rem;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    color: #006351;
+    border-radius: 30px;
+    border: 1px solid #b2c6cd;
+    padding: 6px 13px;
+  }
+  .user-like::before {
+    content: "";
+    margin-right: 8px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-size: 16px 16px;
+    background-image: url("/img/fill-heart.svg");
+  }
+}
+
+.tlToggle {
+  display: flex;
+  margin-top: 20px;
+  margin-left: 18px;
+  margin-bottom: 20px;
+  gap: 22px;
+  h3 {
+    font-family: "REM";
+    font-size: 1.7rem;
+    font-weight: 500;
+    line-height: normal;
+    color: #b9c0d4;
+  }
+  h3.active {
+    color: #4f938d;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: 10%; /* 1.7px */
+    text-underline-offset: 25%; /* 4.25px */
+    text-underline-position: from-font;
+  }
+  .vertical-line {
+    width: 1px;
+    background-color: #1e66592f;
+  }
+}

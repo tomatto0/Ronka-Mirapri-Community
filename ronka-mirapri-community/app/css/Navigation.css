@@ -40,9 +40,6 @@ img#menu-bar {
 @media (min-width: 1075px) {
   .navigation_wrap {
     width: 100vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     height: 102px;
 
     color: #006351;

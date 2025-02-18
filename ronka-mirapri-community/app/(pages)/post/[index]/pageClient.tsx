@@ -4,13 +4,20 @@ import "../../../css/PostPageClient.css";
 import ItemViewer from "@/app/components/ItemViewer";
 import { Item } from "@/app/types/Item";
 import { useAddLike, useDeleteLike, useGetPostLikes } from "./hooks/useLike";
-import { job_category, job_category_group } from "@/app/utils/constants";
+import { job_category_group } from "@/app/utils/constants";
+import Link from "next/link";
+import Swal from "sweetalert2";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import React, { useState } from "react";
+import AutoLink from "@/app/components/AutoLink";
 
 export default function PostPageClient({
   post_data,
 }: {
   post_data: {
-    author: { nickname: string };
+    author: { nickname: string; _id: string };
     _id: string;
     index: number;
     image_url: string;
@@ -26,16 +33,18 @@ export default function PostPageClient({
     created_at: string;
   };
 }) {
+  const { data: session } = useSession();
+  const router = useRouter();
   const postIndex = post_data.index;
   const postId = post_data._id;
   const postDate = formatDate(new Date(post_data.created_at));
+  const jobs = job_summary(post_data.job);
   function formatDate(date: Date) {
     const yyyy = date.getFullYear();
     const mm = String(date.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1 필요
     const dd = String(date.getDate()).padStart(2, "0"); // 일
     return `${yyyy}.${mm}.${dd}`;
   }
-
   function job_summary(jobs: string[]) {
     const summary: string[] = [];
     for (let job of jobs) {
@@ -45,11 +54,62 @@ export default function PostPageClient({
     }
     return jobs.filter(job => !summary.includes(job));
   }
-  const jobs = job_summary(post_data.job);
+  async function post_delete() {
+    const result = await Swal.fire({
+      title: "정말로 삭제하시겠습니까?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "삭제",
+      cancelButtonText: "취소",
+    });
+    if (result.isConfirmed) {
+      delete_post();
+    }
+  }
 
   const { data, isLoading, isError } = useGetPostLikes(postIndex);
   const { deleteLikeMutation } = useDeleteLike(postIndex);
   const { addLikeMutation } = useAddLike(postIndex);
+  const { mutate: delete_post } = useMutation({
+    mutationFn: async () => {
+      try {
+        const response = await fetch(`/api/db/posts`, {
+          method: "DELETE",
+          body: JSON.stringify({ id: postId }),
+        });
+        const res = await response.json();
+        return res;
+      } catch (e) {
+        if (e instanceof Error) {
+          throw new Error(e.message || "삭제 실패");
+        }
+        throw e;
+      }
+    },
+    onSuccess: async res => {
+      if (res.success) {
+        await Swal.fire({
+          title: "성공적으로 삭제되었습니다.",
+          icon: "success",
+          timer: 2000,
+        });
+        router.push("/");
+      } else {
+        Swal.fire({
+          title: "삭제에 실패했습니다.",
+          text: res.error ?? "알 수 없는 에러",
+          icon: "error",
+        });
+      }
+    },
+    onError: error => {
+      Swal.fire({
+        title: "삭제에 실패했습니다.",
+        text: error.message ?? "알 수 없는 에러",
+        icon: "error",
+      });
+    },
+  });
 
   const toggleLike = () => {
     if (data?.is_liked) {
@@ -58,6 +118,7 @@ export default function PostPageClient({
       addLikeMutation(postId);
     }
   };
+  const [is_modal_open, set_is_modal_open] = useState<boolean>(false);
 
   const share_twitter = () => {
     const href = "https://twitter.com/intent/tweet?";
@@ -90,9 +151,29 @@ export default function PostPageClient({
   if (isError) return <div>에러 발생</div>;
 
   return (
-    <main>
-      <p className="post-title">{post_data.title}</p>
+    <main className="post">
       <div className="post-title-box">
+        <p className="post-title">{post_data.title}</p>
+        {session?.user._id === post_data.author._id && (
+          <button
+            className="post-edit"
+            onClick={() => {
+              set_is_modal_open(prev => !prev);
+            }}
+          >
+            <img alt="edit icon" id="edit" />
+          </button>
+        )}
+        {session?.user._id === post_data.author._id && (
+          <div
+            className={`post-edit-modal ${is_modal_open ? "modal-active" : ""}`}
+          >
+            <Link href={`/editor/${postIndex}`}>수정하기</Link>
+            <button onClick={post_delete}>삭제하기</button>
+          </div>
+        )}
+      </div>
+      <div className="post-subtitle-box">
         <div>
           <p className="post-author">{post_data.author.nickname}</p>
           <p className="post-date">{postDate}</p>
@@ -123,8 +204,12 @@ export default function PostPageClient({
         </div>
       </div>
       <p className="post-content">{post_data.content}</p>
-      <p className="post-subtitle">SNS 게시글</p>
-      <p className="post-sns">{post_data.sns}</p>
+      {post_data.sns && <p className="post-subtitle">SNS 게시글</p>}
+      {post_data.sns && (
+        <AutoLink className="post-sns" target="_blank">
+          {post_data.sns}
+        </AutoLink>
+      )}
       <p className="post-subtitle">공유하기</p>
       <button className="share-button bluesky" onClick={share_bluesky}>
         BLUESKY
