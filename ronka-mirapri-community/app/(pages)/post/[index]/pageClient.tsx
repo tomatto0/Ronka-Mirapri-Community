@@ -147,7 +147,6 @@ export default function PostPageClient({
     return <div className="tag-box">{content}</div>;
   };
 
-  if (isLoading) return <div>로딩 중...</div>;
   if (isError) return <div>에러 발생</div>;
 
   return (
@@ -175,7 +174,12 @@ export default function PostPageClient({
       </div>
       <div className="post-subtitle-box">
         <div>
-          <p className="post-author">{post_data.author.nickname}</p>
+          <Link
+            href={`/user/${post_data.author.nickname}`}
+            className="post-author"
+          >
+            {post_data.author.nickname}
+          </Link>
           <p className="post-date">{postDate}</p>
         </div>
         <button className="like-button" onClick={toggleLike}>

@@ -1,11 +1,11 @@
 "use client";
 import "../../../css/home.css";
 import "../../../css/User.css";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import PostThumbnail from "../../../components/PostThumbnail";
 import { useInView } from "react-intersection-observer";
-import { Posts, PostInform } from "../../../types/PostInform";
+import { PostInform } from "../../../types/PostInform";
 import { useUserPosts, useUserLikedPosts } from "./hooks/useUserPosts";
 import { useParams } from "next/navigation";
 import { useGetUserInfo } from "./hooks/useUserInfo";
@@ -73,7 +73,9 @@ export default function Page_user() {
   return (
     <main className="user">
       {userInfo.status === "pending" ? (
-        <p>Loading...</p>
+        <div className="user-card">
+          <span className="loading"></span>
+        </div>
       ) : userInfo.status === "error" ? (
         <p>
           Error:{" "}
@@ -88,9 +90,11 @@ export default function Page_user() {
             <AutoLink className="user-sns" target="_blank">
               {userInfo?.data?.sns.toUpperCase()}
             </AutoLink>
-            <button className="user-setting">
-              <img alt="setting" id="setting" />
-            </button>
+            {session?.user.nickname === userInfo?.data?.nickname && (
+              <button className="user-setting">
+                <img alt="setting" id="setting" />
+              </button>
+            )}
           </div>
           <p className="user-like">{userInfo?.data?.like_count}</p>
         </div>
@@ -106,7 +110,9 @@ export default function Page_user() {
         >
           POST
         </h3>
-        <div className="vertical-line" />
+        {session?.user.nickname === userInfo?.data?.nickname && (
+          <div className="vertical-line" />
+        )}
         {session?.user.nickname === userInfo?.data?.nickname && (
           <h3
             className={timeline === "userPosts" ? "" : "active"}
@@ -121,7 +127,9 @@ export default function Page_user() {
       </div>
 
       {userPosts.status === "pending" ? (
-        <p>Loading...</p>
+        <div className="post-container">
+          <span className="loading"></span>
+        </div>
       ) : userPosts.status === "error" ? (
         <p>
           Error:{" "}

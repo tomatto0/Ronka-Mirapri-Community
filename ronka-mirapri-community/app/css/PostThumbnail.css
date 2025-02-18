@@ -10,25 +10,29 @@
 }
 
 .post-box:hover .post-box-hover {
-  opacity: 1;
+  background: linear-gradient(to bottom, #ffffff00, #000000);
+  p {
+    opacity: 1;
+  }
 }
 .post-box-hover {
   position: absolute;
   display: flex;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
   left: 0;
   bottom: 0;
   padding: 2rem;
-  background: linear-gradient(to bottom, #ffffff00, #000000);
+  background: none;
   width: 100%;
   height: 100px;
   justify-content: space-between;
   align-items: flex-end;
 
   p {
+    opacity: 0;
     color: white;
-    font-size: 2rem;
+    font-family: "Pretendard";
+    font-size: 1.6rem;
+    font-weight: 600;
   }
 
   button {
@@ -36,6 +40,17 @@
     font-size: 2rem;
     background: none;
     border: none;
+    display: flex;
+    img#fill-heart {
+      height: 18px;
+      margin: auto;
+      content: url("/img/fill-heart.svg");
+    }
+    img#hollow-heart {
+      height: 18px;
+      margin: auto;
+      content: url("/img/heart.svg");
+    }
   }
 }
 .post-thumbnail {

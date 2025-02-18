@@ -58,7 +58,12 @@ export default function PostThumbnail({
       />
       <div className="post-box-hover">
         <p>{post.title}</p>
-        <button onClick={like_handler}>{is_liked ? "♥" : "♡"}</button>
+        <button onClick={like_handler}>
+          <img
+            alt={is_liked ? "채워진 하트" : "빈 하트"}
+            id={is_liked ? "fill-heart" : "hollow-heart"}
+          />
+        </button>
       </div>
     </div>
   );

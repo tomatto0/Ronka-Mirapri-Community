@@ -28,7 +28,12 @@ div.logo {
 .navigation_right li {
   cursor: pointer;
 }
-
+.search-button {
+  background: none;
+  border: none;
+  display: flex;
+  cursor: pointer;
+}
 img#search {
   display: block;
   height: 24px;
