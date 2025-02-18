@@ -1,8 +1,137 @@
-.main-container {
+main {
+  width: 700px;
+}
+
+.post-title {
+  color: #006351;
+  font-weight: 700;
+  font-size: 4.7rem;
+  width: 660px;
+}
+.post-title-box {
+  width: 700px;
+  display: flex;
+  justify-content: space-between;
+  .post-author {
+    color: #337e78;
+    text-decoration: underline;
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+  .post-date {
+    color: #667085;
+    font-size: 1.4rem;
+    font-weight: 300;
+    font-family: "REM";
+  }
+  .like-button {
+    background: none;
+    cursor: pointer;
+    border-radius: 40px;
+    border: 1px solid #b2c6cd;
+    padding: 0 16px;
+    min-width: 64px;
+    height: 32px;
+    color: #006351;
+    font-size: 1.6rem;
+    font-family: "REM";
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0 4px;
+  }
+}
+.post-main-container {
   display: flex;
   align-items: flex-start;
+  margin-bottom: 20px;
 
   .post-image {
     height: 680px;
+    margin-right: 10px;
   }
+
+  .post-information {
+    .tag-container {
+      width: 350px;
+      display: flex;
+      gap: 0 4px;
+      flex-direction: row;
+      flex-wrap: wrap;
+      .tag-box {
+        display: inline;
+        font-size: 1.2rem;
+        color: #006351;
+        padding: 2px 8px;
+        border: 1px #99c0b8 solid;
+        border-radius: 20px;
+      }
+      .tag-box::before {
+        content: "#";
+      }
+    }
+  }
+}
+.post-content {
+  font-family: "pretendard";
+  font-size: 1.4rem;
+  color: #475467;
+  width: 100%;
+  padding-bottom: 28px;
+  margin-bottom: 28px;
+  border-bottom: 1px #b2c6cd solid;
+}
+.post-subtitle {
+  font-family: "pretendard";
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #006351;
+  margin-bottom: 8px;
+}
+.post-sns {
+  font-family: "pretendard";
+  font-size: 1.2rem;
+  color: #667085;
+  margin-bottom: 32px;
+  display: flex;
+}
+.post-sns::before {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 9px;
+  background-image: url("/img/link.svg");
+  background-size: 1.5rem 1.5rem;
+}
+.share-button {
+  cursor: pointer;
+  background: none;
+  padding: 5px 10px;
+  border-radius: 70px;
+  border: 1px #006351 solid;
+  color: #006351;
+  font-family: "REM";
+  font-size: 1.2rem;
+  display: inline-flex;
+  margin-right: 5px;
+}
+.share-button.bluesky::before {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 9px;
+  background-image: url("/img/bluesky.svg");
+  background-size: 1.5rem 1.5rem;
+}
+
+.share-button.twitter::before {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 9px;
+  background-image: url("/img/twitter.svg");
+  background-size: 1.5rem 1.5rem;
 }

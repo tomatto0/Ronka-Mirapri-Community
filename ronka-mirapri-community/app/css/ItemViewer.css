@@ -2,7 +2,8 @@
   .item-viewer-title {
     color: #006351;
     font-size: 1.7rem;
-    font-weight: bold;
+    font-weight: 600;
+    margin-bottom: 12px;
   }
   .item-searcher-list {
     border: 1px solid #006351;
@@ -13,6 +14,7 @@
     display: flex;
     flex-direction: column;
     width: 350px;
+    margin-bottom: 12px;
     .item-searcher {
       display: flex;
       position: relative;
@@ -24,7 +26,7 @@
         height: 40px;
         margin-right: 10px;
       }
-      .item-information {
+      .post-item-information {
         p {
           color: #006351;
         }
@@ -46,7 +48,7 @@
         position: absolute;
         right: 0;
         img#search {
-          height: 14px;
+          height: 1.8rem;
           content: url("/img/search_header.svg");
           margin: auto;
         }
