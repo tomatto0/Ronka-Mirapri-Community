@@ -88,7 +88,7 @@ export default function Page_sign_up() {
 
   if (session?.user.email) {
     return (
-      <main>
+      <main className="signup-fill">
         <div className="signup-wrap">
           <div className="signup-logo">
             <img alt="Ronka LookBook logo" id="signup-title" />

@@ -253,13 +253,14 @@ main.post {
   }
   .post-title-box {
     margin: 0 0 28px;
+    padding-top: 48px;
     border: none;
     row-gap: 0;
     .post-title {
       color: #006351;
       font-weight: 700;
       font-size: 4.7rem;
-      padding: 48px 0 36px;
+      padding: 0 0 36px;
     }
     .setting {
       align-self: start;

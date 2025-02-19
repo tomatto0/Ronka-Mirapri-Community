@@ -1,3 +1,7 @@
+main.signup-fill::before {
+  display: none;
+}
+
 div.signup-wrap {
   background-color: #fafafe;
   color: #006351;
