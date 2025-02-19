@@ -61,6 +61,7 @@ export default function PostPageClient({
       showCancelButton: true,
       confirmButtonText: "삭제",
       cancelButtonText: "취소",
+      reverseButtons: true,
     });
     if (result.isConfirmed) {
       delete_post();

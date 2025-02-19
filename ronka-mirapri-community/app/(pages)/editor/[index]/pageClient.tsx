@@ -234,6 +234,7 @@ export default function EditorPageClient({
         showCancelButton: true,
         confirmButtonText: "삭제",
         cancelButtonText: "취소",
+        reverseButtons: true,
       });
       if (modal.isConfirmed) {
         const post_response = await fetch("/api/db/posts", {

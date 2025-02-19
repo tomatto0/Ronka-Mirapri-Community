@@ -172,6 +172,16 @@ main {
   margin-right: 30px;
   margin-bottom: 30px;
 }
+.swal2-confirm {
+  background-color: #15b79e;
+  color: white;
+  font-weight: 700;
+}
+.swal2-cancel {
+  background-color: #e4e7ec;
+  color: #667085;
+  font-weight: 700;
+}
 
 div.footer {
   color: #50b1a8;

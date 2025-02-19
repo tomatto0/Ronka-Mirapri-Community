@@ -86,7 +86,20 @@ export default function Page_sign_up() {
       if (res.success) {
         Swal.fire({ title: "회원 탈퇴에 성공했습니다." });
         signOut();
+      } else {
+        Swal.fire({
+          title: "회원 탈퇴에 실패했습니다.",
+          text: res.errror ?? "알 수 없는 에러",
+          icon: "error",
+        });
       }
+    },
+    onError: error => {
+      Swal.fire({
+        title: "회원 탈퇴에 실패했습니다.",
+        text: error.message ?? "알 수 없는 에러",
+        icon: "error",
+      });
     },
   });
 
@@ -96,6 +109,9 @@ export default function Page_sign_up() {
     if (nickname_message !== "") {
       set_nickname_error(nickname_message);
       set_is_error(true);
+    }
+    if (sns.length > 50) {
+      set_sns_error("SNS url은 50자 이하여야 합니다.");
     }
     if (cursed_word_check(sns)) {
       set_sns_error(
@@ -108,6 +124,16 @@ export default function Page_sign_up() {
     }
     edit_user();
     return true;
+  };
+  const delete_handler = async () => {
+    const result = Swal.fire({
+      title: "정말로 탈퇴하시겠습니까?",
+      icon: "warning",
+      confirmButtonText: "탈퇴",
+      showCancelButton: true,
+      cancelButtonText: "취소",
+      reverseButtons: true,
+    });
   };
   const cancle_handler = () => {
     router.back();
@@ -174,7 +200,7 @@ export default function Page_sign_up() {
             />
             <p className="signup-error">{sns_error}</p>
           </div>
-          <button className="withdraw-submit" onClick={() => {}}>
+          <button className="withdraw-submit" onClick={delete_handler}>
             탈퇴하기
           </button>
           <div className="setting-button-container">

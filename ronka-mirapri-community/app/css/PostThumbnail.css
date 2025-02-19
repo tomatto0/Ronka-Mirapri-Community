@@ -3,6 +3,7 @@
   display: flex;
   position: relative;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .post-box:hover {
@@ -42,6 +43,7 @@
     background: none;
     border: none;
     display: flex;
+    cursor: pointer;
     img#fill-heart {
       height: 18px;
       margin: auto;

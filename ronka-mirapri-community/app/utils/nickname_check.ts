@@ -4,8 +4,8 @@ export default function nickname_validate(text: string): string {
   if (!text) {
     return "닉네임이 필요합니다.";
   }
-  if (text.length < 2) {
-    return "닉네임은 최소한 두 글자 이상이여합니다.";
+  if (text.length < 2 || text.length > 20) {
+    return "닉네임은 2자 이상, 20자 이하여합니다.";
   }
   if (/[^a-zA-Z가-힣0-9\-_']/g.test(text)) {
     return "닉네임은 한글, 영어, 숫자, 특수기호(-, _, ')만 포함할 수 있습니다.";

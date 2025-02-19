@@ -6,7 +6,7 @@ import nickname_validate from "@/app/utils/nickname_check";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 export default function Page_sign_up() {
@@ -20,7 +20,6 @@ export default function Page_sign_up() {
   const [sns, set_sns] = useState<string>("");
   const [sns_error, set_sns_error] = useState<string>("");
   const [is_error, set_is_error] = useState<boolean>(false);
-  const is_user_load = useRef<boolean>(false);
 
   const signup_handler = async () => {
     set_is_error(false);
@@ -29,9 +28,12 @@ export default function Page_sign_up() {
       set_nickname_error(nickname_message);
       set_is_error(true);
     }
+    if (sns.length > 50) {
+      set_sns_error("SNS url은 50자 이하여야 합니다.");
+    }
     if (cursed_word_check(sns)) {
       set_sns_error(
-        "SNS에 부적절한 단어가 포함되어있습니다. 부적절한 내용을 작성할 경우 통보없이 수정, 탈퇴처리 될 수 있습니다."
+        "SNS url에 부적절한 단어가 포함되어있습니다. 부적절한 내용을 작성할 경우 통보없이 수정, 탈퇴처리 될 수 있습니다."
       );
       set_is_error(true);
     }
@@ -69,9 +71,8 @@ export default function Page_sign_up() {
       if (session?.user.email) {
         set_email(session.user.email);
         if ("nickname" in session.user) {
-          console.log("이미 회원가입됨");
-          // router.push(sessionStorage.getItem("login_callback") || "/");
-          // sessionStorage.removeItem("login_callback");
+          router.push(sessionStorage.getItem("login_callback") || "/");
+          sessionStorage.removeItem("login_callback");
         }
       }
     }
