@@ -210,6 +210,47 @@ div.editor-container {
   padding: 0 3px 0 5px;
 }
 
+/* 글 수정 하단 버튼 */
+.post_edit_submit_buttons {
+  width: min(calc(100vw - 64px), 100%);
+  display: flex;
+
+  gap: 12px;
+  height: 49px;
+  margin: 24px auto 0;
+}
+
+.post_edit_delete_button {
+  width: 150px;
+  background-color: unset;
+  border-radius: 8px;
+  border: 1px solid #7e889d;
+  color: #7e889d;
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+
+.post_edit_delete_button:hover {
+  background-color: white;
+  border: 1px solid #e0e3e9;
+  color: #6d7586;
+}
+
+.post_edit_submit_button {
+  background-color: #f6fefc;
+  color: #344054;
+  flex-grow: 1;
+  border-radius: 8px;
+  border: 1px #107569 solid;
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+
+.post_edit_submit_button:hover {
+  background-color: #107569;
+  color: white;
+}
+
 @media (min-width: 1075px) {
   div.main-container {
     text-align: center;
@@ -221,12 +262,12 @@ div.editor-container {
     max-height: 608px;
     min-height: 608px;
   }
-}
-
-@media (min-width: 1087px) {
   main.generator-fill {
     padding-top: 36px;
   }
+}
+
+@media (min-width: 1087px) {
   div.main-container::before {
     content: "";
 

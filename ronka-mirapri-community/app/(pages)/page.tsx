@@ -30,6 +30,7 @@ export default function Page_home() {
   );
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
   const [is_open, set_is_open] = useState<boolean>(false);
+
   const searchParams = useSearchParams();
   const [post_chunk, set_post_chunk] = useState<PostInform[][]>([[]]);
 
@@ -227,14 +228,14 @@ export default function Page_home() {
         )}
         {filter_tag.keyword !== "" && (
           <button
-            className="primary-filter filter-items"
+            className="primary-filter filter-keyword"
             onClick={() => {
               set_filter_tag(prev => ({ ...prev, keyword: "" }));
             }}
           >
             검색: {filter_tag.keyword}
             <img
-              src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"}
+              src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_purple.svg"}
               alt="modal open button"
             />
           </button>

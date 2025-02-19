@@ -1,5 +1,6 @@
 main.fill {
   width: 100vw;
+  border-top: 1px solid hsla(169, 55%, 26%, 0.3);
 }
 
 .post-container {
@@ -23,7 +24,6 @@ main.fill {
   row-gap: 6px;
   padding-top: 12px;
   margin-bottom: 12px;
-  border-top: 1px solid hsla(169, 55%, 26%, 0.3);
   flex-wrap: wrap;
 }
 
@@ -85,7 +85,6 @@ main.fill {
     gap: 10px;
     padding-top: 20px;
     margin-bottom: 20px;
-    border-top: 1px solid hsla(169, 55%, 26%, 0.3);
     flex-wrap: wrap;
   }
 
@@ -104,6 +103,9 @@ main.fill {
 
   .filter-keyword {
     padding: 0 14px 0 20px;
+    background-color: #ffffff;
+    color: #7a5af8;
+    border: 1px solid #7a5af8;
   }
 
   .filter-items {

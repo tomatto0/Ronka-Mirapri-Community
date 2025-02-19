@@ -6,8 +6,9 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import FilterSelector from "./FilterSelector";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { filter_tag_init_state } from "../utils/constants";
+import NavMobile from "./NavMobile";
 
 export default function Navigation() {
   const { data: session } = useSession();
@@ -30,7 +31,9 @@ export default function Navigation() {
     filter_tag_init_state
   );
   const [is_open, set_is_open] = useState<boolean>(false);
+  const [is_mobile_nav_open, set_is_mobile_nav_open] = useState<boolean>(false);
   const renderingRef = useRef<boolean>(true);
+
   const search = () => {
     if (!is_open) {
       const session_filter = JSON.parse(
@@ -47,6 +50,11 @@ export default function Navigation() {
     sessionStorage.setItem("filter", JSON.stringify({ filter, filter_tag }));
     router.push(`/search?keyword=${filter_tag.keyword}`);
   };
+
+  const mobile_nav = () => {
+    set_is_mobile_nav_open(prev => !prev);
+  };
+
   return (
     <>
       <div className="navigation_wrap">
@@ -99,7 +107,9 @@ export default function Navigation() {
           <button className="search-button" onClick={search}>
             <img alt="search icon" id="search" />
           </button>
-          <img alt="hamburger icon" id="menu-bar" />
+          <button className="search-button" onClick={mobile_nav}>
+            <img alt="hamburger icon" id="menu-bar" />
+          </button>
         </div>
       </div>
       <FilterSelector
@@ -109,6 +119,10 @@ export default function Navigation() {
         set_filter_tag={filter_tag_handler}
         is_open={is_open}
         set_is_open={set_is_open}
+      />
+      <NavMobile
+        is_mobile_nav_open={is_mobile_nav_open}
+        set_is_mobile_nav_open={set_is_mobile_nav_open}
       />
     </>
   );
