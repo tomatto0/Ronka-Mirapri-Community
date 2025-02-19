@@ -297,8 +297,14 @@ export default function EditorPageClient({
           dispatch={post_dispatch}
           message={message_data}
         />
-        <button onClick={patch}>수정</button>
-        <button onClick={post_delete}>삭제</button>
+        <div className="post_edit_submit_buttons">
+          <button className="post_edit_delete_button" onClick={post_delete}>
+            삭제
+          </button>
+          <button className="post_edit_submit_button" onClick={patch}>
+            수정
+          </button>
+        </div>
         <ItemSearchModal
           slot={modal_slot}
           is_open={is_open}

@@ -256,6 +256,7 @@ export default function Editor({
             autoComplete="off"
             value={tag_input}
             onChange={tag_change_handler}
+            placeholder="태그 입력"
           />
         </div>
         <p className="input_subtext">태그 입력 후 스페이스바로 태그 추가</p>

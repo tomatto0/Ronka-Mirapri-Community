@@ -142,7 +142,7 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 .App {
   min-height: 100vh;
@@ -205,6 +205,12 @@ span.loading {
   animation: loading-rotate 1s ease-in-out infinite;
 }
 
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 333;
+}
+
 @keyframes loading-rotate {
   from {
     transform: rotate(0deg);
@@ -237,6 +243,9 @@ img#hollow-heart-white {
 }
 
 @media (min-width: 1075px) {
+  .header {
+    position: static;
+  }
   div.footer {
     color: #50b1a8;
     font-size: 1rem;

@@ -136,7 +136,12 @@ export default function FilterSelector({
     return <div></div>;
   }
   return (
-    <div className="filter-background">
+    <div
+      className="filter-background"
+      onClick={() => {
+        set_is_open(false);
+      }}
+    >
       <div className="filter-wrap">
         <div className="filter-modal-title">
           <h3>검색 필터</h3>
