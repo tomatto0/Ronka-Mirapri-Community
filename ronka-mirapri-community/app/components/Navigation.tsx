@@ -6,7 +6,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import FilterSelector from "./FilterSelector";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { filter_tag_init_state } from "../utils/constants";
 
 export default function Navigation() {
@@ -31,7 +31,6 @@ export default function Navigation() {
   );
   const [is_open, set_is_open] = useState<boolean>(false);
   const renderingRef = useRef<boolean>(true);
-
   const search = () => {
     if (!is_open) {
       const session_filter = JSON.parse(
@@ -43,17 +42,11 @@ export default function Navigation() {
     set_is_open(prev => !prev);
   };
 
-  useEffect(() => {
-    if (renderingRef.current) {
-      renderingRef.current = false;
-      return;
-    }
-    if (!is_open) {
-      sessionStorage.setItem("filter", JSON.stringify({ filter, filter_tag }));
-      router.push(`/search?keyword=${filter_tag.keyword}`);
-    }
-  }, [filter_tag]);
-
+  const filter_tag_handler = (filter_tag: typeof filter_tag_init_state) => {
+    set_filter_tag(filter_tag);
+    sessionStorage.setItem("filter", JSON.stringify({ filter, filter_tag }));
+    router.push(`/search?keyword=${filter_tag.keyword}`);
+  };
   return (
     <>
       <div className="navigation_wrap">
@@ -113,7 +106,7 @@ export default function Navigation() {
         filter={filter}
         set_filter={set_filter}
         filter_tag={filter_tag}
-        set_filter_tag={set_filter_tag}
+        set_filter_tag={filter_tag_handler}
         is_open={is_open}
         set_is_open={set_is_open}
       />

@@ -98,6 +98,7 @@ main.user-fill {
   font-weight: 500;
   line-height: normal;
   color: #b9c0d4;
+  cursor: pointer;
 }
 
 h3.user-tap-active {

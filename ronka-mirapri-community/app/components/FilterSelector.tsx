@@ -34,22 +34,10 @@ export default function FilterSelector({
     race: string[];
     job: string[];
   };
-  set_filter_tag: React.Dispatch<
-    React.SetStateAction<{
-      order: string;
-      keyword: string;
-      gender: string;
-      race: string[];
-      job: string[];
-    }>
-  >;
+  set_filter_tag: (f: typeof filter_tag_init_state) => void;
   is_open: boolean;
   set_is_open: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const router = useRouter();
-
   //키워드 세팅관련 변수 선언
   const [keyword, set_keyword] = useState<string>("");
   const [search_category, set_search_category] = useState<string>("item");

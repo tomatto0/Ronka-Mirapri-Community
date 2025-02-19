@@ -1,6 +1,6 @@
 "use client";
 
-import "../../css/SignUp.css";
+import "../css/SignUp.css";
 import cursed_word_check from "@/app/utils/cursed_word_check";
 import nickname_validate from "@/app/utils/nickname_check";
 import { signIn, useSession } from "next-auth/react";

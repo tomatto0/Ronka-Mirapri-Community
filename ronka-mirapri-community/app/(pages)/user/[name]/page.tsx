@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { PostInform } from "../../../types/PostInform";
 import { useUserPosts, useUserLikedPosts } from "./hooks/useUserPosts";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useGetUserInfo } from "./hooks/useUserInfo";
 
 import PostThumbnail from "../../../components/PostThumbnail";
@@ -18,6 +18,7 @@ import AutoLink from "@/app/components/AutoLink";
 export default function Page_user() {
   const params = useParams<{ name: string }>();
   const userName = params.name;
+  const router = useRouter();
   const { data: session } = useSession();
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
   const [timeline, set_timeline] = useState<string>("userPosts");
@@ -27,7 +28,6 @@ export default function Page_user() {
   const [post_chunk, set_post_chunk] = useState<PostInform[][]>([[]]);
   const userLikedPosts = useUserLikedPosts(userName, 12);
   const [like_chunk, set_like_chunk] = useState<PostInform[][]>([[]]);
-
   // 무한 스크롤 감지해서 다음 페이지 로드
   useEffect(() => {
     if (inView) {
@@ -97,7 +97,9 @@ export default function Page_user() {
                   {userInfo?.data?.sns.toUpperCase()}
                 </AutoLink>
                 {session?.user.nickname === userInfo?.data?.nickname && (
-                  <button className="user-setting">
+                  <button className="user-setting"                 onClick={() => {
+                  router.push("/setting");
+                }}>
                     <img alt="setting" id="setting" />
                   </button>
                 )}
@@ -108,6 +110,7 @@ export default function Page_user() {
         )}
 
         <div className="tlToggle">
+
           <h3
             className={timeline === "userPosts" ? "user-tap-active" : ""}
             onClick={() => {
@@ -117,7 +120,7 @@ export default function Page_user() {
           >
             POST
           </h3>
-          {session?.user.nickname === userInfo?.data?.nickname && (
+          {session?.user._id === userInfo?.data?._id && (
             <>
               <div className="vertical-line" />
               <h3

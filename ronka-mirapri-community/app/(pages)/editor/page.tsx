@@ -238,6 +238,7 @@ export default function Page_editor() {
       if (is_posted.current) {
         return;
       }
+      post_data.sns = post_data.sns == session?.user.sns ? "" : post_data.sns;
       localDB.open(1.0).then(() => {
         localDB.put(
           {
