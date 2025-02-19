@@ -16,6 +16,7 @@
     opacity: 1;
   }
 }
+
 .post-box-hover {
   position: absolute;
   display: flex;
@@ -49,10 +50,15 @@
       margin: auto;
       content: url("/img/fill-heart.svg");
     }
+
     img#hollow-heart {
       height: 18px;
       margin: auto;
       content: url("/img/heart.svg");
+    }
+
+    img#hollow-heart:hover {
+      content: url("/img/fill-heart.svg");
     }
   }
 }

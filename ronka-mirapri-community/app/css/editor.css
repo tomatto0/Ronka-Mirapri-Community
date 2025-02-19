@@ -2,6 +2,12 @@
   width: fit-content;
 }
 
+main.generator-fill {
+  padding: 0;
+  border-top: 1px solid hsla(169, 55%, 26%, 0.3);
+  width: 100vw;
+}
+
 button.image {
   border: 0;
   background: transparent;
@@ -41,6 +47,7 @@ div.main-container {
   padding: 10px;
   border-radius: 30px;
   font-size: 1.6rem;
+  cursor: pointer;
 }
 
 .login_to_write_button:hover {
@@ -217,6 +224,9 @@ div.editor-container {
 }
 
 @media (min-width: 1087px) {
+  main.generator-fill {
+    padding-top: 36px;
+  }
   div.main-container::before {
     content: "";
 
