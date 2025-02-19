@@ -1,29 +1,94 @@
 main.post {
-  width: 700px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .post-title-box {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(2, auto);
+  row-gap: 14px;
   position: relative;
-  margin-bottom: 36px;
+  margin: 0 26px 24px;
+  flex-wrap: wrap;
+  order: 2;
   .post-title {
     color: #006351;
-    font-weight: 700;
-    font-size: 4.7rem;
-    width: 660px;
+    font-weight: 600;
+    font-size: 1.7rem;
+    align-self: start;
+    justify-self: start;
+    order: 1;
+  }
+  .setting {
+    align-self: center;
+    justify-self: end;
+    order: 5;
     position: relative;
+    display: flex;
+    .post-edit {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    img#edit {
+      height: 1.5rem;
+      content: url("/img/gear.svg");
+      margin: auto;
+    }
   }
-  .post-edit {
-    background: none;
-    border: none;
-    cursor: pointer;
+  hr {
+    order: 3;
+    grid-column: 1/3;
+    background: #006351;
+    height: 1px;
+    border: 0;
   }
-  img#edit {
-    height: 1.5rem;
-    content: url("/img/gear.svg");
-    margin: auto;
+  .post-subtitle-box {
+    align-self: center;
+    justify-self: start;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    order: 4;
+    .post-author {
+      color: #337e78;
+      text-decoration: underline;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+    .post-date {
+      color: #667085;
+      font-size: 1.4rem;
+      font-weight: 300;
+      font-family: "REM";
+    }
+  }
+  .like-button-container {
+    order: 2;
+    position: relative;
+    align-self: start;
+    justify-self: end;
+    .like-button {
+      min-width: 32px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      font-weight: 300;
+      font-family: "REM";
+      color: #006351;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0 4px;
+    }
   }
 }
 
@@ -36,13 +101,14 @@ main.post {
   flex-direction: column;
   gap: 20px 0;
   position: absolute;
-  left: calc(100% + 32px);
-  top: 0;
+  right: 28px;
+  z-index: 1;
   width: max-content;
   a,
   button {
     color: #006351;
     font-size: 1.5rem;
+    font-weight: 500;
     text-decoration: none;
     position: relative;
     display: flex;
@@ -66,68 +132,41 @@ main.post {
   display: flex;
 }
 
-.post-subtitle-box {
-  width: 700px;
+/* .post-subtitle-box {
+  width: 100%;
+  padding: 0 26px;
   display: flex;
   justify-content: space-between;
   margin-bottom: 36px;
-  .post-author {
-    color: #337e78;
-    text-decoration: underline;
-    font-size: 1.4rem;
-    cursor: pointer;
-  }
-  .post-date {
-    color: #667085;
-    font-size: 1.4rem;
-    font-weight: 300;
-    font-family: "REM";
-  }
-  .like-button {
-    background: none;
-    cursor: pointer;
-    border-radius: 40px;
-    border: 1px solid #b2c6cd;
-    padding: 0 16px;
-    min-width: 64px;
-    height: 32px;
-    color: #006351;
-    font-size: 1.6rem;
-    font-family: "REM";
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0 4px;
-  }
+  position: relative;
+  order: 3;
+} */
+
+.post-image {
+  width: 100%;
+  vertical-align: top;
+  order: 1;
+  margin-bottom: 28px;
 }
-.post-main-container {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 20px;
 
-  .post-image {
-    height: 680px;
-    margin-right: 10px;
-  }
-
-  .post-information {
-    .tag-container {
-      width: 350px;
-      display: flex;
-      gap: 0 4px;
-      flex-direction: row;
-      flex-wrap: wrap;
-      .tag-box {
-        display: inline;
-        font-size: 1.2rem;
-        color: #006351;
-        padding: 2px 8px;
-        border: 1px #99c0b8 solid;
-        border-radius: 20px;
-      }
-      .tag-box::before {
-        content: "#";
-      }
+.post-information {
+  width: 100%;
+  padding: 0 26px;
+  order: 5;
+  margin-bottom: 90px;
+  .tag-container {
+    width: 100%;
+    display: flex;
+    gap: 0 8px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .tag-box {
+      display: inline;
+      font-size: 1.4rem;
+      color: #006351;
+    }
+    .tag-box::before {
+      content: "#";
     }
   }
 }
@@ -136,22 +175,27 @@ main.post {
   font-size: 1.4rem;
   color: #475467;
   width: 100%;
-  padding-bottom: 28px;
-  margin-bottom: 28px;
-  border-bottom: 1px #b2c6cd dashed;
+  padding: 0 26px 28px;
+  margin-bottom: 80px;
   white-space: pre-wrap;
+  order: 4;
 }
 .post-subtitle {
   font-family: "pretendard";
   font-size: 1.5rem;
   font-weight: 600;
   color: #006351;
+  padding: 0 26px;
   margin-bottom: 8px;
+}
+.post-sns-container {
+  order: 6;
 }
 .post-sns {
   font-family: "pretendard";
   font-size: 1.2rem;
   color: #667085;
+  padding: 0 26px;
   margin-bottom: 32px;
   display: flex;
 }
@@ -164,33 +208,136 @@ main.post {
   background-image: url("/img/link.svg");
   background-size: 1.5rem 1.5rem;
 }
-.share-button {
-  cursor: pointer;
-  background: none;
-  padding: 5px 10px;
-  border-radius: 70px;
-  border: 1px #006351 solid;
-  color: #006351;
-  font-family: "REM";
-  font-size: 1.2rem;
-  display: inline-flex;
-  margin-right: 5px;
+.post-share-container {
+  order: 7;
 }
-.share-button.bluesky::before {
-  content: "";
-  display: inline-block;
-  width: 1.5rem;
-  height: 1.5rem;
-  margin-right: 9px;
-  background-image: url("/img/bluesky.svg");
-  background-size: 1.5rem 1.5rem;
+.share-button-container {
+  padding: 0 26px;
+  .share-button {
+    cursor: pointer;
+    background: none;
+    border-radius: 70px;
+    border: 1px #006351 solid;
+    color: #006351;
+    font-family: "REM";
+    font-size: 1.2rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+  }
+  .share-button.bluesky::before {
+    content: "";
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: url("/img/bluesky.svg");
+    background-size: 1.5rem 1.5rem;
+  }
+  .share-button.twitter::before {
+    content: "";
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: url("/img/twitter.svg");
+    background-size: 1.5rem 1.5rem;
+  }
 }
-.share-button.twitter::before {
-  content: "";
-  display: inline-block;
-  width: 1.5rem;
-  height: 1.5rem;
-  margin-right: 9px;
-  background-image: url("/img/twitter.svg");
-  background-size: 1.5rem 1.5rem;
+
+@media (min-width: 601px) {
+  main.post {
+    width: 700px;
+    display: block;
+  }
+  .post-title-box {
+    margin: 0 0 28px;
+    border: none;
+    row-gap: 0;
+    .post-title {
+      color: #006351;
+      font-weight: 700;
+      font-size: 4.7rem;
+      padding: 0 0 36px;
+    }
+    .setting {
+      order: 2;
+    }
+    hr {
+      display: none;
+    }
+    .post-subtitle-box {
+      display: block;
+      width: auto;
+    }
+    .like-button-container {
+      order: 5;
+      .like-button {
+        min-width: 72px;
+        position: absolute;
+        right: 0;
+        border-radius: 40px;
+        border: 1px solid #b2c6cd;
+        padding: 0 16px;
+        height: 32px;
+        font-size: 1.6rem;
+        font-family: "REM";
+      }
+      .like-button:hover {
+        background-color: #e4e7ec;
+      }
+    }
+  }
+  .post-image {
+    height: 680px;
+    width: auto;
+    margin-right: 10px;
+    display: inline-block;
+  }
+
+  .post-edit-modal {
+    left: 28px;
+  }
+
+  .post-information {
+    display: inline-block;
+    width: 350px;
+    padding: 0;
+    margin: 0;
+    .tag-container {
+      .tag-box {
+        padding: 2px 8px;
+        border: 1px #99c0b8 solid;
+        border-radius: 20px;
+        font-size: 1.2rem;
+      }
+    }
+  }
+  .post-content {
+    padding: 0 0 28px;
+    border-bottom: 1px #b2c6cd dashed;
+    margin-bottom: 28px;
+  }
+  .post-sns,
+  .post-subtitle {
+    padding: 0;
+  }
+  .share-button-container {
+    padding: 0;
+    .share-button {
+      width: auto;
+      height: auto;
+      padding: 5px 10px;
+    }
+    .share-button::before {
+      margin-right: 9px;
+    }
+    .share-button.bluesky::after {
+      content: "BLUESKY";
+    }
+    .share-button.twitter::after {
+      content: "TWITTER";
+    }
+  }
 }

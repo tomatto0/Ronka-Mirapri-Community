@@ -6,7 +6,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import FilterSelector from "./FilterSelector";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { filter_tag_init_state } from "../utils/constants";
 
 export default function Navigation() {

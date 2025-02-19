@@ -40,6 +40,7 @@ div.logo {
   cursor: pointer;
 }
 img#search {
+  border-radius: 50%;
   display: block;
   height: 24px;
   content: url("/img/search_header.svg");

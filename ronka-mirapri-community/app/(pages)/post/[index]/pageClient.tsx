@@ -156,27 +156,30 @@ export default function PostPageClient({
     <main className="post">
       <div className="post-title-box">
         <p className="post-title">{post_data.title}</p>
-        {session?.user._id === post_data.author._id && (
-          <button
-            className="post-edit"
-            onClick={() => {
-              set_is_modal_open(prev => !prev);
-            }}
-          >
-            <img alt="edit icon" id="edit" />
-          </button>
-        )}
-        {session?.user._id === post_data.author._id && (
-          <div
-            className={`post-edit-modal ${is_modal_open ? "modal-active" : ""}`}
-          >
-            <Link href={`/editor/${postIndex}`}>수정하기</Link>
-            <button onClick={post_delete}>삭제하기</button>
+        {session?.user._id === post_data.author._id ? (
+          <div className="setting">
+            <button
+              className="post-edit"
+              onClick={() => {
+                set_is_modal_open(prev => !prev);
+              }}
+            >
+              <img alt="edit icon" id="edit" />
+            </button>
+            <div
+              className={`post-edit-modal ${
+                is_modal_open ? "modal-active" : ""
+              }`}
+            >
+              <Link href={`/editor/${postIndex}`}>수정하기</Link>
+              <button onClick={post_delete}>삭제하기</button>
+            </div>
           </div>
+        ) : (
+          <div className="setting"></div>
         )}
-      </div>
-      <div className="post-subtitle-box">
-        <div>
+        <hr />
+        <div className="post-subtitle-box">
           <Link
             href={`/user/${post_data.author.nickname}`}
             className="post-author"
@@ -185,45 +188,51 @@ export default function PostPageClient({
           </Link>
           <p className="post-date">{postDate}</p>
         </div>
-        <button className="like-button" onClick={toggleLike}>
-          <span>{data?.is_liked ? "♥" : "♡"}</span>
-          <span>{data?.like_count}</span>
-        </button>
+        {/* <div> */}
+        <div className="like-button-container">
+          <button className="like-button" onClick={toggleLike}>
+            <img
+              alt="heart"
+              id={data?.is_liked ? "fill-heart-green" : "hollow-heart-green"}
+            />
+            <span>{data?.like_count}</span>
+          </button>
+        </div>
       </div>
-      <div className="post-main-container">
-        <img
-          className="post-image"
-          src={post_data.image_url}
-          alt={post_data.title}
-        />
-        <div className="post-information">
-          <ItemViewer equiped_item={post_data.equiped_item} />
-          <div className="tag-container">
-            <TagBox content={post_data.gender} />
-            <TagBox content={post_data.race} />
-            {jobs.map(job => (
-              <TagBox content={job} key={`job-${job}`} />
-            ))}
-            {post_data.tag.map(tag => (
-              <TagBox content={tag} key={`tag-${tag}`} />
-            ))}
-          </div>
+      <img
+        className="post-image"
+        src={post_data.image_url}
+        alt={post_data.title}
+      />
+      <div className="post-information">
+        <ItemViewer equiped_item={post_data.equiped_item} />
+        <div className="tag-container">
+          <TagBox content={post_data.gender} />
+          <TagBox content={post_data.race} />
+          {jobs.map(job => (
+            <TagBox content={job} key={`job-${job}`} />
+          ))}
+          {post_data.tag.map(tag => (
+            <TagBox content={tag} key={`tag-${tag}`} />
+          ))}
         </div>
       </div>
       <p className="post-content">{post_data.content}</p>
-      {post_data.sns && <p className="post-subtitle">SNS 게시글</p>}
       {post_data.sns && (
-        <AutoLink className="post-sns" target="_blank">
-          {post_data.sns}
-        </AutoLink>
+        <div className="post-sns-container">
+          <p className="post-subtitle">SNS 게시글</p>
+          <AutoLink className="post-sns" target="_blank">
+            {post_data.sns}
+          </AutoLink>
+        </div>
       )}
-      <p className="post-subtitle">공유하기</p>
-      <button className="share-button bluesky" onClick={share_bluesky}>
-        BLUESKY
-      </button>
-      <button className="share-button twitter" onClick={share_twitter}>
-        TWITTER
-      </button>
+      <div className="post-share-container">
+        <p className="post-subtitle">공유하기</p>
+        <div className="share-button-container">
+          <button className="share-button bluesky" onClick={share_bluesky} />
+          <button className="share-button twitter" onClick={share_twitter} />
+        </div>
+      </div>
     </main>
   );
 }

@@ -45,20 +45,9 @@
     border: none;
     display: flex;
     cursor: pointer;
-    img#fill-heart {
-      height: 18px;
-      margin: auto;
-      content: url("/img/fill-heart.svg");
-    }
 
-    img#hollow-heart {
-      height: 18px;
-      margin: auto;
-      content: url("/img/heart.svg");
-    }
-
-    img#hollow-heart:hover {
-      content: url("/img/fill-heart.svg");
+    img#hollow-heart-white:hover {
+      content: url("/img/fill-heart-teal500.svg");
     }
   }
 }

@@ -61,8 +61,8 @@ export default function PostThumbnail({
         <p>{post.title}</p>
         <button onClick={like_handler}>
           <img
-            alt={is_liked ? "채워진 하트" : "빈 하트"}
-            id={is_liked ? "fill-heart" : "hollow-heart"}
+            alt="heart"
+            id={is_liked ? "fill-heart-teal" : "hollow-heart-white"}
           />
         </button>
       </div>

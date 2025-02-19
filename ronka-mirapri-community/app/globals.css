@@ -214,6 +214,28 @@ span.loading {
   }
 }
 
+img#fill-heart-green {
+  height: 16px;
+  content: url("/img/fill-heart.svg");
+  aspect-ratio: 1;
+}
+img#hollow-heart-green {
+  height: 16px;
+  content: url("/img/heart-green.svg");
+  aspect-ratio: 1;
+}
+
+img#fill-heart-teal {
+  height: 18px;
+  content: url("/img/fill-heart-teal500.svg");
+  aspect-ratio: 1;
+}
+img#hollow-heart-white {
+  height: 18px;
+  content: url("/img/heart-white.svg");
+  aspect-ratio: 1;
+}
+
 @media (min-width: 1075px) {
   div.footer {
     color: #50b1a8;
