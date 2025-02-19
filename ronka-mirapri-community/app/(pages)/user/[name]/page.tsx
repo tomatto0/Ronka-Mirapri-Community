@@ -1,17 +1,19 @@
 "use client";
+
 import "../../../css/home.css";
 import "../../../css/User.css";
+
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import PostThumbnail from "../../../components/PostThumbnail";
 import { useInView } from "react-intersection-observer";
 import { PostInform } from "../../../types/PostInform";
 import { useUserPosts, useUserLikedPosts } from "./hooks/useUserPosts";
 import { useParams } from "next/navigation";
 import { useGetUserInfo } from "./hooks/useUserInfo";
+
+import PostThumbnail from "../../../components/PostThumbnail";
 import EditButton from "@/app/components/EditButton";
 import AutoLink from "@/app/components/AutoLink";
-
 
 export default function Page_user() {
   const params = useParams<{ name: string }>();
@@ -73,59 +75,63 @@ export default function Page_user() {
   }, [userLikedPosts.data]);
 
   return (
-    <main className="user">
-      {userInfo.status === "pending" ? (
-        <div className="user-card">
-          <span className="loading"></span>
-        </div>
-      ) : userInfo.status === "error" ? (
-        <p>
-          Error:{" "}
-          {userInfo.error instanceof Error
-            ? userInfo.error.message
-            : "An unknown error occurred"}
-        </p>
-      ) : (
-        <div className="user-card">
-          <div>
-            <p className="user-name">{userInfo?.data?.nickname}</p>
-            <AutoLink className="user-sns" target="_blank">
-              {userInfo?.data?.sns.toUpperCase()}
-            </AutoLink>
-            {session?.user.nickname === userInfo?.data?.nickname && (
-              <button className="user-setting">
-                <img alt="setting" id="setting" />
-              </button>
-            )}
+    <main className="user-fill">
+      <div className="user-card-wrap">
+        {userInfo.status === "pending" ? (
+          <div className="user-card">
+            <span className="loading"></span>
           </div>
-          <p className="user-like">{userInfo?.data?.like_count}</p>
-        </div>
-      )}
-
-      <div className="tlToggle">
-        <h3
-          className={timeline === "userPosts" ? "active" : ""}
-          onClick={() => {
-            set_timeline("userPosts");
-            userPosts.refetch();
-          }}
-        >
-          POST
-        </h3>
-        {session?.user.nickname === userInfo?.data?.nickname && (
-          <div className="vertical-line" />
+        ) : userInfo.status === "error" ? (
+          <p>
+            Error:{" "}
+            {userInfo.error instanceof Error
+              ? userInfo.error.message
+              : "An unknown error occurred"}
+          </p>
+        ) : (
+          <div className="user-card">
+            <div className="user-info">
+              <p className="user-name">{userInfo?.data?.nickname}</p>
+              <div className="user-info-right">
+                <AutoLink className="user-sns" target="_blank">
+                  {userInfo?.data?.sns.toUpperCase()}
+                </AutoLink>
+                {session?.user.nickname === userInfo?.data?.nickname && (
+                  <button className="user-setting">
+                    <img alt="setting" id="setting" />
+                  </button>
+                )}
+              </div>
+            </div>
+            <p className="user-like">{userInfo?.data?.like_count}</p>
+          </div>
         )}
-        {session?.user.nickname === userInfo?.data?.nickname && (
+
+        <div className="tlToggle">
           <h3
-            className={timeline === "userPosts" ? "" : "active"}
+            className={timeline === "userPosts" ? "user-tap-active" : ""}
             onClick={() => {
-              set_timeline("likedPosts");
-              userLikedPosts.refetch();
+              set_timeline("userPosts");
+              userPosts.refetch();
             }}
           >
-            LIKE
+            POST
           </h3>
-        )}
+          {session?.user.nickname === userInfo?.data?.nickname && (
+            <>
+              <div className="vertical-line" />
+              <h3
+                className={timeline === "userPosts" ? "" : "user-tap-active"}
+                onClick={() => {
+                  set_timeline("likedPosts");
+                  userLikedPosts.refetch();
+                }}
+              >
+                LIKE
+              </h3>
+            </>
+          )}
+        </div>
       </div>
 
       {userPosts.status === "pending" ? (

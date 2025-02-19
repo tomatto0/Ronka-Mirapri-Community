@@ -1,4 +1,5 @@
 import "../css/PostThumbnail.css";
+
 import { useEffect, useState } from "react";
 import { is_like, like_toggle } from "../utils/clientfunction";
 import { useRouter } from "next/navigation";

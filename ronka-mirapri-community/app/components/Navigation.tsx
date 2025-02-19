@@ -4,7 +4,7 @@ import "../css/Navigation.css";
 
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import FilterSelector from "./FilterSelector";
 import { useEffect, useRef, useState } from "react";
 import { filter_tag_init_state } from "../utils/constants";
@@ -12,6 +12,18 @@ import { filter_tag_init_state } from "../utils/constants";
 export default function Navigation() {
   const { data: session } = useSession();
   const router = useRouter();
+
+  const pathname = usePathname();
+  const [active_path, set_active_path] = useState<string>("");
+
+  useEffect(() => {
+    // 현재 경로를 activePath로 설정
+    set_active_path(decodeURIComponent(pathname));
+  }, [pathname]);
+
+  const isActive = (path: string) => {
+    return active_path === decodeURIComponent(path);
+  };
 
   const [filter, set_filter] = useState<string>("{}");
   const [filter_tag, set_filter_tag] = useState<typeof filter_tag_init_state>(
@@ -38,7 +50,6 @@ export default function Navigation() {
     }
     if (!is_open) {
       sessionStorage.setItem("filter", JSON.stringify({ filter, filter_tag }));
-      console.log("설마 이거임??");
       router.push(`/search?keyword=${filter_tag.keyword}`);
     }
   }, [filter_tag]);
@@ -52,23 +63,27 @@ export default function Navigation() {
           </Link>
         </div>
         <ul className="menus">
-          <li>
+          <li className={isActive("/") ? "nav-active" : ""}>
             <Link href="/" className="menu">
               GALLERY
             </Link>
           </li>
-          <li>
+          <li className={isActive("/editor") ? "nav-active" : ""}>
             <Link href="/editor" className="menu">
               GENERATOR
             </Link>
           </li>
-          <li>
+          <li className={isActive("/about") ? "nav-active" : ""}>
             <Link href="/" className="menu">
               ABOUT
             </Link>
           </li>
           {session?.user?.login && (
-            <li>
+            <li
+              className={
+                isActive(`/user/${session?.user.nickname}`) ? "nav-active" : ""
+              }
+            >
               <Link href={`/user/${session?.user.nickname}`} className="menu">
                 MYPAGE
               </Link>

@@ -36,14 +36,22 @@ export default function Page_editor() {
   const x = useRef<number>(0);
   const is_posted = useRef<boolean>(false);
 
-  // editor모드 Toggle
-  const is_editor_mode = window.localStorage.getItem("editor_mode") ?? "false";
+  // editor_mode 초기값 설정
+  // localStorage에 값이 없으면 false가 기본값
   const [editor_mode, set_editor_mode] = useState<boolean>(() => {
-    if (is_editor_mode === null) {
-      window.localStorage.setItem("editor_mode", "false"); // 기본값 저장
+    if (typeof window !== "undefined") {
+      const is_editor_mode = localStorage.getItem("editor_mode") ?? "false";
+      return is_editor_mode === "true";
     }
-    return is_editor_mode === "true";
+    return false;
   });
+
+  // editor_mode 값이 변경될때마다 localStorage에 업데이트
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("editor_mode", String(editor_mode));
+    }
+  }, [editor_mode]);
 
   const toggleEditorMode = () => {
     set_editor_mode(prev => {
@@ -373,84 +381,87 @@ export default function Page_editor() {
     return <main></main>;
   }
   return (
-    <main>
-      <div className="main-container">
-        <UserCanvas
-          image_src={image_src}
+    <main className="generator-fill">
+      <div>
+        <div className="main-container">
+          <UserCanvas
+            image_src={image_src}
+            equiped_item={equiped_item}
+            set_image_src={set_image_src}
+            x={x}
+            imageRef={imageRef}
+          />
+          <ItemInformation
+            image_src={image_src}
+            open_modal={open_modal}
+            equiped_item={equiped_item}
+            slot_active={slot_active}
+            reset_equiped_item={reset_equiped_item}
+          />
+        </div>
+        {session?.user?.login ? (
+          <>
+            <div className="write_button_wrap">
+              <button
+                className="login_to_write_button"
+                onClick={toggleEditorMode}
+              >
+                {editor_mode ? (
+                  <div className="write-button-content">
+                    <img
+                      className="write_svg"
+                      src={
+                        process.env.NEXT_PUBLIC_BASE_URL + "/img/chevron-up.svg"
+                      }
+                      alt="edit button"
+                    />
+                    에디터 닫기
+                  </div>
+                ) : (
+                  <div className="write-button-content">
+                    <img
+                      className="write_svg"
+                      src={
+                        process.env.NEXT_PUBLIC_BASE_URL +
+                        "/img/chevron-down.svg"
+                      }
+                      alt="edit button"
+                    />
+                    글 작성하기
+                  </div>
+                )}
+              </button>
+            </div>
+            {editor_mode && (
+              <>
+                <Editor
+                  post_data={post_data}
+                  dispatch={post_dispatch}
+                  message={message_data}
+                />
+                <button className="editor-submit-button" onClick={post}>
+                  작성
+                </button>
+              </>
+            )}
+          </>
+        ) : (
+          <div className="write_button_wrap">
+            <button className="login_to_write_button" onClick={sign_in_handler}>
+              LOGIN
+            </button>
+            <p>로그인시 글작성 가능</p>
+          </div>
+        )}
+
+        <ItemSearchModal
+          slot={modal_slot}
+          is_open={is_open}
           equiped_item={equiped_item}
-          set_image_src={set_image_src}
-          x={x}
-          imageRef={imageRef}
-        />
-        <ItemInformation
-          image_src={image_src}
-          open_modal={open_modal}
-          equiped_item={equiped_item}
-          slot_active={slot_active}
-          reset_equiped_item={reset_equiped_item}
+          set_is_open={set_is_open}
+          edit_equiped_item={edit_equiped_item}
         />
       </div>
-      {session?.user?.login ? (
-        <>
-          <div className="write_button_wrap">
-            <button
-              className="login_to_write_button"
-              onClick={toggleEditorMode}
-            >
-              {editor_mode ? (
-                <div className="write-button-content">
-                  <img
-                    className="write_svg"
-                    src={
-                      process.env.NEXT_PUBLIC_BASE_URL + "/img/chevron-up.svg"
-                    }
-                    alt="edit button"
-                  />
-                  에디터 닫기
-                </div>
-              ) : (
-                <div className="write-button-content">
-                  <img
-                    className="write_svg"
-                    src={
-                      process.env.NEXT_PUBLIC_BASE_URL + "/img/chevron-down.svg"
-                    }
-                    alt="edit button"
-                  />
-                  글 작성하기
-                </div>
-              )}
-            </button>
-          </div>
-          {editor_mode && (
-            <>
-              <Editor
-                post_data={post_data}
-                dispatch={post_dispatch}
-                message={message_data}
-              />
-              <button className="editor-submit-button" onClick={post}>
-                작성
-              </button>
-            </>
-          )}
-        </>
-      ) : (
-        <div className="write_button_wrap">
-          <button className="login_to_write_button" onClick={sign_in_handler}>
-            LOGIN
-          </button>
-          <p>로그인시 글작성 가능</p>
-        </div>
-      )}
-
-      <ItemSearchModal
-        slot={modal_slot}
-        is_open={is_open}
-        equiped_item={equiped_item}
-        set_is_open={set_is_open}
-        edit_equiped_item={edit_equiped_item}
-      />
     </main>
   );
 }

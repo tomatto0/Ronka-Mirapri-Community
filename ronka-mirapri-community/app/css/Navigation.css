@@ -28,6 +28,11 @@ div.logo {
 .navigation_right li {
   cursor: pointer;
 }
+
+.navigation_right li:hover {
+  background-color: #e1dbfa;
+}
+
 .search-button {
   background: none;
   border: none;
@@ -39,6 +44,10 @@ img#search {
   height: 24px;
   content: url("/img/search_header.svg");
   cursor: pointer;
+}
+
+img#search:hover {
+  background-color: #e1dbfa;
 }
 
 img#menu-bar {
@@ -70,10 +79,24 @@ img#menu-bar {
     gap: 20px;
   }
 
+  .menus li:hover {
+    background-color: #e1dbfa;
+    border-radius: 2px;
+  }
+
   .menu {
     text-decoration: none;
     color: #006351;
     cursor: pointer;
+  }
+
+  .nav-active {
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: 5%; /* 1.7px */
+    text-underline-offset: 25%; /* 4.25px */
+    text-underline-position: from-font;
   }
 
   div.logo {
@@ -91,6 +114,14 @@ img#menu-bar {
     display: flex;
     gap: 24px;
     align-items: center;
+  }
+
+  .navigation_right div {
+    cursor: pointer;
+  }
+
+  .navigation_right div:hover {
+    background-color: #e1dbfa;
   }
 
   img#menu-bar {
