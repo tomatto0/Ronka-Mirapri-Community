@@ -1,31 +1,50 @@
-main.user {
+main.user-fill {
   width: 100vw;
-  max-width: 1076px;
+  border-top: 1px solid hsla(169, 55%, 26%, 0.3);
+}
+
+.user-card-wrap {
+  max-width: 1058px;
+  margin: auto;
+  padding: 0 6px;
 }
 
 .user-card {
+  margin-top: 20px;
   height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 28px;
+  padding: 0 16px;
   border-bottom: 1px solid #b2c6cd;
+  position: relative;
 
-  div {
+  .user-info {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    column-gap: 12px;
+    flex-direction: row;
+    row-gap: 3px;
+  }
+
+  .user-info-right {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    row-gap: 5px;
   }
 
   .user-name {
-    font-size: 3.2rem;
+    font-size: 2.2rem;
     font-weight: 600;
     color: #006351;
+    width: max-content;
   }
   .user-sns {
     font-family: "REM";
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     color: #628d85;
-    margin-left: 32px;
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -34,15 +53,16 @@ main.user {
     background: none;
     border: none;
     cursor: pointer;
-    margin-left: 16px;
     display: flex;
+
     img#setting {
-      height: 1.8rem;
+      height: 1.4rem;
       content: url("/img/settings.svg");
       margin: auto;
     }
   }
   .user-like {
+    margin-left: 10px;
     font-family: "REM";
     font-size: 1.5rem;
     font-weight: 300;
@@ -66,29 +86,91 @@ main.user {
 
 .tlToggle {
   display: flex;
-  margin-top: 20px;
-  margin-left: 18px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-left: 16px;
+  margin-bottom: 16px;
   gap: 22px;
-  h3 {
-    font-family: "REM";
+}
+
+.tlToggle h3 {
+  font-family: "REM";
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: normal;
+  color: #b9c0d4;
+  cursor: pointer;
+}
+
+h3.user-tap-active {
+  color: #4f938d;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: 10%; /* 1.7px */
+  text-underline-offset: 25%; /* 4.25px */
+  text-underline-position: from-font;
+}
+
+.vertical-line {
+  width: 1px;
+  background-color: #1e66592f;
+}
+
+@media (min-width: 510px) {
+  .user-card {
+    padding-right: 28px;
+
+    .user-info {
+      column-gap: 28px;
+    }
+
+    .user-name {
+      font-size: 3.2rem;
+    }
+
+    .user-info-right {
+      column-gap: 16px;
+    }
+
+    .user-sns {
+      font-size: 1.1rem;
+    }
+
+    .user-setting {
+      img#setting {
+        height: 1.6rem;
+      }
+    }
+  }
+
+  .tlToggle {
+    margin-top: 20px;
+    margin-left: 12px;
+    margin-bottom: 20px;
+    gap: 22px;
+  }
+
+  .tlToggle h3 {
     font-size: 1.7rem;
-    font-weight: 500;
-    line-height: normal;
-    color: #b9c0d4;
-    cursor: pointer;
   }
-  h3.active {
-    color: #4f938d;
-    text-decoration-line: underline;
-    text-decoration-style: solid;
-    text-decoration-skip-ink: auto;
-    text-decoration-thickness: 10%; /* 1.7px */
-    text-underline-offset: 25%; /* 4.25px */
-    text-underline-position: from-font;
+}
+
+@media (min-width: 1076px) {
+  .user-card {
+    padding: 0 10px;
   }
-  .vertical-line {
-    width: 1px;
-    background-color: #1e66592f;
+  div.user-card::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -16px;
+    width: calc(100% + 34px);
+    height: calc(100% + 16px);
+    background-image: url(/_next/static/media/plus.9522872c.svg),
+      url(/_next/static/media/plus.9522872c.svg);
+    background-size: 12px 12px;
+    background-position: bottom left, bottom right;
+    background-repeat: no-repeat;
+    z-index: -1;
   }
 }

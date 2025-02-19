@@ -183,7 +183,7 @@ export default function Page_home() {
   }
 
   return (
-    <main className="home">
+    <main className="fill">
       <div className="primary-filter-wrap">
         <button
           className="primary-filter filter-open"
