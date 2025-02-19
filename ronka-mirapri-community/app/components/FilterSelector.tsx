@@ -10,7 +10,6 @@ import {
 } from "../utils/constants";
 import CheckBox from "./CheckBox";
 import RadioBox from "./RadioBox";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Item } from "../types/Item";
 import ItemSearch from "./ItemSearch";
 import ItemSearchResult from "./ItemSearchResult";
@@ -142,7 +141,12 @@ export default function FilterSelector({
         set_is_open(false);
       }}
     >
-      <div className="filter-wrap">
+      <div
+        className="filter-wrap"
+        onClick={e => {
+          e.stopPropagation();
+        }}
+      >
         <div className="filter-modal-title">
           <h3>검색 필터</h3>
           <button

@@ -154,6 +154,15 @@ main {
   flex-grow: 1;
   margin: auto;
 }
+main:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 1px;
+  border-top: 1px solid hsla(169, 55%, 26%, 0.3);
+}
 
 .swal2-title {
   font-size: 2rem !important;
@@ -209,6 +218,7 @@ span.loading {
   position: sticky;
   top: 0;
   z-index: 333;
+  width: 100vw;
 }
 
 @keyframes loading-rotate {
@@ -245,6 +255,7 @@ img#hollow-heart-white {
 @media (min-width: 1075px) {
   .header {
     position: static;
+    width: auto;
   }
   div.footer {
     color: #50b1a8;

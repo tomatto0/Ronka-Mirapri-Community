@@ -4,7 +4,6 @@
 
 main.generator-fill {
   padding: 0;
-  border-top: 1px solid hsla(169, 55%, 26%, 0.3);
   width: 100vw;
 }
 
@@ -262,7 +261,7 @@ div.editor-container {
     max-height: 608px;
     min-height: 608px;
   }
-  main.generator-fill {
+  main.generator-fill > div {
     padding-top: 36px;
   }
 }

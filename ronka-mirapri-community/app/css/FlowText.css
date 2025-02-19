@@ -44,6 +44,9 @@
   font-weight: 400;
   margin-right: 10px;
 }
+.flow-text:not(.title):hover {
+  background-color: #e1dbfa;
+}
 
 .flow-text.title {
   font-weight: 700;

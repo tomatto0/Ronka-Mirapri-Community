@@ -246,7 +246,7 @@ main.post {
   }
 }
 
-@media (min-width: 601px) {
+@media (min-width: 701px) {
   main.post {
     width: 700px;
     display: block;
@@ -259,9 +259,10 @@ main.post {
       color: #006351;
       font-weight: 700;
       font-size: 4.7rem;
-      padding: 0 0 36px;
+      padding: 48px 0 36px;
     }
     .setting {
+      align-self: start;
       order: 2;
     }
     hr {
