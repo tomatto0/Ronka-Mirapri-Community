@@ -76,6 +76,7 @@ main.user {
     font-weight: 500;
     line-height: normal;
     color: #b9c0d4;
+    cursor: pointer;
   }
   h3.active {
     color: #4f938d;

@@ -154,8 +154,11 @@ main {
   flex-grow: 1;
   margin: auto;
 }
+
 .swal2-title {
-  font-size: 2.4rem !important;
+  font-size: 2rem !important;
+  margin-bottom: 10px;
+  font-weight: 500;
 }
 .swal2-html-container {
   font-size: 1.6rem !important;
@@ -163,6 +166,11 @@ main {
 .swal2-confirm,
 .swal2-cancel {
   font-size: 1.6rem !important;
+}
+
+.swal2-container.swal2-bottom-end {
+  margin-right: 30px;
+  margin-bottom: 30px;
 }
 
 div.footer {

@@ -4,20 +4,32 @@ import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 
 export default function Page_test() {
-  const { data: session, status } = useSession();
+  const { data: session, status, update } = useSession();
   const router = useRouter();
 
   const sign_out_handler = async () => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/db/users`,
-      { method: "DELETE", body: JSON.stringify({ id: session?.user?._id }) }
-    );
-  };
-  const toast_handler = () => {
     Swal.fire({
-      title: "삭제에 실패했습니다.",
-      text: "알 수 없는 에러",
-      icon: "error",
+      title: "회원 탈퇴에 성공했습니다.",
+      icon: "success",
+      showConfirmButton: false,
+      timer: 3000,
+    });
+  };
+  const toast_handler = async () => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "bottom-end",
+      showConfirmButton: false,
+      timer: 300000,
+      timerProgressBar: true,
+      didOpen: toast => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+    Toast.fire({
+      icon: "success",
+      title: "Signed in successfully",
     });
   };
 

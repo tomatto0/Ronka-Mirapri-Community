@@ -51,13 +51,15 @@ export const authOptions: AuthOptions = {
       return true;
     },
     //토큰을 보낼 때/세션을 요청받았을 때 동작
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
       if (token?.login === undefined || token?.login === false) {
         await connectDB();
         const users = await User.findOne({ email: token.email }).exec();
         if (users) {
           //계정이 있는 사용자인 경우 > 사용자 정보를 jwt에 저장
           const { _id, email, nickname, sns } = users;
+          token._id = _id;
+          token.sns = sns;
           token.encrypted = encrypt_payload(
             JSON.stringify({ _id, email, nickname, sns }),
             process.env.JWT_ENCRYPTION_KEY!
@@ -71,6 +73,16 @@ export const authOptions: AuthOptions = {
           );
           token.login = false;
         }
+      }
+      //update callback
+      if (trigger === "update") {
+        token.nickname = session.nickname ?? token.nickname;
+        token.sns = session.sns ?? token.sns;
+        const { _id, email, nickname, sns } = token;
+        token.encrypted = encrypt_payload(
+          JSON.stringify({ _id, email, nickname, sns }),
+          process.env.JWT_ENCRYPTION_KEY!
+        );
       }
       return token; //encrypted로 암호화된 정보를 저장해 전송
     },
