@@ -8,8 +8,8 @@ import { job_category_group } from "@/app/utils/constants";
 import Link from "next/link";
 import Swal from "sweetalert2";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { usePathname, useRouter } from "next/navigation";
+import { signIn, useSession } from "next-auth/react";
 import React, { useState } from "react";
 import AutoLink from "@/app/components/AutoLink";
 
@@ -35,6 +35,7 @@ export default function PostPageClient({
 }) {
   const { data: session } = useSession();
   const router = useRouter();
+  const pathname = usePathname();
   const postIndex = post_data.index;
   const postId = post_data._id;
   const postDate = formatDate(new Date(post_data.created_at));
@@ -114,7 +115,21 @@ export default function PostPageClient({
     },
   });
 
-  const toggleLike = () => {
+  const toggleLike = async () => {
+    if (!session?.user.login) {
+      const result = await Swal.fire({
+        title: "로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?",
+        icon: "info",
+        confirmButtonText: "로그인",
+        showCancelButton: true,
+        cancelButtonText: "취소",
+        reverseButtons: true,
+      });
+      if (result.isConfirmed) {
+        sessionStorage.setItem("login_callback", pathname);
+        signIn("google", { callbackUrl: "/signup" });
+      }
+    }
     if (data?.is_liked) {
       deleteLikeMutation(postId);
     } else {
@@ -156,7 +171,8 @@ export default function PostPageClient({
     <main className="post">
       <div className="post-title-box">
         <p className="post-title">{post_data.title}</p>
-        {session?.user._id === post_data.author._id ? (
+        {session?.user._id === post_data.author._id ||
+        session?.user.is_admin ? (
           <div className="setting">
             <button
               className="post-edit"

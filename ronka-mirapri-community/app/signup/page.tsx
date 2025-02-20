@@ -99,7 +99,7 @@ export default function Page_sign_up() {
             </label>
             <span>*</span>
             <input type="text" disabled value={email} id="email" />
-            <p>
+            <p className="signup-error">
               <Link
                 href="#"
                 onClick={() => signIn("google", { callbackUrl: "/signup" })}

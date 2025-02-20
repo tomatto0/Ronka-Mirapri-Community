@@ -8,11 +8,13 @@ export default function Page_test() {
   const router = useRouter();
 
   const sign_out_handler = async () => {
-    Swal.fire({
-      title: "회원 탈퇴에 성공했습니다.",
-      icon: "success",
-      showConfirmButton: false,
-      timer: 3000,
+    return Swal.fire({
+      title: "로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?",
+      icon: "info",
+      confirmButtonText: "로그인",
+      showCancelButton: true,
+      cancelButtonText: "취소",
+      reverseButtons: true,
     });
   };
   const toast_handler = async () => {
@@ -20,7 +22,7 @@ export default function Page_test() {
       toast: true,
       position: "bottom-end",
       showConfirmButton: false,
-      timer: 300000,
+      timer: 3000,
       timerProgressBar: true,
       didOpen: toast => {
         toast.onmouseenter = Swal.stopTimer;

@@ -8,6 +8,7 @@ declare module "next-auth" {
       nickname?: string;
       sns?: string;
       login?: boolean;
+      is_admin?: boolean;
     };
     login_callback?: string;
   }

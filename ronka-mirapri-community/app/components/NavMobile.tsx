@@ -102,12 +102,18 @@ export default function NavMobile({
             ) : (
               <ul className="m-menus">
                 <li
-                  onClick={() => signIn("google", { callbackUrl: "/signup" })}
+                  onClick={() => {
+                    sessionStorage.setItem("login_callback", pathname);
+                    signIn("google", { callbackUrl: "/signup" });
+                  }}
                 >
                   LOGIN
                 </li>
                 <li
-                  onClick={() => signIn("google", { callbackUrl: "/signup" })}
+                  onClick={() => {
+                    sessionStorage.setItem("login_callback", pathname);
+                    signIn("google", { callbackUrl: "/signup" });
+                  }}
                 >
                   JOIN
                 </li>

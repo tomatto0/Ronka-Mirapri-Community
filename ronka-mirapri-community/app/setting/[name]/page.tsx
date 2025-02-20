@@ -1,17 +1,20 @@
 "use client";
 
-import "../css/SignUp.css";
+import { useGetUserInfo } from "@/app/(pages)/user/[name]/hooks/useUserInfo";
+import "../../css/SignUp.css";
 import cursed_word_check from "@/app/utils/cursed_word_check";
 import nickname_validate from "@/app/utils/nickname_check";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 export default function Page_sign_up() {
   const { data: session, status, update } = useSession();
   const router = useRouter();
+  const params = useParams<{ name: string }>();
+  const userName = params.name;
 
   const [email, set_email] = useState<string>(session?.user?.email || "");
   const [nickname, set_nickname] = useState<string>("");
@@ -20,13 +23,37 @@ export default function Page_sign_up() {
   const [sns_error, set_sns_error] = useState<string>("");
   const [is_error, set_is_error] = useState<boolean>(false);
 
+  const userInfo = useQuery({
+    queryKey: ["UserInfo", userName],
+    queryFn: async () => {
+      try {
+        const response = await fetch(`/api/db/users/public/?name=${userName}`);
+        // HTTP 에러 처리
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const res = await response.json();
+        return res.data;
+      } catch (error) {
+        if (error instanceof Error) {
+          throw new Error(error.message || "유저 정보 조회 실패");
+        }
+        throw error;
+      }
+    },
+    staleTime: 5000, // 5초
+    gcTime: 1000 * 60 * 10, // 30분
+    retry: 1,
+    refetchOnWindowFocus: false,
+  });
   const { mutate: edit_user } = useMutation({
     mutationFn: async () => {
       try {
         const response = await fetch(`/api/db/users`, {
           method: "PATCH",
           body: JSON.stringify({
-            id: session?.user._id ?? "",
+            id: userInfo.data._id ?? "",
             nickname,
             sns,
           }),
@@ -78,20 +105,28 @@ export default function Page_sign_up() {
   });
   const { mutate: delete_user } = useMutation({
     mutationFn: async () => {
+      const block_response = await fetch(`/api/db/blacklist`, {
+        method: "POST",
+        body: JSON.stringify({ email: userInfo.data.email }),
+      });
+      const block_res = await block_response.json();
+      if (!block_res.success) {
+        return block_res;
+      }
       const response = await fetch(`/api/db/users`, {
         method: "DELETE",
-        body: JSON.stringify({ id: session?.user?._id }),
+        body: JSON.stringify({ id: userInfo.data._id }),
       });
       const res = await response.json();
       return res;
     },
     onSuccess: async res => {
       if (res.success) {
-        await Swal.fire({ title: "회원 탈퇴에 성공했습니다." });
-        signOut({ callbackUrl: "/" });
+        await Swal.fire({ title: "회원 차단에 성공했습니다." });
+        router.push("/");
       } else {
         Swal.fire({
-          title: "회원 탈퇴에 실패했습니다.",
+          title: "회원 차단에 실패했습니다.",
           text: res.errror ?? "알 수 없는 에러",
           icon: "error",
         });
@@ -99,7 +134,7 @@ export default function Page_sign_up() {
     },
     onError: error => {
       Swal.fire({
-        title: "회원 탈퇴에 실패했습니다.",
+        title: "회원 차단에 실패했습니다.",
         text: error.message ?? "알 수 없는 에러",
         icon: "error",
       });
@@ -145,18 +180,17 @@ export default function Page_sign_up() {
   const cancle_handler = () => {
     router.back();
   };
-
   useEffect(() => {
-    if (status !== "loading") {
-      if (session?.user.login) {
-        set_email(session.user.email ?? "");
-        set_nickname(session.user.nickname ?? "");
-        set_sns(session.user.sns ?? "");
+    if (status !== "loading" && userInfo.status !== "pending") {
+      if (session?.user.is_admin) {
+        set_email(userInfo.data.email ?? "");
+        set_nickname(userInfo.data.nickname ?? "");
+        set_sns(userInfo.data.sns ?? "");
       } else {
         router.push("/");
       }
     }
-  }, [status]);
+  }, [status, userInfo.status]);
 
   if (status === "loading") {
     return (
@@ -210,7 +244,7 @@ export default function Page_sign_up() {
             <p className="signup-error">{sns_error}</p>
           </div>
           <button className="withdraw-submit" onClick={delete_handler}>
-            탈퇴하기
+            차단하기
           </button>
           <div className="setting-button-container">
             <button className="cancle-submit" onClick={cancle_handler}>

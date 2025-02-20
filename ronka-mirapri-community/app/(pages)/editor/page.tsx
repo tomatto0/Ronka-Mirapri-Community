@@ -260,6 +260,44 @@ export default function Page_editor() {
     };
   });
 
+  function message_update(post_message: { [key: string]: string }) {
+    message_dispatch({
+      type: "UPDATE_FIELD",
+      field: "title",
+      value: post_message.title,
+    });
+    message_dispatch({
+      type: "UPDATE_FIELD",
+      field: "content",
+      value: post_message.content,
+    });
+    message_dispatch({
+      type: "UPDATE_FIELD",
+      field: "sns",
+      value: post_message.sns,
+    });
+    message_dispatch({
+      type: "UPDATE_FIELD",
+      field: "race",
+      value: post_message.race,
+    });
+    message_dispatch({
+      type: "UPDATE_FIELD",
+      field: "job",
+      value: post_message.job,
+    });
+    message_dispatch({
+      type: "UPDATE_FIELD",
+      field: "tag",
+      value: post_message.tag,
+    });
+    if (post_message.image || post_message.item) {
+      Swal.fire({
+        html: [post_message.image, post_message.item].join("<br/>"),
+        icon: "error",
+      });
+    }
+  }
   async function post() {
     if (!imageRef.current) {
       return;
@@ -270,47 +308,21 @@ export default function Page_editor() {
       post_data
     );
     if (!is_validate) {
-      message_dispatch({
-        type: "UPDATE_FIELD",
-        field: "title",
-        value: post_message.title,
-      });
-      message_dispatch({
-        type: "UPDATE_FIELD",
-        field: "content",
-        value: post_message.content,
-      });
-      message_dispatch({
-        type: "UPDATE_FIELD",
-        field: "sns",
-        value: post_message.sns,
-      });
-      message_dispatch({
-        type: "UPDATE_FIELD",
-        field: "race",
-        value: post_message.race,
-      });
-      message_dispatch({
-        type: "UPDATE_FIELD",
-        field: "job",
-        value: post_message.job,
-      });
-      message_dispatch({
-        type: "UPDATE_FIELD",
-        field: "tag",
-        value: post_message.tag,
-      });
-      if (post_message.image || post_message.item) {
-        Swal.fire({
-          html: [post_message.image, post_message.item].join("<br/>"),
-          icon: "error",
-        });
-      }
+      message_update(post_message);
       return;
     }
     try {
+      async function image_upload_error() {
+        return Swal.fire({
+          title: "이미지 업로드 과정에서\n오류가 발생했습니다.",
+          text: "잠시 후 다시 시도해주세요.",
+          icon: "error",
+          confirmButtonText: "확인",
+        });
+      }
       const ctx = imageRef.current.getContext("2d");
       if (!ctx) {
+        image_upload_error();
         throw new Error("canvas context 생성에 실패했습니다.");
       }
       const image_data = ctx.getImageData(0, 0, 540, 1080);
@@ -319,6 +331,7 @@ export default function Page_editor() {
       cropped_canvas.height = 1080;
       const cropped_ctx = cropped_canvas.getContext("2d");
       if (!cropped_ctx) {
+        image_upload_error();
         throw new Error("canvas context 생성에 실패했습니다.");
       }
       cropped_ctx.putImageData(image_data, 0, 0);
@@ -326,9 +339,11 @@ export default function Page_editor() {
         cropped_canvas.toBlob(
           blob => {
             if (blob) {
-              return resolve(blob);
+              resolve(blob);
+            } else {
+              image_upload_error();
+              reject(new Error("Blob 생성 실패"));
             }
-            return reject(new Error("Blob 생성 실패"));
           },
           "image/webp",
           1.0
@@ -341,13 +356,12 @@ export default function Page_editor() {
         body: form,
       });
       if (!img_response.ok) {
+        image_upload_error();
         return;
       }
       const img_res = await img_response.json();
-      console.log({ img_res });
 
       const image_url = img_res.image_url;
-
       post_data.title = post_data.title.trim();
       post_data.content = post_data.content.trim();
       post_data.sns = post_data.sns.trim();
@@ -360,30 +374,34 @@ export default function Page_editor() {
           ...post_data,
         }),
       });
-      if (!post_response.ok) {
-        return;
-      }
       const post_res = await post_response.json();
-      localDB.open(1.0).then(() => {
-        localDB.clear();
-      });
-      console.log("res", post_res);
-      is_posted.current = true;
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "bottom-end",
-        timer: 3000,
-        showConfirmButton: false,
-      });
-      Toast.fire({ icon: "success", text: "글 작성이 완료되었습니다." });
-      router.push(`/post/${post_res.data.index}`);
+      if (post_res.success) {
+        localDB.open(1.0).then(() => {
+          localDB.clear();
+        });
+        is_posted.current = true;
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "bottom-end",
+          timer: 3000,
+          showConfirmButton: false,
+        });
+        Toast.fire({ icon: "success", text: "글 작성이 완료되었습니다." });
+        router.push(`/post/${post_res.data.index}`);
+      } else {
+        message_update(post_res.error);
+      }
     } catch (e) {
       console.error(e);
     }
   }
 
   if (status === "loading") {
-    return <main></main>;
+    return (
+      <main className="generator-fill">
+        <span className="loading"></span>
+      </main>
+    );
   }
   return (
     <main className="generator-fill">

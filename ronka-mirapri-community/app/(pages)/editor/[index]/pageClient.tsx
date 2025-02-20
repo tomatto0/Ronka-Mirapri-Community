@@ -148,6 +148,44 @@ export default function EditorPageClient({
     set_modal_slot(slot);
   };
 
+  function message_update(post_message: { [key: string]: string }) {
+    message_dispatch({
+      type: "UPDATE_FIELD",
+      field: "title",
+      value: post_message.title,
+    });
+    message_dispatch({
+      type: "UPDATE_FIELD",
+      field: "content",
+      value: post_message.content,
+    });
+    message_dispatch({
+      type: "UPDATE_FIELD",
+      field: "sns",
+      value: post_message.sns,
+    });
+    message_dispatch({
+      type: "UPDATE_FIELD",
+      field: "race",
+      value: post_message.race,
+    });
+    message_dispatch({
+      type: "UPDATE_FIELD",
+      field: "job",
+      value: post_message.job,
+    });
+    message_dispatch({
+      type: "UPDATE_FIELD",
+      field: "tag",
+      value: post_message.tag,
+    });
+    if (post_message.image || post_message.item) {
+      Swal.fire({
+        html: [post_message.image, post_message.item].join("<br/>"),
+        icon: "error",
+      });
+    }
+  }
   async function patch() {
     const { is_validate, ...post_message } = post_validate(
       image_src,
@@ -155,42 +193,7 @@ export default function EditorPageClient({
       post_data
     );
     if (!is_validate) {
-      message_dispatch({
-        type: "UPDATE_FIELD",
-        field: "title",
-        value: post_message.title,
-      });
-      message_dispatch({
-        type: "UPDATE_FIELD",
-        field: "content",
-        value: post_message.content,
-      });
-      message_dispatch({
-        type: "UPDATE_FIELD",
-        field: "sns",
-        value: post_message.sns,
-      });
-      message_dispatch({
-        type: "UPDATE_FIELD",
-        field: "race",
-        value: post_message.race,
-      });
-      message_dispatch({
-        type: "UPDATE_FIELD",
-        field: "job",
-        value: post_message.job,
-      });
-      message_dispatch({
-        type: "UPDATE_FIELD",
-        field: "tag",
-        value: post_message.tag,
-      });
-      if (post_message.image || post_message.item) {
-        Swal.fire({
-          html: [post_message.image, post_message.item].join("<br/>"),
-          icon: "error",
-        });
-      }
+      message_update(post_message);
       return;
     }
     try {
@@ -210,19 +213,22 @@ export default function EditorPageClient({
         return;
       }
       const post_res = await post_response.json();
-      console.log("res", post_res);
-      is_posted.current = true;
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "bottom-end",
-        timer: 300000,
-        showConfirmButton: false,
-      });
-      Toast.fire({
-        icon: "success",
-        text: "글 수정이 완료되었습니다.",
-      });
-      router.push(`/post/${post_res.data.index}`);
+      if (post_res.success) {
+        is_posted.current = true;
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "bottom-end",
+          timer: 3000,
+          showConfirmButton: false,
+        });
+        Toast.fire({
+          icon: "success",
+          text: "글 수정이 완료되었습니다.",
+        });
+        router.push(`/post/${post_res.data.index}`);
+      } else {
+        message_update(post_res.error);
+      }
     } catch (e) {
       console.error(e);
     }
@@ -259,7 +265,11 @@ export default function EditorPageClient({
   }
 
   useEffect(() => {
-    if (status !== "loading" && session?.user._id !== data.author._id) {
+    if (
+      status !== "loading" &&
+      session?.user._id !== data.author._id &&
+      !session?.user.is_admin
+    ) {
       router.push(`/post/${data.index}`);
       Swal.fire({
         title: "작성자만 수정할 수 있습니다.",
@@ -276,42 +286,44 @@ export default function EditorPageClient({
       </main>
     );
   }
-  if (session?.user._id === data.author._id) {
+  if (session?.user._id === data.author._id || session?.user.is_admin) {
     return (
-      <main>
-        <div className="main-container">
-          <UserCanvasViewer
-            image_src={data.image_url}
-            equiped_item={data.equiped_item}
+      <main className="generator-fill">
+        <div>
+          <div className="main-container">
+            <UserCanvasViewer
+              image_src={data.image_url}
+              equiped_item={data.equiped_item}
+            />
+            <ItemInformation
+              image_src={image_src}
+              open_modal={open_modal}
+              equiped_item={equiped_item}
+              slot_active={slot_active}
+              reset_equiped_item={reset_equiped_item}
+            />
+          </div>
+          <Editor
+            post_data={post_data}
+            dispatch={post_dispatch}
+            message={message_data}
           />
-          <ItemInformation
-            image_src={image_src}
-            open_modal={open_modal}
+          <div className="post_edit_submit_buttons">
+            <button className="post_edit_delete_button" onClick={post_delete}>
+              삭제
+            </button>
+            <button className="post_edit_submit_button" onClick={patch}>
+              수정
+            </button>
+          </div>
+          <ItemSearchModal
+            slot={modal_slot}
+            is_open={is_open}
             equiped_item={equiped_item}
-            slot_active={slot_active}
-            reset_equiped_item={reset_equiped_item}
+            set_is_open={set_is_open}
+            edit_equiped_item={edit_equiped_item}
           />
         </div>
-        <Editor
-          post_data={post_data}
-          dispatch={post_dispatch}
-          message={message_data}
-        />
-        <div className="post_edit_submit_buttons">
-          <button className="post_edit_delete_button" onClick={post_delete}>
-            삭제
-          </button>
-          <button className="post_edit_submit_button" onClick={patch}>
-            수정
-          </button>
-        </div>
-        <ItemSearchModal
-          slot={modal_slot}
-          is_open={is_open}
-          equiped_item={equiped_item}
-          set_is_open={set_is_open}
-          edit_equiped_item={edit_equiped_item}
-        />
       </main>
     );
   } else {

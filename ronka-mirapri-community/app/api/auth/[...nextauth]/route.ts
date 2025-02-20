@@ -57,11 +57,11 @@ export const authOptions: AuthOptions = {
         const users = await User.findOne({ email: token.email }).exec();
         if (users) {
           //계정이 있는 사용자인 경우 > 사용자 정보를 jwt에 저장
-          const { _id, email, nickname, sns } = users;
+          const { _id, email, nickname, sns, is_admin } = users;
           token._id = _id;
           token.sns = sns;
           token.encrypted = encrypt_payload(
-            JSON.stringify({ _id, email, nickname, sns }),
+            JSON.stringify({ _id, email, nickname, sns, is_admin }),
             process.env.JWT_ENCRYPTION_KEY!
           );
           token.login = true;

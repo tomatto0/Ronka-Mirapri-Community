@@ -123,7 +123,6 @@ export default function Page_home() {
 
   useEffect(() => {
     update_filter();
-
     if (filter_tag.keyword !== "") {
       router.push(`/?keyword=${filter_tag.keyword}`);
     } else {
@@ -153,13 +152,6 @@ export default function Page_home() {
       keyword: searchParams.get("keyword") ?? filter_tag.keyword,
     }));
   }, [searchParams]);
-
-  useEffect(() => {
-    set_filter_tag(prev => ({
-      ...prev,
-      keyword: searchParams.get("keyword") ?? filter_tag.keyword,
-    }));
-  }, []);
 
   const fetch_item_rank = async (): Promise<string[]> => {
     const response = await fetch(

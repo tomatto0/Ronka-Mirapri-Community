@@ -1,9 +1,12 @@
-import "../css/PostThumbnail.css";
+"use client";
 
-import { useEffect, useState } from "react";
-import { is_like, like_toggle } from "../utils/clientfunction";
-import { useRouter } from "next/navigation";
+import "../css/PostThumbnail.css";
+import { useState } from "react";
+import { like_toggle } from "../utils/clientfunction";
+import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
+import { signIn, useSession } from "next-auth/react";
+import Swal from "sweetalert2";
 
 type PostInform = {
   _id: string;
@@ -24,10 +27,26 @@ export default function PostThumbnail({
   index?: number[];
 }) {
   const router = useRouter();
+  const pathname = usePathname();
+  const { data: session } = useSession();
   const queryClient = useQueryClient();
   const [is_liked, set_is_liked] = useState<boolean>(post.is_liked);
 
   const like_handler = async () => {
+    if (!session?.user.login) {
+      const result = await Swal.fire({
+        title: "로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?",
+        icon: "info",
+        confirmButtonText: "로그인",
+        showCancelButton: true,
+        cancelButtonText: "취소",
+        reverseButtons: true,
+      });
+      if (result.isConfirmed) {
+        sessionStorage.setItem("login_callback", pathname);
+        signIn("google", { callbackUrl: "/signup" });
+      }
+    }
     set_is_liked(prev => !prev);
     await like_toggle(post._id);
 

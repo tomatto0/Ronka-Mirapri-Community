@@ -96,10 +96,14 @@ export default function Page_user() {
                 <AutoLink className="user-sns" target="_blank">
                   {userInfo?.data?.sns.toUpperCase()}
                 </AutoLink>
-                {session?.user.nickname === userInfo?.data?.nickname && (
-                  <button className="user-setting"                 onClick={() => {
-                  router.push("/setting");
-                }}>
+                {(session?.user.nickname === userInfo?.data?.nickname ||
+                  session?.user.is_admin) && (
+                  <button
+                    className="user-setting"
+                    onClick={() => {
+                      router.push("/setting");
+                    }}
+                  >
                     <img alt="setting" id="setting" />
                   </button>
                 )}
@@ -110,7 +114,6 @@ export default function Page_user() {
         )}
 
         <div className="tlToggle">
-
           <h3
             className={timeline === "userPosts" ? "user-tap-active" : ""}
             onClick={() => {

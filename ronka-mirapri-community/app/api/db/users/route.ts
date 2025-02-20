@@ -1,4 +1,5 @@
 import {
+  Blacklist,
   connectDB,
   is_duplicated_error,
   is_validation_error,
@@ -21,7 +22,7 @@ export async function GET(request: Request) {
       );
     }
     const session = await getServerSession(authOptions);
-    if (session?.user._id !== id) {
+    if (session?.user._id !== id && !session?.user.is_admin) {
       return NextResponse.json(
         { success: false, error: "Forbidden access" },
         { status: 403 }
@@ -64,6 +65,11 @@ export async function POST(request: Request) {
       user_message.email_message =
         "유효하지 않은 이메일입니다. 처음부터 다시 시도해주세요.";
     }
+    const blacklist = await Blacklist.findOne({ email: session?.user.email });
+    if (blacklist) {
+      user_message.is_invalid = true;
+      user_message.email_message = "차단된 이메일입니다.";
+    }
     user_message.nickname_message = nickname_validate(body.nickname);
     if (user_message.nickname_message !== "") {
       user_message.is_invalid = true;
@@ -86,6 +92,7 @@ export async function POST(request: Request) {
       nickname: body.nickname,
       sns: body.sns,
     });
+
     const created_user = await user.save();
     return NextResponse.json({ success: true, data: created_user });
   } catch (e) {
@@ -116,7 +123,10 @@ export async function PATCH(request: Request) {
         { status: 400 }
       );
     }
-    if (!body.id || session?.user?._id !== body.id) {
+    if (
+      !body.id ||
+      (session?.user?._id !== body.id && !session.user.is_admin)
+    ) {
       return NextResponse.json(
         { success: false, error: "Invalid request" },
         { status: 400 }

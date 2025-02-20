@@ -32,6 +32,7 @@ const user_schema = new Schema({
   sns: { type: String, default: "" },
   posts: [{ type: Schema.Types.ObjectId, ref: "Post", default: [] }],
   likes: [{ type: Schema.Types.ObjectId, ref: "Like", default: [] }],
+  is_admin: { type: Boolean, default: false },
   created_at: { type: Date, default: Date.now },
 });
 //user가 findOneAndDelete로 삭제될 때 user _id를 가진 Post, Like를 삭제
@@ -222,10 +223,16 @@ const counter_schema = new Schema({
   seq: { type: Number },
 });
 
+const blacklist_schema = new Schema({
+  email: { type: String, required: true, unique: true },
+});
+
 const User = mongoose.models.User || model("User", user_schema);
 const Post = mongoose.models.Post || model("Post", post_schema);
 const Like = mongoose.models.Like || model("Like", like_schema);
 const Counter = mongoose.models.Counter || model("Counter", counter_schema);
+const Blacklist =
+  mongoose.models.Blacklist || model("Blacklist", blacklist_schema);
 
 export {
   connectDB,
@@ -234,4 +241,5 @@ export {
   User,
   Post,
   Like,
+  Blacklist,
 };

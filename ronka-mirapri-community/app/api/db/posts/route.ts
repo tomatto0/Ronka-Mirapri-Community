@@ -1,26 +1,42 @@
-import { connectDB, is_validation_error, Post } from "../database";
+import { connectDB, is_validation_error, Post, User } from "../database";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import post_validate from "@/app/utils/post_validate";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     const session = await getServerSession(authOptions);
 
-    if (!session?.user?._id) {
+    if (!session?.user._id) {
       return NextResponse.json(
         { success: false, error: "Need to login" },
         { status: 400 }
       );
     }
-    if (!body.title && !body.content) {
+
+    const { is_validate, ...post_message } = post_validate(
+      body.image_url,
+      body.equiped_item,
+      body
+    );
+
+    if (!is_validate) {
+      return NextResponse.json({ success: false, error: post_message });
+    }
+
+    await connectDB();
+
+    const user = await User.findById(session?.user._id).lean();
+
+    if (!user) {
       return NextResponse.json(
-        { success: false, error: "Invalid request" },
-        { status: 400 }
+        { success: false, error: "User not found" },
+        { status: 404 }
       );
     }
-    await connectDB();
+
     const post = new Post({
       ...body,
       author: session.user._id,
@@ -63,6 +79,15 @@ export async function PATCH(request: Request) {
       );
     }
 
+    const { is_validate, ...post_message } = post_validate(
+      body.image_url,
+      body.equiped_item,
+      body
+    );
+    if (!is_validate) {
+      return NextResponse.json({ success: false, error: post_message });
+    }
+
     await connectDB();
 
     const { id: _, ...update_field } = body;
@@ -70,7 +95,6 @@ export async function PATCH(request: Request) {
     const updated_post = await Post.findOneAndUpdate(
       {
         _id: body.id,
-        author: session.user._id,
       },
       update_field,
       {
@@ -78,6 +102,13 @@ export async function PATCH(request: Request) {
         runValidators: true,
       }
     ).exec();
+
+    if (updated_post.author !== session.user._id && !session.user.is_admin) {
+      return NextResponse.json(
+        { success: false, error: "Invalid request" },
+        { status: 400 }
+      );
+    }
 
     if (!updated_post) {
       return NextResponse.json(

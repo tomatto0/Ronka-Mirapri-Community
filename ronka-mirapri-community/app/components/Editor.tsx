@@ -167,7 +167,7 @@ export default function Editor({
         onChange={title_change_handler}
         autoComplete="off"
       />
-      <p>{message.title}</p>
+      <p className="error-message">{message.title}</p>
 
       <label className="editor-input-title" htmlFor="content">
         내용{" "}
@@ -180,7 +180,7 @@ export default function Editor({
         onChange={content_change_handler}
         autoComplete="off"
       />
-      <p>{message.content}</p>
+      <p className="error-message">{message.content}</p>
       <label className="editor-input-title" htmlFor="sns">
         SNS URL{" "}
       </label>
@@ -191,7 +191,7 @@ export default function Editor({
         onChange={sns_change_handler}
         autoComplete="off"
       />
-      <p>{message.sns}</p>
+      <p className="error-message">{message.sns}</p>
       <h3>검색 필터 설정</h3>
       <hr className="editor-divider" />
       <h4>착용가능 성별</h4>
@@ -218,7 +218,7 @@ export default function Editor({
           />
         ))}
       </div>
-      <p>{message.race}</p>
+      <p className="error-message">{message.race}</p>
       <h4>
         직업 <span>중복 선택 가능</span>
       </h4>
@@ -238,7 +238,7 @@ export default function Editor({
           />
         ))}
       </div>
-      <p>{message.job}</p>
+      <p className="error-message">{message.job}</p>
       <div className="editor-tag-title">
         <label className="editor-input-title" htmlFor="tag">
           태그
@@ -260,7 +260,7 @@ export default function Editor({
           />
         </div>
         <p className="input_subtext">태그 입력 후 스페이스바로 태그 추가</p>
-        <p>{message.tag}</p>
+        <p className="error-message">{message.tag}</p>
       </div>
     </div>
   );

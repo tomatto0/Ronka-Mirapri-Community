@@ -73,6 +73,9 @@ div.signup-wrap {
   color: #d92d20;
   font-size: 1.3rem;
   margin-top: 4px;
+  a {
+    color: inherit;
+  }
 }
 
 .signup-submit {

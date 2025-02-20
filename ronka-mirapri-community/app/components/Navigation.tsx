@@ -96,10 +96,20 @@ export default function Navigation() {
             <div onClick={() => signOut()}>LOGOUT</div>
           ) : (
             <ul className="menus">
-              <li onClick={() => signIn("google", { callbackUrl: "/signup" })}>
+              <li
+                onClick={() => {
+                  sessionStorage.setItem("login_callback", pathname);
+                  signIn("google", { callbackUrl: "/signup" });
+                }}
+              >
                 LOGIN
               </li>
-              <li onClick={() => signIn("google", { callbackUrl: "/signup" })}>
+              <li
+                onClick={() => {
+                  sessionStorage.setItem("login_callback", pathname);
+                  signIn("google", { callbackUrl: "/signup" });
+                }}
+              >
                 JOIN
               </li>
             </ul>

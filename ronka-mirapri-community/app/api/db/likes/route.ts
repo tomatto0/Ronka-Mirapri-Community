@@ -1,4 +1,4 @@
-import { connectDB, is_validation_error, Like } from "../database";
+import { connectDB, is_validation_error, Like, User } from "../database";
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
@@ -46,19 +46,42 @@ export async function POST(request: Request) {
     const body = await request.json();
     const session = await getServerSession(authOptions);
 
-    if (!session?.user?._id) {
+    if (!session?.user._id) {
       return NextResponse.json(
         { success: false, error: "Need to login" },
         { status: 400 }
       );
     }
+
     if (!body.post) {
       return NextResponse.json(
         { success: false, error: "Invalid request" },
         { status: 400 }
       );
     }
+
     await connectDB();
+
+    const user = await User.findById(session?.user._id).lean();
+
+    if (!user) {
+      return NextResponse.json(
+        { success: false, error: "User not found" },
+        { status: 404 }
+      );
+    }
+
+    const like_check = await Like.find({
+      post: body.post,
+      user: session.user._id,
+    }).lean();
+
+    if (like_check.length > 0) {
+      return NextResponse.json(
+        { success: false, error: "Invalid request" },
+        { status: 400 }
+      );
+    }
 
     const like = new Like({
       post: body.post,

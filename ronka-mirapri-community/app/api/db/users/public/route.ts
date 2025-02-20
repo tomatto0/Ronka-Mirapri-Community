@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectDB, Post, User } from "../../database";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -12,10 +14,18 @@ export async function GET(request: Request) {
         { status: 400 }
       );
     }
+    const session = await getServerSession(authOptions);
     await connectDB();
     const user = await User.aggregate([
       { $match: { nickname: name } },
-      { $project: { nickname: 1, sns: 1, posts: 1 } },
+      {
+        $project: {
+          nickname: 1,
+          sns: 1,
+          posts: 1,
+          ...(session?.user.is_admin ? { email: 1 } : {}),
+        },
+      },
     ]);
     const posts = await Post.aggregate([
       { $match: { _id: { $in: user[0].posts } } },
