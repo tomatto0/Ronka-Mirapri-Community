@@ -51,7 +51,7 @@ export default function RootLayout({
           <div className="App">
             <Providers>{children}</Providers>
             <div className="footer">
-              <Link href="https://ronkacloset.com">
+              <Link href="https://ronkacloset.com" target="_blank">
                 https://ronkacloset.com
               </Link>
               <br />

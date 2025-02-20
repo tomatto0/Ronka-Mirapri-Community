@@ -132,16 +132,6 @@ main.post {
   display: flex;
 }
 
-/* .post-subtitle-box {
-  width: 100%;
-  padding: 0 26px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 36px;
-  position: relative;
-  order: 3;
-} */
-
 .post-image {
   width: 100%;
   vertical-align: top;
