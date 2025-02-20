@@ -3,7 +3,7 @@
 import "../../css/editor.css";
 import ItemInformation from "@/app/components/ItemInformation";
 import ItemSearchModal from "@/app/components/ItemSearchModal";
-import Editor from "@/app/components/Editor_";
+import Editor from "@/app/components/Editor";
 import UserCanvas from "@/app/components/UserCanvas";
 import equip_slot_categories from "../../json/equip_slot_categories.json";
 import { EquipSlot } from "@/app/types/EquipSlot";
