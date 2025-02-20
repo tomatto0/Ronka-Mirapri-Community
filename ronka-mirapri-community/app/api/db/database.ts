@@ -35,20 +35,15 @@ const user_schema = new Schema({
   created_at: { type: Date, default: Date.now },
 });
 //user가 findOneAndDelete로 삭제될 때 user _id를 가진 Post, Like를 삭제
-user_schema.pre("findOneAndDelete", async function (next) {
+user_schema.post("findOneAndDelete", async function (user, next) {
   try {
-    const user = await this.model.findOne(this.getFilter());
     if (user) {
       await Post.deleteMany({ author: user._id });
       await Like.deleteMany({ user: user._id });
     }
     next();
   } catch (e) {
-    if (e instanceof Error) {
-      next(e);
-    } else {
-      next(new Error("Unknown error"));
-    }
+    next(e instanceof Error ? e : new Error("Unknown error"));
   }
 });
 

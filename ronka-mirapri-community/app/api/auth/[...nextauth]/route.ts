@@ -76,13 +76,15 @@ export const authOptions: AuthOptions = {
       }
       //update callback
       if (trigger === "update") {
-        token.nickname = session.nickname ?? token.nickname;
-        token.sns = session.sns ?? token.sns;
-        const { _id, email, nickname, sns } = token;
-        token.encrypted = encrypt_payload(
-          JSON.stringify({ _id, email, nickname, sns }),
-          process.env.JWT_ENCRYPTION_KEY!
-        );
+        if (session.type === "update") {
+          token.nickname = session.nickname ?? token.nickname;
+          token.sns = session.sns ?? token.sns;
+          const { _id, email, nickname, sns } = token;
+          token.encrypted = encrypt_payload(
+            JSON.stringify({ _id, email, nickname, sns }),
+            process.env.JWT_ENCRYPTION_KEY!
+          );
+        }
       }
       return token; //encrypted로 암호화된 정보를 저장해 전송
     },

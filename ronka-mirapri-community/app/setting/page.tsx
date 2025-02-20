@@ -5,7 +5,6 @@ import cursed_word_check from "@/app/utils/cursed_word_check";
 import nickname_validate from "@/app/utils/nickname_check";
 import { useMutation } from "@tanstack/react-query";
 import { signIn, signOut, useSession } from "next-auth/react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Swal from "sweetalert2";
@@ -84,8 +83,8 @@ export default function Page_sign_up() {
     },
     onSuccess: async res => {
       if (res.success) {
-        Swal.fire({ title: "회원 탈퇴에 성공했습니다." });
-        signOut();
+        await Swal.fire({ title: "회원 탈퇴에 성공했습니다." });
+        signOut({ callbackUrl: "/" });
       } else {
         Swal.fire({
           title: "회원 탈퇴에 실패했습니다.",
@@ -110,8 +109,8 @@ export default function Page_sign_up() {
       set_nickname_error(nickname_message);
       set_is_error(true);
     }
-    if (sns.length > 50) {
-      set_sns_error("SNS url은 50자 이하여야 합니다.");
+    if (sns.length > 100) {
+      set_sns_error("SNS url은 100자 이하여야 합니다.");
     }
     if (cursed_word_check(sns)) {
       set_sns_error(
@@ -126,7 +125,7 @@ export default function Page_sign_up() {
     return true;
   };
   const delete_handler = async () => {
-    const result = Swal.fire({
+    const result = await Swal.fire({
       title: "정말로 탈퇴하시겠습니까?",
       icon: "warning",
       confirmButtonText: "탈퇴",
@@ -134,6 +133,10 @@ export default function Page_sign_up() {
       cancelButtonText: "취소",
       reverseButtons: true,
     });
+
+    if (result.isConfirmed) {
+      delete_user();
+    }
   };
   const cancle_handler = () => {
     router.back();
@@ -145,19 +148,21 @@ export default function Page_sign_up() {
         set_email(session.user.email ?? "");
         set_nickname(session.user.nickname ?? "");
         set_sns(session.user.sns ?? "");
+      } else {
+        router.push("/");
       }
     }
   }, [status]);
 
   if (status === "loading") {
     return (
-      <main>
+      <main className="signup-fill">
         <span className="loading"></span>
       </main>
     );
   }
 
-  if (session?.user.email) {
+  if (session?.user.login) {
     return (
       <main className="signup-fill">
         <div className="signup-wrap">
@@ -216,12 +221,5 @@ export default function Page_sign_up() {
     );
   }
 
-  return (
-    <main>
-      <p>Please log in to sign up.</p>
-      <button onClick={() => signIn("google", { callbackUrl: "/signup" })}>
-        Sign in with Google
-      </button>
-    </main>
-  );
+  return <main className="signup-fill"></main>;
 }

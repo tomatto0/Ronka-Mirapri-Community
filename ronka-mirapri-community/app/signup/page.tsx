@@ -28,8 +28,8 @@ export default function Page_sign_up() {
       set_nickname_error(nickname_message);
       set_is_error(true);
     }
-    if (sns.length > 50) {
-      set_sns_error("SNS url은 50자 이하여야 합니다.");
+    if (sns.length > 100) {
+      set_sns_error("SNS url은 100자 이하여야 합니다.");
     }
     if (cursed_word_check(sns)) {
       set_sns_error(
@@ -38,18 +38,17 @@ export default function Page_sign_up() {
       set_is_error(true);
     }
     if (is_error) {
-      return false;
+      return;
     }
     const user = { email, nickname, sns };
     const response = await fetch("/api/db/users", {
       method: "POST",
       body: JSON.stringify(user),
     });
-    if (!response.ok) {
-      return false;
-    }
     const res = await response.json();
-    if (res.success === false) {
+    if (res.success) {
+      router.push("/");
+    } else {
       if (res.error === "Unknown error") {
         Swal.fire({
           text: "알수없는 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
@@ -61,9 +60,7 @@ export default function Page_sign_up() {
         set_nickname_error(res.error.nickname_message);
         set_sns_error(res.error.sns_message);
       }
-      return false;
     }
-    return true;
   };
 
   useEffect(() => {
@@ -74,19 +71,21 @@ export default function Page_sign_up() {
           router.push(sessionStorage.getItem("login_callback") || "/");
           sessionStorage.removeItem("login_callback");
         }
+      } else {
+        router.push("/");
       }
     }
   }, [status]);
 
-  if (status === "loading") {
+  if (status === "loading" || session?.user.login === true) {
     return (
-      <main>
+      <main className="signup-fill">
         <span className="loading"></span>
       </main>
     );
   }
 
-  if (session?.user.email) {
+  if (session?.user.login === false) {
     return (
       <main className="signup-fill">
         <div className="signup-wrap">
@@ -146,12 +145,5 @@ export default function Page_sign_up() {
     );
   }
 
-  return (
-    <main>
-      <p>Please log in to sign up.</p>
-      <button onClick={() => signIn("google", { callbackUrl: "/signup" })}>
-        Sign in with Google
-      </button>
-    </main>
-  );
+  return <main className="signup-fill"></main>;
 }

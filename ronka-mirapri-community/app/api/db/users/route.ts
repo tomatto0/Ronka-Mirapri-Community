@@ -13,7 +13,6 @@ import nickname_validate from "@/app/utils/nickname_check";
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const id = url.searchParams.get("id");
-
   try {
     if (!id) {
       return NextResponse.json(
@@ -69,10 +68,14 @@ export async function POST(request: Request) {
     if (user_message.nickname_message !== "") {
       user_message.is_invalid = true;
     }
+    if (body.sns.length > 100) {
+      user_message.is_invalid = true;
+      user_message.sns_message = "SNS url은 100자 이하여야 합니다.";
+    }
     if (cursed_word_check(body.sns)) {
       user_message.is_invalid = true;
       user_message.sns_message =
-        "SNS에 부적절한 단어가 포함되어있습니다. 부적절한 내용을 작성할 경우 통보없이 수정, 탈퇴처리 될 수 있습니다.";
+        "SNS url에 부적절한 단어가 포함되어있습니다. 부적절한 내용을 작성할 경우 통보없이 수정, 탈퇴처리 될 수 있습니다.";
     }
     if (user_message.is_invalid) {
       return NextResponse.json({ success: false, error: user_message });
@@ -101,6 +104,11 @@ export async function PATCH(request: Request) {
   try {
     const body = await request.json();
     const session = await getServerSession(authOptions);
+    const user_message = {
+      is_invalid: false,
+      nickname_message: "",
+      sns_message: "",
+    };
 
     if (!session?.user?._id) {
       return NextResponse.json(
@@ -119,12 +127,29 @@ export async function PATCH(request: Request) {
 
     const update_field: Partial<{ nickname: string; sns: string }> = {};
 
-    const keys: (keyof typeof update_field)[] = ["nickname", "sns"];
-    keys.forEach(key => {
-      if (body[key] !== undefined) {
-        update_field[key] = body[key];
+    if (typeof body.nickname === "string") {
+      user_message.nickname_message = nickname_validate(body.nickname);
+      if (user_message.nickname_message !== "") {
+        user_message.is_invalid = true;
+      } else {
+        update_field.nickname = body.nickname;
       }
-    });
+    }
+    if (typeof body.sns === "string") {
+      if (body.sns.length > 100) {
+        user_message.is_invalid = true;
+        user_message.sns_message = "SNS url은 100자 이하여야 합니다.";
+      } else if (cursed_word_check(body.sns)) {
+        user_message.is_invalid = true;
+        user_message.sns_message =
+          "SNS url에 부적절한 단어가 포함되어있습니다. 부적절한 내용을 작성할 경우 통보없이 수정, 탈퇴처리 될 수 있습니다.";
+      } else {
+        update_field.sns = body.sns;
+      }
+    }
+    if (user_message.is_invalid) {
+      return NextResponse.json({ success: false, error: user_message });
+    }
 
     const updated_user = await User.findByIdAndUpdate(body.id, update_field, {
       new: true,

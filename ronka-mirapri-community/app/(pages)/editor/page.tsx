@@ -13,7 +13,7 @@ import { useEffect, useReducer, useRef, useState } from "react";
 import { post_init_state, item_null } from "@/app/utils/constants";
 import { LocalDB } from "@/app/utils/localDB";
 import Swal from "sweetalert2";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import post_validate from "@/app/utils/post_validate";
 
 export default function Page_editor() {
@@ -161,6 +161,9 @@ export default function Page_editor() {
 
   //indexedDB에서 정보 불러오기
   useEffect(() => {
+    if (status === "loading") {
+      return;
+    }
     if (post_data.sns === "" && session?.user) {
       post_dispatch({
         type: "UPDATE_FIELD",
@@ -183,7 +186,6 @@ export default function Page_editor() {
             job: string[];
             tag: string[];
           };
-          console.log({ item });
           if (item.image) {
             const objectURL = URL.createObjectURL(item.image);
             set_image_src(objectURL);
@@ -233,28 +235,30 @@ export default function Page_editor() {
   }, [status]);
 
   //indexedDB에 정보 저장하기
+  const indexedDB_save = () => {
+    if (is_posted.current) {
+      return;
+    }
+    post_data.sns = post_data.sns == session?.user.sns ? "" : post_data.sns;
+    localDB.open(1.0).then(() => {
+      localDB.put(
+        {
+          x: x.current,
+          equiped_item,
+          ...post_data,
+        },
+        1
+      );
+    });
+  };
+
   useEffect(() => {
-    const handleBeforeUnload = () => {
-      if (is_posted.current) {
-        return;
-      }
-      post_data.sns = post_data.sns == session?.user.sns ? "" : post_data.sns;
-      localDB.open(1.0).then(() => {
-        localDB.put(
-          {
-            x: x.current,
-            equiped_item,
-            ...post_data,
-          },
-          1
-        );
-      });
-    };
-    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("beforeunload", indexedDB_save);
     return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
+      indexedDB_save();
+      window.removeEventListener("beforeunload", indexedDB_save);
     };
-  }, [x.current, equiped_item, post_data, is_posted.current]);
+  });
 
   async function post() {
     if (!imageRef.current) {
