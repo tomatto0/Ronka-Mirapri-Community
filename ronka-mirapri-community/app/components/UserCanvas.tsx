@@ -7,6 +7,7 @@ import { Item } from "../types/Item";
 import "../css/UserCanvas.css";
 import { LocalDB } from "../utils/localDB";
 import { clamp } from "../utils/clamp";
+import Swal from "sweetalert2";
 
 type ItemImage = {
   Id: number;
@@ -447,7 +448,12 @@ export default function UserCanvas({
       set_image_src(objectUrl);
       x.current = 0;
     } else {
-      console.log("유효하지 않은 이미지");
+      Swal.fire({
+        icon: "error",
+        title: "유효하지 않은 이미지입니다.",
+        text: "bmp, png, jpeg 형식의 이미지만 등록할 수 있습니다",
+        confirmButtonText: "확인",
+      });
       e.target.value = "";
     }
   };

@@ -164,7 +164,6 @@ export default function PostPageClient({
   };
 
   const image_download = async () => {
-    console.log(imageRef.current);
     const options: Intl.DateTimeFormatOptions = {
       month: "2-digit", // 두 자리 월
       day: "2-digit", // 두 자리 일

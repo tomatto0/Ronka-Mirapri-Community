@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 export default function ItemUploader({
   set_image_src,
 }: {
@@ -19,7 +21,12 @@ export default function ItemUploader({
         set_image_src(reader.result as string);
       };
     } else {
-      console.log("유효하지 않은 이미지");
+      Swal.fire({
+        icon: "error",
+        title: "유효하지 않은 이미지입니다.",
+        text: "bmp, png, jpeg 형식의 이미지만 등록할 수 있습니다",
+        confirmButtonText: "확인",
+      });
       e.target.value = "";
     }
   };
