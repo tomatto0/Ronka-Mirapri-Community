@@ -10,8 +10,9 @@ import Swal from "sweetalert2";
 import { useMutation } from "@tanstack/react-query";
 import { usePathname, useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import AutoLink from "@/app/components/AutoLink";
+import UserCanvasViewer from "@/app/components/UserCanvasViewer";
 
 export default function PostPageClient({
   post_data,
@@ -40,6 +41,7 @@ export default function PostPageClient({
   const postId = post_data._id;
   const postDate = formatDate(new Date(post_data.created_at));
   const jobs = job_summary(post_data.job);
+  const imageRef = useRef<HTMLCanvasElement | null>(null);
   function formatDate(date: Date) {
     const yyyy = date.getFullYear();
     const mm = String(date.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1 필요
@@ -161,6 +163,51 @@ export default function PostPageClient({
     );
   };
 
+  const image_download = async () => {
+    console.log(imageRef.current);
+    const options: Intl.DateTimeFormatOptions = {
+      month: "2-digit", // 두 자리 월
+      day: "2-digit", // 두 자리 일
+      hour: "2-digit", // 두 자리 시간
+      minute: "2-digit", // 두 자리 분
+      hour12: false, // 24시간제
+      timeZone: "Asia/Seoul", // 한국 시간대
+    };
+
+    const formattedDate = new Intl.DateTimeFormat("ko-KR", options)
+      .format(new Date())
+      .replace(". ", "")
+      .replace(". ", "")
+      .replace(":", "");
+
+    if (imageRef.current instanceof HTMLCanvasElement) {
+      const result = await Swal.fire({
+        title: "룩북을 다운받으시겠습니까?",
+        text: "확장자를 선택해주세요.",
+        input: "radio",
+        inputValue: "jpg",
+        inputOptions: { jpg: "jpg", png: "png" },
+        confirmButtonText: "다운로드",
+        showCancelButton: true,
+        cancelButtonText: "취소",
+        reverseButtons: true,
+      });
+      if (result.isConfirmed) {
+        if (result.value === "jpg") {
+          const a = document.createElement("a");
+          a.href = imageRef.current.toDataURL("image/jpeg");
+          a.download = `RonkaMirapri ${formattedDate}.jpg`;
+          a.click();
+        } else {
+          const a = document.createElement("a");
+          a.href = imageRef.current.toDataURL("image/png");
+          a.download = `RonkaMirapri ${formattedDate}.png`;
+          a.click();
+        }
+      }
+    }
+  };
+
   const TagBox = ({ content }: { content: string }) => {
     return <div className="tag-box">{content}</div>;
   };
@@ -215,11 +262,16 @@ export default function PostPageClient({
           </button>
         </div>
       </div>
-      <img
-        className="post-image"
-        src={post_data.image_url}
-        alt={post_data.title}
-      />
+      <div className="image-container">
+        <img
+          className="post-image"
+          src={post_data.image_url}
+          alt={post_data.title}
+        />
+        <div className="download-container" onClick={image_download}>
+          <img alt="download" id="download" />
+        </div>
+      </div>
       <div className="post-information">
         <ItemViewer equiped_item={post_data.equiped_item} />
         <div className="tag-container">
@@ -248,6 +300,13 @@ export default function PostPageClient({
           <button className="share-button bluesky" onClick={share_bluesky} />
           <button className="share-button twitter" onClick={share_twitter} />
         </div>
+      </div>
+      <div style={{ display: "none" }}>
+        <UserCanvasViewer
+          image_src={post_data.image_url}
+          equiped_item={post_data.equiped_item}
+          ref={imageRef}
+        />
       </div>
     </main>
   );

@@ -3,9 +3,14 @@ import {
   job_category,
   race_category,
 } from "@/app/utils/constants";
+import { Storage } from "@google-cloud/storage";
 import { MongoServerError } from "mongodb";
 import mongoose, { model, MongooseError, Schema } from "mongoose";
+import { title } from "process";
 const uri = process.env.MONGODB_URI as string;
+const storage = new Storage();
+const bucketname = "ronka_closet_community";
+const bucket = storage.bucket(bucketname);
 
 async function connectDB() {
   try {
@@ -33,6 +38,7 @@ const user_schema = new Schema({
   posts: [{ type: Schema.Types.ObjectId, ref: "Post", default: [] }],
   likes: [{ type: Schema.Types.ObjectId, ref: "Like", default: [] }],
   is_admin: { type: Boolean, default: false },
+  warning: [{ type: String, default: [] }],
   created_at: { type: Date, default: Date.now },
 });
 //user가 findOneAndDelete로 삭제될 때 user _id를 가진 Post, Like를 삭제
@@ -78,13 +84,14 @@ const post_schema = new Schema({
   created_at: { type: Date, default: Date.now },
 });
 post_schema.index({ index: -1 });
-//post가 findOneAndDelete로 삭제될 때 post _id를 가진 Like를 삭제
+//post가 findOneAndDelete로 삭제될 때 post _id를 가진 Like를 삭제, user에서 post를 삭제
 post_schema.pre("findOneAndDelete", async function (next) {
   try {
     const post = await this.model
       .findOne(this.getFilter())
-      .select(["likes", "author", "_id"])
+      .select(["image_url", "likes", "author", "_id"])
       .lean<{
+        image_url: String;
         likes: Schema.Types.ObjectId[];
         author: Schema.Types.ObjectId;
         _id: Schema.Types.ObjectId;
@@ -92,13 +99,19 @@ post_schema.pre("findOneAndDelete", async function (next) {
     if (!post) {
       return next();
     }
-    if (post.likes?.length > 0) {
+    if (post.likes.length > 0) {
       await Like.deleteMany({ _id: { $in: post.likes } });
     }
     const user = await User.findById(post.author);
     if (user) {
       user.posts.pull(post._id);
       await user.updateOne({ posts: user.posts });
+    }
+    const filename = post.image_url.replace("https://cdn.ronkacloset.com/", "");
+    const file = bucket.file(filename);
+    const [exists] = await file.exists();
+    if (exists) {
+      await file.delete();
     }
     next();
   } catch (e) {
@@ -109,19 +122,18 @@ post_schema.pre("findOneAndDelete", async function (next) {
     }
   }
 });
-//post가 deleteMany로 삭제될 때 post _id를 가진 Like를 삭제
+//post가 deleteMany로 삭제될 때 post _id를 가진 Like를 삭제, user에서 post를 삭제
 post_schema.pre("deleteMany", async function (next) {
   try {
     const posts = await this.model
       .find({ _id: { $in: this.getFilter()._id } })
-      .select(["likes", "author", "_id"])
-      .lean<
-        {
-          likes: Schema.Types.ObjectId[];
-          author: Schema.Types.ObjectId;
-          _id: Schema.Types.ObjectId;
-        }[]
-      >();
+      .select(["image_url", "likes", "author", "_id"])
+      .lean<{
+        image_url: String;
+        likes: Schema.Types.ObjectId[];
+        author: Schema.Types.ObjectId;
+        _id: Schema.Types.ObjectId;
+      }>();
     if (!Array.isArray(posts) || posts.length === 0) {
       return next();
     }
@@ -138,6 +150,15 @@ post_schema.pre("deleteMany", async function (next) {
       if (user) {
         user.posts.pull(post._id);
         promise_update_user.push(user.updateOne({ posts: user.posts }));
+      }
+      const filename = post.image_url.replace(
+        "https://cdn.ronkacloset.com/",
+        ""
+      );
+      const file = bucket.file(filename);
+      const [exists] = await file.exists();
+      if (exists) {
+        await file.delete();
       }
     }
     await Promise.all([...promise_delete_likes, ...promise_update_user]);
@@ -173,6 +194,7 @@ const like_schema = new Schema({
   post: { type: Schema.Types.ObjectId, ref: "Post" },
   user: { type: Schema.Types.ObjectId, ref: "User" },
 });
+//like가 findOneAndDelete로 삭제될 때 user와 post에서 like를 삭제
 like_schema.pre("findOneAndDelete", async function (next) {
   try {
     const like = await this.model.findOne(this.getFilter()).lean<{
@@ -181,7 +203,6 @@ like_schema.pre("findOneAndDelete", async function (next) {
       _id: Schema.Types.ObjectId;
     }>();
     if (!like) {
-      console.log("like not found");
       return next();
     }
     const [user, post] = await Promise.all([
@@ -196,6 +217,47 @@ like_schema.pre("findOneAndDelete", async function (next) {
       post.likes.pull(like._id);
       await post.updateOne({ likes: post.likes });
     }
+    next();
+  } catch (e) {
+    if (e instanceof Error) {
+      next(e);
+    } else {
+      next(new Error("Unknown error"));
+    }
+  }
+});
+//like가 deleteMany로 삭제될 때 user와 post에서 like를 삭제
+like_schema.pre("deleteMany", async function (next) {
+  try {
+    const likes = await this.model
+      .find({ _id: { $in: this.getFilter()._id } })
+      .select(["user", "post", "_id"])
+      .lean<
+        {
+          user: Schema.Types.ObjectId;
+          post: Schema.Types.ObjectId;
+          _id: Schema.Types.ObjectId;
+        }[]
+      >();
+    if (!Array.isArray(likes) || likes.length === 0) {
+      return next();
+    }
+    const promise_update_post = [];
+    const promise_update_user = [];
+
+    for (const like of likes) {
+      const user = await User.findById(like.user);
+      if (user) {
+        user.likes.pull(like._id);
+        promise_update_user.push(user.updateOne({ likes: user.likes }));
+      }
+      const post = await Post.findById(like.post);
+      if (post) {
+        post.likes.pull(like._id);
+        promise_update_post.push(post.updateOne({ likes: post.likes }));
+      }
+    }
+    await Promise.all([...promise_update_post, ...promise_update_user]);
     next();
   } catch (e) {
     if (e instanceof Error) {
@@ -227,12 +289,19 @@ const blacklist_schema = new Schema({
   email: { type: String, required: true, unique: true },
 });
 
+const news_schema = new Schema({
+  title: { type: String, required: true },
+  url: { type: String, required: true },
+  created_at: { type: Date, default: Date.now },
+});
+
 const User = mongoose.models.User || model("User", user_schema);
 const Post = mongoose.models.Post || model("Post", post_schema);
 const Like = mongoose.models.Like || model("Like", like_schema);
 const Counter = mongoose.models.Counter || model("Counter", counter_schema);
 const Blacklist =
   mongoose.models.Blacklist || model("Blacklist", blacklist_schema);
+const News = mongoose.models.News || model("News", news_schema);
 
 export {
   connectDB,
@@ -242,4 +311,5 @@ export {
   Post,
   Like,
   Blacklist,
+  News,
 };

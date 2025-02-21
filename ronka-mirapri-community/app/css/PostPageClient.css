@@ -132,11 +132,36 @@ main.post {
   display: flex;
 }
 
-.post-image {
+.image-container {
   width: 100%;
+  display: inline-block;
   vertical-align: top;
-  order: 1;
   margin-bottom: 28px;
+  position: relative;
+
+  .post-image {
+    width: 100%;
+    aspect-ratio: 1 / 2;
+    vertical-align: top;
+    order: 1;
+    background-color: wheat;
+  }
+
+  .download-container {
+    backdrop-filter: blur(2px);
+    background-color: #0000003d;
+    border: 1px solid #2ed3b7;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 13px;
+    bottom: 13px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
 }
 
 .post-information {
@@ -281,11 +306,16 @@ main.post {
       }
     }
   }
-  .post-image {
-    height: 680px;
-    width: auto;
+
+  .image-container {
+    width: 340px;
+    aspect-ratio: 1/2;
     margin-right: 10px;
-    display: inline-block;
+    .post-image {
+      height: 680px;
+      aspect-ratio: 1/2;
+      display: inline-block;
+    }
   }
 
   .post-edit-modal {

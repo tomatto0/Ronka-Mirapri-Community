@@ -11,44 +11,6 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import cursed_word_check from "@/app/utils/cursed_word_check";
 import nickname_validate from "@/app/utils/nickname_check";
 
-export async function GET(request: Request) {
-  const url = new URL(request.url);
-  const id = url.searchParams.get("id");
-  try {
-    if (!id) {
-      return NextResponse.json(
-        { success: false, error: "Invalid request" },
-        { status: 400 }
-      );
-    }
-    const session = await getServerSession(authOptions);
-    if (session?.user._id !== id && !session?.user.is_admin) {
-      return NextResponse.json(
-        { success: false, error: "Forbidden access" },
-        { status: 403 }
-      );
-    }
-    await connectDB();
-    const user = await User.findById(id).lean();
-    if (!user) {
-      return NextResponse.json(
-        { success: false, error: "User not found" },
-        { status: 404 }
-      );
-    }
-    return NextResponse.json({ success: true, data: user });
-  } catch (e) {
-    console.error("MongoDB Failed to read users error:", e);
-    return NextResponse.json(
-      {
-        success: false,
-        error: "Unknown error",
-      },
-      { status: 500 }
-    );
-  }
-}
-
 export async function POST(request: Request) {
   try {
     await connectDB();

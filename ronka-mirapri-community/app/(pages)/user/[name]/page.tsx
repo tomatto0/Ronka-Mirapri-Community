@@ -101,7 +101,13 @@ export default function Page_user() {
                   <button
                     className="user-setting"
                     onClick={() => {
-                      router.push("/setting");
+                      router.push(
+                        `/setting${
+                          session?.user.is_admin
+                            ? `/${userInfo?.data?.nickname}`
+                            : ""
+                        }`
+                      );
                     }}
                   >
                     <img alt="setting" id="setting" />

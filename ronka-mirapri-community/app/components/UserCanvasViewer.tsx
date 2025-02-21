@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect, useCallback, RefObject } from "react";
 import { ColorInfo } from "../types/ColorInfo";
 import Color_background_list_raw from "../json/color_background.json";
 import { Item } from "../types/Item";
@@ -14,16 +14,19 @@ type ItemImage = {
 export default function UserCanvasViewer({
   image_src,
   equiped_item,
+  ref,
 }: {
   image_src: string;
   equiped_item: Item[];
+  ref?: RefObject<HTMLCanvasElement | null>;
 }) {
-  const imageRef = useRef<HTMLCanvasElement | null>(null);
+  const imageRef = ref ?? useRef<HTMLCanvasElement | null>(null);
   const user_image = useRef<HTMLImageElement | null>(null); // 사용자 이미지 Ref
   const item_background_image = useRef<HTMLImageElement | null>(null); //아이템 배경 이미지 Ref
   const item_placeholder_image = useRef<HTMLImageElement | null>(null); //아이템 플레이스홀더 이미지 Ref
   useEffect(() => {
     user_image.current = new Image();
+    user_image.current.crossOrigin = "anonymous";
     item_background_image.current = new Image();
     item_placeholder_image.current = new Image();
   }, []);

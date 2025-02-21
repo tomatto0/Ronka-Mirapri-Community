@@ -77,6 +77,10 @@ div.signup-wrap {
     color: inherit;
   }
 }
+.signup-waring {
+  font-size: 1.3rem;
+  margin-top: 4px;
+}
 
 .signup-submit {
   background-color: #15b79e;
@@ -135,6 +139,7 @@ div.signup-wrap {
 .withdraw-submit {
   background: none;
   margin-top: 40px;
+  margin-left: 8px;
   border: none;
   font-size: 1.6rem;
   font-weight: 500;

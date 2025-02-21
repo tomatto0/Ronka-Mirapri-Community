@@ -37,7 +37,6 @@ export async function GET(request: Request) {
       like_count += post.like_count;
     }
     const { posts: _, ...return_users } = user[0];
-    console.log(return_users);
     if (!user) {
       return NextResponse.json(
         { success: false, error: "User not found" },

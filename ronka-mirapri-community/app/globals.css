@@ -173,7 +173,8 @@ main:before {
   font-size: 1.6rem !important;
 }
 .swal2-confirm,
-.swal2-cancel {
+.swal2-cancel,
+.swal2-label {
   font-size: 1.6rem !important;
 }
 
@@ -249,6 +250,12 @@ img#fill-heart-teal {
 img#hollow-heart-white {
   height: 18px;
   content: url("/img/heart-white.svg");
+  aspect-ratio: 1;
+}
+
+img#download {
+  height: 18px;
+  content: url("/img/download.svg");
   aspect-ratio: 1;
 }
 
