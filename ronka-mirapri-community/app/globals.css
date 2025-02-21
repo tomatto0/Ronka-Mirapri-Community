@@ -134,7 +134,7 @@ html {
 }
 
 body {
-  background: linear-gradient(to bottom left, #f6ebff, #def8fa);
+  background: linear-gradient(223deg, #fffdf5 -3.13%, #edfeff 106.63%);
   background-attachment: fixed;
   height: 100vh;
 }
