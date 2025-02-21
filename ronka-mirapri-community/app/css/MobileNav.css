@@ -3,11 +3,11 @@ div.mobile-nav-background {
   display: flex;
   top: 0;
   left: 0;
-  background-color: #eff3ff;
   width: 100%;
   height: 100%;
   padding: 16px;
   z-index: 100;
+  background-color: #fffdf5;
 }
 
 .mobile-nav-wrap {
@@ -62,8 +62,25 @@ ul.m-menus {
   cursor: pointer;
 }
 
+.m-navigation_right div:hover {
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: 5%; /* 1.7px */
+  text-underline-offset: 25%; /* 4.25px */
+  text-underline-position: from-font;
+}
+
 .m-menus li {
   color: #006351;
+}
+.m-menus li:hover {
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: 5%; /* 1.7px */
+  text-underline-offset: 25%; /* 4.25px */
+  text-underline-position: from-font;
 }
 
 .m-nav-active {

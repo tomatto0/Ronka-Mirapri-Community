@@ -5,11 +5,10 @@ main.user-fill {
 .user-card-wrap {
   max-width: 1058px;
   margin: auto;
-  padding: 0 6px;
+  padding: 20px 6px 0 6px;
 }
 
 .user-card {
-  margin-top: 20px;
   height: 80px;
   display: flex;
   align-items: center;
