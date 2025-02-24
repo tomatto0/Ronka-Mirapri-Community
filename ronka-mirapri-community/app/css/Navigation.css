@@ -144,7 +144,12 @@ img#menu-bar {
   }
 
   .navigation_right div:hover {
-    background-color: #e1dbfa;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: 5%; /* 1.7px */
+    text-underline-offset: 25%; /* 4.25px */
+    text-underline-position: from-font;
   }
 
   img#menu-bar {
