@@ -75,7 +75,7 @@ export default function Navigation() {
             </Link>
           </li>
           <li className={isActive("/about") ? "nav-active" : ""}>
-            <Link href="/" className="menu">
+            <Link href="/about" className="menu">
               ABOUT
             </Link>
           </li>

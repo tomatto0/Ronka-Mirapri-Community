@@ -45,7 +45,7 @@
   margin-right: 10px;
 }
 .flow-text:not(.title):hover {
-  background-color: #e1dbfa;
+  background-color: #e6f6f3;
 }
 
 .flow-text.title {
