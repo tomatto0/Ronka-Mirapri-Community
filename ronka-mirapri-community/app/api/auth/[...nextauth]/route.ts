@@ -79,9 +79,9 @@ export const authOptions: AuthOptions = {
         if (session.type === "update") {
           token.nickname = session.nickname ?? token.nickname;
           token.sns = session.sns ?? token.sns;
-          const { _id, email, nickname, sns } = token;
+          const { _id, email, nickname, sns, is_admin } = token;
           token.encrypted = encrypt_payload(
-            JSON.stringify({ _id, email, nickname, sns }),
+            JSON.stringify({ _id, email, nickname, sns, is_admin }),
             process.env.JWT_ENCRYPTION_KEY!
           );
         }

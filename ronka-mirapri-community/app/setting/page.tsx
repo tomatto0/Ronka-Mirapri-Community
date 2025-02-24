@@ -42,7 +42,7 @@ export default function Page_sign_up() {
     },
     onSuccess: async res => {
       if (res.success) {
-        await update({ nickname, sns });
+        await update({ type: "update", nickname, sns });
         const Toast = Swal.mixin({
           toast: true,
           position: "bottom-end",

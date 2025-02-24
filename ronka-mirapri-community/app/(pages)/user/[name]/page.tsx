@@ -116,7 +116,8 @@ export default function Page_user() {
                     onClick={() => {
                       router.push(
                         `/setting${
-                          session?.user.is_admin
+                          session?.user.is_admin &&
+                          session?.user.nickname !== userInfo?.data?.nickname
                             ? `/${userInfo?.data?.nickname}`
                             : ""
                         }`
@@ -131,7 +132,6 @@ export default function Page_user() {
             <p className="user-like">{userInfo?.data?.like_count}</p>
           </div>
         )}
-
         <div className="tlToggle">
           <h3
             className={timeline === "userPosts" ? "user-tap-active" : ""}
