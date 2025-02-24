@@ -28,6 +28,7 @@ export default function Page_user() {
   const [post_chunk, set_post_chunk] = useState<PostInform[][]>([[]]);
   const userLikedPosts = useUserLikedPosts(userName, 12);
   const [like_chunk, set_like_chunk] = useState<PostInform[][]>([[]]);
+
   // 무한 스크롤 감지해서 다음 페이지 로드
   useEffect(() => {
     if (inView) {

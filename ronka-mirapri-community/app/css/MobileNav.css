@@ -7,7 +7,9 @@ div.mobile-nav-background {
   height: 100%;
   padding: 16px;
   z-index: 100;
-  background-color: #fffdf5;
+  background-color: #fffdf5d1;
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(18px);
 }
 
 .mobile-nav-wrap {
