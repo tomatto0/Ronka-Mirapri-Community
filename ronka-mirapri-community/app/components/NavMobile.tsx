@@ -71,7 +71,7 @@ export default function NavMobile({
                 set_is_mobile_nav_open(false);
               }}
             >
-              <Link href="/" className="m-menu">
+              <Link href="/about" className="m-menu">
                 ABOUT
               </Link>
             </li>

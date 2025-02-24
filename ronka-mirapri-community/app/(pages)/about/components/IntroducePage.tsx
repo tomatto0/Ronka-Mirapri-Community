@@ -46,37 +46,52 @@ export default function IntroducePage() {
           </p>
         </div>
       </div>
-      <h2>멤버소개</h2>
-      <ul>
-        <li>
-          <p>01</p>
-          <p>롱카의 토마토?</p>
-          <img alt="member-image-tomato" className="member1" />
-          <p>
-            롱카의 옷장 관리자.
-            <br /> 토마토도 좋아합니다.
-          </p>
-        </li>
-        <li>
-          <p>02</p>
-          <img alt="member-image-sunglass" className="member2" />
-          <p>롱카의 안경거치대?</p>
-          <p>
-            ←의 친구. 사실 안경을
-            <br />
-            그렇게 좋아하지는 않습니다.
-          </p>
-        </li>
-        <li>
-          <p>03</p>
-          <img alt="member-image-flour" className="member3" />
-          <p>롱카의 전분?</p>
-          <p>
-            ←←와 ←의 친구
-            <br /> 구경을 했습니다.
-          </p>
-        </li>
-      </ul>
+
+      <div className="rule-block-wrap">
+        <h2>멤버소개</h2>
+        <ul>
+          <li>
+            <p>01</p>
+            <p>롱카의 토마토?</p>
+            <img
+              src="/img/member-tomato.png"
+              alt="member-image-tomato"
+              className="member1"
+            />
+            <p>
+              롱카의 옷장 관리자.
+              <br /> 토마토도 좋아합니다.
+            </p>
+          </li>
+          <li>
+            <p>02</p>
+            <img
+              src="/img/member-sun.png"
+              alt="member-image-sunglass"
+              className="member2"
+            />
+            <p>롱카의 안경거치대?</p>
+            <p>
+              ←의 친구. 사실 안경을
+              <br />
+              그렇게 좋아하지는 않습니다.
+            </p>
+          </li>
+          <li>
+            <p>03</p>
+            <img
+              src="/img/member-flour.png"
+              alt="member-image-flour"
+              className="member3"
+            />
+            <p>롱카의 전분?</p>
+            <p>
+              ←←와 ←의 친구
+              <br /> 구경을 했습니다.
+            </p>
+          </li>
+        </ul>
+      </div>
       <h2>롱카의 룩북 새소식</h2>
 
       <ul></ul>

@@ -4,10 +4,9 @@
   align-items: center;
   height: 60px;
   padding: 0 16px;
-  background: var(
-    --pastel,
-    linear-gradient(223deg, #f6ebff -3.13%, #ebf2fd 106.63%)
-  );
+  background: #fffdf5a9;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
 }
 
 div.logo {
@@ -58,7 +57,7 @@ img#search {
 }
 
 img#search:hover {
-  background-color: #e1dbfa;
+  background-color: #e6f6f3;
 }
 
 img#menu-bar {
@@ -86,6 +85,7 @@ img#menu-bar {
     max-width: 1076px;
     margin: 0 auto;
     background: none;
+    padding: 0;
   }
 
   ul.menus {
