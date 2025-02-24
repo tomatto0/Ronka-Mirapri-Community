@@ -1,4 +1,5 @@
 import PostPageClient from "@/app/(pages)/post/[index]/pageClient";
+import ErrorContainer from "@/app/components/ErrorContainer";
 
 export default async function PostPage({
   params,
@@ -10,5 +11,15 @@ export default async function PostPage({
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/db/posts/index?index=${index}`
   );
   const res = await response.json();
-  return <PostPageClient post_data={res.data} />;
+
+  if (res.data) {
+    return <PostPageClient post_data={res.data} />;
+  } else {
+    return (
+      <main className="error-container">
+        <ErrorContainer error_message="글을 찾을 수 없어요." show_home={true} />
+        ;
+      </main>
+    );
+  }
 }

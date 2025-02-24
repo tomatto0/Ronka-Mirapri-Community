@@ -213,6 +213,8 @@
 
 .item-search-result-main {
   height: 56.1vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .item-search-result-main.search-result {
@@ -254,6 +256,11 @@
   border: 1px solid #e4e7ec;
   margin-bottom: 6px;
   font-weight: 500;
+}
+
+.empty-container {
+  flex-grow: 1;
+  display: flex;
 }
 
 @media (min-width: 1075px) {

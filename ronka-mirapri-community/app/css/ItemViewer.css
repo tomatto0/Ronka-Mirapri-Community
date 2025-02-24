@@ -32,7 +32,7 @@
         }
         .item-color-information {
           display: flex;
-          gap: 5px 0;
+          gap: 0 5px;
           span {
             border-radius: 2px;
             padding: 0 4px;

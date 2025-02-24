@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div className="flex-container">
       <div className="header">
         <Navigation />
       </div>

@@ -15,6 +15,7 @@ import ItemSearch from "./ItemSearch";
 import ItemSearchResult from "./ItemSearchResult";
 import UserSearch from "./UserSearch";
 import UserSearchResult from "./UserSearchResult";
+import ErrorContainer from "./ErrorContainer";
 
 export default function FilterSelector({
   filter,
@@ -217,28 +218,44 @@ export default function FilterSelector({
         {keyword.trim() !== "" &&
           (search_category === "item" ? (
             <div className="item-search-result-main">
-              <div
-                onClick={() => {
-                  search(keyword);
-                }}
-                className="item-search-keyword"
-              >
-                {`'${keyword}'이 포함된 룩북 전체보기`}{" "}
-              </div>
-              <ItemSearchResult
-                slot={-1}
-                search_result={item_search_result}
-                result_click_handler={(slot: number, item: Item) => {
-                  search(item.Name);
-                }}
-                reset_keyword={() => {
-                  set_keyword("");
-                }}
-              />
+              {item_search_result.length !== 0 && (
+                <div
+                  onClick={() => {
+                    search(keyword);
+                  }}
+                  className="item-search-keyword"
+                >
+                  {`'${keyword}'이 포함된 룩북 전체보기`}{" "}
+                </div>
+              )}
+              {item_search_result.length === 0 ? (
+                <ErrorContainer
+                  error_message="검색 결과가 없어요."
+                  small={true}
+                />
+              ) : (
+                <ItemSearchResult
+                  slot={-1}
+                  search_result={item_search_result}
+                  result_click_handler={(slot: number, item: Item) => {
+                    search(item.Name);
+                  }}
+                  reset_keyword={() => {
+                    set_keyword("");
+                  }}
+                />
+              )}
             </div>
           ) : (
             <div className="item-search-result-main">
-              <UserSearchResult search_result={user_search_result} />
+              {user_search_result.length === 0 ? (
+                <ErrorContainer
+                  error_message="검색 결과가 없어요."
+                  small={true}
+                />
+              ) : (
+                <UserSearchResult search_result={user_search_result} />
+              )}
             </div>
           ))}
         {/* 정렬 및 성별 필터 */}

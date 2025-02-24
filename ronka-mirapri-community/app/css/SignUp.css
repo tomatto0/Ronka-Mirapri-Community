@@ -149,10 +149,6 @@ div.signup-wrap {
 }
 
 @media (min-width: 600px) {
-  main {
-    flex-grow: unset;
-  }
-
   div.signup-wrap {
     width: 486px;
     border: 1px solid #b2c6cd;

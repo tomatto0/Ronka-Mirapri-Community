@@ -8,6 +8,7 @@ import Hangul from "hangul-js";
 
 export default function ItemSearch({
   keyword,
+  set_is_loading = (is_loading: boolean) => {},
   set_keyword,
   set_search_result,
   slot = -1,
@@ -15,6 +16,7 @@ export default function ItemSearch({
   keydown_handler = () => {},
 }: {
   keyword: string;
+  set_is_loading?: (is_loading: boolean) => void;
   set_keyword: (keyword: string) => void;
   set_search_result: (items: Item[]) => void;
   slot?: number;
@@ -32,6 +34,7 @@ export default function ItemSearch({
   }, [input_ref]);
 
   useEffect(() => {
+    set_is_loading(true);
     const handler = setTimeout(search, 200);
     return () => {
       clearTimeout(handler);
@@ -43,6 +46,7 @@ export default function ItemSearch({
   };
 
   const search = () => {
+    set_is_loading(false);
     if (keyword.trim() === "") {
       set_search_result([]);
       return false;

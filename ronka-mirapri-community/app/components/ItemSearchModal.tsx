@@ -4,6 +4,7 @@ import ItemSearchResult from "./ItemSearchResult.tsx";
 import { Item } from "../types/Item";
 import { useState, useEffect } from "react";
 import ColorPalette from "./ColorPalette.tsx";
+import ErrorContainer from "./ErrorContainer.tsx";
 
 export default function ItemSearchModal({
   slot,
@@ -35,6 +36,8 @@ export default function ItemSearchModal({
   const [is_item_select, set_is_item_select] = useState<boolean>(
     selected_item.Id !== 0
   );
+  const [is_loading, set_is_loading] = useState<boolean>(false);
+  const [show_error, set_show_error] = useState<boolean>(false);
 
   useEffect(() => {
     if (selected_item !== equiped_item[slot]) {
@@ -44,6 +47,12 @@ export default function ItemSearchModal({
       set_is_item_select(equiped_item[slot].Id !== 0);
     }
   }, [is_item_select, selected_item, equiped_item, slot]);
+
+  useEffect(() => {
+    if (!is_loading) {
+      set_show_error(keyword.trim() !== "");
+    }
+  }, [is_loading]);
 
   const select_item = (slot: number, item: Item) => {
     edit_equiped_item(slot, item);
@@ -86,10 +95,21 @@ export default function ItemSearchModal({
         </div>
         <ItemSearch
           keyword={keyword}
+          set_is_loading={set_is_loading}
           set_keyword={set_keyword}
           set_search_result={set_search_result}
           slot={slot}
         />
+        {!is_item_select && search_result.length === 0 && (
+          <div className="empty-container">
+            {show_error && (
+              <ErrorContainer
+                error_message="검색 결과가 없어요."
+                small={true}
+              />
+            )}
+          </div>
+        )}
         {search_result.length > 0 && (
           <ItemSearchResult
             slot={slot}
@@ -108,7 +128,9 @@ export default function ItemSearchModal({
               modal_close={modal_close}
             />
           )}
-        <p className="data-version">현재 적용된 패치 데이터 버전(KOR): V7.05</p>
+        <div className="data-version">
+          <p>현재 적용된 패치 데이터 버전(KOR): V7.05</p>
+        </div>
       </div>
     </div>
   );

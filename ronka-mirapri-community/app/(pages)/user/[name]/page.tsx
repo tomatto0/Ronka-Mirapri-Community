@@ -14,6 +14,7 @@ import { useGetUserInfo } from "./hooks/useUserInfo";
 import PostThumbnail from "../../../components/PostThumbnail";
 import EditButton from "@/app/components/EditButton";
 import AutoLink from "@/app/components/AutoLink";
+import ErrorContainer from "@/app/components/ErrorContainer";
 
 export default function Page_user() {
   const params = useParams<{ name: string }>();
@@ -28,6 +29,7 @@ export default function Page_user() {
   const [post_chunk, set_post_chunk] = useState<PostInform[][]>([[]]);
   const userLikedPosts = useUserLikedPosts(userName, 12);
   const [like_chunk, set_like_chunk] = useState<PostInform[][]>([[]]);
+
   // 무한 스크롤 감지해서 다음 페이지 로드
   useEffect(() => {
     if (inView) {
@@ -73,6 +75,17 @@ export default function Page_user() {
     }, []);
     set_like_chunk(post_chunk);
   }, [userLikedPosts.data]);
+
+  if (userInfo.status !== "pending" && userInfo.data === undefined) {
+    return (
+      <main className="error-container">
+        <ErrorContainer
+          error_message="유저를 찾을 수 없어요."
+          show_home={true}
+        />
+      </main>
+    );
+  }
 
   return (
     <main className="user-fill">
@@ -158,16 +171,22 @@ export default function Page_user() {
             : "An unknown error occurred"}
         </p>
       ) : timeline === "userPosts" ? (
-        <div className="post-container">
-          {/* 게시물 목록 렌더링 */}
-          {post_chunk.map((chunk: PostInform[], i: number) => (
-            <div className="post-container-row" key={i + 1}>
-              {chunk.map((post: PostInform, i: number) => (
-                <PostThumbnail post={post} key={`post-${post.index}`} />
-              ))}
-            </div>
-          ))}
-        </div>
+        post_chunk.length === 0 ? (
+          <ErrorContainer error_message="아직 게시글이 없어요." />
+        ) : (
+          <div className="post-container">
+            {/* 게시물 목록 렌더링 */}
+            {post_chunk.map((chunk: PostInform[], i: number) => (
+              <div className="post-container-row" key={i + 1}>
+                {chunk.map((post: PostInform, i: number) => (
+                  <PostThumbnail post={post} key={`post-${post.index}`} />
+                ))}
+              </div>
+            ))}
+          </div>
+        )
+      ) : like_chunk.length === 0 ? (
+        <ErrorContainer error_message="아직 게시글이 없어요." />
       ) : (
         <div className="post-container">
           {/* 게시물 목록 렌더링 */}

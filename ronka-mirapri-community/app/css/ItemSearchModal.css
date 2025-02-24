@@ -29,6 +29,8 @@ div.item-search-modal {
   font-weight: 600;
   letter-spacing: -0.51px;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .item-search-container {
@@ -85,9 +87,8 @@ div.item-search-modal {
 }
 
 .data-version {
-  position: absolute;
-  bottom: 10px;
-  left: 17px;
+  display: flex;
+  flex-direction: column-reverse;
   font-weight: 500;
   font-size: 1.2rem;
   color: #7883a6;

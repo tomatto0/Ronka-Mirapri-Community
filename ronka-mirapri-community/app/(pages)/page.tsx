@@ -18,6 +18,7 @@ import {
 import { useRouter, useSearchParams } from "next/navigation";
 
 import EditButton from "../components/EditButton";
+import ErrorContainer from "../components/ErrorContainer";
 
 export default function Page_home() {
   const { data: session } = useSession();
@@ -293,6 +294,8 @@ export default function Page_home() {
           Error:{" "}
           {error instanceof Error ? error.message : "An unknown error occurred"}
         </p>
+      ) : post_chunk.length === 0 ? (
+        <ErrorContainer error_message="해당하는 게시글을 찾을 수 없어요." />
       ) : (
         <>
           <div className="post-container">
