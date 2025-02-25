@@ -32,7 +32,16 @@ export default function IntroducePage() {
 
   return (
     <>
-      <img src="/img/titlelogo.svg" alt="logo icon" id="intro-logo" />
+      <div className="title-box">
+        <img src="/img/titlelogo.svg" alt="logo icon" id="intro-logo" />
+        <Link href="https://github.com/tomatto0/Ronka-Mirapri-Community">
+          <img
+            alt="GitHub Repo stars"
+            src="https://img.shields.io/github/stars/tomatto0/Ronka-Mirapri-Community?style=social"
+          />
+        </Link>
+      </div>
+
       <p className="intro-page-description">
         롱카의 룩북?은 롱카의 옷장에서 확장된 서브 프로젝트로, 기존의 룩템
         아카이빙을 넘어 모험가 여러분이 더욱 즐겁게 투영 생활을 즐길 수 있도록
