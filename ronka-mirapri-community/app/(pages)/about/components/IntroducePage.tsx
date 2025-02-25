@@ -36,18 +36,13 @@ export default function IntroducePage() {
       <p className="intro-page-description">
         롱카의 룩북?은 롱카의 옷장에서 확장된 서브 프로젝트로, 기존의 룩템
         아카이빙을 넘어 모험가 여러분이 더욱 즐겁게 투영 생활을 즐길 수 있도록
-        마련한 <strong>파판14 투영 커뮤니티 사이트</strong>입니다. <br />
-        쉽고 간편하게 투영기록을 공유하고 영감을 주고받으며, 나만의 개성을
-        마음껏 표현해보세요!
+        마련한 <strong>파판14 투영 커뮤니티 사이트</strong>입니다. 쉽고 간편하게
+        투영기록을 공유하고 영감을 주고받으며, 나만의 개성을 마음껏
+        표현해보세요!
       </p>
 
       <div className="page-introduce-wrap">
         <div className="page-introduce-gallery">
-          {/* <img
-            src="/img/intro-background-gallery.svg"
-            alt="intro-gallery"
-            className="page-introduce-background-gallery"
-          /> */}{" "}
           <img
             src="/img/intro-background-gallery.svg"
             alt="sample-image-gallery"
