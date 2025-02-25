@@ -4,15 +4,18 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next-on-pages",
-    "deploy": "wrangler pages deploy .next --project-name=ronka-mirapri-community",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:worker": "opennextjs-cloudflare",
+    "dev:worker": "wrangler dev --port 8771",
+    "preview:worker": "npm run build:worker && npm run dev:worker",
+    "deploy:worker": "npm run build:worker && wrangler deploy"
   },
   "dependencies": {
-    "@cloudflare/next-on-pages": "^1.13.8",
     "@google-cloud/storage": "^7.15.0",
     "@next/third-parties": "^15.1.6",
+    "@opennextjs/cloudflare": "^0.5.3",
     "@tanstack/react-query": "^5.66.0",
     "hangul-js": "^0.2.6",
     "mongodb": "^6.12.0",
