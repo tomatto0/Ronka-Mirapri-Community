@@ -1,7 +1,7 @@
 import { connectDB, is_validation_error, Like, User } from "../database";
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/utils/authOptions";
 
 export async function GET(request: NextRequest) {
   try {

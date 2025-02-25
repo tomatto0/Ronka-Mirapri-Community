@@ -9,30 +9,38 @@ import { usePosts } from "./hooks/usePosts";
 import { useInView } from "react-intersection-observer";
 import { PostInform } from "../types/PostInform";
 import { useQuery } from "@tanstack/react-query";
+import { Suspense } from "react";
 import Itemrank from "../components/Itemrank";
 import {
   filter_tag_init_state,
   job_category,
   job_category_group,
 } from "../utils/constants";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import EditButton from "../components/EditButton";
 import ErrorContainer from "../components/ErrorContainer";
+<<<<<<< HEAD
 import Image from "next/image";
+=======
+import SearchParamsHandler from "./util/SearchParamsHandler";
+>>>>>>> fa433e28889daa02f4a99ff614ba0e07361ec5b2
 
 export default function Page_home() {
   const router = useRouter();
 
-  const session_filter = JSON.parse(sessionStorage.getItem("filter") ?? "{}");
+  const session_filter = JSON.parse(
+    typeof window !== "undefined"
+      ? window.sessionStorage.getItem("filter") ?? "{}"
+      : "{}"
+  );
+
   const [filter, set_filter] = useState<string>(session_filter.filter ?? "{}");
   const [filter_tag, set_filter_tag] = useState<typeof filter_tag_init_state>(
     session_filter.filter_tag ?? filter_tag_init_state
   );
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
   const [is_open, set_is_open] = useState<boolean>(false);
-
-  const searchParams = useSearchParams();
   const [post_chunk, set_post_chunk] = useState<PostInform[][]>([[]]);
 
   const {
@@ -76,7 +84,13 @@ export default function Page_home() {
       ...job_filter,
     };
     set_filter(JSON.stringify(filter));
-    sessionStorage.setItem("filter", JSON.stringify({ filter, filter_tag }));
+
+    if (typeof window !== "undefined") {
+      window.sessionStorage.setItem(
+        "filter",
+        JSON.stringify({ filter, filter_tag })
+      );
+    }
   }
 
   function job_delete(job: string) {
@@ -147,13 +161,6 @@ export default function Page_home() {
     set_post_chunk(post_chunk);
   }, [data]);
 
-  useEffect(() => {
-    set_filter_tag(prev => ({
-      ...prev,
-      keyword: searchParams.get("keyword") ?? filter_tag.keyword,
-    }));
-  }, [searchParams]);
-
   const fetch_item_rank = async (): Promise<string[]> => {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/db/items/ranking`
@@ -177,6 +184,7 @@ export default function Page_home() {
   }
 
   return (
+<<<<<<< HEAD
     <main className="fill">
       <div className="primary-filter-wrap">
         <button
@@ -314,17 +322,184 @@ export default function Page_home() {
               .map((chunk: PostInform[], i: number) => (
                 <div className="post-container-row" key={i + 1}>
                   {chunk.map((post: PostInform) => (
+=======
+    <Suspense>
+      <main className="fill">
+        <Suspense fallback={<div>검색어 로딩 중...</div>}>
+          <SearchParamsHandler set_filter_tag={set_filter_tag} />
+        </Suspense>
+
+        <Suspense>
+          <div className="primary-filter-wrap">
+            <button
+              className="primary-filter filter-open"
+              onClick={() => {
+                set_is_open(true);
+              }}
+            >
+              <img
+                src={process.env.NEXT_PUBLIC_BASE_URL + "/img/plus-green.svg"}
+                alt="modal open button"
+              />
+              FILTER
+            </button>
+            {filter_tag.order !== "최신순" && (
+              <button
+                className="primary-filter filter-items"
+                onClick={() => {
+                  set_filter_tag(prev => ({ ...prev, order: "최신순" }));
+                }}
+              >
+                {filter_tag.order}{" "}
+                <img
+                  src={
+                    process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"
+                  }
+                  alt="modal open button"
+                />
+              </button>
+            )}
+            {filter_tag.gender !== "전체" && (
+              <button
+                className="primary-filter filter-items"
+                onClick={() => {
+                  set_filter_tag(prev => ({ ...prev, gender: "전체" }));
+                }}
+              >
+                {filter_tag.gender}{" "}
+                <img
+                  src={
+                    process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"
+                  }
+                  alt="modal open button"
+                />
+              </button>
+            )}
+            {filter_tag.keyword !== "" && (
+              <button
+                className="primary-filter filter-keyword"
+                onClick={() => {
+                  set_filter_tag(prev => ({ ...prev, keyword: "" }));
+                }}
+              >
+                검색: {filter_tag.keyword}
+                <img
+                  src={
+                    process.env.NEXT_PUBLIC_BASE_URL + "/img/close_purple.svg"
+                  }
+                  alt="modal open button"
+                />
+              </button>
+            )}
+            {filter_tag.job.map(job => (
+              <button
+                className="primary-filter filter-items"
+                onClick={() => {
+                  job_delete(job);
+                }}
+                key={`filter-${job}`}
+              >
+                {job}{" "}
+                <img
+                  src={
+                    process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"
+                  }
+                  alt="modal open button"
+                />
+              </button>
+            ))}{" "}
+            {filter_tag.race.map(race => (
+              <button
+                className="primary-filter filter-items"
+                onClick={() => {
+                  set_filter_tag(prev => ({
+                    ...prev,
+                    race: prev.race.filter(i => i !== race),
+                  }));
+                }}
+                key={`filter-${race}`}
+              >
+                {race}{" "}
+                <img
+                  src={
+                    process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"
+                  }
+                  alt="modal open button"
+                />
+              </button>
+            ))}{" "}
+            {(filter !== "{}" || filter_tag.order !== "최신순") && (
+              <button className="primary-filter" onClick={reset_filter}>
+                {" "}
+                <img
+                  src={
+                    process.env.NEXT_PUBLIC_BASE_URL + "/img/refresh-green.svg"
+                  }
+                  alt="modal open button"
+                />
+                초기화
+              </button>
+            )}
+          </div>
+        </Suspense>
+        <Suspense>
+          <FilterSelector
+            filter={filter}
+            set_filter={set_filter}
+            filter_tag={filter_tag}
+            set_filter_tag={set_filter_tag}
+            is_open={is_open}
+            set_is_open={set_is_open}
+          />
+        </Suspense>
+
+        {status === "pending" ? (
+          <div>
+            <span className="loading"></span>
+          </div>
+        ) : status === "error" ? (
+          <p>
+            Error:{" "}
+            {error instanceof Error
+              ? error.message
+              : "An unknown error occurred"}
+          </p>
+        ) : post_chunk.length === 0 ? (
+          <ErrorContainer error_message="해당하는 게시글을 찾을 수 없어요." />
+        ) : (
+          <>
+            <div className="post-container">
+              {post_chunk.length > 0 && (
+                <div className="post-container-row" key={0}>
+                  {post_chunk[0].map((post: PostInform) => (
+>>>>>>> fa433e28889daa02f4a99ff614ba0e07361ec5b2
                     <PostThumbnail post={post} key={`post-${post.index}`} />
                   ))}
                 </div>
-              ))}
-          </div>
-        </>
-      )}
-      <div ref={ref} className="loader">
-        {isFetchingNextPage && <p>Loading more...</p>}
-      </div>
-      <EditButton />
-    </main>
+              )}
+            </div>
+            <Itemrank itemrank={item_rank.data ?? []} />
+
+            {/* 게시물 목록 렌더링 */}
+            <div className="post-container">
+              {post_chunk
+                .slice(1, post_chunk.length)
+                .map((chunk: PostInform[], i: number) => (
+                  <div className="post-container-row" key={i + 1}>
+                    {chunk.map((post: PostInform) => (
+                      <PostThumbnail post={post} key={`post-${post.index}`} />
+                    ))}
+                  </div>
+                ))}
+            </div>
+          </>
+        )}
+
+        <div ref={ref} className="loader">
+          {isFetchingNextPage && <p>Loading more...</p>}
+        </div>
+        <EditButton />
+      </main>
+    </Suspense>
   );
 }

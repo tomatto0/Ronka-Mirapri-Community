@@ -37,6 +37,7 @@ export default function EditorPageClient({
   const { data: session, status } = useSession();
   const router = useRouter();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [image_src, set_image_src] = useState<string>(data.image_url);
   const [is_open, set_is_open] = useState<boolean>(false);
   const [modal_slot, set_modal_slot] = useState<number>(0);

@@ -1,5 +1,7 @@
 import type { OpenNextConfig } from "@opennextjs/aws/types/open-next.js";
 import cache from "@opennextjs/cloudflare/kv-cache";
+// import incrementalCache from "@opennextjs/cloudflare/kv-cache";
+// import memoryQueue from "@opennextjs/cloudflare/memory-queue";
 
 const config: OpenNextConfig = {
   default: {
@@ -7,7 +9,7 @@ const config: OpenNextConfig = {
       wrapper: "cloudflare-node",
       converter: "edge",
       // set `incrementalCache` to "dummy" to disable KV cache
-      incrementalCache: "dummy",
+      incrementalCache: async () => cache,
       tagCache: "dummy",
       queue: "dummy",
     },

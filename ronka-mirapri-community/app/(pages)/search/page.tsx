@@ -1,13 +1,12 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense } from "react";
+import SearchParamsHandler from "./util/SearchParamsHandler";
 
 export default function SearchPage() {
-  const searchParams = useSearchParams();
-  const keyword = searchParams.get("keyword");
-  const router = useRouter();
-  useEffect(() => {
-    router.push(`/${keyword ? `?keyword=${keyword}` : ""}`);
-  }, []);
+  return (
+    <Suspense fallback={<div>검색 중...</div>}>
+      <SearchParamsHandler />
+    </Suspense>
+  );
 }

@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { Blacklist, connectDB } from "../database";
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { authOptions } from "@/app/utils/authOptions";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

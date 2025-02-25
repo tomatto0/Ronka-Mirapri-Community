@@ -30,6 +30,8 @@ export default function IntroducePage() {
     return `${yyyy}.${mm}.${dd}`;
   }
 
+  if (isLoading) return <div>로딩 중...</div>;
+  if (isError) return <div>에러 발생</div>;
   return (
     <>
       <div className="title-box">
