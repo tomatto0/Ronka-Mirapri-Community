@@ -13,7 +13,7 @@ import { useEffect, useReducer, useRef, useState } from "react";
 import { post_init_state, item_null } from "@/app/utils/constants";
 import { LocalDB } from "@/app/utils/localDB";
 import Swal from "sweetalert2";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import post_validate from "@/app/utils/post_validate";
 
 export default function Page_editor() {

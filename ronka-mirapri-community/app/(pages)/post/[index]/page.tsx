@@ -4,7 +4,7 @@ import ErrorContainer from "@/app/components/ErrorContainer";
 export default async function PostPage({
   params,
 }: {
-  params: { [key: string]: string };
+  params: Promise<{ [key: string]: string }>;
 }) {
   const { index } = await params;
   const response = await fetch(

@@ -3,9 +3,11 @@ import EditorPageClient from "./pageClient";
 export default async function PostPage({
   params,
 }: {
-  params: { [key: string]: string };
+  params: Promise<{ [key: string]: string }>;
 }) {
-  const { index } = await params;
+  const resolvedParams = await params;
+  const { index } = resolvedParams;
+
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/db/posts/index?index=${index}`
   );
