@@ -70,7 +70,7 @@ export default function RulePage() {
               합니다.
             </li>
             <li>
-              게임 내 배경이 아닌 이미지(예: 외부 CG, 크로마키, 현실 배경 등)를
+              게임 내 배경이 아닌 이미지(예: 외부 CG, 크로마키 배경 등)를
               사용하여 게임 내 장면과 혼동을 줄 수 있는 경우, 별도의 통보 없이
               삭제될 수 있습니다.
             </li>
@@ -225,17 +225,18 @@ export default function RulePage() {
       <div className="rule-block-wrap">
         <p className="rule-page-description-sub">
           <strong>
-            운영 정책은 필요 시 변경될 수 있으며, 변경된 내용은 별도의 공지를
+            - 운영 정책은 필요 시 변경될 수 있으며, 변경된 내용은 별도의 공지를
             통해 안내됩니다.
           </strong>
-          <br />
-          이용규칙 혹은 사이트 이용에 관한 문의사항은{" "}
+        </p>
+        <p className="rule-page-description-sub">
+          - 이용규칙 혹은 사이트 이용에 관한 문의사항은{" "}
           <Link href="https://open.kakao.com/me/ronkacloset">오픈채팅</Link>
           으로 문의하여 주시기 바랍니다.
-          <br />
+        </p>
+        <p className="rule-page-description-sub">
           더 많은 모험가 분들이 편하고 즐거운 투영생활을 할 수 있도록 최선의
-          노력을 다하겠습니다.
-          <br /> 감사합니다.
+          노력을 다하겠습니다. 감사합니다.
         </p>
       </div>
     </>
