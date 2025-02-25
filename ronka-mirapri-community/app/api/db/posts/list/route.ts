@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectDB, Like, Post } from "../../database";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/utils/authOptions";
 
 // 조건에 맞는 다중 게시물 조회
 export async function GET(request: Request) {

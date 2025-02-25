@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectDB, Like, Post } from "../../../database";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/utils/authOptions";
 
 // 게시글 좋아요 GET요청
 export async function GET(request: Request) {

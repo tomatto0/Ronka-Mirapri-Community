@@ -7,7 +7,7 @@ import {
 } from "../database";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/utils/authOptions";
 import cursed_word_check from "@/app/utils/cursed_word_check";
 import nickname_validate from "@/app/utils/nickname_check";
 

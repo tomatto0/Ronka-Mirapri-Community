@@ -39,3 +39,9 @@ ronka-closet-community-20596d8274ed.json
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+.open-next
+.output
+.wrangler
+wrangler.json
