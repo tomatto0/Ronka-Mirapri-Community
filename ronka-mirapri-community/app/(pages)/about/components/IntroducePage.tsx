@@ -47,71 +47,103 @@ export default function IntroducePage() {
             src="/img/intro-background-gallery.svg"
             alt="intro-gallery"
             className="page-introduce-background-gallery"
-          /> */}
-          <div className="intro-contents">
-            <img
-              src="/img/intro-gallery.png"
-              alt="sample-image-gallery"
-              className="gallery-sample1"
-            />
-            <img
-              src="/img/intro-gallery2.png"
-              alt="sample-image-gallery"
-              className="gallery-sample2"
-            />
-            <img
-              src="/img/intro-gallery-s.png"
-              alt="sample-image-gallery"
-              className="gallery-sample-s"
-            />
-            <p className="intro-page-description">
-              다양한 모험가들의 개성 넘치는
-              <br /> 투영기록들을 감상하고, 필터 기능으로
-              <br />
-              원하는 종족, 직업, 아이템에 맞는 <br />
-              코디만 쏙쏙 골라볼 수 있어요.
-            </p>
+          /> */}{" "}
+          <img
+            src="/img/intro-background-gallery.svg"
+            alt="sample-image-gallery"
+            className="page-introduce-background"
+          />
+          <img
+            src="/img/intro-background-gallery-s.svg"
+            alt="sample-image-gallery"
+            className="page-introduce-background-s"
+          />
+          <div className="intro-contents-background">
+            <div className="intro-contents">
+              <img
+                src="/img/intro-gallery.png"
+                alt="sample-image-gallery"
+                className="gallery-sample1"
+              />
+              <img
+                src="/img/intro-gallery2.png"
+                alt="sample-image-gallery"
+                className="gallery-sample2"
+              />
+              <img
+                src="/img/intro-gallery-s.png"
+                alt="sample-image-gallery"
+                className="gallery-sample-s"
+              />
+              <p className="intro-page-description half-width">
+                다양한 모험가들의 개성 넘치는 투영기록들을 감상하고, 필터
+                기능으로 원하는 종족, 직업, 아이템에 맞는 코디만 쏙쏙 골라볼 수
+                있어요.
+              </p>
+            </div>
           </div>
         </div>
         <div className="page-introduce-generator">
-          <div className="intro-contents">
-            <img
-              src="/img/intro-generator.png"
-              alt="intro-generator"
-              className="page-introduce-background-generator"
-            />
-            <img
-              src="/img/intro-generator-s.png"
-              alt="intro-generator"
-              className="page-introduce-background-generator-s"
-            />
+          <img
+            src="/img/intro-background-generator.svg"
+            alt="sample-image-gallery"
+            className="page-introduce-background"
+          />
+          <img
+            src="/img/intro-background-generator-s.svg"
+            alt="sample-image-gallery"
+            className="page-introduce-background-s"
+          />
+          <div className="intro-contents-background">
+            <div className="intro-contents">
+              <img
+                src="/img/intro-generator.png"
+                alt="intro-generator"
+                className="generator-sample"
+              />
+              <img
+                src="/img/intro-generator-s.png"
+                alt="intro-generator"
+                className="generator-sample-s"
+              />
 
-            <p className="intro-page-description">
-              쉽고 간편한 코디 기록! 스크린샷과 함께 장착한 아이템을 하나의
-              이미지로 저장할 수 있어요. 로그인하면 직접 스타일 노트를 작성해
-              나만의 룩북을 안전하게 백업할 수도 있어요.
-            </p>
+              <p className="intro-page-description">
+                쉽고 간편한 코디 기록! 스크린샷과 함께 장착한 아이템을 하나의
+                이미지로 저장할 수 있어요. 로그인하면 직접 스타일 노트를 작성해
+                나만의 룩북을 안전하게 백업할 수도 있어요.
+              </p>
+            </div>
           </div>
         </div>
         <div className="page-introduce-mypage">
-          <div className="intro-contents">
-            <img
-              src="/img/intro-mypage.png"
-              alt="intro-mypage"
-              className="page-introduce-background-mypage"
-            />
-            <img
-              src="/img/intro-mypage-s.png"
-              alt="intro-mypage"
-              className="page-introduce-background-mypage-s"
-            />
-            <p className="intro-page-description">
-              내가 올린 투영기록들과 ‘좋아요’한
-              <br /> 코디를 한눈에 모아볼 수 있어요.
-              <br />
-              회원정보 수정도 가능하니, 투영기록과
-              <br /> 함께 프로필도 업데이트해보세요!
-            </p>
+          <img
+            src="/img/intro-background-mypage.svg"
+            alt="sample-image-gallery"
+            className="page-introduce-background"
+          />
+          <img
+            src="/img/intro-background-mypage-s.svg"
+            alt="sample-image-gallery"
+            className="page-introduce-background-s"
+          />
+          <div className="intro-contents-background">
+            <div className="intro-contents">
+              <img
+                src="/img/intro-mypage.png"
+                alt="intro-mypage"
+                className="mypage-sample"
+              />
+              <img
+                src="/img/intro-mypage-s.png"
+                alt="intro-mypage"
+                className="mypage-sample-s"
+              />
+              <p className="intro-page-description">
+                내가 올린 투영기록들과 ‘좋아요’한 코디를 한눈에 모아볼 수
+                있어요. 회원정보 수정도 가능하니, 투영기록과 함께 프로필도
+                업데이트해보세요!
+              </p>
+            </div>
           </div>
         </div>
       </div>
