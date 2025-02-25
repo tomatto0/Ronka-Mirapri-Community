@@ -136,48 +136,66 @@ p.intro-page-description {
   }
 }
 
+p.intro-page-description.half-width {
+  width: 100%;
+}
+
 /* 사이트소개 - page 소개 */
 
 .page-introduce-wrap {
   margin-top: 240px;
-  height: calc(100vh * 3);
-  max-height: 3300px;
+  height: max-content;
 }
 
 .page-introduce-gallery {
-  height: 100vh;
-  background: no-repeat;
-  background-image: url("/img/intro-background-gallery-s.svg");
-  background-size: cover;
-  padding-top: 76px;
+  height: max-content;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   position: sticky;
   top: 61px;
 }
 
 .page-introduce-generator {
-  height: 100vh;
-  background: no-repeat;
-  background-image: url("/img/intro-background-generator-s.svg");
-  padding-top: 76px;
-  background-size: cover;
+  height: max-content;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   position: sticky;
   top: 65px;
 }
 
 .page-introduce-mypage {
-  height: 100vh;
-  background: no-repeat;
-  background-image: url("/img/intro-background-mypage-s.svg");
-  padding-top: 76px;
-  background-size: cover;
+  height: max-content;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   position: sticky;
   top: 69px;
+}
+
+.page-introduce-background-s {
+  width: calc(100vw - 32px);
+}
+
+.page-introduce-background {
+  display: none;
+}
+
+.intro-contents-background {
+  height: 100%;
+  width: calc(100vw - 32px);
+  background-color: #fffdeb;
+
+  border-left: 1px solid #006351;
+  border-bottom: 1px solid #006351;
+  border-right: 1px solid #006351;
+  border-end-start-radius: 12px;
+  border-end-end-radius: 12px;
+
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
 }
 
 .intro-contents {
@@ -187,18 +205,20 @@ p.intro-page-description {
 
   p {
     margin-top: 16px;
+    margin-bottom: 70px;
+    font-size: 1.7rem;
   }
 
   .gallery-sample1,
-  .page-introduce-background-generator,
-  .page-introduce-background-mypage {
+  .generator-sample,
+  .mypage-sample {
     display: none;
   }
 
   .gallery-sample-s,
-  .page-introduce-background-generator-s,
-  .page-introduce-background-mypage-s {
-    width: 70vw;
+  .generator-sample-s,
+  .mypage-sample-s {
+    width: 60vw;
   }
 
   .gallery-sample2 {
@@ -299,9 +319,52 @@ p.intro-page-description {
   }
 }
 
-@media (min-width: 501px) and (max-width: 1074px) {
+@media (min-width: 700px) and (max-width: 1074px) {
   main.about-wrap {
     padding: 0 24px;
+  }
+
+  p.intro-page-description.half-width {
+    width: 65%;
+  }
+
+  .page-introduce-background-s {
+    display: none;
+  }
+
+  .page-introduce-background {
+    display: block;
+    width: 100%;
+  }
+
+  .gallery-sample-s,
+  .generator-sample-s,
+  .mypage-sample-s {
+    display: none;
+  }
+
+  .intro-contents {
+    max-width: 716px;
+    position: relative;
+    width: min-content;
+
+    p {
+      margin-top: 32px;
+    }
+
+    .gallery-sample1,
+    .generator-sample,
+    .mypage-sample {
+      max-width: 630px;
+      display: block;
+    }
+
+    .gallery-sample2 {
+      display: block;
+      position: absolute;
+      top: 126px;
+      right: 20px;
+    }
   }
 }
 
@@ -310,6 +373,7 @@ p.intro-page-description {
     padding: 0;
     margin-bottom: 100px;
   }
+
   .about-toggle {
     padding-top: 24px;
     margin: 0;
@@ -389,26 +453,44 @@ p.intro-page-description {
     height: 2640px;
   }
 
+  p.intro-page-description.half-width {
+    width: 65%;
+  }
+
+  .page-introduce-background-s {
+    display: none;
+  }
+
+  .page-introduce-background {
+    display: block;
+    width: 100%;
+  }
+
+  .intro-contents-background {
+    height: 100%;
+    width: 100%;
+    padding-top: 50px;
+  }
+
   .page-introduce-gallery {
     height: 880px;
-    background-image: url("/img/intro-background-gallery.svg");
-    background-size: inherit;
-    padding-top: 185px;
     top: 0px;
   }
 
   .page-introduce-generator {
     height: 880px;
-    background-image: url("/img/intro-background-mypage.svg");
-    padding-top: 185px;
     top: 0px;
   }
 
   .page-introduce-mypage {
     height: 880px;
-    background-image: url("/img/intro-background-mypage.svg");
-    padding-top: 185px;
     top: 0px;
+  }
+
+  .gallery-sample-s,
+  .generator-sample-s,
+  .mypage-sample-s {
+    display: none;
   }
 
   .intro-contents {
@@ -421,12 +503,14 @@ p.intro-page-description {
     }
 
     .gallery-sample1,
-    .page-introduce-background-generator,
-    .page-introduce-background-mypage {
+    .generator-sample,
+    .mypage-sample {
       max-width: 630px;
+      display: block;
     }
 
     .gallery-sample2 {
+      display: block;
       position: absolute;
       top: 106px;
       right: -78px;
