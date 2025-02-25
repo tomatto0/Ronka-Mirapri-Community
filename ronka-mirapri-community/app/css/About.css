@@ -116,11 +116,15 @@ img.guide-image {
 
 /* 사이트 소개 페이지*/
 
+.title-box {
+  margin-top: 110px;
+  margin-bottom: 36px;
+}
+
 img#intro-logo {
   max-height: 100px;
   height: 16vw;
-  margin-top: 110px;
-  margin-bottom: 36px;
+  margin-right: 7px;
 }
 
 p.intro-page-description {
@@ -325,7 +329,7 @@ p.intro-page-description.half-width {
   }
 
   p.intro-page-description.half-width {
-    width: 65%;
+    width: 50%;
   }
 
   .page-introduce-background-s {
@@ -431,14 +435,18 @@ p.intro-page-description.half-width {
 
   /* 사이트 소개 페이지 */
 
-  img#intro-logo {
-    height: 146px;
+  .title-box {
     margin-top: 92px;
     margin-bottom: 44px;
   }
 
+  img#intro-logo {
+    height: 146px;
+    margin-right: 17px;
+  }
+
   p.intro-page-description {
-    font-size: 2.8rem;
+    font-size: 2.9rem;
     color: #525252;
     letter-spacing: -0.56px;
     font-weight: 400;
@@ -500,6 +508,7 @@ p.intro-page-description.half-width {
 
     p {
       margin-top: 32px;
+      font-size: 2.8rem;
     }
 
     .gallery-sample1,
