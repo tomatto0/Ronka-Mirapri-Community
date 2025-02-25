@@ -155,7 +155,7 @@ export default function FilterSelector({
               set_is_open(false);
             }}
           >
-            <Image
+            <img
               src={process.env.NEXT_PUBLIC_BASE_URL + "/img/cancle.svg"}
               alt="modal close button"
             />
@@ -356,7 +356,7 @@ export default function FilterSelector({
         ) : (
           <div className="submit-button-wrap">
             <button className="filter-reset-button" onClick={reset_filter}>
-              <Image
+              <img
                 src={process.env.NEXT_PUBLIC_BASE_URL + "/img/refresh.svg"}
                 alt="modal close button"
               />

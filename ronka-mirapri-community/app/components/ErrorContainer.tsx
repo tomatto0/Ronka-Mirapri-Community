@@ -12,7 +12,7 @@ export default function ErrorContainer({
 }) {
   return (
     <div className={`error-notice${small ? " small" : ""}`}>
-      <Image
+      <img
         src={`${process.env.NEXT_PUBLIC_BASE_URL}/img/not-pound.png`}
         alt="error"
       />

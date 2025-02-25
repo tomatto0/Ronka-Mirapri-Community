@@ -185,7 +185,7 @@ export default function Page_home() {
             set_is_open(true);
           }}
         >
-          <Image
+          <img
             src={process.env.NEXT_PUBLIC_BASE_URL + "/img/plus-green.svg"}
             alt="modal open button"
           />
@@ -199,7 +199,7 @@ export default function Page_home() {
             }}
           >
             {filter_tag.order}{" "}
-            <Image
+            <img
               src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"}
               alt="modal open button"
             />
@@ -213,7 +213,7 @@ export default function Page_home() {
             }}
           >
             {filter_tag.gender}{" "}
-            <Image
+            <img
               src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"}
               alt="modal open button"
             />
@@ -227,7 +227,7 @@ export default function Page_home() {
             }}
           >
             검색: {filter_tag.keyword}
-            <Image
+            <img
               src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_purple.svg"}
               alt="modal open button"
             />
@@ -242,7 +242,7 @@ export default function Page_home() {
             key={`filter-${job}`}
           >
             {job}{" "}
-            <Image
+            <img
               src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"}
               alt="modal open button"
             />
@@ -260,7 +260,7 @@ export default function Page_home() {
             key={`filter-${race}`}
           >
             {race}{" "}
-            <Image
+            <img
               src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"}
               alt="modal open button"
             />
@@ -269,7 +269,7 @@ export default function Page_home() {
         {(filter !== "{}" || filter_tag.order !== "최신순") && (
           <button className="primary-filter" onClick={reset_filter}>
             {" "}
-            <Image
+            <img
               src={process.env.NEXT_PUBLIC_BASE_URL + "/img/refresh-green.svg"}
               alt="modal open button"
             />

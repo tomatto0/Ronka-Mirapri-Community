@@ -434,7 +434,7 @@ export default function Page_editor() {
               >
                 {editor_mode ? (
                   <div className="write-button-content">
-                    <Image
+                    <img
                       className="write_svg"
                       src={
                         process.env.NEXT_PUBLIC_BASE_URL + "/img/chevron-up.svg"
@@ -445,7 +445,7 @@ export default function Page_editor() {
                   </div>
                 ) : (
                   <div className="write-button-content">
-                    <Image
+                    <img
                       className="write_svg"
                       src={
                         process.env.NEXT_PUBLIC_BASE_URL +

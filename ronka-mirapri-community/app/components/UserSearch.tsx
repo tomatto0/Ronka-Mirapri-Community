@@ -59,7 +59,7 @@ export default function UserSearch({
 
   return (
     <div className="item-search-container">
-      <Image
+      <img
         className="search-icon"
         src={process.env.NEXT_PUBLIC_BASE_URL + "/img/search.svg"}
         alt="search icon"

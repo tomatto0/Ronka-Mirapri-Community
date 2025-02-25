@@ -13,7 +13,7 @@ export default function EditButton() {
   return (
     <>
       <button className="edit-button" onClick={sendEditor}>
-        <Image
+        <img
           src={process.env.NEXT_PUBLIC_BASE_URL + "/img/edit-icon.svg"}
           alt="edit button"
         />

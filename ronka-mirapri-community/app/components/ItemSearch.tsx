@@ -74,7 +74,7 @@ export default function ItemSearch({
 
   return (
     <div className="item-search-container">
-      <Image
+      <img
         className="search-icon"
         src={process.env.NEXT_PUBLIC_BASE_URL + "/img/search.svg"}
         alt="search icon"
@@ -89,7 +89,7 @@ export default function ItemSearch({
       />
       {keyword !== "" ? (
         <button className="search-input-reset" onClick={input_reset}>
-          <Image
+          <img
             src={process.env.NEXT_PUBLIC_BASE_URL + "/img/cancle_small.svg"}
             alt="item cancle button"
           />

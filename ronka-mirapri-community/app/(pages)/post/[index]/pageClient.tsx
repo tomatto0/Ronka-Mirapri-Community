@@ -263,7 +263,7 @@ export default function PostPageClient({
         </div>
       </div>
       <div className="image-container">
-        <Image
+        <img
           className="post-image"
           src={post_data.image_url}
           alt={post_data.title}

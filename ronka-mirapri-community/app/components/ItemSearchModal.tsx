@@ -88,7 +88,7 @@ export default function ItemSearchModal({
               : slots[slot]}
           </span>
           <button className="image" onClick={modal_close}>
-            <Image
+            <img
               src={process.env.NEXT_PUBLIC_BASE_URL + "/img/cancle.svg"}
               alt="cancle button"
             />

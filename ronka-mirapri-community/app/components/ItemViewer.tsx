@@ -34,7 +34,7 @@ export default function ItemViewer({ equiped_item }: { equiped_item: Item[] }) {
     };
     return (
       <div className="item-searcher">
-        <Image className="item-image" src={item.Icon} alt={item.Name} />
+        <img className="item-image" src={item.Icon} alt={item.Name} />
         <div className="post-item-information">
           <p>{item.Name}</p>
           <div className="item-color-information">

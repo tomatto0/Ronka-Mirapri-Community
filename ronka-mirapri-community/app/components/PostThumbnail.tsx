@@ -71,7 +71,7 @@ export default function PostThumbnail({
 
   return (
     <div className="post-box">
-      <Image
+      <img
         className="post-thumbnail"
         src={post.image_url}
         alt={post.title}

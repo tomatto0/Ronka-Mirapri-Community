@@ -39,7 +39,7 @@ export default function NavMobile({
             set_is_mobile_nav_open(false);
           }}
         >
-          <Image
+          <img
             src={process.env.NEXT_PUBLIC_BASE_URL + "/img/cancle.svg"}
             alt="modal close button"
           />

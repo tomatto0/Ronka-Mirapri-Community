@@ -145,7 +145,7 @@ export default function Editor({
     return (
       <button className="editor-tag" onClick={click_handler}>
         {value}{" "}
-        <Image
+        <img
           src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"}
           alt="tag_close button"
         />
