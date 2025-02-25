@@ -69,7 +69,7 @@ export default function EditorPageClient({
     action: {
       type: "UPDATE_FIELD";
       field: string;
-      value: any;
+      value: string;
     }
   ) {
     switch (action.type) {
@@ -265,11 +265,10 @@ export default function EditorPageClient({
   }
 
   useEffect(() => {
-    if (
-      status !== "loading" &&
-      session?.user._id !== data.author._id &&
-      !session?.user.is_admin
-    ) {
+    if (status === "loading") {
+      return;
+    }
+    if (session?.user._id !== data.author._id && !session?.user.is_admin) {
       router.push(`/post/${data.index}`);
       Swal.fire({
         title: "작성자만 수정할 수 있습니다.",

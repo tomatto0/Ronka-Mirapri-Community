@@ -32,7 +32,6 @@ export default function Navigation() {
   );
   const [is_open, set_is_open] = useState<boolean>(false);
   const [is_mobile_nav_open, set_is_mobile_nav_open] = useState<boolean>(false);
-  const renderingRef = useRef<boolean>(true);
 
   const search = () => {
     if (!is_open) {
@@ -123,7 +122,6 @@ export default function Navigation() {
         </div>
       </div>
       <FilterSelector
-        filter={filter}
         set_filter={set_filter}
         filter_tag={filter_tag}
         set_filter_tag={filter_tag_handler}

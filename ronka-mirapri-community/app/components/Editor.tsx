@@ -11,6 +11,7 @@ import {
 import React, { ActionDispatch, useState } from "react";
 import CheckBox from "./CheckBox";
 import RadioBox from "./RadioBox";
+import Image from "next/image";
 
 export default function Editor({
   post_data,
@@ -144,7 +145,7 @@ export default function Editor({
     return (
       <button className="editor-tag" onClick={click_handler}>
         {value}{" "}
-        <img
+        <Image
           src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"}
           alt="tag_close button"
         />

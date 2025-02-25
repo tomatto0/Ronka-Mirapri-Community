@@ -1,6 +1,7 @@
 import Link from "next/link";
 import "../css/FlowText.css";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 export default function Itemrank({ itemrank }: { itemrank: string[] }) {
   const flowRef = useRef<HTMLDivElement[]>([]);
@@ -61,7 +62,7 @@ export default function Itemrank({ itemrank }: { itemrank: string[] }) {
             {itemrank.map(item => (
               <Link href={`/?keyword=${item}`} className="flow-text" key={item}>
                 {item}{" "}
-                <img
+                <Image
                   src={process.env.NEXT_PUBLIC_BASE_URL + "/img/plus-green.svg"}
                   alt="modal open button"
                 />
@@ -69,7 +70,7 @@ export default function Itemrank({ itemrank }: { itemrank: string[] }) {
             ))}
             <p className="flow-text title">
               주간인기 TOP 10 ITEM{" "}
-              <img
+              <Image
                 src={process.env.NEXT_PUBLIC_BASE_URL + "/img/plus-green.svg"}
                 alt="modal open button"
               />

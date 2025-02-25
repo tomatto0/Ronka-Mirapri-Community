@@ -404,33 +404,37 @@ export default function UserCanvas({
   }, [image_src, user_image_draw]);
 
   // 아이템 이미지 로드 확인
-  const image_load_check = async () => {
-    const image_load = (id: number, src: string): Promise<ItemImage> => {
-      return new Promise((resolve, reject) => {
-        const item_image = new Image();
-        item_image.src = src;
-
-        item_image.onload = () => resolve({ Id: id, Image: item_image });
-        item_image.onerror = error => reject(error);
-      });
-    };
-
-    try {
-      const promises = equiped_item_ref.current.map(item =>
-        image_load(item.Id, process.env.NEXT_PUBLIC_BASE_URL + "/" + item.Icon)
-      );
-      item_images.current = await Promise.all(promises);
-    } catch (error) {
-      console.error(error);
-    }
-    user_item_draw(equiped_item_ref.current);
-  };
 
   // 장착 아이템이 변경될 때 이미지 로드
   useEffect(() => {
+    const image_load_check = async () => {
+      const image_load = (id: number, src: string): Promise<ItemImage> => {
+        return new Promise((resolve, reject) => {
+          const item_image = new Image();
+          item_image.src = src;
+
+          item_image.onload = () => resolve({ Id: id, Image: item_image });
+          item_image.onerror = error => reject(error);
+        });
+      };
+
+      try {
+        const promises = equiped_item_ref.current.map(item =>
+          image_load(
+            item.Id,
+            process.env.NEXT_PUBLIC_BASE_URL + "/" + item.Icon
+          )
+        );
+        item_images.current = await Promise.all(promises);
+      } catch (error) {
+        console.error(error);
+      }
+      user_item_draw(equiped_item_ref.current);
+    };
+
     equiped_item_ref.current = equiped_item;
     image_load_check();
-  }, [equiped_item, image_load_check]);
+  }, [equiped_item]);
 
   const image_validate = (e: React.ChangeEvent<HTMLInputElement>) => {
     // 입력된 파일의 확장자 추출

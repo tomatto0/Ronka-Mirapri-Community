@@ -3,6 +3,7 @@ import { Item } from "../types/Item";
 import { ColorInfo } from "../types/ColorInfo";
 import Color_background_list_raw from "../json/color_background.json";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function ItemInformation({
   open_modal,
@@ -100,7 +101,7 @@ export default function ItemInformation({
     return (
       <div className="item-slot">
         <span>{slot_name}</span>
-        <img
+        <Image
           src={process.env.NEXT_PUBLIC_BASE_URL + src}
           alt={slot_name + "아이콘"}
           onClick={item_search_modal_open}
@@ -159,7 +160,7 @@ export default function ItemInformation({
           <div>
             <span>코디 정보 입력</span>
             <div className="infomation-icon">
-              <img
+              <Image
                 src={process.env.NEXT_PUBLIC_BASE_URL + "/img/help-circle.svg"}
                 alt="도움말"
               />
@@ -225,7 +226,7 @@ export default function ItemInformation({
         </p>
         <div className="download-container">
           {is_null_equiped_item(equiped_item) && (
-            <img
+            <Image
               className="download-info"
               src={process.env.NEXT_PUBLIC_BASE_URL + "/img/download_info.svg"}
               alt="예시 이미지와 아이템 등록시 다운로드 가능"

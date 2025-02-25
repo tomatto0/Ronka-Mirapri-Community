@@ -45,6 +45,3 @@ export async function POST(request: NextRequest) {
   }
   return NextResponse.json({ success: false });
 }
-export async function DELETE(request: NextRequest) {
-  const body = await request.json();
-}

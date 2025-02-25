@@ -178,7 +178,7 @@ export default function Page_user() {
             {/* 게시물 목록 렌더링 */}
             {post_chunk.map((chunk: PostInform[], i: number) => (
               <div className="post-container-row" key={i + 1}>
-                {chunk.map((post: PostInform, i: number) => (
+                {chunk.map((post: PostInform) => (
                   <PostThumbnail post={post} key={`post-${post.index}`} />
                 ))}
               </div>
@@ -192,7 +192,7 @@ export default function Page_user() {
           {/* 게시물 목록 렌더링 */}
           {like_chunk.map((chunk: PostInform[], i: number) => (
             <div className="post-container-row" key={i + 1}>
-              {chunk.map((post: PostInform, i: number) => (
+              {chunk.map((post: PostInform) => (
                 <PostThumbnail post={post} key={`post-${post.index}`} />
               ))}
             </div>

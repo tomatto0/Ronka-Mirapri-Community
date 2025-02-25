@@ -9,15 +9,18 @@ import equip_slot_categories from "../../json/equip_slot_categories.json";
 import { EquipSlot } from "@/app/types/EquipSlot";
 import { Item } from "@/app/types/Item";
 import { signIn, useSession } from "next-auth/react";
-import { useEffect, useReducer, useRef, useState } from "react";
+import { useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { post_init_state, item_null } from "@/app/utils/constants";
 import { LocalDB } from "@/app/utils/localDB";
 import Swal from "sweetalert2";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import post_validate from "@/app/utils/post_validate";
+import Image from "next/image";
 
 export default function Page_editor() {
-  const localDB = new LocalDB("post_data", "user_image", false);
+  const localDB = useMemo(() => {
+    return new LocalDB("post_data", "user_image", false);
+  }, []);
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -66,7 +69,7 @@ export default function Page_editor() {
     action: {
       type: "UPDATE_FIELD";
       field: string;
-      value: any;
+      value: string | string[] | null;
     }
   ) {
     switch (action.type) {
@@ -84,7 +87,7 @@ export default function Page_editor() {
     action: {
       type: "UPDATE_FIELD";
       field: string;
-      value: any;
+      value: string;
     }
   ) {
     switch (action.type) {
@@ -431,7 +434,7 @@ export default function Page_editor() {
               >
                 {editor_mode ? (
                   <div className="write-button-content">
-                    <img
+                    <Image
                       className="write_svg"
                       src={
                         process.env.NEXT_PUBLIC_BASE_URL + "/img/chevron-up.svg"
@@ -442,7 +445,7 @@ export default function Page_editor() {
                   </div>
                 ) : (
                   <div className="write-button-content">
-                    <img
+                    <Image
                       className="write_svg"
                       src={
                         process.env.NEXT_PUBLIC_BASE_URL +

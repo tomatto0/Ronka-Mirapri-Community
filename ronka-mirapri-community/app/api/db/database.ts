@@ -6,7 +6,6 @@ import {
 import { Storage } from "@google-cloud/storage";
 import { MongoServerError } from "mongodb";
 import mongoose, { model, MongooseError, Schema } from "mongoose";
-import { title } from "process";
 const uri = process.env.MONGODB_URI as string;
 const storage = new Storage();
 const bucketname = "ronka_closet_community";
@@ -91,7 +90,7 @@ post_schema.pre("findOneAndDelete", async function (next) {
       .findOne(this.getFilter())
       .select(["image_url", "likes", "author", "_id"])
       .lean<{
-        image_url: String;
+        image_url: string;
         likes: Schema.Types.ObjectId[];
         author: Schema.Types.ObjectId;
         _id: Schema.Types.ObjectId;
@@ -129,7 +128,7 @@ post_schema.pre("deleteMany", async function (next) {
       .find({ _id: { $in: this.getFilter()._id } })
       .select(["image_url", "likes", "author", "_id"])
       .lean<{
-        image_url: String;
+        image_url: string;
         likes: Schema.Types.ObjectId[];
         author: Schema.Types.ObjectId;
         _id: Schema.Types.ObjectId;

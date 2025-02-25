@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next-on-pages",
+    "deploy": "wrangler pages deploy .next --project-name=ronka-mirapri-community",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@cloudflare/next-on-pages": "^1.13.8",
     "@google-cloud/storage": "^7.15.0",
     "@next/third-parties": "^15.1.6",
     "@tanstack/react-query": "^5.66.0",

@@ -1,6 +1,7 @@
 import "../css/SearchResult.css";
 import { useRef, useState, useEffect } from "react";
 import { Item } from "../types/Item";
+import Image from "next/image";
 
 export default function ItemSearchResult({
   slot,
@@ -33,7 +34,7 @@ export default function ItemSearchResult({
         ref={component}
         onClick={click_handler_container}
       >
-        <img
+        <Image
           className="item-icon"
           src={process.env.NEXT_PUBLIC_BASE_URL + item.Icon}
           alt={item.Name}

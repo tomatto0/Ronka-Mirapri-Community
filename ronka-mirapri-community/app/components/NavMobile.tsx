@@ -1,3 +1,4 @@
+import Image from "next/image";
 import "../css/MobileNav.css";
 
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -38,7 +39,7 @@ export default function NavMobile({
             set_is_mobile_nav_open(false);
           }}
         >
-          <img
+          <Image
             src={process.env.NEXT_PUBLIC_BASE_URL + "/img/cancle.svg"}
             alt="modal close button"
           />

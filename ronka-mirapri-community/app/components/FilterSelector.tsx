@@ -16,16 +16,15 @@ import ItemSearchResult from "./ItemSearchResult";
 import UserSearch from "./UserSearch";
 import UserSearchResult from "./UserSearchResult";
 import ErrorContainer from "./ErrorContainer";
+import Image from "next/image";
 
 export default function FilterSelector({
-  filter,
   set_filter,
   filter_tag,
   set_filter_tag,
   is_open,
   set_is_open,
 }: {
-  filter: string;
   set_filter: React.Dispatch<React.SetStateAction<string>>;
   filter_tag: {
     order: string;
@@ -156,7 +155,7 @@ export default function FilterSelector({
               set_is_open(false);
             }}
           >
-            <img
+            <Image
               src={process.env.NEXT_PUBLIC_BASE_URL + "/img/cancle.svg"}
               alt="modal close button"
             />
@@ -357,7 +356,7 @@ export default function FilterSelector({
         ) : (
           <div className="submit-button-wrap">
             <button className="filter-reset-button" onClick={reset_filter}>
-              <img
+              <Image
                 src={process.env.NEXT_PUBLIC_BASE_URL + "/img/refresh.svg"}
                 alt="modal close button"
               />

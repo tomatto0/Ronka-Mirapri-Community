@@ -4,6 +4,7 @@ import Color_background_list_raw from "../json/color_background.json";
 import { useRef, useState, useEffect } from "react";
 import { Item } from "../types/Item";
 import { item_null } from "../utils/constants";
+import Image from "next/image";
 
 export default function ColorPalette({
   item,
@@ -260,7 +261,7 @@ export default function ColorPalette({
             onClick={() => palette_controll(undefined)}
           >
             <div className="palette-name-info">
-              <img
+              <Image
                 className="svg-image"
                 src={process.env.NEXT_PUBLIC_BASE_URL + "/img/color_plus.svg"}
                 alt="add_color_icon"
@@ -285,7 +286,7 @@ export default function ColorPalette({
               {dye_slot}염색 - {Color_background_list[color_id].name}
             </div>
             <button className="image" onClick={color_cancle}>
-              <img
+              <Image
                 src={process.env.NEXT_PUBLIC_BASE_URL + "/img/cancle_small.svg"}
                 alt="color cancle button"
               />
@@ -314,7 +315,7 @@ export default function ColorPalette({
       <div className="selected-item-name">
         {item.Name}
         <button className="image" onClick={item_cancel}>
-          <img
+          <Image
             src={process.env.NEXT_PUBLIC_BASE_URL + "/img/cancle_small.svg"}
             alt="item cancle button"
           />

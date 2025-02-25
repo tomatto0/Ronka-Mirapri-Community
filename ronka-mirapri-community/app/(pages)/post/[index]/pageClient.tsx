@@ -13,6 +13,7 @@ import { signIn, useSession } from "next-auth/react";
 import React, { useRef, useState } from "react";
 import AutoLink from "@/app/components/AutoLink";
 import UserCanvasViewer from "@/app/components/UserCanvasViewer";
+import Image from "next/image";
 
 export default function PostPageClient({
   post_data,
@@ -71,7 +72,7 @@ export default function PostPageClient({
     }
   }
 
-  const { data, isLoading, isError } = useGetPostLikes(postIndex);
+  const { data, isError } = useGetPostLikes(postIndex);
   const { deleteLikeMutation } = useDeleteLike(postIndex);
   const { addLikeMutation } = useAddLike(postIndex);
   const { mutate: delete_post } = useMutation({
@@ -262,7 +263,7 @@ export default function PostPageClient({
         </div>
       </div>
       <div className="image-container">
-        <img
+        <Image
           className="post-image"
           src={post_data.image_url}
           alt={post_data.title}

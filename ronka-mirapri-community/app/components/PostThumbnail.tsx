@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { signIn, useSession } from "next-auth/react";
 import Swal from "sweetalert2";
+import Image from "next/image";
 
 type PostInform = {
   _id: string;
@@ -70,7 +71,7 @@ export default function PostThumbnail({
 
   return (
     <div className="post-box">
-      <img
+      <Image
         className="post-thumbnail"
         src={post.image_url}
         alt={post.title}

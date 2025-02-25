@@ -49,10 +49,10 @@ class LocalDB {
 
       const clear_request = store.clear();
 
-      clear_request.onsuccess = (e: Event) => {
+      clear_request.onsuccess = () => {
         resolve();
       };
-      clear_request.onerror = (e: Event) => {
+      clear_request.onerror = () => {
         reject(new Error("indexedDB clear Error"));
       };
     });
@@ -67,15 +67,15 @@ class LocalDB {
 
       const add_request = store.add(key ? { image: value, id: key } : value);
 
-      add_request.onsuccess = (e: Event) => {
+      add_request.onsuccess = () => {
         resolve();
       };
-      add_request.onerror = (e: Event) => {
+      add_request.onerror = () => {
         reject(new Error("indexedDB add Error"));
       };
     });
   }
-  put(value: Object, key: IDBValidKey) {
+  put(value: object, key: IDBValidKey) {
     return new Promise<void>(async (resolve, reject) => {
       if (!this.db) {
         return reject(new Error("indexDB open Error"));
@@ -85,12 +85,12 @@ class LocalDB {
         const transaction = this.db.transaction(this.store_name, "readwrite");
         const store = transaction.objectStore(this.store_name);
 
-        const put_request = (data: Object) => {
+        const put_request = (data: object) => {
           const put_request = store.put(data);
-          put_request.onsuccess = (e: Event) => {
+          put_request.onsuccess = () => {
             resolve();
           };
-          put_request.onerror = (e: Event) => {
+          put_request.onerror = () => {
             reject(new Error("indexedDB put Error"));
           };
         };
@@ -118,7 +118,7 @@ class LocalDB {
         const item = (e.target as IDBRequest).result;
         resolve(item);
       };
-      get_request.onerror = (e: Event) => {
+      get_request.onerror = () => {
         reject(new Error("indexedDB get Error"));
       };
     });
@@ -137,7 +137,7 @@ class LocalDB {
         const item = (e.target as IDBRequest).result;
         resolve(item);
       };
-      get_request.onerror = (e: Event) => {
+      get_request.onerror = () => {
         reject(new Error("indexedDB get Error"));
       };
     });

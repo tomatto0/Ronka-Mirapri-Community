@@ -1,7 +1,7 @@
 import "../css/ItemSearchModal.css";
 import { useEffect, useRef } from "react";
-import Hangul from "hangul-js";
 import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 
 export default function UserSearch({
   keyword,
@@ -59,7 +59,7 @@ export default function UserSearch({
 
   return (
     <div className="item-search-container">
-      <img
+      <Image
         className="search-icon"
         src={process.env.NEXT_PUBLIC_BASE_URL + "/img/search.svg"}
         alt="search icon"

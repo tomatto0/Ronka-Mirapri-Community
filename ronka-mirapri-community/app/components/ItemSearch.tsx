@@ -5,10 +5,11 @@ import equip_slot_categories from "../json/equip_slot_categories.json";
 import { Item } from "../types/Item";
 import { EquipSlot } from "../types/EquipSlot";
 import Hangul from "hangul-js";
+import Image from "next/image";
 
 export default function ItemSearch({
   keyword,
-  set_is_loading = (is_loading: boolean) => {},
+  set_is_loading = () => {},
   set_keyword,
   set_search_result,
   slot = -1,
@@ -73,7 +74,7 @@ export default function ItemSearch({
 
   return (
     <div className="item-search-container">
-      <img
+      <Image
         className="search-icon"
         src={process.env.NEXT_PUBLIC_BASE_URL + "/img/search.svg"}
         alt="search icon"
@@ -88,7 +89,7 @@ export default function ItemSearch({
       />
       {keyword !== "" ? (
         <button className="search-input-reset" onClick={input_reset}>
-          <img
+          <Image
             src={process.env.NEXT_PUBLIC_BASE_URL + "/img/cancle_small.svg"}
             alt="item cancle button"
           />

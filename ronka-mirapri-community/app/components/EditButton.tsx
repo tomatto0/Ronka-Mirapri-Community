@@ -1,3 +1,4 @@
+import Image from "next/image";
 import "../css/EditButton.css";
 
 import { useRouter } from "next/navigation";
@@ -12,7 +13,7 @@ export default function EditButton() {
   return (
     <>
       <button className="edit-button" onClick={sendEditor}>
-        <img
+        <Image
           src={process.env.NEXT_PUBLIC_BASE_URL + "/img/edit-icon.svg"}
           alt="edit button"
         />

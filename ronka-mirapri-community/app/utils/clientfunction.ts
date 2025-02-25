@@ -45,12 +45,12 @@ async function is_like(post_id: string): Promise<boolean> {
   return res.data !== null;
 }
 
-async function like_count(index: string) {
-  const response = await fetch(`/api/db/posts/index/likes?index=${index}`, {
-    method: "GET",
-  });
-  const res = await response.json();
-  return res.data.like_count;
-}
+// async function like_count(index: string) {
+//   const response = await fetch(`/api/db/posts/index/likes?index=${index}`, {
+//     method: "GET",
+//   });
+//   const res = await response.json();
+//   return res.data.like_count;
+// }
 
 export { like_toggle, is_like };

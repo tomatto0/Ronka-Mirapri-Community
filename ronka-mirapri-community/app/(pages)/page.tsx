@@ -19,9 +19,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import EditButton from "../components/EditButton";
 import ErrorContainer from "../components/ErrorContainer";
+import Image from "next/image";
 
 export default function Page_home() {
-  const { data: session } = useSession();
   const router = useRouter();
 
   const session_filter = JSON.parse(sessionStorage.getItem("filter") ?? "{}");
@@ -185,7 +185,7 @@ export default function Page_home() {
             set_is_open(true);
           }}
         >
-          <img
+          <Image
             src={process.env.NEXT_PUBLIC_BASE_URL + "/img/plus-green.svg"}
             alt="modal open button"
           />
@@ -199,7 +199,7 @@ export default function Page_home() {
             }}
           >
             {filter_tag.order}{" "}
-            <img
+            <Image
               src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"}
               alt="modal open button"
             />
@@ -213,7 +213,7 @@ export default function Page_home() {
             }}
           >
             {filter_tag.gender}{" "}
-            <img
+            <Image
               src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"}
               alt="modal open button"
             />
@@ -227,7 +227,7 @@ export default function Page_home() {
             }}
           >
             검색: {filter_tag.keyword}
-            <img
+            <Image
               src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_purple.svg"}
               alt="modal open button"
             />
@@ -242,7 +242,7 @@ export default function Page_home() {
             key={`filter-${job}`}
           >
             {job}{" "}
-            <img
+            <Image
               src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"}
               alt="modal open button"
             />
@@ -260,7 +260,7 @@ export default function Page_home() {
             key={`filter-${race}`}
           >
             {race}{" "}
-            <img
+            <Image
               src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"}
               alt="modal open button"
             />
@@ -269,7 +269,7 @@ export default function Page_home() {
         {(filter !== "{}" || filter_tag.order !== "최신순") && (
           <button className="primary-filter" onClick={reset_filter}>
             {" "}
-            <img
+            <Image
               src={process.env.NEXT_PUBLIC_BASE_URL + "/img/refresh-green.svg"}
               alt="modal open button"
             />
@@ -278,7 +278,6 @@ export default function Page_home() {
         )}
       </div>
       <FilterSelector
-        filter={filter}
         set_filter={set_filter}
         filter_tag={filter_tag}
         set_filter_tag={set_filter_tag}
@@ -301,7 +300,7 @@ export default function Page_home() {
           <div className="post-container">
             {post_chunk.length > 0 && (
               <div className="post-container-row" key={0}>
-                {post_chunk[0].map((post: PostInform, i: number) => (
+                {post_chunk[0].map((post: PostInform) => (
                   <PostThumbnail post={post} key={`post-${post.index}`} />
                 ))}
               </div>
@@ -314,7 +313,7 @@ export default function Page_home() {
               .slice(1, post_chunk.length)
               .map((chunk: PostInform[], i: number) => (
                 <div className="post-container-row" key={i + 1}>
-                  {chunk.map((post: PostInform, i: number) => (
+                  {chunk.map((post: PostInform) => (
                     <PostThumbnail post={post} key={`post-${post.index}`} />
                   ))}
                 </div>

@@ -4,6 +4,7 @@ import Color_background_list_raw from "../json/color_background.json";
 import { ColorInfo } from "../types/ColorInfo";
 import Link from "next/link";
 import { SetStateAction, useState } from "react";
+import Image from "next/image";
 
 export default function ItemViewer({ equiped_item }: { equiped_item: Item[] }) {
   const Color_background_list: ColorInfo[] =
@@ -33,7 +34,7 @@ export default function ItemViewer({ equiped_item }: { equiped_item: Item[] }) {
     };
     return (
       <div className="item-searcher">
-        <img className="item-image" src={item.Icon} alt={item.Name} />
+        <Image className="item-image" src={item.Icon} alt={item.Name} />
         <div className="post-item-information">
           <p>{item.Name}</p>
           <div className="item-color-information">

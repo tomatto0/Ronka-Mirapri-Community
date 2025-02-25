@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function ErrorContainer({
@@ -11,7 +12,7 @@ export default function ErrorContainer({
 }) {
   return (
     <div className={`error-notice${small ? " small" : ""}`}>
-      <img
+      <Image
         src={`${process.env.NEXT_PUBLIC_BASE_URL}/img/not-pound.png`}
         alt="error"
       />
