@@ -7,15 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:worker": "opennextjs-cloudflare",
-    "dev:worker": "wrangler dev --port 8771",
-    "preview:worker": "npm run build:worker && npm run dev:worker",
-    "deploy:worker": "npm run build:worker && wrangler deploy"
+    "preview": "opennextjs-cloudflare && wrangler dev",
+    "deploy": "opennextjs-cloudflare && wrangler deploy",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
     "@google-cloud/storage": "^7.15.0",
     "@next/third-parties": "^15.1.6",
-    "@opennextjs/cloudflare": "^0.5.3",
     "@tanstack/react-query": "^5.66.0",
     "hangul-js": "^0.2.6",
     "mongodb": "^6.12.0",
@@ -31,12 +29,15 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@opennextjs/cloudflare": "^0.5.3",
+    "@svgr/webpack": "^8.1.0",
     "@types/multer": "^1.4.12",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.1.4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^3.109.3"
   }
 }
