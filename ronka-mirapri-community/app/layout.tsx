@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Providers from "./components/Providers";
 import Link from "next/link";
 
@@ -50,6 +51,8 @@ export default function RootLayout({
         <div id="root">
           <div className="App">
             <Providers>{children}</Providers>
+            <SpeedInsights />
+
             <div className="footer">
               <Link href="https://ronkacloset.com" target="_blank">
                 https://ronkacloset.com
