@@ -238,24 +238,24 @@ export default function Page_editor() {
   }, [status]);
 
   //indexedDB에 정보 저장하기
-  const indexedDB_save = () => {
-    if (is_posted.current) {
-      return;
-    }
-    post_data.sns = post_data.sns == session?.user.sns ? "" : post_data.sns;
-    localDB.open(1.0).then(() => {
-      localDB.put(
-        {
-          x: x.current,
-          equiped_item,
-          ...post_data,
-        },
-        1
-      );
-    });
-  };
-
   useEffect(() => {
+    const indexedDB_save = () => {
+      if (is_posted.current) {
+        return;
+      }
+      post_data.sns = post_data.sns == session?.user.sns ? "" : post_data.sns;
+      localDB.open(1.0).then(() => {
+        localDB.put(
+          {
+            x: x.current,
+            equiped_item,
+            ...post_data,
+          },
+          1
+        );
+      });
+    };
+
     window.addEventListener("beforeunload", indexedDB_save);
     return () => {
       indexedDB_save();
@@ -301,7 +301,12 @@ export default function Page_editor() {
       });
     }
   }
+
+  const is_loading = useRef<boolean>(false);
   async function post() {
+    if (is_loading.current) {
+      return;
+    }
     if (!imageRef.current) {
       return;
     }
@@ -315,6 +320,7 @@ export default function Page_editor() {
       return;
     }
     try {
+      is_loading.current = true;
       async function image_upload_error() {
         return Swal.fire({
           title: "이미지 업로드 과정에서\n오류가 발생했습니다.",
@@ -396,6 +402,8 @@ export default function Page_editor() {
       }
     } catch (e) {
       console.error(e);
+    } finally {
+      is_loading.current = false;
     }
   }
 

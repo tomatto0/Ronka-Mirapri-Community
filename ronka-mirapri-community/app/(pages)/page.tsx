@@ -1,7 +1,6 @@
 "use client";
 
 import "../css/home.css";
-import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import PostThumbnail from "../components/PostThumbnail";
 import FilterSelector from "../components/FilterSelector";
@@ -25,16 +24,20 @@ import SearchParamsHandler from "./util/SearchParamsHandler";
 export default function Page_home() {
   const router = useRouter();
 
-  const session_filter = JSON.parse(
-    typeof window !== "undefined"
-      ? window.sessionStorage.getItem("filter") ?? "{}"
-      : "{}"
-  );
-
-  const [filter, set_filter] = useState<string>(session_filter.filter ?? "{}");
+  const [filter, set_filter] = useState<string>("{}");
   const [filter_tag, set_filter_tag] = useState<typeof filter_tag_init_state>(
-    session_filter.filter_tag ?? filter_tag_init_state
+    filter_tag_init_state
   );
+  useEffect(() => {
+    const session_filter = JSON.parse(
+      typeof window !== "undefined"
+        ? window.sessionStorage.getItem("filter") ?? "{}"
+        : "{}"
+    );
+    set_filter(session_filter.filter ?? "{}");
+    set_filter_tag(session_filter.filter_tag ?? filter_tag_init_state);
+  }, []);
+
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
   const [is_open, set_is_open] = useState<boolean>(false);
   const [post_chunk, set_post_chunk] = useState<PostInform[][]>([[]]);
