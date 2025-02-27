@@ -103,7 +103,7 @@ export async function PATCH(request: Request) {
       );
     }
 
-    if (post.author !== session.user._id && !session.user.is_admin) {
+    if (post.author !== session.user._id || !session.user.is_admin) {
       return NextResponse.json(
         { success: false, error: "Invalid request" },
         { status: 400 }
@@ -163,7 +163,7 @@ export async function DELETE(request: Request) {
       );
     }
 
-    if (post.author !== session.user._id && !session.user.is_admin) {
+    if (post.author !== session.user._id || !session.user.is_admin) {
       return NextResponse.json(
         { success: false, error: "Invalid request" },
         { status: 400 }
