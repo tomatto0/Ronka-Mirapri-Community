@@ -168,60 +168,62 @@ export default function Page_sign_up() {
 
   if (session?.user.login) {
     return (
-      <main className="signup-fill">
-        <div className="signup-wrap">
-          <div className="signup-logo">
-            <img alt="Ronka LookBook logo" id="signup-title" />
-          </div>
-          <h3>회원 정보 수정</h3>
-          <div className="signup-inputs">
-            <label className="signup-label" htmlFor="email">
-              구글 이메일
-            </label>
-            <input type="text" disabled value={email} id="email" />
-            <p></p>
-            <div className="signup-title">
-              <label className="signup-label" htmlFor="nickname">
-                닉네임
-              </label>
+      <div className="flex-container">
+        <main className="signup-fill">
+          <div className="signup-wrap">
+            <div className="signup-logo">
+              <img alt="Ronka LookBook logo" id="signup-title" />
             </div>
-            <input
-              type="text"
-              id="nickname"
-              value={nickname}
-              onChange={e => {
-                set_nickname(e.target.value);
-              }}
-            />
-            <p className="signup-error">{nickname_error}</p>
-            <div className="signup-title">
-              <label className="signup-label" htmlFor="sns">
-                SNS URL
+            <h3>회원 정보 수정</h3>
+            <div className="signup-inputs">
+              <label className="signup-label" htmlFor="email">
+                구글 이메일
               </label>
+              <input type="text" disabled value={email} id="email" />
+              <p></p>
+              <div className="signup-title">
+                <label className="signup-label" htmlFor="nickname">
+                  닉네임
+                </label>
+              </div>
+              <input
+                type="text"
+                id="nickname"
+                value={nickname}
+                onChange={e => {
+                  set_nickname(e.target.value);
+                }}
+              />
+              <p className="signup-error">{nickname_error}</p>
+              <div className="signup-title">
+                <label className="signup-label" htmlFor="sns">
+                  SNS URL
+                </label>
+              </div>
+              <input
+                type="text"
+                id="sns"
+                value={sns}
+                onChange={e => {
+                  set_sns(e.target.value);
+                }}
+              />
+              <p className="signup-error">{sns_error}</p>
             </div>
-            <input
-              type="text"
-              id="sns"
-              value={sns}
-              onChange={e => {
-                set_sns(e.target.value);
-              }}
-            />
-            <p className="signup-error">{sns_error}</p>
-          </div>
-          <button className="withdraw-submit" onClick={delete_handler}>
-            탈퇴하기
-          </button>
-          <div className="setting-button-container">
-            <button className="cancle-submit" onClick={cancle_handler}>
-              취소하기
+            <button className="withdraw-submit" onClick={delete_handler}>
+              탈퇴하기
             </button>
-            <button className="edit-submit" onClick={edit_handler}>
-              수정하기
-            </button>
+            <div className="setting-button-container">
+              <button className="cancle-submit" onClick={cancle_handler}>
+                취소하기
+              </button>
+              <button className="edit-submit" onClick={edit_handler}>
+                수정하기
+              </button>
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     );
   }
 

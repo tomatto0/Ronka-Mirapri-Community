@@ -87,61 +87,63 @@ export default function Page_sign_up() {
 
   if (session?.user.login === false) {
     return (
-      <main className="signup-fill">
-        <div className="signup-wrap">
-          <div className="signup-logo">
-            <img alt="Ronka LookBook logo" id="signup-title" />
-          </div>
-          <h3>가입하기</h3>
-          <div className="signup-inputs">
-            <label className="signup-label" htmlFor="email">
-              구글 이메일
-            </label>
-            <span>*</span>
-            <input type="text" disabled value={email} id="email" />
-            <p className="signup-error">
-              <Link
-                href="#"
-                onClick={() => signIn("google", { callbackUrl: "/signup" })}
-              >
-                {email_error}
-              </Link>
-            </p>
-            <div className="signup-title">
-              <label className="signup-label" htmlFor="nickname">
-                닉네임
-              </label>
-              <span>*</span>{" "}
+      <div className="flex-container">
+        <main className="signup-fill">
+          <div className="signup-wrap">
+            <div className="signup-logo">
+              <img alt="Ronka LookBook logo" id="signup-title" />
             </div>
-            <input
-              type="text"
-              id="nickname"
-              value={nickname}
-              onChange={e => {
-                set_nickname(e.target.value);
-              }}
-            />
-            <p className="signup-error">{nickname_error}</p>
-            <div className="signup-title">
-              <label className="signup-label" htmlFor="sns">
-                SNS URL
+            <h3>가입하기</h3>
+            <div className="signup-inputs">
+              <label className="signup-label" htmlFor="email">
+                구글 이메일
               </label>
+              <span>*</span>
+              <input type="text" disabled value={email} id="email" />
+              <p className="signup-error">
+                <Link
+                  href="#"
+                  onClick={() => signIn("google", { callbackUrl: "/signup" })}
+                >
+                  {email_error}
+                </Link>
+              </p>
+              <div className="signup-title">
+                <label className="signup-label" htmlFor="nickname">
+                  닉네임
+                </label>
+                <span>*</span>{" "}
+              </div>
+              <input
+                type="text"
+                id="nickname"
+                value={nickname}
+                onChange={e => {
+                  set_nickname(e.target.value);
+                }}
+              />
+              <p className="signup-error">{nickname_error}</p>
+              <div className="signup-title">
+                <label className="signup-label" htmlFor="sns">
+                  SNS URL
+                </label>
+              </div>
+              <input
+                type="text"
+                id="sns"
+                value={sns}
+                onChange={e => {
+                  set_sns(e.target.value);
+                }}
+              />
+              <p className="signup-error">{sns_error}</p>
             </div>
-            <input
-              type="text"
-              id="sns"
-              value={sns}
-              onChange={e => {
-                set_sns(e.target.value);
-              }}
-            />
-            <p className="signup-error">{sns_error}</p>
+            <button className="signup-submit" onClick={signup_handler}>
+              가입하기
+            </button>
           </div>
-          <button className="signup-submit" onClick={signup_handler}>
-            가입하기
-          </button>
-        </div>
-      </main>
+        </main>
+      </div>
     );
   }
 

@@ -2,6 +2,10 @@ main.signup-fill::before {
   display: none;
 }
 
+main.signup-fill {
+  margin: auto;
+}
+
 div.signup-wrap {
   background-color: #fafafe;
   color: #006351;

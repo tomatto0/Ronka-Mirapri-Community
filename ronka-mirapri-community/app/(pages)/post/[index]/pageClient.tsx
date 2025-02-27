@@ -212,7 +212,6 @@ export default function PostPageClient({
     return <div className="tag-box">{content}</div>;
   };
 
-  if (isLoading) return <div>로딩 중...</div>;
   if (isError) return <div>에러 발생</div>;
 
   return (
