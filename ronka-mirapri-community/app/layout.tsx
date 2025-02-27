@@ -6,8 +6,8 @@ import Providers from "./components/Providers";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "롱카의 투영기록?",
-  description: "파판14 코디 커뮤니티",
+  title: "롱카의 룩북?",
+  description: "ff14 모험가를 위한 투영커뮤니티",
   icons: {
     icon: "/logo/favicon.png",
   },

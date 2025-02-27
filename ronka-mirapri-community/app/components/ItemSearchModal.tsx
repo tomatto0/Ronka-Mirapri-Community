@@ -1,11 +1,10 @@
 import "../css/ItemSearchModal.css";
-import ItemSearch from "./ItemSearch";
+import ItemSearch from "./ItemSearch.tsx";
 import ItemSearchResult from "./ItemSearchResult.tsx";
 import { Item } from "../types/Item";
 import { useState, useEffect } from "react";
 import ColorPalette from "./ColorPalette.tsx";
 import ErrorContainer from "./ErrorContainer.tsx";
-import Image from "next/image";
 
 export default function ItemSearchModal({
   slot,
