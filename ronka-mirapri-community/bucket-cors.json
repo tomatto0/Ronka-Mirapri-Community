@@ -1,6 +1,10 @@
 [
   {
-    "origin": ["http://localhost:3000", "https://localhost:3000"],
+    "origin": [
+      "http://localhost:3000",
+      "https://ronka-lookbook.vercel.app",
+      "https://lookbook.ronkacloset.com"
+    ],
     "method": ["GET"],
     "responseHeader": ["Content-Type"],
     "maxAgeSeconds": 2592000

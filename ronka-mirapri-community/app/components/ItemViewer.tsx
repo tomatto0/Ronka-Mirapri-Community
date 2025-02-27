@@ -89,7 +89,9 @@ export default function ItemViewer({ equiped_item }: { equiped_item: Item[] }) {
         >
           롱카의 옷장
         </Link>
-        <Link href={`http://localhost:3000/?keyword=${item.Name}`}>
+        <Link
+          href={`${process.env.NEXT_PUBLIC_BASE_URL}/?keyword=${item.Name}`}
+        >
           다른 코디 보기
         </Link>
       </div>
