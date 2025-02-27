@@ -7,7 +7,12 @@ import { Storage } from "@google-cloud/storage";
 import { MongoServerError } from "mongodb";
 import mongoose, { model, MongooseError, Schema } from "mongoose";
 const uri = process.env.MONGODB_URI as string;
-const storage = new Storage();
+const credentials = JSON.parse(
+  Buffer.from(process.env.GOOGLE_APPLICATION_CREDENTIALS!, "base64").toString(
+    "utf8"
+  )
+);
+const storage = new Storage({ credentials });
 const bucketname = "ronka_closet_community";
 const bucket = storage.bucket(bucketname);
 
@@ -108,10 +113,7 @@ post_schema.pre("findOneAndDelete", async function (next) {
     }
     const filename = post.image_url.replace("https://cdn.ronkacloset.com/", "");
     const file = bucket.file(filename);
-    const [exists] = await file.exists();
-    if (exists) {
-      await file.delete();
-    }
+    await file.delete();
     next();
   } catch (e) {
     if (e instanceof Error) {
@@ -155,10 +157,7 @@ post_schema.pre("deleteMany", async function (next) {
         ""
       );
       const file = bucket.file(filename);
-      const [exists] = await file.exists();
-      if (exists) {
-        await file.delete();
-      }
+      await file.delete();
     }
     await Promise.all([...promise_delete_likes, ...promise_update_user]);
     next();
