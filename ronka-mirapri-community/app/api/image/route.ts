@@ -2,7 +2,10 @@ import { generateUUID } from "@/app/utils/uuid";
 import { Storage } from "@google-cloud/storage";
 import { NextRequest, NextResponse } from "next/server";
 
-const storage = new Storage();
+const credentials = JSON.parse(
+  Buffer.from(process.env.GOOGLE_APPLICATION_CREDENTIALS!, "base64").toString("utf8")
+);
+const storage = new Storage({credentials});
 const bucketname = "ronka_closet_community";
 const bucket = storage.bucket(bucketname);
 
