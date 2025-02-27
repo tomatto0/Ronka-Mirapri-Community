@@ -92,6 +92,24 @@ export async function PATCH(request: Request) {
 
     const { id: _, ...update_field } = body;
 
+    const post = await Post.findOne({
+      _id: body.id,
+    }).exec();
+
+    if (!post) {
+      return NextResponse.json(
+        { sucess: false, error: "Post not found" },
+        { status: 404 }
+      );
+    }
+
+    if (post.author !== session.user._id && !session.user.is_admin) {
+      return NextResponse.json(
+        { success: false, error: "Invalid request" },
+        { status: 400 }
+      );
+    }
+
     const updated_post = await Post.findOneAndUpdate(
       {
         _id: body.id,
@@ -103,19 +121,6 @@ export async function PATCH(request: Request) {
       }
     ).exec();
 
-    if (updated_post.author !== session.user._id && !session.user.is_admin) {
-      return NextResponse.json(
-        { success: false, error: "Invalid request" },
-        { status: 400 }
-      );
-    }
-
-    if (!updated_post) {
-      return NextResponse.json(
-        { sucess: false, error: "Post not found" },
-        { status: 404 }
-      );
-    }
     return NextResponse.json({ success: true, data: updated_post });
   } catch (e) {
     console.error("MongoDB Failed to update posts", e);
@@ -144,16 +149,38 @@ export async function DELETE(request: Request) {
       );
     }
     await connectDB();
+
+    const post = await Post.findOne({
+      _id: body.id,
+    }).exec();
+
+    console.log(post);
+
+    if (!post) {
+      return NextResponse.json(
+        { sucess: false, error: "Post not found" },
+        { status: 404 }
+      );
+    }
+
+    if (post.author !== session.user._id && !session.user.is_admin) {
+      return NextResponse.json(
+        { success: false, error: "Invalid request" },
+        { status: 400 }
+      );
+    }
+
     const deleted_post = await Post.findOneAndDelete({
       _id: body.id,
-      author: session.user._id,
     }).exec();
+
     if (!deleted_post) {
       return NextResponse.json(
         { success: false, error: "Post not found" },
         { status: 404 }
       );
     }
+
     return NextResponse.json({ success: true, data: deleted_post });
   } catch (e) {
     console.error("MongoDB Failed to delete posts:", e);

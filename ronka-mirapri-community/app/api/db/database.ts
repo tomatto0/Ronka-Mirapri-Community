@@ -227,8 +227,9 @@ like_schema.pre("findOneAndDelete", async function (next) {
 //like가 deleteMany로 삭제될 때 user와 post에서 like를 삭제
 like_schema.pre("deleteMany", async function (next) {
   try {
+    console.log("like-schema.deleteMany", this.getFilter());
     const likes = await this.model
-      .find({ _id: { $in: this.getFilter()._id } })
+      .find(this.getFilter())
       .select(["user", "post", "_id"])
       .lean<
         {
