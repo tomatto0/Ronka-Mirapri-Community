@@ -72,6 +72,7 @@ export async function PATCH(request: Request) {
         { status: 400 }
       );
     }
+
     if (!body.id) {
       return NextResponse.json(
         { success: false, error: "Invalid request" },
@@ -103,7 +104,7 @@ export async function PATCH(request: Request) {
       );
     }
 
-    if (post.author !== session.user._id || !session.user.is_admin) {
+    if (post.author.toString() !== session.user._id && !session.user.is_admin) {
       return NextResponse.json(
         { success: false, error: "Invalid request" },
         { status: 400 }
@@ -154,8 +155,6 @@ export async function DELETE(request: Request) {
       _id: body.id,
     }).exec();
 
-    console.log(post);
-
     if (!post) {
       return NextResponse.json(
         { sucess: false, error: "Post not found" },
@@ -163,7 +162,7 @@ export async function DELETE(request: Request) {
       );
     }
 
-    if (post.author !== session.user._id || !session.user.is_admin) {
+    if (post.author.toString() !== session.user._id && !session.user.is_admin) {
       return NextResponse.json(
         { success: false, error: "Invalid request" },
         { status: 400 }
