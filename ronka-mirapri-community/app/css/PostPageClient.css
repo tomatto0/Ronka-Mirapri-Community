@@ -57,12 +57,14 @@ main.post {
     justify-content: space-between;
     flex-direction: column;
     order: 4;
+
     .post-author {
       color: #337e78;
       text-decoration: underline;
       font-size: 1.4rem;
       cursor: pointer;
     }
+
     .post-date {
       color: #667085;
       font-size: 1.4rem;
@@ -75,6 +77,7 @@ main.post {
     position: relative;
     align-self: start;
     justify-self: end;
+
     .like-button {
       min-width: 32px;
       background: none;
@@ -87,7 +90,7 @@ main.post {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 0 4px;
+      gap: 0 7px;
     }
   }
 }
@@ -162,6 +165,10 @@ main.post {
     height: 30px;
     cursor: pointer;
   }
+
+  .download-container:hover {
+    background-color: white;
+  }
 }
 
 .post-information {
@@ -169,12 +176,14 @@ main.post {
   padding: 0 26px;
   order: 5;
   margin-bottom: 90px;
+
   .tag-container {
     width: 100%;
     display: flex;
-    gap: 0 8px;
+    gap: 0 4px;
     flex-direction: row;
     flex-wrap: wrap;
+
     .tag-box {
       display: inline;
       font-size: 1.4rem;
@@ -226,6 +235,7 @@ main.post {
 .post-share-container {
   order: 7;
 }
+
 .share-button-container {
   padding: 0 26px;
   .share-button {
@@ -239,9 +249,14 @@ main.post {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 25px;
-    height: 25px;
+    width: auto;
+    height: auto;
     margin-right: 5px;
+    padding: 5px 10px;
+  }
+
+  .share-button::before {
+    margin-right: 9px;
   }
   .share-button.bluesky::before {
     content: "";
@@ -259,6 +274,12 @@ main.post {
     background-image: url("/img/twitter.svg");
     background-size: 1.5rem 1.5rem;
   }
+  .share-button.bluesky::after {
+    content: "BLUESKY";
+  }
+  .share-button.twitter::after {
+    content: "TWITTER";
+  }
 }
 
 @media (min-width: 701px) {
@@ -271,36 +292,43 @@ main.post {
     padding-top: 48px;
     border: none;
     row-gap: 0;
+
     .post-title {
       color: #006351;
       font-weight: 700;
       font-size: 4.7rem;
       padding: 0 0 36px;
     }
+
     .setting {
       align-self: start;
       order: 2;
     }
+
     hr {
       display: none;
     }
+
     .post-subtitle-box {
       display: block;
       width: auto;
     }
+
     .like-button-container {
       order: 5;
+
       .like-button {
-        min-width: 72px;
+        min-width: 64px;
         position: absolute;
         right: 0;
         border-radius: 40px;
         border: 1px solid #b2c6cd;
-        padding: 0 16px;
+        padding: 0 13px;
         height: 32px;
         font-size: 1.6rem;
         font-family: "REM";
       }
+
       .like-button:hover {
         background-color: #e4e7ec;
       }
@@ -308,11 +336,12 @@ main.post {
   }
 
   .image-container {
-    width: 340px;
+    width: 320px;
     aspect-ratio: 1/2;
-    margin-right: 10px;
+    margin-right: 28px;
+
     .post-image {
-      height: 680px;
+      height: 640px;
       aspect-ratio: 1/2;
       display: inline-block;
     }
@@ -345,21 +374,8 @@ main.post {
   .post-subtitle {
     padding: 0;
   }
+
   .share-button-container {
     padding: 0;
-    .share-button {
-      width: auto;
-      height: auto;
-      padding: 5px 10px;
-    }
-    .share-button::before {
-      margin-right: 9px;
-    }
-    .share-button.bluesky::after {
-      content: "BLUESKY";
-    }
-    .share-button.twitter::after {
-      content: "TWITTER";
-    }
   }
 }

@@ -12,7 +12,7 @@ interface PostInform {
 }
 
 export default function IntroducePage() {
-  const { data, isLoading, isError } = useGetNews();
+  const { data } = useGetNews();
   const [newsData, set_newsData] = useState<PostInform[]>([]);
 
   useEffect(() => {
@@ -30,8 +30,6 @@ export default function IntroducePage() {
     return `${yyyy}.${mm}.${dd}`;
   }
 
-  if (isLoading) return <div>로딩 중...</div>;
-  if (isError) return <div>에러 발생</div>;
   return (
     <>
       <div className="title-box">
@@ -108,7 +106,7 @@ export default function IntroducePage() {
                 className="generator-sample"
               />
               <img
-                src="/img/intro-generator-s.png"
+                src="/img/intro-generator-s.gif"
                 alt="intro-generator"
                 className="generator-sample-s"
               />

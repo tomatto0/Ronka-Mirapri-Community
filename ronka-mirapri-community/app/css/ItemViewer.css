@@ -27,15 +27,23 @@
         margin-right: 10px;
       }
       .post-item-information {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+
         p {
+          font-weight: 500;
           color: #006351;
         }
+
         .item-color-information {
           display: flex;
           gap: 0 5px;
+
           span {
             border-radius: 2px;
             padding: 0 4px;
+            font-size: 1.2rem;
           }
         }
       }
@@ -43,8 +51,8 @@
         background: none;
         border-radius: 50%;
         border: 1px #99c0b8 solid;
-        width: 2.7rem;
-        height: 2.7rem;
+        width: 28px;
+        height: 28px;
         position: absolute;
         right: 0;
         cursor: pointer;

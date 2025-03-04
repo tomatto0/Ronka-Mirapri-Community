@@ -9,10 +9,12 @@
     "lint": "next lint",
     "preview": "opennextjs-cloudflare && wrangler dev",
     "deploy": "opennextjs-cloudflare && wrangler deploy",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "analyze": "cross-env ANALYZE=true next build"
   },
   "dependencies": {
     "@google-cloud/storage": "^7.15.0",
+    "@next/bundle-analyzer": "^15.2.0",
     "@next/third-parties": "^15.1.6",
     "@tanstack/react-query": "^5.66.0",
     "@vercel/speed-insights": "^1.2.0",
@@ -34,6 +36,8 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cross-env": "^7.0.3",
+    "esbuild": "^0.25.0",
     "eslint": "^9",
     "eslint-config-next": "15.1.4",
     "typescript": "^5"

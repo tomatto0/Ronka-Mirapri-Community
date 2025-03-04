@@ -199,7 +199,7 @@ p.intro-page-description.half-width {
 
   display: flex;
   justify-content: center;
-  padding-top: 10px;
+  padding-top: 4px;
 }
 
 .intro-contents {
@@ -209,8 +209,8 @@ p.intro-page-description.half-width {
 
   p {
     margin-top: 16px;
-    margin-bottom: 70px;
-    font-size: 1.7rem;
+    margin-bottom: 90px;
+    font-size: 1.6rem;
   }
 
   .gallery-sample1,
@@ -222,7 +222,7 @@ p.intro-page-description.half-width {
   .gallery-sample-s,
   .generator-sample-s,
   .mypage-sample-s {
-    width: 60vw;
+    width: 76vw;
   }
 
   .gallery-sample2 {
@@ -320,6 +320,11 @@ p.intro-page-description.half-width {
     padding: 12px 0;
     color: #525252;
     border-bottom: 1px solid #b2c6cd;
+  }
+
+  .news-list p:last-child {
+    color: #a3a3a3;
+    font-weight: 300;
   }
 }
 
