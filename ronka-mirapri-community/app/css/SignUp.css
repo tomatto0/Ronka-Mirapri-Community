@@ -1,3 +1,7 @@
+#root {
+  background-color: #fafafe;
+}
+
 main.signup-fill::before {
   display: none;
 }
@@ -153,6 +157,10 @@ div.signup-wrap {
 }
 
 @media (min-width: 600px) {
+  #root {
+    background-color: inherit;
+  }
+
   div.signup-wrap {
     width: 486px;
     border: 1px solid #b2c6cd;
@@ -167,10 +175,9 @@ div.signup-wrap {
     left: -8px;
     width: calc(100% + 16px);
     height: calc(100% + 16px);
-    background-image: url(/_next/static/media/plus.9522872c.svg),
-      url(/_next/static/media/plus.9522872c.svg),
-      url(/_next/static/media/plus.9522872c.svg),
-      url(/_next/static/media/plus.9522872c.svg);
+    background-image: url("../../public/img/plus.svg"),
+      url("../../public/img/plus.svg"), url("../../public/img/plus.svg"),
+      url("../../public/img/plus.svg");
     background-size: 12px 12px;
     background-position: top left, top right, bottom left, bottom right;
     background-repeat: no-repeat;
