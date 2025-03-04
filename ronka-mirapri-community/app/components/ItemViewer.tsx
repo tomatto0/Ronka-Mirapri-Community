@@ -4,7 +4,6 @@ import Color_background_list_raw from "../json/color_background.json";
 import { ColorInfo } from "../types/ColorInfo";
 import Link from "next/link";
 import { SetStateAction, useState } from "react";
-import Image from "next/image";
 
 export default function ItemViewer({ equiped_item }: { equiped_item: Item[] }) {
   const Color_background_list: ColorInfo[] =
@@ -101,7 +100,7 @@ export default function ItemViewer({ equiped_item }: { equiped_item: Item[] }) {
 
   return (
     <div className="item-viewer">
-      <p className="item-viewer-title">코디 아이템</p>
+      <p className="item-viewer-title">코디아이템</p>
       <div className="item-searcher-list">
         {equiped_item.map(
           (i, key) =>
