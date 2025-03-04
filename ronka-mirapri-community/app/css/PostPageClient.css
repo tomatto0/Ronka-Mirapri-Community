@@ -180,7 +180,7 @@ main.post {
   .tag-container {
     width: 100%;
     display: flex;
-    gap: 0 4px;
+    gap: 4px 4px;
     flex-direction: row;
     flex-wrap: wrap;
 

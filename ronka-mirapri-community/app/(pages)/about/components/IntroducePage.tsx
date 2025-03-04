@@ -34,12 +34,16 @@ export default function IntroducePage() {
     <>
       <div className="title-box">
         <img src="/img/titlelogo.svg" alt="logo icon" id="intro-logo" />
+
         <Link href="https://github.com/tomatto0/Ronka-Mirapri-Community">
           <img
             alt="GitHub Repo stars"
             src="https://img.shields.io/github/stars/tomatto0/Ronka-Mirapri-Community?style=social"
           />
         </Link>
+        <p>
+          Github프로젝트 <br /> ★눌러주기
+        </p>
       </div>
 
       <p className="intro-page-description">

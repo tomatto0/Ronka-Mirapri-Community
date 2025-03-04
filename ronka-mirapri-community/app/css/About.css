@@ -65,6 +65,10 @@ p.rule-page-description {
 }
 
 img.guide-image {
+  display: none;
+}
+
+img.guide-image-s {
   max-width: 100%;
   height: auto;
   margin-top: 40px;
@@ -119,6 +123,24 @@ img.guide-image {
 .title-box {
   margin-top: 110px;
   margin-bottom: 36px;
+  position: relative;
+}
+
+.title-box a:hover + p {
+  display: block;
+}
+
+.title-box p {
+  display: none;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #006351d6;
+  color: white;
+  text-align: center;
+  font-size: 1.6rem;
+  position: absolute;
+  left: 53vw;
+  bottom: -65px;
 }
 
 img#intro-logo {
@@ -333,6 +355,22 @@ p.intro-page-description.half-width {
     padding: 0 24px;
   }
 
+  .title-box p {
+    left: 335px;
+    bottom: -65px;
+  }
+
+  img.guide-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 40px;
+    display: block;
+  }
+
+  img.guide-image-s {
+    display: none;
+  }
+
   p.intro-page-description.half-width {
     width: 50%;
   }
@@ -404,6 +442,17 @@ p.intro-page-description.half-width {
 
   /* 운영정책 - 내용 */
 
+  img.guide-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 40px;
+    display: block;
+  }
+
+  img.guide-image-s {
+    display: none;
+  }
+
   .rule-page-description-sub {
     /* line-height: 1.7; */
     font-size: 1.8rem;
@@ -448,6 +497,11 @@ p.intro-page-description.half-width {
   img#intro-logo {
     height: 146px;
     margin-right: 17px;
+  }
+
+  .title-box p {
+    left: 370px;
+    bottom: 30px;
   }
 
   p.intro-page-description {

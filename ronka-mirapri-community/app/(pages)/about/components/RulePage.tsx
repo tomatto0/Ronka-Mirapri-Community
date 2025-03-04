@@ -48,6 +48,12 @@ export default function RulePage() {
             className="guide-image"
           />
 
+          <img
+            src="/img/image-guide-s.png"
+            alt="guide-image"
+            className="guide-image-s"
+          />
+
           <h3>이미지 보정 및 수정</h3>
           <ul>
             <li>
