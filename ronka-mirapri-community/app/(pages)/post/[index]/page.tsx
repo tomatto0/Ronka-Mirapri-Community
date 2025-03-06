@@ -1,6 +1,29 @@
 import PostPageClient from "@/app/(pages)/post/[index]/pageClient";
 import ErrorContainer from "@/app/components/ErrorContainer";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { [key: string]: string };
+}) {
+  const { index } = await params;
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/db/posts/index?index=${index}`
+  );
+  const res = await response.json();
+
+  if (res.data) {
+    return {
+      openGraph: {
+        title: res.data.title,
+        description: res.data.content,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/post/${index}`,
+        images: res.data.image_url,
+      },
+    };
+  }
+}
+
 export default async function PostPage({
   params,
 }: {

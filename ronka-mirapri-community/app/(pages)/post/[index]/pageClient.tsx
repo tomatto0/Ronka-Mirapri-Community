@@ -13,7 +13,6 @@ import { signIn, useSession } from "next-auth/react";
 import React, { useRef, useState } from "react";
 import AutoLink from "@/app/components/AutoLink";
 import UserCanvasViewer from "@/app/components/UserCanvasViewer";
-import Image from "next/image";
 
 export default function PostPageClient({
   post_data,
