@@ -1,11 +1,12 @@
  <a href="https://lookbook.ronkacloset.com/">
 <img alt="lookbook logo" src="ronka-mirapri-community/public/img/titlelogo.svg" height="50">
-  <h1>롱카의 룩북?</h1>
-  </a>
+    </a>
+
+
 
 ## 프로젝트 소개
 
-본 프로젝트는 [롱카의 옷장?](https://ronkacloset.com/) 서브 프로젝트로, 간단하게 <strong>파이널판타지14의 코디 이미지를 생성</strong>하여 백업 & 자랑할 수 있는 커뮤니티입니다.
+본 프로젝트는 [롱카의 옷장?](https://ronkacloset.com/) 서브 프로젝트로, 간단하게 <strong>파이널판타지14의 코디 이미지를 생성하여 백업 & 자랑</strong>할 수 있는 커뮤니티입니다.
 1차 프로젝트 [🔗FFXIV-KOR MIRAPRI GENERATOR(Github)](https://github.com/tomatto0/Ronka-Mirapri)의 투영기록 생성기는 Generator Page에 포함되었습니다.
 
 ### 작업기간
@@ -102,7 +103,7 @@
 
 ## 페이지 주요 기능
 
-#### GALLERY
+### GALLERY
 
 ![gallery-Img](ronka-mirapri-community/public/readme/gallery.gif)
 
@@ -110,7 +111,10 @@
 - 주간인기 TOP 10 아이템 리스트를 롤링으로 제공하고, 클릭시 해당 아이템을 사용한 코디만 볼 수 있습니다.
 - sessionStorage를 활용해 필터상태를 저장하여 새로고침 후에도 설정한 필터링 상태가 유지되게 하였습니다.
 
-#### GENERATOR
+</br>
+
+
+### GENERATOR
 
 ![generator-Img](ronka-mirapri-community/public/readme/generator.gif)
 
@@ -118,13 +122,17 @@
 - 하단의 에디터를 사용해 스타일 노트를 작성해 나만의 룩북을 안전하게 백업할 수 있습니다.
 - IndexedDB를 통해 이미지와 에디터에 입력된 정보를 관리해 사용자가 화면을 새로고침하거나 닫아도 데이터가 유지됩니다.
 
-#### ABOUT
+</br>
+
+### ABOUT
 
 ![generator-Img](ronka-mirapri-community/public/readme/about.gif)
 
 - 사이트의 운영정책 및 이용가이드와 간단한 사이트소개
 
-#### MYPAGE
+</br>
+
+### MYPAGE
 
 ![generator-Img](ronka-mirapri-community/public/readme/mypage.gif)
 
