@@ -55,6 +55,7 @@ export default function Page_home() {
 
   function update_filter() {
     let keyword_filter = {};
+
     if (filter_tag.keyword !== "") {
       keyword_filter = {
         equiped_item: {
@@ -64,28 +65,37 @@ export default function Page_home() {
         },
       };
     }
+
     let gender_filter = {};
+
     if (filter_tag.gender !== "전체") {
       gender_filter = { gender: filter_tag.gender };
     }
+
     let race_filter = {};
+
     if (filter_tag.race.length > 0) {
       race_filter = { race: { $in: filter_tag.race } };
     }
+
     let job_filter = {};
+
     if (filter_tag.job.length > 0) {
       job_filter = filter_tag.job.includes("모든 클래스")
         ? { job: { $in: filter_tag.job } }
         : { job: { $in: filter_tag.job, $nin: ["모든 클래스"] } };
     }
+
     const filter = {
       ...keyword_filter,
       ...gender_filter,
       ...race_filter,
       ...job_filter,
     };
+
     set_filter(JSON.stringify(filter));
 
+    // 브라우저 환경에서 sessionStorage를 이용해 필터 상태 저장(새로고침 후에도 유지)
     if (typeof window !== "undefined") {
       window.sessionStorage.setItem(
         "filter",
