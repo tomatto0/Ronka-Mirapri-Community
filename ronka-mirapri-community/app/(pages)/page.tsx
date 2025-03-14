@@ -1,21 +1,23 @@
 "use client";
 
 import "../css/home.css";
+
 import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
+import { useQuery } from "@tanstack/react-query";
+import { Suspense } from "react";
+import { useRouter } from "next/navigation";
+
+import { PostInform } from "../types/PostInform";
 import PostThumbnail from "../components/PostThumbnail";
 import FilterSelector from "../components/FilterSelector";
 import { usePosts } from "./hooks/usePosts";
-import { useInView } from "react-intersection-observer";
-import { PostInform } from "../types/PostInform";
-import { useQuery } from "@tanstack/react-query";
-import { Suspense } from "react";
 import Itemrank from "../components/Itemrank";
 import {
   filter_tag_init_state,
   job_category,
   job_category_group,
 } from "../utils/constants";
-import { useRouter } from "next/navigation";
 
 import EditButton from "../components/EditButton";
 import ErrorContainer from "../components/ErrorContainer";
@@ -53,6 +55,7 @@ export default function Page_home() {
 
   function update_filter() {
     let keyword_filter = {};
+
     if (filter_tag.keyword !== "") {
       keyword_filter = {
         equiped_item: {
@@ -62,29 +65,38 @@ export default function Page_home() {
         },
       };
     }
+
     let gender_filter = {};
+
     if (filter_tag.gender !== "전체") {
       gender_filter = { gender: filter_tag.gender };
     }
+
     let race_filter = {};
+
     if (filter_tag.race.length > 0) {
       race_filter = { race: { $in: filter_tag.race } };
     }
+
     let job_filter = {};
+
     if (filter_tag.job.length > 0) {
       job_filter = filter_tag.job.includes("모든 클래스")
         ? { job: { $in: filter_tag.job } }
         : { job: { $in: filter_tag.job, $nin: ["모든 클래스"] } };
     }
+
     const filter = {
       ...keyword_filter,
       ...gender_filter,
       ...race_filter,
       ...job_filter,
     };
+
     set_filter(JSON.stringify(filter));
     console.log({ filter });
 
+    // 브라우저 환경에서 sessionStorage를 이용해 필터 상태 저장(새로고침 후에도 유지)
     if (typeof window !== "undefined") {
       window.sessionStorage.setItem(
         "filter",
