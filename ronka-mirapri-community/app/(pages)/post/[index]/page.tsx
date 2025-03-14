@@ -1,9 +1,12 @@
-import { PageProps } from "@/.next/types/app/(pages)/post/[index]/page";
 import PostPageClient from "@/app/(pages)/post/[index]/pageClient";
 import ErrorContainer from "@/app/components/ErrorContainer";
 
-export async function generateMetadata({ params }: { params: PageProps }) {
-  const { index } = await params.params;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ [key: string]: string }>;
+}) {
+  const { index } = await params;
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/db/posts/index?index=${index}`
   );
