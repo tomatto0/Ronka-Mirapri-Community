@@ -89,6 +89,23 @@ export default function ItemViewer({ equiped_item }: { equiped_item: Item[] }) {
           롱카의 옷장
         </Link>
         <Link
+          onClick={() => {
+            if (typeof window !== "undefined") {
+              window.sessionStorage.setItem(
+                "filter",
+                JSON.stringify({
+                  filter: {},
+                  filter_tag: {
+                    order: "최신순",
+                    gender: "전체",
+                    keyword: item.Name,
+                    race: [],
+                    job: [],
+                  },
+                })
+              );
+            }
+          }}
           href={`${process.env.NEXT_PUBLIC_BASE_URL}/?keyword=${item.Name}`}
         >
           다른 코디 보기

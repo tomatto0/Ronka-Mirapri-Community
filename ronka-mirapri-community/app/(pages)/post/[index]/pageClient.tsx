@@ -142,9 +142,9 @@ export default function PostPageClient({
 
   const share_twitter = () => {
     const href = "https://twitter.com/intent/tweet?";
-    const text = "롱카의 투영기록?에서 제 새로운 투영을 확인해보세요!";
+    const text = `롱카의 룩북?에서 제 새로운 투영을 확인해보세요!\n${post_data.title}\n`;
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}/post/${postIndex}`;
-    const hashtags = "롱카의_투영기록";
+    const hashtags = "롱카의_룩북";
     window.open(
       `${href}text=${encodeURIComponent(text)}&url=${encodeURIComponent(
         url
@@ -154,9 +154,9 @@ export default function PostPageClient({
   };
   const share_bluesky = () => {
     const href = "https://bsky.app/intent/compose?";
-    const text = "롱카의 투영기록?에서 제 새로운 투영을 확인해보세요!";
+    const text = `롱카의 룩북?에서 제 새로운 투영을 확인해보세요!<br>${post_data.title}<br>`;
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}/post/${postIndex}`;
-    const hashtags = "롱카의_투영기록";
+    const hashtags = "롱카의_룩북";
     window.open(
       `${href}text=${encodeURIComponent(`${text} ${url} #${hashtags}`)}`,
       "_blank"

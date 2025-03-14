@@ -34,8 +34,8 @@ export default function Page_home() {
         ? window.sessionStorage.getItem("filter") ?? "{}"
         : "{}"
     );
-    set_filter(session_filter.filter ?? "{}");
     set_filter_tag(session_filter.filter_tag ?? filter_tag_init_state);
+    update_filter();
   }, []);
 
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
@@ -83,6 +83,7 @@ export default function Page_home() {
       ...job_filter,
     };
     set_filter(JSON.stringify(filter));
+    console.log({ filter });
 
     if (typeof window !== "undefined") {
       window.sessionStorage.setItem(

@@ -16,7 +16,6 @@ import ItemSearchResult from "./ItemSearchResult";
 import UserSearch from "./UserSearch";
 import UserSearchResult from "./UserSearchResult";
 import ErrorContainer from "./ErrorContainer";
-import Image from "next/image";
 
 export default function FilterSelector({
   set_filter,
