@@ -111,7 +111,7 @@ post_schema.pre("findOneAndDelete", async function (next) {
       user.posts.pull(post._id);
       await user.updateOne({ posts: user.posts });
     }
-    const filename = post.image_url.replace("https://cdn.ronkacloset.com/", "");
+    const filename = post.image_url.replace(`${process.env.NEXT_PUBLIC_CDN_URL}/`, "");
     const file = bucket.file(filename);
     await file.delete();
     next();
@@ -153,7 +153,7 @@ post_schema.pre("deleteMany", async function (next) {
         promise_update_user.push(user.updateOne({ posts: user.posts }));
       }
       const filename = post.image_url.replace(
-        "https://cdn.ronkacloset.com/",
+        `${process.env.NEXT_PUBLIC_CDN_URL}/`,
         ""
       );
       const file = bucket.file(filename);
