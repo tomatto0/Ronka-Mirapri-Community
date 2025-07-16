@@ -19,6 +19,7 @@ items['EquipSlotCategory'] = pd.to_numeric(items['EquipSlotCategory'])
 equipable_items = items[(items['EquipSlotCategory'] != 0) & (items['ClassJobCategory'] != 0)].copy()
 
 #필요 없는 아이템 삭제
+equipable_items.dropna(subset=['Singular'], inplace=True)
 equipable_items.drop(axis=0, index=equipable_items[equipable_items['Singular'].str.contains(r'^햇살의')].index, inplace=True)
 equipable_items.drop(axis=0, index=equipable_items[equipable_items['Singular'].str.contains(r'^햇빛살')].index, inplace=True)
 equipable_items.drop(axis=0, index=equipable_items[equipable_items['Singular'].str.contains(r'^안개돋이')].index, inplace=True)
