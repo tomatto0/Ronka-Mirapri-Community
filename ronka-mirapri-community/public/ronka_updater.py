@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import json
 
 #CSV raw data 읽어오기
 raw_data = pd.read_csv('public/item.csv', header=1, index_col=0)
@@ -36,7 +37,7 @@ style_items.loc[style_items.index, 'EquipSlotCategory'] = 24
 filtered_items = pd.concat([equipable_items, style_items])
 
 #아이콘 넘버링을 경로로 수정
-filtered_items.Icon = '/i/'+filtered_items.Icon.str[:2].zfill(3)+'000/0'+filtered_items.Icon.zfill(6)+'_hr1.png'
+filtered_items['Icon'] = '/i/0' + filtered_items['Icon'].str[:2] + '000/0' + filtered_items['Icon'] + '_hr1.png'
 
 #실장 안된 이벤트 아이템 필터링(할 때마다 수정해주세요)
 filtered_items.drop(axis=0, index=filtered_items[filtered_items.Singular.str.contains('밤의 악마')].index, inplace=True)
@@ -46,7 +47,10 @@ filtered_items.reset_index(inplace=True)
 filtered_items.columns = ['Id', 'Name', 'Icon', 'DyeCount', 'ClassJobCategory', 'EquipSlotCategory']
 
 #json으로 저장
-filtered_items.to_json('app/json/filtered_items.json', orient='records', indent=2, force_ascii=False)
+# filtered_items.to_json('app/json/filtered_items.json', orient='records', indent=2, force_ascii=False)
+records = filtered_items.to_dict(orient='records')
+with open('app/json/filtered_items.json', 'w', encoding='utf-8') as f:
+    json.dump(records, f, indent=2, ensure_ascii=False)
 
 #이미지 파일 다운로드
 length = len(filtered_items['Icon'])
