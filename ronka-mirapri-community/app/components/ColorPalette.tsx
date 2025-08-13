@@ -135,8 +135,8 @@ export default function ColorPalette({
         Color_background_list.slice(51, 69),
         Color_background_list.slice(69, 89),
         Color_background_list.slice(89, 99),
-        Color_background_list.slice(99, 125),
-        [Color_background_list[0], ...Color_background_list.slice(115, 126)],
+        Color_background_list.slice(99, 126),
+        [Color_background_list[0], ...Color_background_list.slice(126, 137)],
       ];
 
       const commit = () => {
