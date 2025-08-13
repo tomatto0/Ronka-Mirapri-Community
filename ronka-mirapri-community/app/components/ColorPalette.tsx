@@ -129,13 +129,13 @@ export default function ColorPalette({
       ];
       const colors = [
         Color_background_list.slice(0, 7),
-        Color_background_list.slice(7, 18),
-        Color_background_list.slice(18, 36),
-        Color_background_list.slice(36, 47),
-        Color_background_list.slice(47, 64),
-        Color_background_list.slice(64, 83),
-        Color_background_list.slice(83, 92),
-        Color_background_list.slice(92, 115),
+        Color_background_list.slice(7, 20),
+        Color_background_list.slice(20, 39),
+        Color_background_list.slice(39, 51),
+        Color_background_list.slice(51, 69),
+        Color_background_list.slice(69, 89),
+        Color_background_list.slice(89, 99),
+        Color_background_list.slice(99, 125),
         [Color_background_list[0], ...Color_background_list.slice(115, 126)],
       ];
 
