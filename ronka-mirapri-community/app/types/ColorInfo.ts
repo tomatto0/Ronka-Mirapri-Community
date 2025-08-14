@@ -3,4 +3,5 @@ export type ColorInfo = {
   name: string;
   background_color: string;
   text_color: string;
+  color_type: string;
 };

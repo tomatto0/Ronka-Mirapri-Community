@@ -3,756 +3,959 @@
         "color_id":0,
         "name":"기본색",
         "background_color":"FFFFFF",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"base"
     },
     {
         "color_id":1,
         "name":"하얀눈색",
         "background_color":"E4DFD1",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"white"
     },
     {
         "color_id":2,
         "name":"회색",
         "background_color":"ADA9A3",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"white"
     },
     {
         "color_id":3,
         "name":"구부 회색",
         "background_color":"8A8885",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"white"
     },
     {
         "color_id":4,
         "name":"진회색",
         "background_color":"666666",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"white"
     },
     {
         "color_id":5,
         "name":"탄회색",
         "background_color":"494843",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"white"
     },
     {
         "color_id":6,
         "name":"숯검정색",
         "background_color":"2C2A24",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"white"
     },
     {
         "color_id":7,
         "name":"장미색",
         "background_color":"E6A097",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"red"
     },
     {
         "color_id":8,
         "name":"라일락색",
         "background_color":"846A6A",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"red"
     },
     {
         "color_id":9,
         "name":"롤란베리색",
         "background_color":"5D182A",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"red"
     },
     {
         "color_id":10,
         "name":"달라가브색",
         "background_color":"791B1B",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"red"
     },
     {
         "color_id":11,
         "name":"녹슨 빨간색",
         "background_color":"632307",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"red"
     },
     {
         "color_id":12,
         "name":"포도주색",
         "background_color":"461612",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"red"
     },
     {
         "color_id":13,
         "name":"산호색",
         "background_color":"CD6D60",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"red"
     },
     {
         "color_id":14,
         "name":"선홍색",
         "background_color":"923C28",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"red"
     },
     {
         "color_id":15,
         "name":"연어색",
         "background_color":"E4AB8B",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"red"
     },
     {
         "color_id":16,
         "name":"홍옥색",
         "background_color":"E40012",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"red"
     },
     {
         "color_id":17,
         "name":"꽃분홍색",
         "background_color":"F5389C",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"red"
     },
     {
         "color_id":18,
         "name":"노을색",
         "background_color":"B85E2E",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"brown"
     },
     {
         "color_id":19,
         "name":"황야의 붉은색",
         "background_color":"7E3A06",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"brown"
     },
     {
         "color_id":20,
         "name":"나무껍질색",
         "background_color":"6B4C38",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"brown"
     },
     {
         "color_id":21,
         "name":"초콜릿색",
         "background_color":"6F3E25",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"brown"
     },
     {
         "color_id":22,
         "name":"적갈색",
         "background_color":"5.02E+24",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"brown"
     },
     {
         "color_id":23,
         "name":"코볼드색",
         "background_color":"31221C",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"brown"
     },
     {
         "color_id":24,
         "name":"코르크색",
         "background_color":"CA9257",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"brown"
     },
     {
         "color_id":25,
         "name":"키키룬색",
         "background_color":"9A6F40",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"brown"
     },
     {
         "color_id":26,
         "name":"오포오포색",
         "background_color":"7C5E2E",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"brown"
     },
     {
         "color_id":27,
         "name":"큰뿔염소색",
         "background_color":"A3885E",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"brown"
     },
     {
         "color_id":28,
         "name":"늙은호박색",
         "background_color":"C67525",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"brown"
     },
     {
         "color_id":29,
         "name":"도토리색",
         "background_color":"8F591C",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"brown"
     },
     {
         "color_id":30,
         "name":"과수원 흙색",
         "background_color":"654317",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"brown"
     },
     {
         "color_id":31,
         "name":"밤색",
         "background_color":"3E2A0E",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"brown"
     },
     {
         "color_id":32,
         "name":"고블린색",
         "background_color":"BAA58A",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"brown"
     },
     {
         "color_id":33,
         "name":"찰흙색",
         "background_color":"93826D",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"brown"
     },
     {
         "color_id":34,
         "name":"두더지색",
         "background_color":"625346",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"brown"
     },
     {
         "color_id":35,
         "name":"비옥토색",
         "background_color":"40342A",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"brown"
     },
     {
         "color_id":36,
         "name":"상아색",
         "background_color":"EBD4A1",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"yellow"
     },
     {
         "color_id":37,
         "name":"울다하 갈색",
         "background_color":"B8A471",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"yellow"
     },
     {
         "color_id":38,
         "name":"사막노란색",
         "background_color":"DCB558",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"yellow"
     },
     {
         "color_id":39,
         "name":"꿀색",
         "background_color":"FAC72C",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"yellow"
     },
     {
         "color_id":40,
         "name":"옥수수색",
         "background_color":"E49F35",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"yellow"
     },
     {
         "color_id":41,
         "name":"커얼색",
         "background_color":"BD8904",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"yellow"
     },
     {
         "color_id":42,
         "name":"크림색",
         "background_color":"F2D871",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"yellow"
     },
     {
         "color_id":43,
         "name":"할라탈리 노란색",
         "background_color":"A68531",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"yellow"
     },
     {
         "color_id":44,
         "name":"건포도색",
         "background_color":"413412",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"yellow"
     },
     {
         "color_id":45,
         "name":"카나리아색",
         "background_color":"FEF865",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"yellow"
     },
     {
         "color_id":46,
         "name":"바닐라색",
         "background_color":"FBF1B5",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"yellow"
     },
     {
         "color_id":47,
         "name":"습지 녹색",
         "background_color":"595331",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"green"
     },
     {
         "color_id":48,
         "name":"실프색",
         "background_color":"BCBC8B",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"green"
     },
     {
         "color_id":49,
         "name":"라임색",
         "background_color":"ACB155",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"green"
     },
     {
         "color_id":50,
         "name":"이끼색",
         "background_color":"717427",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"green"
     },
     {
         "color_id":51,
         "name":"풀색",
         "background_color":"8C9D64",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"green"
     },
     {
         "color_id":52,
         "name":"올리브색",
         "background_color":"4C5333",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"green"
     },
     {
         "color_id":53,
         "name":"늪지 녹색",
         "background_color":"333722",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"green"
     },
     {
         "color_id":54,
         "name":"풋사과색",
         "background_color":"9CB464",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"green"
     },
     {
         "color_id":55,
         "name":"선인장색",
         "background_color":"668342",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"green"
     },
     {
         "color_id":56,
         "name":"진녹색",
         "background_color":"294C2D",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"green"
     },
     {
         "color_id":57,
         "name":"오츄색",
         "background_color":"41643A",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"green"
     },
     {
         "color_id":58,
         "name":"금강거북색",
         "background_color":"607659",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"green"
     },
     {
         "color_id":59,
         "name":"노피카의 녹색",
         "background_color":"3C4E3D",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"green"
     },
     {
         "color_id":60,
         "name":"밀림 녹색",
         "background_color":"1F2B22",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"green"
     },
     {
         "color_id":61,
         "name":"옅은 청록색",
         "background_color":"97BEBA",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"green"
     },
     {
         "color_id":62,
         "name":"터키석색",
         "background_color":"447373",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"green"
     },
     {
         "color_id":63,
         "name":"몰볼색",
         "background_color":"204747",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"green"
     },
     {
         "color_id":64,
         "name":"옅은 하늘색",
         "background_color":"B3C5CF",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"blue"
     },
     {
         "color_id":65,
         "name":"하늘색",
         "background_color":"84B1D3",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"blue"
     },
     {
         "color_id":66,
         "name":"바다안개색",
         "background_color":"6582A1",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"blue"
     },
     {
         "color_id":67,
         "name":"공잣깃 파란색",
         "background_color":"3C6987",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"blue"
     },
     {
         "color_id":68,
         "name":"로타노 바다색",
         "background_color":"1D3E55",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"blue"
     },
     {
         "color_id":69,
         "name":"좀비의 얼굴색",
         "background_color":"8F9CAD",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"blue"
     },
     {
         "color_id":70,
         "name":"청린수색",
         "background_color":"505867",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"blue"
     },
     {
         "color_id":71,
         "name":"쪽빛 파란색",
         "background_color":"303952",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"blue"
     },
     {
         "color_id":72,
         "name":"검푸른색",
         "background_color":"1B2028",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"blue"
     },
     {
         "color_id":73,
         "name":"랍토르색",
         "background_color":"5D80C1",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"blue"
     },
     {
         "color_id":74,
         "name":"오사드 바다색",
         "background_color":"30598A",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"blue"
     },
     {
         "color_id":75,
         "name":"선명한 파란색",
         "background_color":"244273",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"blue"
     },
     {
         "color_id":76,
         "name":"보이드의 파란색",
         "background_color":"122A45",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"blue"
     },
     {
         "color_id":77,
         "name":"감청색",
         "background_color":"283168",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"blue"
     },
     {
         "color_id":78,
         "name":"밤하늘색",
         "background_color":"191A38",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"blue"
     },
     {
         "color_id":79,
         "name":"청회색",
         "background_color":"383848",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"blue"
     },
     {
         "color_id":80,
         "name":"청보라색",
         "background_color":"3.22E+60",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"blue"
     },
     {
         "color_id":81,
         "name":"새파란색",
         "background_color":"000FA3",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"blue"
     },
     {
         "color_id":82,
         "name":"담청색",
         "background_color":"04B0CE",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"blue"
     },
     {
         "color_id":83,
         "name":"라벤더색",
         "background_color":"8880AF",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"purple"
     },
     {
         "color_id":84,
         "name":"어두운 보라색",
         "background_color":"524661",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"purple"
     },
     {
         "color_id":85,
         "name":"머루색",
         "background_color":"332D3C",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"purple"
     },
     {
         "color_id":86,
         "name":"붓꽃색",
         "background_color":"B89FBD",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"purple"
     },
     {
         "color_id":87,
         "name":"포도색",
         "background_color":"3C2B3E",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"purple"
     },
     {
         "color_id":88,
         "name":"연꽃색",
         "background_color":"FECFF5",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"purple"
     },
     {
         "color_id":89,
         "name":"콜리브리색",
         "background_color":"DD9CCB",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"purple"
     },
     {
         "color_id":90,
         "name":"매화색",
         "background_color":"7A536D",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"purple"
     },
     {
         "color_id":91,
         "name":"자주색",
         "background_color":"67314F",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"purple"
     },
     {
         "color_id":92,
         "name":"순백색",
         "background_color":"FFFFFF",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"special"
     },
     {
         "color_id":93,
         "name":"칠흑색",
         "background_color":"1F1F1F",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"special"
     },
     {
         "color_id":94,
         "name":"부드러운 연분홍",
         "background_color":"FDC9C7",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"special"
     },
     {
         "color_id":95,
         "name":"짙은 빨강",
         "background_color":"331A1A",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"special"
     },
     {
         "color_id":96,
         "name":"짙은 갈색",
         "background_color":"29221D",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"special"
     },
     {
         "color_id":97,
         "name":"부드러운 연녹색",
         "background_color":"BBD0AB",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"special"
     },
     {
         "color_id":98,
         "name":"짙은 녹색",
         "background_color":"162D2D",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"special"
     },
     {
         "color_id":99,
         "name":"부드러운 연파랑",
         "background_color":"97A5DA",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"special"
     },
     {
         "color_id":100,
         "name":"짙은 파랑",
         "background_color":"13202E",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"special"
     },
     {
         "color_id":101,
         "name":"부드러운 연보라",
         "background_color":"BCB6DB",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"special"
     },
     {
         "color_id":102,
         "name":"짙은 자주색",
         "background_color":"242127",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"special"
     },
     {
         "color_id":103,
         "name":"반짝이는 은색",
         "background_color":"A7A7A7",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"special"
     },
     {
         "color_id":104,
         "name":"반짝이는 금색",
         "background_color":"ECEA41",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"special"
     },
     {
         "color_id":105,
         "name":"금속질 빨간색",
         "background_color":"C61445",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"special"
     },
     {
         "color_id":106,
         "name":"금속질 주황색",
         "background_color":"E9990F",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"special"
     },
     {
         "color_id":107,
         "name":"금속질 노란색",
         "background_color":"F4DA46",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"special"
     },
     {
         "color_id":108,
         "name":"금속질 녹색",
         "background_color":"1AA552",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"special"
     },
     {
         "color_id":109,
         "name":"금속질 하늘색",
         "background_color":"5ED4E6",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"special"
     },
     {
         "color_id":110,
         "name":"금속질 파란색",
         "background_color":"4447C4",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"special"
     },
     {
         "color_id":111,
         "name":"금속질 보라색",
         "background_color":"C445D7",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"special"
     },
     {
         "color_id":112,
         "name":"건메탈색",
         "background_color":"454545",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"special"
     },
     {
         "color_id":113,
         "name":"진주색",
         "background_color":"E9E3DA",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"special"
     },
     {
         "color_id":114,
         "name":"황동색",
         "background_color":"E7D197",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"special"
     },
     {
         "color_id":115,
         "name":"은색",
         "background_color":"D6D6D6",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"facewear"
     },
     {
         "color_id":116,
         "name":"금색",
         "background_color":"ECEA41",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"facewear"
     },
     {
         "color_id":117,
         "name":"검은색",
         "background_color":"1F1F1F",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"facewear"
     },
     {
         "color_id":118,
         "name":"흰색",
         "background_color":"FFFFFF",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"facewear"
     },
     {
         "color_id":119,
         "name":"회색",
         "background_color":"BABABA",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"facewear"
     },
     {
         "color_id":120,
         "name":"빨간색",
         "background_color":"E73013",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"facewear"
     },
     {
         "color_id":121,
         "name":"파란색",
         "background_color":"403CA1",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"facewear"
     },
     {
         "color_id":122,
         "name":"초록색",
         "background_color":"409320",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"facewear"
     },
     {
         "color_id":123,
         "name":"구리색",
         "background_color":"E7D197",
-        "text_color":"black"
+        "text_color":"black",
+        "color_type":"facewear"
     },
     {
         "color_id":124,
         "name":"보라색",
         "background_color":"7A536D",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"facewear"
     },
     {
         "color_id":125,
         "name":"갈색",
         "background_color":"B85E2E",
-        "text_color":"white"
+        "text_color":"white",
+        "color_type":"facewear"
+    },
+    {
+        "color_id":126,
+        "name":"연지색",
+        "background_color":"E50B18",
+        "text_color":"white",
+        "color_type":"red"
+    },
+    {
+        "color_id":127,
+        "name":"형광 분홍색",
+        "background_color":"F61296",
+        "text_color":"white",
+        "color_type":"red"
+    },
+    {
+        "color_id":128,
+        "name":"밝은 주황색",
+        "background_color":"F95513",
+        "text_color":"white",
+        "color_type":"brown"
+    },
+    {
+        "color_id":129,
+        "name":"형광 노란색",
+        "background_color":"E0E90B",
+        "text_color":"black",
+        "color_type":"yellow"
+    },
+    {
+        "color_id":130,
+        "name":"형광 녹색",
+        "background_color":"bAF913",
+        "text_color":"black",
+        "color_type":"green"
+    },
+    {
+        "color_id":131,
+        "name":"짙은 하늘색",
+        "background_color":"4056A4",
+        "text_color":"white",
+        "color_type":"blue"
+    },
+    {
+        "color_id":132,
+        "name":"제비꽃색",
+        "background_color":"6F5AA2",
+        "text_color":"white",
+        "color_type":"purple"
+    },
+    {
+        "color_id":133,
+        "name":"금속질 분홍색",
+        "background_color":"FFA1C2",
+        "text_color":"black",
+        "color_type":"special"
+    },
+    {
+        "color_id":134,
+        "name":"금속질 홍옥색",
+        "background_color":"470103",
+        "text_color":"white",
+        "color_type":"special"
+    },
+    {
+        "color_id":135,
+        "name":"금속질 푸른 녹색",
+        "background_color":"28847F",
+        "text_color":"white",
+        "color_type":"special"
+    },
+    {
+        "color_id":136,
+        "name":"금속질 짙은 파랑",
+        "background_color":"120445",
+        "text_color":"white",
+        "color_type":"special"
     }
 ]

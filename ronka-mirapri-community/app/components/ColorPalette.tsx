@@ -65,26 +65,27 @@ export default function ColorPalette({
     const [color_id, set_color_id] = useState<number>(color);
 
     function color_id_to_category(color_id: number): number {
-      if (color_id <= 6) {
+      let color_type = Color_background_list[color_id].color_type;
+      if (color_type === "white" || color_type === "base") {
         return 0;
-      } else if (color_id <= 17) {
+      } else if (color_type === "red") {
         return 1;
-      } else if (color_id <= 35) {
+      } else if (color_type === "brown") {
         return 2;
-      } else if (color_id <= 46) {
+      } else if (color_type === "yellow") {
         return 3;
-      } else if (color_id <= 63) {
+      } else if (color_type === "green") {
         return 4;
-      } else if (color_id <= 82) {
+      } else if (color_type === "blue") {
         return 5;
-      } else if (color_id <= 91) {
+      } else if (color_type === "purple") {
         return 6;
-      } else if (color_id <= 114) {
+      } else if (color_type === "special") {
         return 7;
       }
       return 8;
     }
-
+    
     const [color_category, set_color_category] = useState<number>(
       is_facewear ? 8 : color_id_to_category(color)
     );
@@ -128,15 +129,15 @@ export default function ColorPalette({
         "rare",
       ];
       const colors = [
-        Color_background_list.slice(0, 7),
-        Color_background_list.slice(7, 18),
-        Color_background_list.slice(18, 36),
-        Color_background_list.slice(36, 47),
-        Color_background_list.slice(47, 64),
-        Color_background_list.slice(64, 83),
-        Color_background_list.slice(83, 92),
-        Color_background_list.slice(92, 115),
-        [Color_background_list[0], ...Color_background_list.slice(115, 126)],
+        [Color_background_list[0], ...Color_background_list.filter(item => item.color_type === "white")],
+        Color_background_list.filter(item => item.color_type === "red"),
+        Color_background_list.filter(item => item.color_type === "brown"),
+        Color_background_list.filter(item => item.color_type === "yellow"),
+        Color_background_list.filter(item => item.color_type === "green"),
+        Color_background_list.filter(item => item.color_type === "blue"),
+        Color_background_list.filter(item => item.color_type === "purple"),
+        Color_background_list.filter(item => item.color_type === "special"),
+        [Color_background_list[0], ...Color_background_list.filter(item => item.color_type === "facewear")],
       ];
 
       const commit = () => {
