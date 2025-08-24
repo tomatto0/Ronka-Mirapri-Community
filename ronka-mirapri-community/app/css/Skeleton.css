@@ -1,0 +1,48 @@
+.skeleton-box {
+  margin: 0 auto;
+  max-width: 1076px;
+  display: flex;
+  gap: 18px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  z-index: -1;
+}
+
+.skeleton {
+  border-radius: 8px;
+  width: calc(50vw - 9px);
+  aspect-ratio: 1/2;
+  background: linear-gradient(90deg, #e5f2f1 25%, #daf0ee 50%, #e5f2f1 70%);
+  background-size: 200% 100%;
+  animation: loading-grey 3s infinite;
+}
+
+.skeleton-line {
+  height: 40px;
+  width: 100%;
+  background: linear-gradient(90deg, #e5f2f1 25%, #daf0ee 50%, #e5f2f1 70%);
+  background-size: 200% 100%;
+  animation: loading-grey 3s infinite;
+  margin-bottom: 18px;
+  z-index: -1;
+}
+
+@media (min-width: 702px) and (max-width: 1074px) {
+  .skeleton {
+    width: calc(25vw - 16px);
+  }
+}
+@media (min-width: 1075px) {
+  .skeleton {
+    max-width: 255px;
+  }
+}
+
+@keyframes loading-grey {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}

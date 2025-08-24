@@ -10,6 +10,17 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "storage.googleapis.com",
+        port: "",
+        pathname: "/ronka_closet_community/**",
+        search: "",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

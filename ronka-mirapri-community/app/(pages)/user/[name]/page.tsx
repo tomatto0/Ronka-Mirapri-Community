@@ -15,6 +15,7 @@ import PostThumbnail from "../../../components/PostThumbnail";
 import EditButton from "@/app/components/EditButton";
 import AutoLink from "@/app/components/AutoLink";
 import ErrorContainer from "@/app/components/ErrorContainer";
+import SkeletonBox from "@/app/components/SkeletonBox";
 
 export default function Page_user() {
   const params = useParams<{ name: string }>();
@@ -61,12 +62,9 @@ export default function Page_user() {
     if (!userLikedPosts.data) {
       return;
     }
-    const post_list = userLikedPosts.data?.pages.reduce<PostInform[]>(
-      (acc, _) => {
-        return [...acc, ...(_.data ?? [])];
-      },
-      []
-    );
+    const post_list = userLikedPosts.data?.pages.reduce<PostInform[]>((acc, _) => {
+      return [...acc, ...(_.data ?? [])];
+    }, []);
     const post_chunk = post_list.reduce<PostInform[][]>((acc, _, i) => {
       if (i % 4 === 0) {
         acc.push(post_list.slice(i, i + 4));
@@ -79,10 +77,7 @@ export default function Page_user() {
   if (userInfo.status !== "pending" && userInfo.data === undefined) {
     return (
       <main className="error-container">
-        <ErrorContainer
-          error_message="유저를 찾을 수 없어요."
-          show_home={true}
-        />
+        <ErrorContainer error_message="유저를 찾을 수 없어요." show_home={true} />
       </main>
     );
   }
@@ -95,12 +90,7 @@ export default function Page_user() {
             <span className="loading"></span>
           </div>
         ) : userInfo.status === "error" ? (
-          <p>
-            Error:{" "}
-            {userInfo.error instanceof Error
-              ? userInfo.error.message
-              : "An unknown error occurred"}
-          </p>
+          <p>Error: {userInfo.error instanceof Error ? userInfo.error.message : "An unknown error occurred"}</p>
         ) : (
           <div className="user-card">
             <div className="user-info">
@@ -109,21 +99,18 @@ export default function Page_user() {
                 <AutoLink className="user-sns" target="_blank">
                   {userInfo?.data?.sns.toUpperCase()}
                 </AutoLink>
-                {(session?.user.nickname === userInfo?.data?.nickname ||
-                  session?.user.is_admin) && (
+                {(session?.user.nickname === userInfo?.data?.nickname || session?.user.is_admin) && (
                   <button
                     className="user-setting"
                     onClick={() => {
                       router.push(
                         `/setting${
-                          session?.user.is_admin &&
-                          session?.user.nickname !== userInfo?.data?.nickname
+                          session?.user.is_admin && session?.user.nickname !== userInfo?.data?.nickname
                             ? `/${userInfo?.data?.nickname}`
                             : ""
                         }`
                       );
-                    }}
-                  >
+                    }}>
                     <img alt="setting" id="setting" />
                   </button>
                 )}
@@ -138,8 +125,7 @@ export default function Page_user() {
             onClick={() => {
               set_timeline("userPosts");
               userPosts.refetch();
-            }}
-          >
+            }}>
             POST
           </h3>
           {session?.user._id === userInfo?.data?._id && (
@@ -150,8 +136,7 @@ export default function Page_user() {
                 onClick={() => {
                   set_timeline("likedPosts");
                   userLikedPosts.refetch();
-                }}
-              >
+                }}>
                 LIKE
               </h3>
             </>
@@ -161,15 +146,14 @@ export default function Page_user() {
 
       {userPosts.status === "pending" ? (
         <div className="post-container">
-          <span className="loading"></span>
+          <div className="loading-box-user">
+            <span className="loading"></span>
+          </div>
+          <SkeletonBox />
+          <SkeletonBox />
         </div>
       ) : userPosts.status === "error" ? (
-        <p>
-          Error:{" "}
-          {userPosts.error instanceof Error
-            ? userPosts.error.message
-            : "An unknown error occurred"}
-        </p>
+        <p>Error: {userPosts.error instanceof Error ? userPosts.error.message : "An unknown error occurred"}</p>
       ) : timeline === "userPosts" ? (
         post_chunk.length === 0 ? (
           <ErrorContainer error_message="아직 게시글이 없어요." />
