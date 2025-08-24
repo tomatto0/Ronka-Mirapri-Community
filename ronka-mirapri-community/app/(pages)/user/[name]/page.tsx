@@ -140,7 +140,7 @@ export default function Page_user() {
 
       {userPosts.status === "pending" ? (
         <div className='post-container'>
-          <div className='loading-box'>
+          <div className='loading-box-user'>
             <span className='loading'></span>
           </div>
           <SkeletonBox />

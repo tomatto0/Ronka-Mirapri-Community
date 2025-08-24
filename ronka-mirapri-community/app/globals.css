@@ -254,8 +254,14 @@ div.footer {
 }
 
 div.loading-box {
-  width: 100%;
+  padding-left: 10px;
+  padding-top: 20px;
   position: absolute;
+}
+
+div.loading-box-user {
+  position: absolute;
+  margin: 20px;
 }
 
 span.loading {
@@ -331,6 +337,10 @@ img#download {
       color: inherit;
       text-decoration: none;
     }
+  }
+
+  div.loading-box {
+    padding-left: calc(50vw - 518px);
   }
 }
 
