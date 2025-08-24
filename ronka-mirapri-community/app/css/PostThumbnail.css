@@ -1,9 +1,10 @@
 .post-box {
-  height: fit-content;
   display: flex;
   position: relative;
   box-sizing: border-box;
   cursor: pointer;
+  width: calc(50vw - 6px);
+  aspect-ratio: 1/2;
 }
 
 .post-box:hover {
@@ -51,18 +52,14 @@
     }
   }
 }
-.post-thumbnail {
-  width: calc(50vw - 6px);
-  aspect-ratio: 540/1080;
-}
 
 @media (min-width: 702px) and (max-width: 1074px) {
-  .post-thumbnail {
+  .post-box {
     width: calc(25vw - 11px);
   }
 }
 @media (min-width: 1075px) {
-  .post-thumbnail {
+  .post-box {
     max-width: 255px;
   }
 }

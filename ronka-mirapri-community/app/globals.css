@@ -121,8 +121,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "REM", "Pretendard", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "REM", "Pretendard", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
@@ -253,6 +252,12 @@ div.footer {
     text-decoration: none;
   }
 }
+
+div.loading-box {
+  width: 100%;
+  position: absolute;
+}
+
 span.loading {
   display: block;
   margin: auto;
@@ -263,6 +268,7 @@ span.loading {
   border: 5px solid #15b79e;
   border-top: 5px solid transparent;
   animation: loading-rotate 1s ease-in-out infinite;
+  z-index: 200;
 }
 
 .header {
