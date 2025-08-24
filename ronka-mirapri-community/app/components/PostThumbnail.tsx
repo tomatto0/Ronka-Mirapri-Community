@@ -78,7 +78,7 @@ export default function PostThumbnail({
         fill={true}
         priority={true}
         sizes="(max-width: 701px) 50vw, 20vw"
-        loading="eager"
+        unoptimized={true}
       />
       <div className="post-box-hover">
         <p>{post.title}</p>
