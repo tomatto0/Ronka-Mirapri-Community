@@ -26,7 +26,9 @@ export default function Page_home() {
   const [filter, set_filter] = useState<string>("{}");
   const [filter_tag, set_filter_tag] = useState<typeof filter_tag_init_state>(filter_tag_init_state);
   useEffect(() => {
-    const session_filter = JSON.parse(typeof window !== "undefined" ? window.sessionStorage.getItem("filter") ?? "{}" : "{}");
+    const session_filter = JSON.parse(
+      typeof window !== "undefined" ? window.sessionStorage.getItem("filter") ?? "{}" : "{}"
+    );
     set_filter_tag(session_filter.filter_tag ?? filter_tag_init_state);
     update_filter();
   }, []);
@@ -35,7 +37,11 @@ export default function Page_home() {
   const [is_open, set_is_open] = useState<boolean>(false);
   const [post_chunk, set_post_chunk] = useState<PostInform[][]>([[]]);
 
-  const { data, error, fetchNextPage, hasNextPage, isFetchingNextPage, status } = usePosts(12, filter, filter_tag.order);
+  const { data, error, fetchNextPage, hasNextPage, isFetchingNextPage, status } = usePosts(
+    12,
+    filter,
+    filter_tag.order
+  );
 
   function update_filter() {
     let keyword_filter = {};
@@ -65,7 +71,9 @@ export default function Page_home() {
     let job_filter = {};
 
     if (filter_tag.job.length > 0) {
-      job_filter = filter_tag.job.includes("모든 클래스") ? { job: { $in: filter_tag.job } } : { job: { $in: filter_tag.job, $nin: ["모든 클래스"] } };
+      job_filter = filter_tag.job.includes("모든 클래스")
+        ? { job: { $in: filter_tag.job } }
+        : { job: { $in: filter_tag.job, $nin: ["모든 클래스"] } };
     }
 
     const filter = {
@@ -169,62 +177,64 @@ export default function Page_home() {
 
   return (
     <Suspense>
-      <main className='fill'>
+      <main className="fill">
         <Suspense fallback={<div>검색어 로딩 중...</div>}>
           <SearchParamsHandler set_filter_tag={set_filter_tag} />
         </Suspense>
 
         <Suspense>
-          <div className='primary-filter-wrap'>
+          <div className="primary-filter-wrap">
             <button
-              className='primary-filter filter-open'
+              className="primary-filter filter-open"
               onClick={() => {
                 set_is_open(true);
               }}>
-              <img src={process.env.NEXT_PUBLIC_BASE_URL + "/img/plus-green.svg"} alt='modal open button' />
+              <img src={process.env.NEXT_PUBLIC_BASE_URL + "/img/plus-green.svg"} alt="modal open button" />
               FILTER
             </button>
             {filter_tag.order !== "최신순" && (
               <button
-                className='primary-filter filter-items'
+                className="primary-filter filter-items"
                 onClick={() => {
                   set_filter_tag(prev => ({ ...prev, order: "최신순" }));
                 }}>
-                {filter_tag.order} <img src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"} alt='modal open button' />
+                {filter_tag.order}{" "}
+                <img src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"} alt="modal open button" />
               </button>
             )}
             {filter_tag.gender !== "전체" && (
               <button
-                className='primary-filter filter-items'
+                className="primary-filter filter-items"
                 onClick={() => {
                   set_filter_tag(prev => ({ ...prev, gender: "전체" }));
                 }}>
-                {filter_tag.gender} <img src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"} alt='modal open button' />
+                {filter_tag.gender}{" "}
+                <img src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"} alt="modal open button" />
               </button>
             )}
             {filter_tag.keyword !== "" && (
               <button
-                className='primary-filter filter-keyword'
+                className="primary-filter filter-keyword"
                 onClick={() => {
                   set_filter_tag(prev => ({ ...prev, keyword: "" }));
                 }}>
                 검색: {filter_tag.keyword}
-                <img src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_purple.svg"} alt='modal open button' />
+                <img src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_purple.svg"} alt="modal open button" />
               </button>
             )}
             {filter_tag.job.map(job => (
               <button
-                className='primary-filter filter-items'
+                className="primary-filter filter-items"
                 onClick={() => {
                   job_delete(job);
                 }}
                 key={`filter-${job}`}>
-                {job} <img src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"} alt='modal open button' />
+                {job} <img src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"} alt="modal open button" />
               </button>
             ))}{" "}
             {filter_tag.race.map(race => (
               <button
-                className='primary-filter filter-items'
+                className="primary-filter filter-items"
                 onClick={() => {
                   set_filter_tag(prev => ({
                     ...prev,
@@ -232,20 +242,26 @@ export default function Page_home() {
                   }));
                 }}
                 key={`filter-${race}`}>
-                {race} <img src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"} alt='modal open button' />
+                {race} <img src={process.env.NEXT_PUBLIC_BASE_URL + "/img/close_green.svg"} alt="modal open button" />
               </button>
             ))}{" "}
             {(filter !== "{}" || filter_tag.order !== "최신순") && (
-              <button className='primary-filter' onClick={reset_filter}>
+              <button className="primary-filter" onClick={reset_filter}>
                 {" "}
-                <img src={process.env.NEXT_PUBLIC_BASE_URL + "/img/refresh-green.svg"} alt='modal open button' />
+                <img src={process.env.NEXT_PUBLIC_BASE_URL + "/img/refresh-green.svg"} alt="modal open button" />
                 초기화
               </button>
             )}
           </div>
         </Suspense>
         <Suspense>
-          <FilterSelector set_filter={set_filter} filter_tag={filter_tag} set_filter_tag={set_filter_tag} is_open={is_open} set_is_open={set_is_open} />
+          <FilterSelector
+            set_filter={set_filter}
+            filter_tag={filter_tag}
+            set_filter_tag={set_filter_tag}
+            is_open={is_open}
+            set_is_open={set_is_open}
+          />
         </Suspense>
 
         {status === "pending" ? (
@@ -253,12 +269,12 @@ export default function Page_home() {
         ) : status === "error" ? (
           <p>Error: {error instanceof Error ? error.message : "An unknown error occurred"}</p>
         ) : post_chunk.length === 0 ? (
-          <ErrorContainer error_message='해당하는 게시글을 찾을 수 없어요.' />
+          <ErrorContainer error_message="해당하는 게시글을 찾을 수 없어요." />
         ) : (
           <>
-            <div className='post-container'>
+            <div className="post-container">
               {post_chunk.length > 0 && (
-                <div className='post-container-row' key={0}>
+                <div className="post-container-row" key={0}>
                   {post_chunk[0].map((post: PostInform) => (
                     <PostThumbnail post={post} key={`post-${post.index}`} />
                   ))}
@@ -268,9 +284,9 @@ export default function Page_home() {
             <Itemrank itemrank={item_rank.data ?? []} />
 
             {/* 게시물 목록 렌더링 */}
-            <div className='post-container'>
+            <div className="post-container">
               {post_chunk.slice(1, post_chunk.length).map((chunk: PostInform[], i: number) => (
-                <div className='post-container-row' key={i + 1}>
+                <div className="post-container-row" key={i + 1}>
                   {chunk.map((post: PostInform) => (
                     <PostThumbnail post={post} key={`post-${post.index}`} />
                   ))}
@@ -280,7 +296,7 @@ export default function Page_home() {
           </>
         )}
 
-        <div ref={ref} className='loader'>
+        <div ref={ref} className="loader">
           {isFetchingNextPage && <p>Loading more...</p>}
         </div>
         <EditButton />

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import Providers from "./components/Providers";
 import Link from "next/link";
 
@@ -13,11 +12,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
       <head>
@@ -40,18 +35,12 @@ export default function RootLayout({
         </noscript>
         {/* <!-- End Google Tag Manager (noscript) --> */}
         {/* <!-- Google Search console (noscript) --> */}
-        <meta
-          name="google-site-verification"
-          content="UJRNKnijwobnk4mrxPmb1GkeZyxIPW6CNDv7QxaF4MU"
-        />
+        <meta name="google-site-verification" content="UJRNKnijwobnk4mrxPmb1GkeZyxIPW6CNDv7QxaF4MU" />
         {/* <!-- End Google Search console (noscript) --> */}
-        <noscript>
-          이 사이트는 javascript를 허용해야 정상적으로 동작합니다.
-        </noscript>
+        <noscript>이 사이트는 javascript를 허용해야 정상적으로 동작합니다.</noscript>
         <div id="root">
           <div className="App">
             <Providers>{children}</Providers>
-            <SpeedInsights />
 
             <div className="footer">
               <Link href="https://ronkacloset.com" target="_blank">

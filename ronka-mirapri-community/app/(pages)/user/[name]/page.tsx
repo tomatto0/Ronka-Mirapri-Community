@@ -76,44 +76,50 @@ export default function Page_user() {
 
   if (userInfo.status !== "pending" && userInfo.data === undefined) {
     return (
-      <main className='error-container'>
-        <ErrorContainer error_message='유저를 찾을 수 없어요.' show_home={true} />
+      <main className="error-container">
+        <ErrorContainer error_message="유저를 찾을 수 없어요." show_home={true} />
       </main>
     );
   }
 
   return (
-    <main className='user-fill'>
-      <div className='user-card-wrap'>
+    <main className="user-fill">
+      <div className="user-card-wrap">
         {userInfo.status === "pending" ? (
-          <div className='user-card'>
-            <span className='loading'></span>
+          <div className="user-card">
+            <span className="loading"></span>
           </div>
         ) : userInfo.status === "error" ? (
           <p>Error: {userInfo.error instanceof Error ? userInfo.error.message : "An unknown error occurred"}</p>
         ) : (
-          <div className='user-card'>
-            <div className='user-info'>
-              <p className='user-name'>{userInfo?.data?.nickname}</p>
-              <div className='user-info-right'>
-                <AutoLink className='user-sns' target='_blank'>
+          <div className="user-card">
+            <div className="user-info">
+              <p className="user-name">{userInfo?.data?.nickname}</p>
+              <div className="user-info-right">
+                <AutoLink className="user-sns" target="_blank">
                   {userInfo?.data?.sns.toUpperCase()}
                 </AutoLink>
                 {(session?.user.nickname === userInfo?.data?.nickname || session?.user.is_admin) && (
                   <button
-                    className='user-setting'
+                    className="user-setting"
                     onClick={() => {
-                      router.push(`/setting${session?.user.is_admin && session?.user.nickname !== userInfo?.data?.nickname ? `/${userInfo?.data?.nickname}` : ""}`);
+                      router.push(
+                        `/setting${
+                          session?.user.is_admin && session?.user.nickname !== userInfo?.data?.nickname
+                            ? `/${userInfo?.data?.nickname}`
+                            : ""
+                        }`
+                      );
                     }}>
-                    <img alt='setting' id='setting' />
+                    <img alt="setting" id="setting" />
                   </button>
                 )}
               </div>
             </div>
-            <p className='user-like'>{userInfo?.data?.like_count}</p>
+            <p className="user-like">{userInfo?.data?.like_count}</p>
           </div>
         )}
-        <div className='tlToggle'>
+        <div className="tlToggle">
           <h3
             className={timeline === "userPosts" ? "user-tap-active" : ""}
             onClick={() => {
@@ -124,7 +130,7 @@ export default function Page_user() {
           </h3>
           {session?.user._id === userInfo?.data?._id && (
             <>
-              <div className='vertical-line' />
+              <div className="vertical-line" />
               <h3
                 className={timeline === "userPosts" ? "" : "user-tap-active"}
                 onClick={() => {
@@ -139,9 +145,9 @@ export default function Page_user() {
       </div>
 
       {userPosts.status === "pending" ? (
-        <div className='post-container'>
-          <div className='loading-box-user'>
-            <span className='loading'></span>
+        <div className="post-container">
+          <div className="loading-box-user">
+            <span className="loading"></span>
           </div>
           <SkeletonBox />
           <SkeletonBox />
@@ -150,12 +156,12 @@ export default function Page_user() {
         <p>Error: {userPosts.error instanceof Error ? userPosts.error.message : "An unknown error occurred"}</p>
       ) : timeline === "userPosts" ? (
         post_chunk.length === 0 ? (
-          <ErrorContainer error_message='아직 게시글이 없어요.' />
+          <ErrorContainer error_message="아직 게시글이 없어요." />
         ) : (
-          <div className='post-container'>
+          <div className="post-container">
             {/* 게시물 목록 렌더링 */}
             {post_chunk.map((chunk: PostInform[], i: number) => (
-              <div className='post-container-row' key={i + 1}>
+              <div className="post-container-row" key={i + 1}>
                 {chunk.map((post: PostInform) => (
                   <PostThumbnail post={post} key={`post-${post.index}`} />
                 ))}
@@ -164,12 +170,12 @@ export default function Page_user() {
           </div>
         )
       ) : like_chunk.length === 0 ? (
-        <ErrorContainer error_message='아직 게시글이 없어요.' />
+        <ErrorContainer error_message="아직 게시글이 없어요." />
       ) : (
-        <div className='post-container'>
+        <div className="post-container">
           {/* 게시물 목록 렌더링 */}
           {like_chunk.map((chunk: PostInform[], i: number) => (
-            <div className='post-container-row' key={i + 1}>
+            <div className="post-container-row" key={i + 1}>
               {chunk.map((post: PostInform) => (
                 <PostThumbnail post={post} key={`post-${post.index}`} />
               ))}
@@ -177,10 +183,10 @@ export default function Page_user() {
           ))}
         </div>
       )}
-      <div ref={ref} className='loader'>
+      <div ref={ref} className="loader">
         {userPosts.isFetchingNextPage && <p>Loading more...</p>}
       </div>
-      <div ref={ref} className='loader'>
+      <div ref={ref} className="loader">
         {userLikedPosts.isFetchingNextPage && <p>Loading more...</p>}
       </div>
       <EditButton />
