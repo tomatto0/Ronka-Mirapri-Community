@@ -18,7 +18,15 @@ type PostInform = {
   is_liked: boolean;
 };
 
-export default function PostThumbnail({ post, queryKey, index }: { post: PostInform; queryKey?: any[]; index?: number[] }) {
+export default function PostThumbnail({
+  post,
+  queryKey,
+  index,
+}: {
+  post: PostInform;
+  queryKey?: any[];
+  index?: number[];
+}) {
   const router = useRouter();
   const pathname = usePathname();
   const { data: session } = useSession();
@@ -61,12 +69,21 @@ export default function PostThumbnail({ post, queryKey, index }: { post: PostInf
   };
 
   return (
-    <div className='post-box'>
-      <Image className='post-thumbnail' src={post.image_url} alt={post.title} onClick={post_click_handler} fill={true} priority={true} sizes='(max-width: 701px) 50vw, 20vw' />
-      <div className='post-box-hover'>
+    <div className="post-box">
+      <Image
+        className="post-thumbnail"
+        src={post.image_url}
+        alt={post.title}
+        onClick={post_click_handler}
+        fill={true}
+        priority={true}
+        sizes="(max-width: 701px) 50vw, 20vw"
+        loading="eager"
+      />
+      <div className="post-box-hover">
         <p>{post.title}</p>
         <button onClick={like_handler}>
-          <img alt='heart' id={is_liked ? "fill-heart-teal" : "hollow-heart-white"} />
+          <img alt="heart" id={is_liked ? "fill-heart-teal" : "hollow-heart-white"} />
         </button>
       </div>
     </div>
