@@ -58,8 +58,7 @@ export default function PostThumbnail({
         pageParams: number[];
       }>(queryKey);
       if (data) {
-        data.pages[index[0]].data[index[1]].is_liked =
-          !data.pages[index[0]].data[index[1]].is_liked;
+        data.pages[index[0]].data[index[1]].is_liked = !data.pages[index[0]].data[index[1]].is_liked;
         queryClient.setQueryData(queryKey, data);
       }
     }
@@ -71,19 +70,20 @@ export default function PostThumbnail({
 
   return (
     <div className="post-box">
-      <img
+      <Image
         className="post-thumbnail"
         src={post.image_url}
         alt={post.title}
         onClick={post_click_handler}
+        fill={true}
+        priority={true}
+        sizes="(max-width: 701px) 50vw, 20vw"
+        unoptimized={true}
       />
       <div className="post-box-hover">
         <p>{post.title}</p>
         <button onClick={like_handler}>
-          <img
-            alt="heart"
-            id={is_liked ? "fill-heart-teal" : "hollow-heart-white"}
-          />
+          <img alt="heart" id={is_liked ? "fill-heart-teal" : "hollow-heart-white"} />
         </button>
       </div>
     </div>

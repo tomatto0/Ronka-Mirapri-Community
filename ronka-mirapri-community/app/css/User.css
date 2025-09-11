@@ -94,7 +94,7 @@ main.user-fill {
 .tlToggle h3 {
   font-family: "REM";
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: normal;
   color: #b9c0d4;
   cursor: pointer;
@@ -165,8 +165,7 @@ h3.user-tap-active {
     left: -16px;
     width: calc(100% + 34px);
     height: calc(100% + 16px);
-    background-image: url("../../public/img/plus.svg"),
-      url("../../public/img/plus.svg");
+    background-image: url("../../public/img/plus.svg"), url("../../public/img/plus.svg");
     background-size: 12px 12px;
     background-position: bottom left, bottom right;
     background-repeat: no-repeat;

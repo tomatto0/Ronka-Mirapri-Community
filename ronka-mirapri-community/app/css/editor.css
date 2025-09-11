@@ -117,7 +117,7 @@ div.editor-container {
   padding-top: 24px;
   display: block;
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: -0.48px;
 }
 
@@ -282,12 +282,9 @@ p.error-message {
     width: calc(100% + 14px);
     height: calc(100% + 14px);
 
-    background-image: url("../../public/img/plus.svg"),
-      url("../../public/img/plus.svg"), url("../../public/img/plus.svg"),
-      url("../../public/img/plus.svg"), url("../../public/img/plus.svg");
+    background-image: url("../../public/img/plus.svg"), url("../../public/img/plus.svg"), url("../../public/img/plus.svg"), url("../../public/img/plus.svg"), url("../../public/img/plus.svg");
     background-size: 12px 12px;
-    background-position: top left, top right, center right, bottom left,
-      bottom right;
+    background-position: top left, top right, center right, bottom left, bottom right;
     background-repeat: no-repeat;
     z-index: -1;
   }
