@@ -41,14 +41,13 @@ filtered_items = pd.concat([equipable_items, style_items])
 filtered_items['Icon'] = '/i/0' + filtered_items['Icon'].str[:2] + '000/0' + filtered_items['Icon'] + '_hr1.png'
 
 #실장 안된 이벤트 아이템 필터링(할 때마다 수정해주세요)
-filtered_items.drop(axis=0, index=filtered_items[filtered_items.Singular.str.contains('밤의 악마')].index, inplace=True)
+# filtered_items.drop(axis=0, index=filtered_items[filtered_items.Singular.str.contains('밤의 악마')].index, inplace=True)
 
 #index를 id로, 컬럼명 수정
 filtered_items.reset_index(inplace=True)
 filtered_items.columns = ['Id', 'Name', 'Icon', 'DyeCount', 'ClassJobCategory', 'EquipSlotCategory']
 
 #json으로 저장
-# filtered_items.to_json('app/json/filtered_items.json', orient='records', indent=2, force_ascii=False)
 records = filtered_items.to_dict(orient='records')
 with open('app/json/filtered_items.json', 'w', encoding='utf-8') as f:
     json.dump(records, f, indent=2, ensure_ascii=False)
@@ -65,3 +64,7 @@ for i, url in enumerate(filtered_items['Icon']):
     if not os.path.exists(os.path.join(path, filename)):
         os.system('curl https://xivapi.com' +url +' > ' +os.path.join(path, filename))
     print(f'\r{i/length: .2%} {i} / {length}: {url}', end='')
+
+
+
+#python public/ronka_updater.py

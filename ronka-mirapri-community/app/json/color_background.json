@@ -156,7 +156,7 @@
     {
         "color_id":22,
         "name":"적갈색",
-        "background_color":"5.02E+24",
+        "background_color":"502E24",
         "text_color":"white",
         "color_type":"brown"
     },
@@ -562,7 +562,7 @@
     {
         "color_id":80,
         "name":"청보라색",
-        "background_color":"3.22E+60",
+        "background_color":"322E60",
         "text_color":"white",
         "color_type":"blue"
     },
