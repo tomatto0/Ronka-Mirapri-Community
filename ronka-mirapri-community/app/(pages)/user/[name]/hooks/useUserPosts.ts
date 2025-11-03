@@ -10,6 +10,7 @@ export interface FetchPostsResponse {
 }
 
 export const useUserPosts = (name: string, size: number) => {
+  console.log("usePosts", name);
   return useInfiniteQuery<
     FetchPostsResponse, // TData: 쿼리의 반환 데이터 타입
     unknown, // TError: 에러 타입 (기본적으로 unknown)

@@ -28,7 +28,7 @@ export default function ItemSearch({
   const slot_category: { [key: number]: EquipSlot } = equip_slot_categories;
   const input_ref = useRef<HTMLInputElement | null>(null);
   
-  item_list.forEach(item => {if (!item.Name) {console.log(item)}})
+  // item_list.forEach(item => {if (!item.Name) {console.log(item)}})
 
   useEffect(() => {
     if (input_ref.current) {

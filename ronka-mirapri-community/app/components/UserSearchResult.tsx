@@ -38,7 +38,7 @@ export default function UserSearchResult({
     search_result.slice(0, 10)
   );
   const click_handler = (user_name: string) => {
-    console.log(user_name);
+    // console.log(user_name);
     router.push(`/user/${user_name}`);
   };
 

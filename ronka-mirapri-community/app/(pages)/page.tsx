@@ -4,7 +4,7 @@ import "../css/home.css";
 
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, InfiniteData, UseInfiniteQueryResult } from "@tanstack/react-query";
 import { Suspense } from "react";
 import { useRouter } from "next/navigation";
 
@@ -12,6 +12,7 @@ import { PostInform } from "../types/PostInform";
 import PostThumbnail from "../components/PostThumbnail";
 import FilterSelector from "../components/FilterSelector";
 import { usePosts } from "./hooks/usePosts";
+import { useSessionStorage } from "./hooks/useSessionStorage";
 import Itemrank from "../components/Itemrank";
 import { filter_tag_init_state, job_category, job_category_group } from "../utils/constants";
 
@@ -22,26 +23,15 @@ import SkeletonMain from "../components/SkeletonMain";
 
 export default function Page_home() {
   const router = useRouter();
+  
+  const [session_filter, set_session_filter] = useSessionStorage("filter", '{}');
+  const [filter_tag, set_filter_tag] = useState<typeof filter_tag_init_state>(session_filter.filter_tag ?? filter_tag_init_state);    
+  const [filter, set_filter] = useState<string>(JSON.stringify(update_filter()));
 
-  const [filter, set_filter] = useState<string>("{}");
-  const [filter_tag, set_filter_tag] = useState<typeof filter_tag_init_state>(filter_tag_init_state);
-  useEffect(() => {
-    const session_filter = JSON.parse(
-      typeof window !== "undefined" ? window.sessionStorage.getItem("filter") ?? "{}" : "{}"
-    );
-    set_filter_tag(session_filter.filter_tag ?? filter_tag_init_state);
-    update_filter();
-  }, []);
-
+  const posts = usePosts(12, filter, filter_tag.order);
   const { ref, inView } = useInView(); // 무한 스크롤 트리거 감지
   const [is_open, set_is_open] = useState<boolean>(false);
   const [post_chunk, set_post_chunk] = useState<PostInform[][]>([[]]);
-
-  const { data, error, fetchNextPage, hasNextPage, isFetchingNextPage, status } = usePosts(
-    12,
-    filter,
-    filter_tag.order
-  );
 
   function update_filter() {
     let keyword_filter = {};
@@ -83,8 +73,9 @@ export default function Page_home() {
       ...job_filter,
     };
 
+    return filter;
     set_filter(JSON.stringify(filter));
-    console.log({ filter });
+    // console.log({ filter });
 
     // 브라우저 환경에서 sessionStorage를 이용해 필터 상태 저장(새로고침 후에도 유지)
     if (typeof window !== "undefined") {
@@ -125,25 +116,32 @@ export default function Page_home() {
 
   // 무한 스크롤 감지해서 다음 페이지 로드
   useEffect(() => {
-    if (inView && hasNextPage) {
-      fetchNextPage();
+    if (inView && posts.hasNextPage) {
+      posts.fetchNextPage();
     }
-  }, [inView, hasNextPage]);
+  }, [inView, posts.hasNextPage]);
 
   useEffect(() => {
-    update_filter();
-    if (filter_tag.keyword !== "") {
-      router.push(`/?keyword=${filter_tag.keyword}`);
-    } else {
-      router.push(`/`);
+    const updated_filter = update_filter();
+    
+    set_filter(JSON.stringify(updated_filter));
+    // 브라우저 환경에서 sessionStorage를 이용해 필터 상태 저장(새로고침 후에도 유지)
+    if (typeof window !== "undefined") {
+      window.sessionStorage.setItem("filter", JSON.stringify({ updated_filter, filter_tag }));
     }
+
+    // if (filter_tag.keyword !== "") {
+    //   router.push(`/?keyword=${filter_tag.keyword}`);
+    // } else {
+    //   router.push(`/`);
+    // }
   }, [filter_tag]);
 
   useEffect(() => {
-    if (!data) {
+    if (!posts.data) {
       return;
     }
-    const post_list = data?.pages.reduce<PostInform[]>((acc, _) => {
+    const post_list = posts.data?.pages.reduce<PostInform[]>((acc, _) => {
       return [...acc, ...(_.data ?? [])];
     }, []);
     const post_chunk = post_list.reduce<PostInform[][]>((acc, _, i) => {
@@ -153,7 +151,7 @@ export default function Page_home() {
       return acc;
     }, []);
     set_post_chunk(post_chunk);
-  }, [data]);
+  }, [posts.data]);
 
   const fetch_item_rank = async (): Promise<string[]> => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/db/items/ranking`);
@@ -264,10 +262,10 @@ export default function Page_home() {
           />
         </Suspense>
 
-        {status === "pending" ? (
+        {posts.status === "pending" ? (
           <SkeletonMain />
-        ) : status === "error" ? (
-          <p>Error: {error instanceof Error ? error.message : "An unknown error occurred"}</p>
+        ) : posts.status === "error" ? (
+          <p>Error: {posts.error instanceof Error ? posts.error.message : "An unknown error occurred"}</p>
         ) : post_chunk.length === 0 ? (
           <ErrorContainer error_message="해당하는 게시글을 찾을 수 없어요." />
         ) : (
@@ -297,7 +295,7 @@ export default function Page_home() {
         )}
 
         <div ref={ref} className="loader">
-          {isFetchingNextPage && <p>Loading more...</p>}
+          {posts.isFetchingNextPage && <p>Loading more...</p>}
         </div>
         <EditButton />
       </main>

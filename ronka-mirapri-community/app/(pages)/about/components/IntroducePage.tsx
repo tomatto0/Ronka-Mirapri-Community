@@ -19,7 +19,7 @@ export default function IntroducePage() {
     set_newsData(data?.data);
   }, [data]);
 
-  console.log({ newsData });
+  // console.log({ newsData });
 
   // const postDate = formatDate(new Date(data.created_at));
 
