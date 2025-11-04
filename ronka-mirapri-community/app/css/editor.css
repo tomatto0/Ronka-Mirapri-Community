@@ -148,7 +148,7 @@ div.editor-container {
 
 .editor-container textarea {
   padding: 15px 20px;
-  resize: none;
+  resize: vertical;
   overflow-y: auto;
   scrollbar-width: none;
 }
@@ -282,7 +282,8 @@ p.error-message {
     width: calc(100% + 14px);
     height: calc(100% + 14px);
 
-    background-image: url("../../public/img/plus.svg"), url("../../public/img/plus.svg"), url("../../public/img/plus.svg"), url("../../public/img/plus.svg"), url("../../public/img/plus.svg");
+    background-image: url("../../public/img/plus.svg"), url("../../public/img/plus.svg"),
+      url("../../public/img/plus.svg"), url("../../public/img/plus.svg"), url("../../public/img/plus.svg");
     background-size: 12px 12px;
     background-position: top left, top right, center right, bottom left, bottom right;
     background-repeat: no-repeat;

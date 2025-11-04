@@ -3,7 +3,8 @@ main.user-fill {
 }
 
 .user-card-wrap {
-  width: 1050px;
+  width: 100%;
+  max-width: 1050px;
   margin: 0 auto;
   padding: 20px 6px 0 6px;
 }
