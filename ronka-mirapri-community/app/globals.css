@@ -121,7 +121,8 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "REM", "Pretendard", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "REM", "Pretendard", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
@@ -136,6 +137,7 @@ body {
   background: linear-gradient(223deg, #fffdf5 -3.13%, #edfeff 106.63%);
   background-attachment: fixed;
   height: 100vh;
+  overflow-x: hidden;
 }
 .flex-container {
   display: flex;
@@ -148,7 +150,6 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
-  /* overflow-x: hidden; */
 }
 .App {
   min-height: 100vh;
