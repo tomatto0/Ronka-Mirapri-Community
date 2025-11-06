@@ -154,7 +154,7 @@ export default function PostPageClient({
   };
   const share_bluesky = () => {
     const href = "https://bsky.app/intent/compose?";
-    const text = `롱카의 룩북?에서 제 새로운 투영을 확인해보세요!<br>${post_data.title}<br>`;
+    const text = `롱카의 룩북?에서 제 새로운 투영을 확인해보세요\n${post_data.title}\n`;
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}/post/${postIndex}`;
     const hashtags = "롱카의_룩북";
     window.open(
