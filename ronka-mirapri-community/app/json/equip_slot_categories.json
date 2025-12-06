@@ -177,11 +177,11 @@
   },
   "23": {
     "Head": 0,
-    "Body": 0,
+    "Body": 1,
     "Gloves": 0,
-    "Legs": 0,
+    "Legs": -1,
     "Feet": 0,
-    "Slot": 5
+    "Slot": 1
   },
   "24": {
     "Head": 0,
