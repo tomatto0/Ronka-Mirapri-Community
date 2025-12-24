@@ -1,6 +1,15 @@
 import pandas as pd
 import os
 import json
+import requests
+
+#github에서 item.csv 갱신
+github_item_url = "https://raw.githubusercontent.com/Ra-Workspace/ffxiv-datamining-ko/master/csv/Item.csv"
+res = requests.get(github_item_url)
+res.raise_for_status()
+
+with open('public/item.csv', "wb") as f:
+    f.write(res.content)
 
 #CSV raw data 읽어오기
 raw_data = pd.read_csv('public/item.csv', header=1, index_col=0)
