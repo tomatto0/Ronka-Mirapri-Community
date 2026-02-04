@@ -17,8 +17,6 @@ import UserSearch from "./UserSearch";
 import UserSearchResult from "./UserSearchResult";
 import ErrorContainer from "./ErrorContainer";
 
-type SearchItem = Omit<Item, 'DyeFirst' | 'DyeSecond' | 'DyeCount'>;
-
 export default function FilterSelector({
   set_filter,
   filter_tag,
@@ -41,7 +39,7 @@ export default function FilterSelector({
   //키워드 세팅관련 변수 선언
   const [keyword, set_keyword] = useState<string>("");
   const [search_category, set_search_category] = useState<string>("item");
-  const [item_search_result, set_item_search_result] = useState<SearchItem[]>([]);
+  const [item_search_result, set_item_search_result] = useState<Item[]>([]);
   const [user_search_result, set_user_search_result] = useState<string[]>([]);
   const [selected_filter_tag, set_selected_filter_tag] =
     useState<typeof filter_tag>(filter_tag);
