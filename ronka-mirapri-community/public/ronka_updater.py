@@ -47,6 +47,7 @@ style_items.loc[style_items.index, 'EquipSlotCategory'] = 24
 filtered_items = pd.concat([equipable_items, style_items])
 
 #아이콘 넘버링을 경로로 수정
+filtered_items['IconNumber'] = filtered_items['Icon']
 filtered_items['Icon'] = '/i/0' + filtered_items['Icon'].str[:2] + '000/0' + filtered_items['Icon'] + '_hr1.png'
 
 #실장 안된 이벤트 아이템 필터링(할 때마다 수정해주세요)
@@ -54,7 +55,7 @@ filtered_items['Icon'] = '/i/0' + filtered_items['Icon'].str[:2] + '000/0' + fil
 
 #index를 id로, 컬럼명 수정
 filtered_items.reset_index(inplace=True)
-filtered_items.columns = ['Id', 'Name', 'Icon', 'DyeCount', 'ClassJobCategory', 'EquipSlotCategory']
+filtered_items.columns = ['Id', 'Name', 'Icon', 'DyeCount', 'ClassJobCategory', 'EquipSlotCategory', 'IconNumber']
 
 #json으로 저장
 records = filtered_items.to_dict(orient='records')
@@ -63,17 +64,18 @@ with open('app/json/filtered_items.json', 'w', encoding='utf-8') as f:
 
 #이미지 파일 다운로드
 length = len(filtered_items['Icon'])
-for i, url in enumerate(filtered_items['Icon']):
+for i, (url, number) in enumerate(zip(filtered_items['Icon'], filtered_items['IconNumber'])):
     path = 'public/' +'/'.join(url.split('/')[:-1])
     filename = url.split('/')[-1]
-
+    api_url = f'asset?path={"ui/icon/0" + number[:2] + "000/0" + number + "_hr1.tex"}&format=png'
+    
     if not os.path.exists(path):
         os.makedirs(path)
 
     if not os.path.exists(os.path.join(path, filename)):
-        os.system('curl https://xivapi.com' +url +' > ' +os.path.join(path, filename))
-    print(f'\r{i/length: .2%} {i} / {length}: {url}', end='')
-
-
+        pass
+        os.system(f'curl -o {os.path.join(path, filename)} "https://v2.xivapi.com/api/{api_url}"')    
+        print(f'\r{i/length: .2%} {i} / {length}: {number}', end='')
+print('image download done!')
 
 #python public/ronka_updater.py
