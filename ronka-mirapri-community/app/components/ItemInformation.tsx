@@ -107,7 +107,7 @@ export default function ItemInformation({
           onClick={item_search_modal_open}
         />
         <div className="dye-palette-container">
-          {item.DyeCount > 0 && (
+          {item.DyeCount > 0 && item.DyeFirst !== undefined && (
             <div
               className="dye-palette"
               style={
@@ -124,7 +124,7 @@ export default function ItemInformation({
               }
             ></div>
           )}
-          {item.DyeCount > 1 && (
+          {item.DyeCount > 1 && item.DyeSecond !== undefined &&(
             <div
               className="dye-palette"
               style={
