@@ -5,7 +5,8 @@ import equip_slot_categories from "../json/equip_slot_categories.json";
 import { Item } from "../types/Item";
 import { EquipSlot } from "../types/EquipSlot";
 import Hangul from "hangul-js";
-import Image from "next/image";
+
+type SearchItem = Omit<Item, 'DyeFirst' | 'DyeSecond' | 'DyeCount'>;
 
 export default function ItemSearch({
   keyword,
@@ -19,12 +20,12 @@ export default function ItemSearch({
   keyword: string;
   set_is_loading?: (is_loading: boolean) => void;
   set_keyword: (keyword: string) => void;
-  set_search_result: (items: Item[]) => void;
+  set_search_result: (items: SearchItem[]) => void;
   slot?: number;
   placeholder?: string;
   keydown_handler?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }) {
-  const item_list: Item[] = item_list_raw as Item[];
+  const item_list: SearchItem[] = item_list_raw as SearchItem[];
   const slot_category: { [key: number]: EquipSlot } = equip_slot_categories;
   const input_ref = useRef<HTMLInputElement | null>(null);
   
