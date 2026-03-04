@@ -77,7 +77,7 @@ img#menu-bar {
     height: 102px;
 
     color: #006351;
-    font-family: "REM";
+    font-family: var(--font-rem);
     font-size: 15px;
     font-weight: 300;
     line-height: normal;

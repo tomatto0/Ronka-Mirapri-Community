@@ -1,7 +1,7 @@
 main.about-wrap {
   max-width: 1076px;
   word-break: keep-all;
-  font-family: "Pretendard";
+  font-family: var(--font-pretendard);
   padding: 0 16px;
   /* padding-top: 20px; */
   margin-bottom: 60px;
@@ -290,7 +290,7 @@ p.intro-page-description.half-width {
     font-weight: 600;
     letter-spacing: -0.6px;
     color: #006351;
-    font-family: "REM";
+    font-family: var(--font-rem);
     margin: 0;
   }
 
@@ -299,12 +299,12 @@ p.intro-page-description.half-width {
     font-size: 2rem;
     font-weight: 600;
     letter-spacing: -1.08px;
-    font-family: Pretendard;
+    font-family: var(--font-pretendard);
   }
 
   p {
     color: #525252;
-    font-family: Pretendard;
+    font-family: var(--font-pretendard);
     font-size: 1.6rem;
     font-style: normal;
     font-weight: 400;

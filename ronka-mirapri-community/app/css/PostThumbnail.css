@@ -34,7 +34,7 @@
     padding-right: 10px;
     opacity: 0;
     color: white;
-    font-family: "Pretendard";
+    font-family: var(--font-pretendard);
     font-size: 1.6rem;
     font-weight: 600;
   }

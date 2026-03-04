@@ -5,6 +5,7 @@ import { ColorInfo } from "../types/ColorInfo";
 import Color_background_list_raw from "../json/color_background.json";
 import { Item } from "../types/Item";
 import "../css/UserCanvas.css";
+import { pretendard } from "@/public/fonts/fonts";
 
 type ItemImage = {
   Id: number;
@@ -110,7 +111,7 @@ export default function UserCanvasViewer({
             // 아이템 아이콘 그리기
             if (image)
               ctx.drawImage(image.Image, box_width + 31, i * 114 + 43, 85, 85);
-            ctx.font = "28px Pretendard";
+            ctx.font = `28px ${pretendard.style.fontFamily}`;
             ctx.fillStyle = "#FFFFFF";
             ctx.fillText(item.Name, box_width + 31 + 104, i * 114 + 51);
 
@@ -129,7 +130,7 @@ export default function UserCanvasViewer({
               const textColor = colorInfo1.text_color || "black";
 
               // 텍스트 배경 그리기
-              ctx.font = "21px Pretendard";
+              ctx.font = `21px ${pretendard.style.fontFamily}`;
               const textWidth = ctx.measureText("1 - " + colorInfo1.name).width;
               dyeFirstWidthRef.current = textWidth;
               ctx.fillStyle = `#${backgroundColor}`; // 배경 색상
@@ -158,7 +159,7 @@ export default function UserCanvasViewer({
               const textColor = colorInfo2.text_color || "black";
 
               // 텍스트 배경 그리기
-              ctx.font = "21px Pretendard";
+              ctx.font = `21px ${pretendard.style.fontFamily}`;
               const textWidth = ctx.measureText("2 - " + colorInfo2.name).width;
               ctx.fillStyle = `#${backgroundColor}`; // 배경 색상
 
@@ -194,7 +195,7 @@ export default function UserCanvasViewer({
 
           ctx.textAlign = "end";
           ctx.textBaseline = "bottom";
-          ctx.font = "16px Pretendard";
+          ctx.font = `16px ${pretendard.style.fontFamily}`;
           ctx.fillStyle = "#BEBEBE";
 
           //ronkacloset.com

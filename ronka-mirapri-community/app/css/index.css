@@ -1,50 +1,8 @@
-@font-face {
-  font-family: "Pretendard";
-  src: url("../fonts/Pretendard-Light.woff") format("woff");
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Pretendard";
-  src: url("../fonts/Pretendard-Regular.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Pretendard";
-  src: url("../fonts/Pretendard-Medium.woff") format("woff");
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Pretendard";
-  src: url("../fonts/Pretendard-SemiBold.woff") format("woff");
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Pretendard";
-  src: url("../fonts/Pretendard-Bold.woff") format("woff");
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Pretendard";
-  src: url("../fonts/Pretendard-ExtraBold.woff") format("woff");
-  font-weight: 800;
-  font-style: normal;
-}
-
 /* 모든 요소의 기본 스타일 초기화 */
 * {
   margin: 0;
   padding: 0;
-  font-family: "Pretendard", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+  font-family: var(--font-pretendard), "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
