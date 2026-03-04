@@ -28,19 +28,18 @@ export async function POST(request: NextRequest) {
 
     try {
       const webpBuffer = await sharp(Buffer.from(buffer))
+      .resize(350, 700, {
+        fit: 'cover',  
+        position: 'center' 
+      })
       .webp({quality: 80})
       .toBuffer();
 
-      const filename =
-      generateUUID() +
-      "-" +
-      new Intl.DateTimeFormat("ko-KR", options)
+      const formattedDate = new Intl.DateTimeFormat("ko-KR", options)
         .format(new Date())
-        .replace(". ", "")
-        .replace(". ", "")
-        .replace(":", "") +
-      ".webp";
+        .replace(/\D/g, "");
 
+      const filename = `${generateUUID()}-${formattedDate}.webp`;
       const upload = bucket.file(filename);
 
       await upload.save(webpBuffer, {
@@ -52,8 +51,9 @@ export async function POST(request: NextRequest) {
       
       const image_url = `${process.env.NEXT_PUBLIC_CDN_URL}/${filename}`;
       return NextResponse.json({ success: true, image_url: image_url });
-    } catch (e) {
-      return NextResponse.json({ success: false, error: e });
+    } catch (e: any) {
+      console.error("Upload Error:", e);
+      return NextResponse.json({ success: false, error: e.message || "Unknown Error" });
     }
   }
   return NextResponse.json({ success: false });
