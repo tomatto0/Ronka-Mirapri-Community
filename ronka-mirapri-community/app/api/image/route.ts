@@ -1,6 +1,7 @@
 import { generateUUID } from "@/app/utils/uuid";
 import { Storage } from "@google-cloud/storage";
 import { NextRequest, NextResponse } from "next/server";
+import sharp from "sharp"
 
 const credentials = JSON.parse(
   Buffer.from(process.env.GOOGLE_APPLICATION_CREDENTIALS!, "base64").toString("utf8")
@@ -22,24 +23,33 @@ export async function POST(request: NextRequest) {
     timeZone: "Asia/Seoul", // 한국 시간대
   };
 
-  const filename =
-    generateUUID() +
-    "-" +
-    new Intl.DateTimeFormat("ko-KR", options)
-      .format(new Date())
-      .replace(". ", "")
-      .replace(". ", "")
-      .replace(":", "") +
-    ".webp";
-
   if (file instanceof Blob) {
     const buffer = await file.arrayBuffer();
-    const file_buffer = Buffer.from(buffer);
+
     try {
+      const webpBuffer = await sharp(Buffer.from(buffer))
+      .webp({quality: 80})
+      .toBuffer();
+
+      const filename =
+      generateUUID() +
+      "-" +
+      new Intl.DateTimeFormat("ko-KR", options)
+        .format(new Date())
+        .replace(". ", "")
+        .replace(". ", "")
+        .replace(":", "") +
+      ".webp";
+
       const upload = bucket.file(filename);
-      await upload.save(file_buffer, {
+
+      await upload.save(webpBuffer, {
         contentType: "image/webp",
+        metadata: {
+          cacheControl: "public, max-age=31536000",
+        },
       });
+      
       const image_url = `${process.env.NEXT_PUBLIC_CDN_URL}/${filename}`;
       return NextResponse.json({ success: true, image_url: image_url });
     } catch (e) {
