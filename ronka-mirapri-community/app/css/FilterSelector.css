@@ -19,7 +19,7 @@
   font-weight: 500;
   letter-spacing: -0.54px;
   color: #475467;
-  font-family: "pretendard";
+  font-family: var(--font-pretendard);
 
   position: absolute;
   z-index: 300;
@@ -277,7 +277,7 @@
     font-weight: 500;
     letter-spacing: -0.54px;
     color: #475467;
-    font-family: "pretendard";
+    font-family: var(--font-pretendard);
   }
 
   .filter-wrap {

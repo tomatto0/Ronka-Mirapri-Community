@@ -42,7 +42,7 @@ main.user-fill {
     width: max-content;
   }
   .user-sns {
-    font-family: "REM";
+    font-family: var(--font-rem);
     font-size: 0.9rem;
     color: #628d85;
     display: flex;
@@ -63,7 +63,7 @@ main.user-fill {
   }
   .user-like {
     margin-left: 10px;
-    font-family: "REM";
+    font-family: var(--font-rem);
     font-size: 1.5rem;
     font-weight: 300;
     display: flex;
@@ -93,7 +93,7 @@ main.user-fill {
 }
 
 .tlToggle h3 {
-  font-family: "REM";
+  font-family: var(--font-rem);
   font-size: 1.5rem;
   font-weight: 600;
   line-height: normal;

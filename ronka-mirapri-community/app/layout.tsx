@@ -3,6 +3,7 @@ import "./globals.css";
 import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 import Providers from "./components/Providers";
 import Link from "next/link";
+import { pretendard, rem, galmuri } from "@/public/fonts/fonts";
 
 export const metadata: Metadata = {
   title: "롱카의 룩북?",
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko">
+    <html lang="ko" className={`${pretendard.variable} ${rem.variable} ${galmuri.variable}`}>
       <head>
         <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.ico" />
@@ -23,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
       </head>
-      <body>
+      <body className={pretendard.className}>
         {/* <!-- Google Tag Manager (noscript) --> */}
         <noscript>
           <iframe

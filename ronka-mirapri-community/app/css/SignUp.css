@@ -54,7 +54,7 @@ div.signup-wrap {
   border: 1px solid #4f938d;
   padding: 10px 20px;
   margin-top: 10px;
-  font-family: "Pretendard";
+  font-family: var(--font-pretendard);
   font-size: 1.6rem;
   color: #667085;
   background-color: unset;
