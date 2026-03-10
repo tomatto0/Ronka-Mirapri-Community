@@ -112,8 +112,16 @@ post_schema.pre("findOneAndDelete", async function (next) {
       await user.updateOne({ posts: user.posts });
     }
     const filename = post.image_url.replace(`${process.env.NEXT_PUBLIC_CDN_URL}/`, "");
-    const file = bucket.file(filename);
-    await file.delete();
+
+      // 원본 삭제
+      const file = bucket.file(filename);
+      await file.delete().catch(console.error); 
+
+      // _resized 파일 삭제
+      const resizedFilename = filename.replace(".webp", "_resized.webp");
+      const resizedFile = bucket.file(resizedFilename);
+      await resizedFile.delete().catch(console.error); 
+      
     next();
   } catch (e) {
     if (e instanceof Error) {
@@ -156,8 +164,15 @@ post_schema.pre("deleteMany", async function (next) {
         `${process.env.NEXT_PUBLIC_CDN_URL}/`,
         ""
       );
+
+      // 원본 삭제
       const file = bucket.file(filename);
-      await file.delete();
+      await file.delete().catch(console.error); 
+
+      // _resized 파일 삭제
+      const resizedFilename = filename.replace(".webp", "_resized.webp");
+      const resizedFile = bucket.file(resizedFilename);
+      await resizedFile.delete().catch(console.error); 
     }
     await Promise.all([...promise_delete_likes, ...promise_update_user]);
     next();
