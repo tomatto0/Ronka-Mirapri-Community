@@ -14,40 +14,44 @@ export async function POST(request: NextRequest) {
   const formdata = await request.formData();
   const file = formdata.get("image");
 
-  const options: Intl.DateTimeFormatOptions = {
-    month: "2-digit", // 두 자리 월
-    day: "2-digit", // 두 자리 일
-    hour: "2-digit", // 두 자리 시간
-    minute: "2-digit", // 두 자리 분
-    hour12: false, // 24시간제
-    timeZone: "Asia/Seoul", // 한국 시간대
-  };
+  if (!(file instanceof Blob)) return NextResponse.json({ success: false });
 
-  if (file instanceof Blob) {
-    const buffer = await file.arrayBuffer();
+  const buffer = await file.arrayBuffer();
+  const nodeBuffer = Buffer.from(buffer);
 
     try {
-      const webpBuffer = await sharp(Buffer.from(buffer))
-      .resize(350, 700, {
-        fit: 'cover',  
-        position: 'center' 
-      })
-      .webp({quality: 80})
+      const formattedDate = new Intl.DateTimeFormat("ko-KR", {
+      month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit",
+      hour12: false, timeZone: "Asia/Seoul",
+    }).format(new Date()).replace(/\D/g, "");
+
+    const baseName = `${generateUUID()}-${formattedDate}`;
+    const filename = `${baseName}.webp`;
+    const resizedFilename = `${baseName}_resized.webp`;
+
+    // 1. 원본(고화질) 생성
+    const originalBuffer = await sharp(nodeBuffer)
+      .resize({ width: 1080 }) // 너비 1080으로 제한 (비율 유지)
+      .webp({ quality: 30 })
       .toBuffer();
 
-      const formattedDate = new Intl.DateTimeFormat("ko-KR", options)
-        .format(new Date())
-        .replace(/\D/g, "");
+    // 2. 디스플레이용(255x510) 생성
+    const resizedBuffer = await sharp(nodeBuffer)
+      .resize(255, 510, { fit: 'fill' })
+      .webp({ quality: 90 })
+      .toBuffer();
 
-      const filename = `${generateUUID()}-${formattedDate}.webp`;
-      const upload = bucket.file(filename);
-
-      await upload.save(webpBuffer, {
+    // 3. 병렬 업로드 (Promise.all로 속도 향상)
+    await Promise.all([
+      bucket.file(filename).save(originalBuffer, {
         contentType: "image/webp",
-        metadata: {
-          cacheControl: "public, max-age=31536000",
-        },
-      });
+        metadata: { cacheControl: "public, max-age=31536000" },
+      }),
+      bucket.file(resizedFilename).save(resizedBuffer, {
+        contentType: "image/webp",
+        metadata: { cacheControl: "public, max-age=31536000" },
+      })
+    ]);
       
       const image_url = `${process.env.NEXT_PUBLIC_CDN_URL}/${filename}`;
       return NextResponse.json({ success: true, image_url: image_url });
@@ -56,5 +60,4 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: e.message || "Unknown Error" });
     }
   }
-  return NextResponse.json({ success: false });
-}
+ 
