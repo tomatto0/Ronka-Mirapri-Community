@@ -79,6 +79,7 @@ export default function PostThumbnail({
         onClick={post_click_handler}
         fill={true}
         priority={true}
+        fetchPriority="high"
         sizes="(max-width: 701px) 50vw, 20vw"
         unoptimized={true}
       />

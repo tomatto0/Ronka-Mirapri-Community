@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   icons: {
     icon: "/logo/favicon.png",
   },
+  other: {
+    "preconnect": "https://lookbook.ronkacloset.com",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
