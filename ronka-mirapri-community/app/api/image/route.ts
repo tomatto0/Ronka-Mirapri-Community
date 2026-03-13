@@ -31,8 +31,7 @@ export async function POST(request: NextRequest) {
 
     // 1. 원본(고화질) 생성
     const originalBuffer = await sharp(nodeBuffer)
-      .resize({ width: 1080}) // 너비 1080으로 제한 (비율 유지)
-      .webp({ quality: 50 })
+      .webp({ quality: 30 })
       .toBuffer();
 
     // 2. 디스플레이용(255x510) 생성
