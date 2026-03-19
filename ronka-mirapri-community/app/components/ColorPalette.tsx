@@ -325,7 +325,7 @@ export default function ColorPalette({
 
       {item.DyeCount >= 1 && (
         <ColorPaletteRow
-          color={item.DyeFirst}
+          color={item.DyeFirst ?? 0}
           is_open={is_f_open}
           is_facewear={itemRef.current.EquipSlotCategory === 24}
           palette_controll={palette_f_controll}
@@ -334,7 +334,7 @@ export default function ColorPalette({
       )}
       {item.DyeCount >= 2 && (
         <ColorPaletteRow
-          color={item.DyeSecond}
+          color={item.DyeSecond ?? 0}
           is_open={is_s_open}
           is_facewear={itemRef.current.EquipSlotCategory === 24}
           palette_controll={palette_s_controll}

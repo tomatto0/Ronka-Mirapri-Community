@@ -5,6 +5,6 @@ export type Item = {
   EquipSlotCategory: number;
   ClassJobCategory: number;
   DyeCount: number;
-  DyeFirst: number;
-  DyeSecond: number;
+  DyeFirst?: number;
+  DyeSecond?: number;
 };

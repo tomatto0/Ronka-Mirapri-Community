@@ -69,7 +69,7 @@ main.post {
       color: #667085;
       font-size: 1.4rem;
       font-weight: 300;
-      font-family: "REM";
+      font-family: var(--font-rem);
     }
   }
   .like-button-container {
@@ -85,7 +85,7 @@ main.post {
       cursor: pointer;
       font-size: 1.5rem;
       font-weight: 300;
-      font-family: "REM";
+      font-family: var(--font-rem);
       color: #006351;
       display: flex;
       justify-content: space-between;
@@ -195,7 +195,7 @@ main.post {
   }
 }
 .post-content {
-  font-family: "pretendard";
+  font-family: var(--font-pretendard);
   font-size: 1.4rem;
   color: #475467;
   width: 100%;
@@ -205,7 +205,7 @@ main.post {
   order: 4;
 }
 .post-subtitle {
-  font-family: "pretendard";
+  font-family: var(--font-pretendard);
   font-size: 1.5rem;
   font-weight: 600;
   color: #006351;
@@ -216,7 +216,7 @@ main.post {
   order: 6;
 }
 .post-sns {
-  font-family: "pretendard";
+  font-family: var(--font-pretendard);
   font-size: 1.2rem;
   color: #667085;
   padding: 0 26px;
@@ -244,7 +244,7 @@ main.post {
     border-radius: 70px;
     border: 1px #006351 solid;
     color: #006351;
-    font-family: "REM";
+    font-family: var(--font-rem);
     font-size: 1.2rem;
     display: inline-flex;
     justify-content: center;
@@ -326,7 +326,7 @@ main.post {
         padding: 0 13px;
         height: 32px;
         font-size: 1.6rem;
-        font-family: "REM";
+        font-family: var(--font-rem);
       }
 
       .like-button:hover {

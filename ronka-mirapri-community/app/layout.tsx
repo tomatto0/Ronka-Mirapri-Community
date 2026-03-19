@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import Providers from "./components/Providers";
 import Link from "next/link";
+import { pretendard, rem, galmuri } from "@/public/fonts/fonts";
 
 export const metadata: Metadata = {
   title: "롱카의 룩북?",
@@ -14,16 +15,24 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko">
+    <html lang="ko" className={`${pretendard.variable} ${rem.variable} ${galmuri.variable}`}>
       <head>
         <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="google-site-verification" content="UJRNKnijwobnk4mrxPmb1GkeZyxIPW6CNDv7QxaF4MU" />
+
+        <link rel="preconnect" href="https://lookbook.ronkacloset.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://storage.googleapis.com" />
+
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon.png" />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
       </head>
-      <body>
+
+      <body className={pretendard.className}>
+        <GoogleTagManager gtmId="GTM-NTZXPT4C" />
         {/* <!-- Google Tag Manager (noscript) --> */}
         <noscript>
           <iframe
@@ -34,9 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         </noscript>
         {/* <!-- End Google Tag Manager (noscript) --> */}
-        {/* <!-- Google Search console (noscript) --> */}
-        <meta name="google-site-verification" content="UJRNKnijwobnk4mrxPmb1GkeZyxIPW6CNDv7QxaF4MU" />
-        {/* <!-- End Google Search console (noscript) --> */}
+
         <noscript>이 사이트는 javascript를 허용해야 정상적으로 동작합니다.</noscript>
         <div id="root">
           <div className="App">
@@ -52,12 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </div>
       </body>
-      {/* Google Analytics */}
-      <GoogleAnalytics gaId="G-0B330M6050" />
-      {/* End Google Analytics */}
-      {/* <!-- Google Tag Manager --> */}
-      <GoogleTagManager gtmId="GTM-NTZXPT4C" />
-      {/* <!-- End Google Tag Manager --> */}
+
     </html>
   );
 }

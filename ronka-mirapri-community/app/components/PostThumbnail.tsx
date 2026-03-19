@@ -68,11 +68,13 @@ export default function PostThumbnail({
     router.push(`/post/${post.index}`);
   };
 
+  const resizedUrl = post.image_url.replace(".webp", "_resized.webp");
+
   return (
     <div className="post-box">
       <Image
         className="post-thumbnail"
-        src={post.image_url}
+        src={resizedUrl}
         alt={post.title}
         onClick={post_click_handler}
         fill={true}
