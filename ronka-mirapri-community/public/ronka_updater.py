@@ -51,7 +51,8 @@ filtered_items['IconNumber'] = filtered_items['Icon']
 filtered_items['Icon'] = '/i/0' + filtered_items['Icon'].str[:2] + '000/0' + filtered_items['Icon'] + '_hr1.png'
 
 #실장 안된 이벤트 아이템 필터링(할 때마다 수정해주세요)
-# filtered_items.drop(axis=0, index=filtered_items[filtered_items.Singular.str.contains('밤의 악마')].index, inplace=True)
+filtered_items.drop(axis=0, index=filtered_items[filtered_items.Singular.str.contains('제로 광명')].index, inplace=True)
+filtered_items.drop(axis=0, index=filtered_items[filtered_items.Singular.str.contains('신생 연왕국 시민')].index, inplace=True)
 
 #index를 id로, 컬럼명 수정
 filtered_items.reset_index(inplace=True)
