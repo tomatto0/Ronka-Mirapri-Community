@@ -129,7 +129,7 @@ export default function ItemSearchModal({
             />
           )}
         <div className="data-version">
-          <p>현재 적용된 패치 데이터 버전(KOR): V7.4.5</p>
+          <p>현재 적용된 패치 데이터 버전(KOR): V7.5</p>
         </div>
       </div>
     </div>
