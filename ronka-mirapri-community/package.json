@@ -36,6 +36,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "critters": "^0.0.25",
     "cross-env": "^7.0.3",
     "esbuild": "^0.25.0",
     "eslint": "^9",
