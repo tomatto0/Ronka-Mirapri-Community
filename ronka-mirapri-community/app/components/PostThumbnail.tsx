@@ -22,10 +22,12 @@ export default function PostThumbnail({
   post,
   queryKey,
   index,
+  priority = false,
 }: {
   post: PostInform;
   queryKey?: any[];
   index?: number[];
+  priority?: boolean;
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -48,7 +50,7 @@ export default function PostThumbnail({
         signIn("google", { callbackUrl: "/signup" });
       }
     }
-    set_is_liked(prev => !prev);
+    set_is_liked((prev) => !prev);
     await like_toggle(post._id);
 
     // 좋아요 변경 후 post.is_liked 갱신
@@ -58,7 +60,8 @@ export default function PostThumbnail({
         pageParams: number[];
       }>(queryKey);
       if (data) {
-        data.pages[index[0]].data[index[1]].is_liked = !data.pages[index[0]].data[index[1]].is_liked;
+        data.pages[index[0]].data[index[1]].is_liked =
+          !data.pages[index[0]].data[index[1]].is_liked;
         queryClient.setQueryData(queryKey, data);
       }
     }
@@ -78,7 +81,8 @@ export default function PostThumbnail({
         alt={post.title}
         onClick={post_click_handler}
         fill={true}
-        priority={true}
+        priority={priority}
+        fetchPriority={priority ? "high" : "auto"}
         sizes="(max-width: 701px) 50vw, 20vw"
         unoptimized={true}
       />
