@@ -5,10 +5,10 @@ import { useEffect, useRef, useState } from "react";
 export default function Itemrank({ itemrank }: { itemrank: string[] }) {
   const flowRef = useRef<HTMLDivElement[]>([]);
   const [text_iterate_number, set_text_iterate_number] = useState<number>(1);
-  const [view_width, set_view_width] = useState<number>(window.innerWidth);
+  const [view_width, set_view_width] = useState<number>(0);
 
   function reset_animation() {
-    flowRef.current.forEach(e => {
+    flowRef.current.forEach((e) => {
       if (e) {
         e.style.animation = "none";
         void e.offsetWidth;
@@ -18,17 +18,22 @@ export default function Itemrank({ itemrank }: { itemrank: string[] }) {
   }
 
   useEffect(() => {
-    if (flowRef.current.length !== 0) {
-      const resizeObserver = new ResizeObserver(entries => {
-        set_text_iterate_number(Math.max(Math.ceil(view_width / entries[0].target.getBoundingClientRect().width) + 1, 1));
-        reset_animation();
-      });
-      resizeObserver.observe(flowRef.current[0]);
-      return () => resizeObserver.disconnect();
+    if (view_width === 0 || flowRef.current.length === 0) {
+      return;
     }
+    const resizeObserver = new ResizeObserver((entries) => {
+      set_text_iterate_number(
+        Math.max(Math.ceil(view_width / entries[0].target.getBoundingClientRect().width) + 1, 1),
+      );
+      reset_animation();
+    });
+    resizeObserver.observe(flowRef.current[0]);
+    return () => resizeObserver.disconnect();
   }, [view_width]);
 
   useEffect(() => {
+    set_view_width(window.innerWidth);
+
     const resize_handler = () => {
       set_view_width(window.innerWidth);
     };
@@ -39,24 +44,33 @@ export default function Itemrank({ itemrank }: { itemrank: string[] }) {
   }, []);
 
   return (
-    <div className='flow-text-wrap'>
-      <div className='flow-text-container'>
+    <div className="flow-text-wrap">
+      <div className="flow-text-container">
         {Array.from({ length: text_iterate_number }).map((_, index) => (
           <div
-            className='flow-text-half'
+            className="flow-text-half"
             key={index}
-            ref={e => {
+            ref={(e) => {
               if (e && !flowRef.current.includes(e)) {
                 flowRef.current[index] = e;
               }
-            }}>
-            {itemrank.map(item => (
-              <Link href={`/?keyword=${item}`} className='flow-text' key={item}>
-                {item} <img src={process.env.NEXT_PUBLIC_BASE_URL + "/img/plus-green.svg"} alt='modal open button' />
+            }}
+          >
+            {itemrank.map((item) => (
+              <Link href={`/?keyword=${item}`} className="flow-text" key={item}>
+                {item}{" "}
+                <img
+                  src={process.env.NEXT_PUBLIC_BASE_URL + "/img/plus-green.svg"}
+                  alt="modal open button"
+                />
               </Link>
             ))}
-            <p className='flow-text title'>
-              주간인기 TOP 10 ITEM <img src={process.env.NEXT_PUBLIC_BASE_URL + "/img/plus-green.svg"} alt='modal open button' />
+            <p className="flow-text title">
+              주간인기 TOP 10 ITEM{" "}
+              <img
+                src={process.env.NEXT_PUBLIC_BASE_URL + "/img/plus-green.svg"}
+                alt="modal open button"
+              />
             </p>
           </div>
         ))}

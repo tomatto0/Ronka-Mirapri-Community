@@ -1,29 +1,69 @@
-import {
-  gender_category,
-  job_category,
-  race_category,
-} from "@/app/utils/constants";
+import { gender_category, job_category, race_category } from "@/app/utils/constants";
 import { Storage } from "@google-cloud/storage";
 import { MongoServerError } from "mongodb";
 import mongoose, { model, MongooseError, Schema } from "mongoose";
 const uri = process.env.MONGODB_URI as string;
 const credentials = JSON.parse(
-  Buffer.from(process.env.GOOGLE_APPLICATION_CREDENTIALS!, "base64").toString(
-    "utf8"
-  )
+  Buffer.from(process.env.GOOGLE_APPLICATION_CREDENTIALS!, "base64").toString("utf8"),
 );
 const storage = new Storage({ credentials });
 const bucketname = "ronka_closet_community";
 const bucket = storage.bucket(bucketname);
 
+// Node.js 전역(global) 객체 타입을 확장하여 캐시 타입을 지정합니다.
+interface GlobalMongoose {
+  conn: typeof mongoose | null;
+  promise: Promise<typeof mongoose> | null;
+}
+
+declare global {
+  var mongooseCache: GlobalMongoose | undefined;
+}
+
+// 전역 캐시 초기화 (이미 있으면 기존 것 사용)
+let cached = global.mongooseCache;
+
+if (!cached) {
+  cached = global.mongooseCache = { conn: null, promise: null };
+}
+
 async function connectDB() {
+  if (!cached) {
+    cached = global.mongooseCache = { conn: null, promise: null };
+  }
+
+  if (cached.conn) {
+    return cached.conn;
+  }
+
+  if (!cached.promise) {
+    cached.promise = connectWithRetry();
+  }
+
   try {
-    await mongoose.connect(uri, {
+    cached.conn = await cached.promise;
+  } catch (e) {
+    cached.promise = null;
+    throw e;
+  }
+
+  return cached.conn;
+}
+
+async function connectWithRetry(retries = 2, delayMs = 300): Promise<typeof mongoose> {
+  try {
+    const instance = await mongoose.connect(uri, {
       connectTimeoutMS: 10000,
+      maxPoolSize: 10,
     });
     console.log("MongoDB connection complete");
+    return instance;
   } catch (e) {
-    console.error("MongoDB connection error:", e);
+    if (retries > 0) {
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+      return connectWithRetry(retries - 1, delayMs * 2);
+    }
+    throw e;
   }
 }
 
@@ -113,15 +153,15 @@ post_schema.pre("findOneAndDelete", async function (next) {
     }
     const filename = post.image_url.replace(`${process.env.NEXT_PUBLIC_CDN_URL}/`, "");
 
-      // 원본 삭제
-      const file = bucket.file(filename);
-      await file.delete().catch(console.error); 
+    // 원본 삭제
+    const file = bucket.file(filename);
+    await file.delete().catch(console.error);
 
-      // _resized 파일 삭제
-      const resizedFilename = filename.replace(".webp", "_resized.webp");
-      const resizedFile = bucket.file(resizedFilename);
-      await resizedFile.delete().catch(console.error); 
-      
+    // _resized 파일 삭제
+    const resizedFilename = filename.replace(".webp", "_resized.webp");
+    const resizedFile = bucket.file(resizedFilename);
+    await resizedFile.delete().catch(console.error);
+
     next();
   } catch (e) {
     if (e instanceof Error) {
@@ -151,28 +191,23 @@ post_schema.pre("deleteMany", async function (next) {
 
     for (const post of posts) {
       if (post.likes?.length > 0) {
-        promise_delete_likes.push(
-          Like.deleteMany({ _id: { $in: post.likes } })
-        );
+        promise_delete_likes.push(Like.deleteMany({ _id: { $in: post.likes } }));
       }
       const user = await User.findById(post.author);
       if (user) {
         user.posts.pull(post._id);
         promise_update_user.push(user.updateOne({ posts: user.posts }));
       }
-      const filename = post.image_url.replace(
-        `${process.env.NEXT_PUBLIC_CDN_URL}/`,
-        ""
-      );
+      const filename = post.image_url.replace(`${process.env.NEXT_PUBLIC_CDN_URL}/`, "");
 
       // 원본 삭제
       const file = bucket.file(filename);
-      await file.delete().catch(console.error); 
+      await file.delete().catch(console.error);
 
       // _resized 파일 삭제
       const resizedFilename = filename.replace(".webp", "_resized.webp");
       const resizedFile = bucket.file(resizedFilename);
-      await resizedFile.delete().catch(console.error); 
+      await resizedFile.delete().catch(console.error);
     }
     await Promise.all([...promise_delete_likes, ...promise_update_user]);
     next();
@@ -189,7 +224,7 @@ post_schema.pre("save", async function (next) {
     const counter = await Counter.findByIdAndUpdate(
       { _id: "post_seq" },
       { $inc: { seq: 1 } },
-      { new: true, upsert: true }
+      { new: true, upsert: true },
     );
     this.index = counter.seq;
   }
@@ -218,10 +253,7 @@ like_schema.pre("findOneAndDelete", async function (next) {
     if (!like) {
       return next();
     }
-    const [user, post] = await Promise.all([
-      User.findById(like.user),
-      Post.findById(like.post),
-    ]);
+    const [user, post] = await Promise.all([User.findById(like.user), Post.findById(like.post)]);
     if (user) {
       user.likes.pull(like._id);
       await user.updateOne({ likes: user.likes });
@@ -243,16 +275,13 @@ like_schema.pre("findOneAndDelete", async function (next) {
 like_schema.pre("deleteMany", async function (next) {
   try {
     console.log("like-schema.deleteMany", this.getFilter());
-    const likes = await this.model
-      .find(this.getFilter())
-      .select(["user", "post", "_id"])
-      .lean<
-        {
-          user: Schema.Types.ObjectId;
-          post: Schema.Types.ObjectId;
-          _id: Schema.Types.ObjectId;
-        }[]
-      >();
+    const likes = await this.model.find(this.getFilter()).select(["user", "post", "_id"]).lean<
+      {
+        user: Schema.Types.ObjectId;
+        post: Schema.Types.ObjectId;
+        _id: Schema.Types.ObjectId;
+      }[]
+    >();
     if (!Array.isArray(likes) || likes.length === 0) {
       return next();
     }
@@ -313,17 +342,7 @@ const User = mongoose.models.User || model("User", user_schema);
 const Post = mongoose.models.Post || model("Post", post_schema);
 const Like = mongoose.models.Like || model("Like", like_schema);
 const Counter = mongoose.models.Counter || model("Counter", counter_schema);
-const Blacklist =
-  mongoose.models.Blacklist || model("Blacklist", blacklist_schema);
+const Blacklist = mongoose.models.Blacklist || model("Blacklist", blacklist_schema);
 const News = mongoose.models.News || model("News", news_schema);
 
-export {
-  connectDB,
-  is_duplicated_error,
-  is_validation_error,
-  User,
-  Post,
-  Like,
-  Blacklist,
-  News,
-};
+export { connectDB, is_duplicated_error, is_validation_error, User, Post, Like, Blacklist, News };
