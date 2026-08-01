@@ -30493,7 +30493,7 @@
   },
   {
     "Id": 8428,
-    "Name": "보강된 초래자의 손목장식",
+    "Name": "보강된 초래자의 손목띠",
     "Icon": "/i/044000/044191_hr1.png",
     "DyeCount": 2,
     "ClassJobCategory": 28,
@@ -239112,6 +239112,1194 @@
     "IconNumber": "54765"
   },
   {
+    "Id": 50978,
+    "Name": "팬텀 달그림자 한손검",
+    "Icon": "/i/030000/030704_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 20,
+    "EquipSlotCategory": 1,
+    "IconNumber": "30704"
+  },
+  {
+    "Id": 50979,
+    "Name": "팬텀 달그림자 톤파",
+    "Icon": "/i/030000/030868_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 21,
+    "EquipSlotCategory": 13,
+    "IconNumber": "30868"
+  },
+  {
+    "Id": 50980,
+    "Name": "팬텀 달그림자 전투망치",
+    "Icon": "/i/031000/031278_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 22,
+    "EquipSlotCategory": 13,
+    "IconNumber": "31278"
+  },
+  {
+    "Id": 50981,
+    "Name": "팬텀 달그림자 창",
+    "Icon": "/i/031000/031680_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 23,
+    "EquipSlotCategory": 13,
+    "IconNumber": "31680"
+  },
+  {
+    "Id": 50982,
+    "Name": "팬텀 달그림자 현악궁",
+    "Icon": "/i/032000/032068_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 24,
+    "EquipSlotCategory": 13,
+    "IconNumber": "32068"
+  },
+  {
+    "Id": 50983,
+    "Name": "팬텀 달그림자 환술봉",
+    "Icon": "/i/032000/032499_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 25,
+    "EquipSlotCategory": 13,
+    "IconNumber": "32499"
+  },
+  {
+    "Id": 50984,
+    "Name": "팬텀 달그림자 주술봉",
+    "Icon": "/i/032000/032914_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 26,
+    "EquipSlotCategory": 13,
+    "IconNumber": "32914"
+  },
+  {
+    "Id": 50985,
+    "Name": "팬텀 달그림자 금서",
+    "Icon": "/i/037000/037859_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 28,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37859"
+  },
+  {
+    "Id": 50986,
+    "Name": "팬텀 달그림자 치유서",
+    "Icon": "/i/037000/037858_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 29,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37858"
+  },
+  {
+    "Id": 50987,
+    "Name": "팬텀 달그림자 단검",
+    "Icon": "/i/033000/033654_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 92,
+    "EquipSlotCategory": 13,
+    "IconNumber": "33654"
+  },
+  {
+    "Id": 50988,
+    "Name": "팬텀 달그림자 단두검",
+    "Icon": "/i/034000/034033_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 98,
+    "EquipSlotCategory": 13,
+    "IconNumber": "34033"
+  },
+  {
+    "Id": 50989,
+    "Name": "팬텀 달그림자 연발권총",
+    "Icon": "/i/034000/034527_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 96,
+    "EquipSlotCategory": 13,
+    "IconNumber": "34527"
+  },
+  {
+    "Id": 50990,
+    "Name": "팬텀 달그림자 천구의",
+    "Icon": "/i/034000/034726_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 99,
+    "EquipSlotCategory": 13,
+    "IconNumber": "34726"
+  },
+  {
+    "Id": 50991,
+    "Name": "팬텀 달그림자 외날검",
+    "Icon": "/i/036000/036582_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 111,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36582"
+  },
+  {
+    "Id": 50992,
+    "Name": "팬텀 달그림자 데겐",
+    "Icon": "/i/036000/036881_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 112,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36881"
+  },
+  {
+    "Id": 50993,
+    "Name": "팬텀 달그림자 건블레이드",
+    "Icon": "/i/036000/036124_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 149,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36124"
+  },
+  {
+    "Id": 50994,
+    "Name": "팬텀 달그림자 부채",
+    "Icon": "/i/036000/036323_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 150,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36323"
+  },
+  {
+    "Id": 50995,
+    "Name": "팬텀 달그림자 전투낫",
+    "Icon": "/i/037000/037294_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 180,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37294"
+  },
+  {
+    "Id": 50996,
+    "Name": "팬텀 달그림자 진자",
+    "Icon": "/i/037000/037090_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 181,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37090"
+  },
+  {
+    "Id": 50997,
+    "Name": "팬텀 달그림자 쌍송곳니",
+    "Icon": "/i/037000/037457_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 196,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37457"
+  },
+  {
+    "Id": 50998,
+    "Name": "팬텀 달그림자 둥근붓",
+    "Icon": "/i/037000/037667_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 197,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37667"
+  },
+  {
+    "Id": 50999,
+    "Name": "팬텀 달그림자 방패",
+    "Icon": "/i/030000/030293_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 20,
+    "EquipSlotCategory": 2,
+    "IconNumber": "30293"
+  },
+  {
+    "Id": 51000,
+    "Name": "팬텀 숨은그림자 한손검",
+    "Icon": "/i/030000/030704_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 20,
+    "EquipSlotCategory": 1,
+    "IconNumber": "30704"
+  },
+  {
+    "Id": 51001,
+    "Name": "팬텀 숨은그림자 톤파",
+    "Icon": "/i/030000/030868_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 21,
+    "EquipSlotCategory": 13,
+    "IconNumber": "30868"
+  },
+  {
+    "Id": 51002,
+    "Name": "팬텀 숨은그림자 전투망치",
+    "Icon": "/i/031000/031278_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 22,
+    "EquipSlotCategory": 13,
+    "IconNumber": "31278"
+  },
+  {
+    "Id": 51003,
+    "Name": "팬텀 숨은그림자 창",
+    "Icon": "/i/031000/031680_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 23,
+    "EquipSlotCategory": 13,
+    "IconNumber": "31680"
+  },
+  {
+    "Id": 51004,
+    "Name": "팬텀 숨은그림자 현악궁",
+    "Icon": "/i/032000/032068_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 24,
+    "EquipSlotCategory": 13,
+    "IconNumber": "32068"
+  },
+  {
+    "Id": 51005,
+    "Name": "팬텀 숨은그림자 환술봉",
+    "Icon": "/i/032000/032499_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 25,
+    "EquipSlotCategory": 13,
+    "IconNumber": "32499"
+  },
+  {
+    "Id": 51006,
+    "Name": "팬텀 숨은그림자 주술봉",
+    "Icon": "/i/032000/032914_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 26,
+    "EquipSlotCategory": 13,
+    "IconNumber": "32914"
+  },
+  {
+    "Id": 51007,
+    "Name": "팬텀 숨은그림자 금서",
+    "Icon": "/i/037000/037859_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 28,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37859"
+  },
+  {
+    "Id": 51008,
+    "Name": "팬텀 숨은그림자 치유서",
+    "Icon": "/i/037000/037858_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 29,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37858"
+  },
+  {
+    "Id": 51009,
+    "Name": "팬텀 숨은그림자 단검",
+    "Icon": "/i/033000/033654_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 92,
+    "EquipSlotCategory": 13,
+    "IconNumber": "33654"
+  },
+  {
+    "Id": 51010,
+    "Name": "팬텀 숨은그림자 단두검",
+    "Icon": "/i/034000/034033_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 98,
+    "EquipSlotCategory": 13,
+    "IconNumber": "34033"
+  },
+  {
+    "Id": 51011,
+    "Name": "팬텀 숨은그림자 연발권총",
+    "Icon": "/i/034000/034527_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 96,
+    "EquipSlotCategory": 13,
+    "IconNumber": "34527"
+  },
+  {
+    "Id": 51012,
+    "Name": "팬텀 숨은그림자 천구의",
+    "Icon": "/i/034000/034726_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 99,
+    "EquipSlotCategory": 13,
+    "IconNumber": "34726"
+  },
+  {
+    "Id": 51013,
+    "Name": "팬텀 숨은그림자 외날검",
+    "Icon": "/i/036000/036582_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 111,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36582"
+  },
+  {
+    "Id": 51014,
+    "Name": "팬텀 숨은그림자 데겐",
+    "Icon": "/i/036000/036881_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 112,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36881"
+  },
+  {
+    "Id": 51015,
+    "Name": "팬텀 숨은그림자 건블레이드",
+    "Icon": "/i/036000/036124_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 149,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36124"
+  },
+  {
+    "Id": 51016,
+    "Name": "팬텀 숨은그림자 부채",
+    "Icon": "/i/036000/036323_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 150,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36323"
+  },
+  {
+    "Id": 51017,
+    "Name": "팬텀 숨은그림자 전투낫",
+    "Icon": "/i/037000/037294_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 180,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37294"
+  },
+  {
+    "Id": 51018,
+    "Name": "팬텀 숨은그림자 진자",
+    "Icon": "/i/037000/037090_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 181,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37090"
+  },
+  {
+    "Id": 51019,
+    "Name": "팬텀 숨은그림자 쌍송곳니",
+    "Icon": "/i/037000/037457_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 196,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37457"
+  },
+  {
+    "Id": 51020,
+    "Name": "팬텀 숨은그림자 둥근붓",
+    "Icon": "/i/037000/037667_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 197,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37667"
+  },
+  {
+    "Id": 51021,
+    "Name": "팬텀 숨은그림자 방패",
+    "Icon": "/i/030000/030293_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 20,
+    "EquipSlotCategory": 2,
+    "IconNumber": "30293"
+  },
+  {
+    "Id": 51022,
+    "Name": "무광 모조 팬텀 어둠그림자 한손검",
+    "Icon": "/i/030000/030699_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 20,
+    "EquipSlotCategory": 1,
+    "IconNumber": "30699"
+  },
+  {
+    "Id": 51023,
+    "Name": "무광 모조 팬텀 어둠그림자 자마다르",
+    "Icon": "/i/030000/030863_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 21,
+    "EquipSlotCategory": 13,
+    "IconNumber": "30863"
+  },
+  {
+    "Id": 51024,
+    "Name": "무광 모조 팬텀 어둠그림자 긴날도끼",
+    "Icon": "/i/031000/031273_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 22,
+    "EquipSlotCategory": 13,
+    "IconNumber": "31273"
+  },
+  {
+    "Id": 51025,
+    "Name": "무광 모조 팬텀 어둠그림자 갈래창",
+    "Icon": "/i/031000/031675_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 23,
+    "EquipSlotCategory": 13,
+    "IconNumber": "31675"
+  },
+  {
+    "Id": 51026,
+    "Name": "무광 모조 팬텀 어둠그림자 장궁",
+    "Icon": "/i/032000/032063_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 24,
+    "EquipSlotCategory": 13,
+    "IconNumber": "32063"
+  },
+  {
+    "Id": 51027,
+    "Name": "무광 모조 팬텀 어둠그림자 환술봉",
+    "Icon": "/i/032000/032494_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 25,
+    "EquipSlotCategory": 13,
+    "IconNumber": "32494"
+  },
+  {
+    "Id": 51028,
+    "Name": "무광 모조 팬텀 어둠그림자 장봉",
+    "Icon": "/i/032000/032909_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 26,
+    "EquipSlotCategory": 13,
+    "IconNumber": "32909"
+  },
+  {
+    "Id": 51029,
+    "Name": "무광 모조 팬텀 어둠그림자 금서",
+    "Icon": "/i/037000/037849_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 28,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37849"
+  },
+  {
+    "Id": 51030,
+    "Name": "무광 모조 팬텀 어둠그림자 치유서",
+    "Icon": "/i/037000/037848_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 29,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37848"
+  },
+  {
+    "Id": 51031,
+    "Name": "무광 모조 팬텀 어둠그림자 쿠쿠리",
+    "Icon": "/i/033000/033649_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 92,
+    "EquipSlotCategory": 13,
+    "IconNumber": "33649"
+  },
+  {
+    "Id": 51032,
+    "Name": "무광 모조 팬텀 어둠그림자 단두검",
+    "Icon": "/i/034000/034028_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 98,
+    "EquipSlotCategory": 13,
+    "IconNumber": "34028"
+  },
+  {
+    "Id": 51033,
+    "Name": "무광 모조 팬텀 어둠그림자 단총",
+    "Icon": "/i/034000/034522_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 96,
+    "EquipSlotCategory": 13,
+    "IconNumber": "34522"
+  },
+  {
+    "Id": 51034,
+    "Name": "무광 모조 팬텀 어둠그림자 항성의",
+    "Icon": "/i/034000/034721_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 99,
+    "EquipSlotCategory": 13,
+    "IconNumber": "34721"
+  },
+  {
+    "Id": 51035,
+    "Name": "무광 모조 팬텀 어둠그림자 외날검",
+    "Icon": "/i/036000/036577_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 111,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36577"
+  },
+  {
+    "Id": 51036,
+    "Name": "무광 모조 팬텀 어둠그림자 행어",
+    "Icon": "/i/036000/036876_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 112,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36876"
+  },
+  {
+    "Id": 51037,
+    "Name": "무광 모조 팬텀 어둠그림자 건블레이드",
+    "Icon": "/i/036000/036119_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 149,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36119"
+  },
+  {
+    "Id": 51038,
+    "Name": "무광 모조 팬텀 어둠그림자 타흘룸",
+    "Icon": "/i/036000/036318_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 150,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36318"
+  },
+  {
+    "Id": 51039,
+    "Name": "무광 모조 팬텀 어둠그림자 전투낫",
+    "Icon": "/i/037000/037289_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 180,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37289"
+  },
+  {
+    "Id": 51040,
+    "Name": "무광 모조 팬텀 어둠그림자 날개",
+    "Icon": "/i/037000/037085_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 181,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37085"
+  },
+  {
+    "Id": 51041,
+    "Name": "무광 모조 팬텀 어둠그림자 쌍송곳니",
+    "Icon": "/i/037000/037452_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 196,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37452"
+  },
+  {
+    "Id": 51042,
+    "Name": "무광 모조 팬텀 어둠그림자 둥근붓",
+    "Icon": "/i/037000/037662_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 197,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37662"
+  },
+  {
+    "Id": 51043,
+    "Name": "무광 모조 팬텀 어둠그림자 방패",
+    "Icon": "/i/030000/030288_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 20,
+    "EquipSlotCategory": 2,
+    "IconNumber": "30288"
+  },
+  {
+    "Id": 51044,
+    "Name": "모조 팬텀 어둠그림자 한손검",
+    "Icon": "/i/030000/030699_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 20,
+    "EquipSlotCategory": 1,
+    "IconNumber": "30699"
+  },
+  {
+    "Id": 51045,
+    "Name": "모조 팬텀 어둠그림자 자마다르",
+    "Icon": "/i/030000/030863_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 21,
+    "EquipSlotCategory": 13,
+    "IconNumber": "30863"
+  },
+  {
+    "Id": 51046,
+    "Name": "모조 팬텀 어둠그림자 긴날도끼",
+    "Icon": "/i/031000/031273_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 22,
+    "EquipSlotCategory": 13,
+    "IconNumber": "31273"
+  },
+  {
+    "Id": 51047,
+    "Name": "모조 팬텀 어둠그림자 갈래창",
+    "Icon": "/i/031000/031675_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 23,
+    "EquipSlotCategory": 13,
+    "IconNumber": "31675"
+  },
+  {
+    "Id": 51048,
+    "Name": "모조 팬텀 어둠그림자 장궁",
+    "Icon": "/i/032000/032063_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 24,
+    "EquipSlotCategory": 13,
+    "IconNumber": "32063"
+  },
+  {
+    "Id": 51049,
+    "Name": "모조 팬텀 어둠그림자 환술봉",
+    "Icon": "/i/032000/032494_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 25,
+    "EquipSlotCategory": 13,
+    "IconNumber": "32494"
+  },
+  {
+    "Id": 51050,
+    "Name": "모조 팬텀 어둠그림자 장봉",
+    "Icon": "/i/032000/032909_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 26,
+    "EquipSlotCategory": 13,
+    "IconNumber": "32909"
+  },
+  {
+    "Id": 51051,
+    "Name": "모조 팬텀 어둠그림자 금서",
+    "Icon": "/i/037000/037849_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 28,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37849"
+  },
+  {
+    "Id": 51052,
+    "Name": "모조 팬텀 어둠그림자 치유서",
+    "Icon": "/i/037000/037848_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 29,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37848"
+  },
+  {
+    "Id": 51053,
+    "Name": "모조 팬텀 어둠그림자 쿠쿠리",
+    "Icon": "/i/033000/033649_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 92,
+    "EquipSlotCategory": 13,
+    "IconNumber": "33649"
+  },
+  {
+    "Id": 51054,
+    "Name": "모조 팬텀 어둠그림자 단두검",
+    "Icon": "/i/034000/034028_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 98,
+    "EquipSlotCategory": 13,
+    "IconNumber": "34028"
+  },
+  {
+    "Id": 51055,
+    "Name": "모조 팬텀 어둠그림자 단총",
+    "Icon": "/i/034000/034522_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 96,
+    "EquipSlotCategory": 13,
+    "IconNumber": "34522"
+  },
+  {
+    "Id": 51056,
+    "Name": "모조 팬텀 어둠그림자 항성의",
+    "Icon": "/i/034000/034721_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 99,
+    "EquipSlotCategory": 13,
+    "IconNumber": "34721"
+  },
+  {
+    "Id": 51057,
+    "Name": "모조 팬텀 어둠그림자 외날검",
+    "Icon": "/i/036000/036577_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 111,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36577"
+  },
+  {
+    "Id": 51058,
+    "Name": "모조 팬텀 어둠그림자 행어",
+    "Icon": "/i/036000/036876_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 112,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36876"
+  },
+  {
+    "Id": 51059,
+    "Name": "모조 팬텀 어둠그림자 건블레이드",
+    "Icon": "/i/036000/036119_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 149,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36119"
+  },
+  {
+    "Id": 51060,
+    "Name": "모조 팬텀 어둠그림자 타흘룸",
+    "Icon": "/i/036000/036318_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 150,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36318"
+  },
+  {
+    "Id": 51061,
+    "Name": "모조 팬텀 어둠그림자 전투낫",
+    "Icon": "/i/037000/037289_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 180,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37289"
+  },
+  {
+    "Id": 51062,
+    "Name": "모조 팬텀 어둠그림자 날개",
+    "Icon": "/i/037000/037085_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 181,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37085"
+  },
+  {
+    "Id": 51063,
+    "Name": "모조 팬텀 어둠그림자 쌍송곳니",
+    "Icon": "/i/037000/037452_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 196,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37452"
+  },
+  {
+    "Id": 51064,
+    "Name": "모조 팬텀 어둠그림자 둥근붓",
+    "Icon": "/i/037000/037662_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 197,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37662"
+  },
+  {
+    "Id": 51065,
+    "Name": "모조 팬텀 어둠그림자 방패",
+    "Icon": "/i/030000/030288_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 20,
+    "EquipSlotCategory": 2,
+    "IconNumber": "30288"
+  },
+  {
+    "Id": 51066,
+    "Name": "모조 팬텀 달그림자 한손검",
+    "Icon": "/i/030000/030704_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 20,
+    "EquipSlotCategory": 1,
+    "IconNumber": "30704"
+  },
+  {
+    "Id": 51067,
+    "Name": "모조 팬텀 달그림자 톤파",
+    "Icon": "/i/030000/030868_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 21,
+    "EquipSlotCategory": 13,
+    "IconNumber": "30868"
+  },
+  {
+    "Id": 51068,
+    "Name": "모조 팬텀 달그림자 전투망치",
+    "Icon": "/i/031000/031278_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 22,
+    "EquipSlotCategory": 13,
+    "IconNumber": "31278"
+  },
+  {
+    "Id": 51069,
+    "Name": "모조 팬텀 달그림자 창",
+    "Icon": "/i/031000/031680_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 23,
+    "EquipSlotCategory": 13,
+    "IconNumber": "31680"
+  },
+  {
+    "Id": 51070,
+    "Name": "모조 팬텀 달그림자 현악궁",
+    "Icon": "/i/032000/032068_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 24,
+    "EquipSlotCategory": 13,
+    "IconNumber": "32068"
+  },
+  {
+    "Id": 51071,
+    "Name": "모조 팬텀 달그림자 환술봉",
+    "Icon": "/i/032000/032499_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 25,
+    "EquipSlotCategory": 13,
+    "IconNumber": "32499"
+  },
+  {
+    "Id": 51072,
+    "Name": "모조 팬텀 달그림자 주술봉",
+    "Icon": "/i/032000/032914_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 26,
+    "EquipSlotCategory": 13,
+    "IconNumber": "32914"
+  },
+  {
+    "Id": 51073,
+    "Name": "모조 팬텀 달그림자 금서",
+    "Icon": "/i/037000/037859_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 28,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37859"
+  },
+  {
+    "Id": 51074,
+    "Name": "모조 팬텀 달그림자 치유서",
+    "Icon": "/i/037000/037858_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 29,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37858"
+  },
+  {
+    "Id": 51075,
+    "Name": "모조 팬텀 달그림자 단검",
+    "Icon": "/i/033000/033654_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 92,
+    "EquipSlotCategory": 13,
+    "IconNumber": "33654"
+  },
+  {
+    "Id": 51076,
+    "Name": "모조 팬텀 달그림자 단두검",
+    "Icon": "/i/034000/034033_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 98,
+    "EquipSlotCategory": 13,
+    "IconNumber": "34033"
+  },
+  {
+    "Id": 51077,
+    "Name": "모조 팬텀 달그림자 연발권총",
+    "Icon": "/i/034000/034527_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 96,
+    "EquipSlotCategory": 13,
+    "IconNumber": "34527"
+  },
+  {
+    "Id": 51078,
+    "Name": "모조 팬텀 달그림자 천구의",
+    "Icon": "/i/034000/034726_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 99,
+    "EquipSlotCategory": 13,
+    "IconNumber": "34726"
+  },
+  {
+    "Id": 51079,
+    "Name": "모조 팬텀 달그림자 외날검",
+    "Icon": "/i/036000/036582_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 111,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36582"
+  },
+  {
+    "Id": 51080,
+    "Name": "모조 팬텀 달그림자 데겐",
+    "Icon": "/i/036000/036881_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 112,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36881"
+  },
+  {
+    "Id": 51081,
+    "Name": "모조 팬텀 달그림자 건블레이드",
+    "Icon": "/i/036000/036124_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 149,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36124"
+  },
+  {
+    "Id": 51082,
+    "Name": "모조 팬텀 달그림자 부채",
+    "Icon": "/i/036000/036323_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 150,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36323"
+  },
+  {
+    "Id": 51083,
+    "Name": "모조 팬텀 달그림자 전투낫",
+    "Icon": "/i/037000/037294_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 180,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37294"
+  },
+  {
+    "Id": 51084,
+    "Name": "모조 팬텀 달그림자 진자",
+    "Icon": "/i/037000/037090_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 181,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37090"
+  },
+  {
+    "Id": 51085,
+    "Name": "모조 팬텀 달그림자 쌍송곳니",
+    "Icon": "/i/037000/037457_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 196,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37457"
+  },
+  {
+    "Id": 51086,
+    "Name": "모조 팬텀 달그림자 둥근붓",
+    "Icon": "/i/037000/037667_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 197,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37667"
+  },
+  {
+    "Id": 51087,
+    "Name": "모조 팬텀 달그림자 방패",
+    "Icon": "/i/030000/030293_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 20,
+    "EquipSlotCategory": 2,
+    "IconNumber": "30293"
+  },
+  {
+    "Id": 51088,
+    "Name": "모조 팬텀 숨은그림자 한손검",
+    "Icon": "/i/030000/030704_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 20,
+    "EquipSlotCategory": 1,
+    "IconNumber": "30704"
+  },
+  {
+    "Id": 51089,
+    "Name": "모조 팬텀 숨은그림자 톤파",
+    "Icon": "/i/030000/030868_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 21,
+    "EquipSlotCategory": 13,
+    "IconNumber": "30868"
+  },
+  {
+    "Id": 51090,
+    "Name": "모조 팬텀 숨은그림자 전투망치",
+    "Icon": "/i/031000/031278_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 22,
+    "EquipSlotCategory": 13,
+    "IconNumber": "31278"
+  },
+  {
+    "Id": 51091,
+    "Name": "모조 팬텀 숨은그림자 창",
+    "Icon": "/i/031000/031680_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 23,
+    "EquipSlotCategory": 13,
+    "IconNumber": "31680"
+  },
+  {
+    "Id": 51092,
+    "Name": "모조 팬텀 숨은그림자 현악궁",
+    "Icon": "/i/032000/032068_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 24,
+    "EquipSlotCategory": 13,
+    "IconNumber": "32068"
+  },
+  {
+    "Id": 51093,
+    "Name": "모조 팬텀 숨은그림자 환술봉",
+    "Icon": "/i/032000/032499_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 25,
+    "EquipSlotCategory": 13,
+    "IconNumber": "32499"
+  },
+  {
+    "Id": 51094,
+    "Name": "모조 팬텀 숨은그림자 주술봉",
+    "Icon": "/i/032000/032914_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 26,
+    "EquipSlotCategory": 13,
+    "IconNumber": "32914"
+  },
+  {
+    "Id": 51095,
+    "Name": "모조 팬텀 숨은그림자 금서",
+    "Icon": "/i/037000/037859_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 28,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37859"
+  },
+  {
+    "Id": 51096,
+    "Name": "모조 팬텀 숨은그림자 치유서",
+    "Icon": "/i/037000/037858_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 29,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37858"
+  },
+  {
+    "Id": 51097,
+    "Name": "모조 팬텀 숨은그림자 단검",
+    "Icon": "/i/033000/033654_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 92,
+    "EquipSlotCategory": 13,
+    "IconNumber": "33654"
+  },
+  {
+    "Id": 51098,
+    "Name": "모조 팬텀 숨은그림자 단두검",
+    "Icon": "/i/034000/034033_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 98,
+    "EquipSlotCategory": 13,
+    "IconNumber": "34033"
+  },
+  {
+    "Id": 51099,
+    "Name": "모조 팬텀 숨은그림자 연발권총",
+    "Icon": "/i/034000/034527_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 96,
+    "EquipSlotCategory": 13,
+    "IconNumber": "34527"
+  },
+  {
+    "Id": 51100,
+    "Name": "모조 팬텀 숨은그림자 천구의",
+    "Icon": "/i/034000/034726_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 99,
+    "EquipSlotCategory": 13,
+    "IconNumber": "34726"
+  },
+  {
+    "Id": 51101,
+    "Name": "모조 팬텀 숨은그림자 외날검",
+    "Icon": "/i/036000/036582_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 111,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36582"
+  },
+  {
+    "Id": 51102,
+    "Name": "모조 팬텀 숨은그림자 데겐",
+    "Icon": "/i/036000/036881_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 112,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36881"
+  },
+  {
+    "Id": 51103,
+    "Name": "모조 팬텀 숨은그림자 건블레이드",
+    "Icon": "/i/036000/036124_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 149,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36124"
+  },
+  {
+    "Id": 51104,
+    "Name": "모조 팬텀 숨은그림자 부채",
+    "Icon": "/i/036000/036323_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 150,
+    "EquipSlotCategory": 13,
+    "IconNumber": "36323"
+  },
+  {
+    "Id": 51105,
+    "Name": "모조 팬텀 숨은그림자 전투낫",
+    "Icon": "/i/037000/037294_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 180,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37294"
+  },
+  {
+    "Id": 51106,
+    "Name": "모조 팬텀 숨은그림자 진자",
+    "Icon": "/i/037000/037090_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 181,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37090"
+  },
+  {
+    "Id": 51107,
+    "Name": "모조 팬텀 숨은그림자 쌍송곳니",
+    "Icon": "/i/037000/037457_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 196,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37457"
+  },
+  {
+    "Id": 51108,
+    "Name": "모조 팬텀 숨은그림자 둥근붓",
+    "Icon": "/i/037000/037667_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 197,
+    "EquipSlotCategory": 13,
+    "IconNumber": "37667"
+  },
+  {
+    "Id": 51109,
+    "Name": "모조 팬텀 숨은그림자 방패",
+    "Icon": "/i/030000/030293_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 20,
+    "EquipSlotCategory": 2,
+    "IconNumber": "30293"
+  },
+  {
     "Id": 51110,
     "Name": "보강된 궁정연인 한손검",
     "Icon": "/i/030000/030703_hr1.png",
@@ -240381,6 +241569,1374 @@
     "IconNumber": "38516"
   },
   {
+    "Id": 51811,
+    "Name": "팬텀 환영 수호자 가면",
+    "Icon": "/i/056000/056947_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56947"
+  },
+  {
+    "Id": 51812,
+    "Name": "팬텀 환영 수호자 흉갑",
+    "Icon": "/i/057000/057376_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57376"
+  },
+  {
+    "Id": 51813,
+    "Name": "팬텀 환영 수호자 완갑",
+    "Icon": "/i/056000/056451_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56451"
+  },
+  {
+    "Id": 51814,
+    "Name": "팬텀 환영 수호자 하의",
+    "Icon": "/i/057000/057469_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57469"
+  },
+  {
+    "Id": 51815,
+    "Name": "팬텀 환영 수호자 쇠구두",
+    "Icon": "/i/057000/057961_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57961"
+  },
+  {
+    "Id": 51816,
+    "Name": "팬텀 환영 수호자 가면 +1",
+    "Icon": "/i/056000/056947_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56947"
+  },
+  {
+    "Id": 51817,
+    "Name": "팬텀 환영 수호자 흉갑 +1",
+    "Icon": "/i/057000/057376_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57376"
+  },
+  {
+    "Id": 51818,
+    "Name": "팬텀 환영 수호자 완갑 +1",
+    "Icon": "/i/056000/056451_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56451"
+  },
+  {
+    "Id": 51819,
+    "Name": "팬텀 환영 수호자 하의 +1",
+    "Icon": "/i/057000/057469_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57469"
+  },
+  {
+    "Id": 51820,
+    "Name": "팬텀 환영 수호자 쇠구두 +1",
+    "Icon": "/i/057000/057961_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57961"
+  },
+  {
+    "Id": 51821,
+    "Name": "팬텀 환영 수호자 가면 +2",
+    "Icon": "/i/056000/056947_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56947"
+  },
+  {
+    "Id": 51822,
+    "Name": "팬텀 환영 수호자 흉갑 +2",
+    "Icon": "/i/057000/057376_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57376"
+  },
+  {
+    "Id": 51823,
+    "Name": "팬텀 환영 수호자 완갑 +2",
+    "Icon": "/i/056000/056451_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56451"
+  },
+  {
+    "Id": 51824,
+    "Name": "팬텀 환영 수호자 하의 +2",
+    "Icon": "/i/057000/057469_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57469"
+  },
+  {
+    "Id": 51825,
+    "Name": "팬텀 환영 수호자 쇠구두 +2",
+    "Icon": "/i/057000/057961_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57961"
+  },
+  {
+    "Id": 51826,
+    "Name": "팬텀 환영 수호자 가면 +3",
+    "Icon": "/i/056000/056947_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56947"
+  },
+  {
+    "Id": 51827,
+    "Name": "팬텀 환영 수호자 흉갑 +3",
+    "Icon": "/i/057000/057376_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57376"
+  },
+  {
+    "Id": 51828,
+    "Name": "팬텀 환영 수호자 완갑 +3",
+    "Icon": "/i/056000/056451_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56451"
+  },
+  {
+    "Id": 51829,
+    "Name": "팬텀 환영 수호자 하의 +3",
+    "Icon": "/i/057000/057469_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57469"
+  },
+  {
+    "Id": 51830,
+    "Name": "팬텀 환영 수호자 쇠구두 +3",
+    "Icon": "/i/057000/057961_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 59,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57961"
+  },
+  {
+    "Id": 51831,
+    "Name": "팬텀 환영 학살자 가면",
+    "Icon": "/i/056000/056948_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56948"
+  },
+  {
+    "Id": 51832,
+    "Name": "팬텀 환영 학살자 흉갑",
+    "Icon": "/i/057000/057377_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57377"
+  },
+  {
+    "Id": 51833,
+    "Name": "팬텀 환영 학살자 완갑",
+    "Icon": "/i/056000/056452_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56452"
+  },
+  {
+    "Id": 51834,
+    "Name": "팬텀 환영 학살자 하의",
+    "Icon": "/i/057000/057470_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57470"
+  },
+  {
+    "Id": 51835,
+    "Name": "팬텀 환영 학살자 쇠구두",
+    "Icon": "/i/057000/057962_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57962"
+  },
+  {
+    "Id": 51836,
+    "Name": "팬텀 환영 학살자 가면 +1",
+    "Icon": "/i/056000/056948_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56948"
+  },
+  {
+    "Id": 51837,
+    "Name": "팬텀 환영 학살자 흉갑 +1",
+    "Icon": "/i/057000/057377_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57377"
+  },
+  {
+    "Id": 51838,
+    "Name": "팬텀 환영 학살자 완갑 +1",
+    "Icon": "/i/056000/056452_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56452"
+  },
+  {
+    "Id": 51839,
+    "Name": "팬텀 환영 학살자 하의 +1",
+    "Icon": "/i/057000/057470_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57470"
+  },
+  {
+    "Id": 51840,
+    "Name": "팬텀 환영 학살자 쇠구두 +1",
+    "Icon": "/i/057000/057962_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57962"
+  },
+  {
+    "Id": 51841,
+    "Name": "팬텀 환영 학살자 가면 +2",
+    "Icon": "/i/056000/056948_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56948"
+  },
+  {
+    "Id": 51842,
+    "Name": "팬텀 환영 학살자 흉갑 +2",
+    "Icon": "/i/057000/057377_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57377"
+  },
+  {
+    "Id": 51843,
+    "Name": "팬텀 환영 학살자 완갑 +2",
+    "Icon": "/i/056000/056452_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56452"
+  },
+  {
+    "Id": 51844,
+    "Name": "팬텀 환영 학살자 하의 +2",
+    "Icon": "/i/057000/057470_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57470"
+  },
+  {
+    "Id": 51845,
+    "Name": "팬텀 환영 학살자 쇠구두 +2",
+    "Icon": "/i/057000/057962_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57962"
+  },
+  {
+    "Id": 51846,
+    "Name": "팬텀 환영 학살자 가면 +3",
+    "Icon": "/i/056000/056948_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56948"
+  },
+  {
+    "Id": 51847,
+    "Name": "팬텀 환영 학살자 흉갑 +3",
+    "Icon": "/i/057000/057377_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57377"
+  },
+  {
+    "Id": 51848,
+    "Name": "팬텀 환영 학살자 완갑 +3",
+    "Icon": "/i/056000/056452_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56452"
+  },
+  {
+    "Id": 51849,
+    "Name": "팬텀 환영 학살자 하의 +3",
+    "Icon": "/i/057000/057470_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57470"
+  },
+  {
+    "Id": 51850,
+    "Name": "팬텀 환영 학살자 쇠구두 +3",
+    "Icon": "/i/057000/057962_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 76,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57962"
+  },
+  {
+    "Id": 51851,
+    "Name": "팬텀 환영 타격대 터번",
+    "Icon": "/i/056000/056950_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56950"
+  },
+  {
+    "Id": 51852,
+    "Name": "팬텀 환영 타격대 로브",
+    "Icon": "/i/057000/057379_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57379"
+  },
+  {
+    "Id": 51853,
+    "Name": "팬텀 환영 타격대 손목덮개",
+    "Icon": "/i/056000/056454_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56454"
+  },
+  {
+    "Id": 51854,
+    "Name": "팬텀 환영 타격대 헐렁바지",
+    "Icon": "/i/057000/057472_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57472"
+  },
+  {
+    "Id": 51855,
+    "Name": "팬텀 환영 타격대 장화",
+    "Icon": "/i/057000/057964_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57964"
+  },
+  {
+    "Id": 51856,
+    "Name": "팬텀 환영 타격대 터번 +1",
+    "Icon": "/i/056000/056950_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56950"
+  },
+  {
+    "Id": 51857,
+    "Name": "팬텀 환영 타격대 로브 +1",
+    "Icon": "/i/057000/057379_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57379"
+  },
+  {
+    "Id": 51858,
+    "Name": "팬텀 환영 타격대 손목덮개 +1",
+    "Icon": "/i/056000/056454_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56454"
+  },
+  {
+    "Id": 51859,
+    "Name": "팬텀 환영 타격대 헐렁바지 +1",
+    "Icon": "/i/057000/057472_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57472"
+  },
+  {
+    "Id": 51860,
+    "Name": "팬텀 환영 타격대 장화 +1",
+    "Icon": "/i/057000/057964_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57964"
+  },
+  {
+    "Id": 51861,
+    "Name": "팬텀 환영 타격대 터번 +2",
+    "Icon": "/i/056000/056950_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56950"
+  },
+  {
+    "Id": 51862,
+    "Name": "팬텀 환영 타격대 로브 +2",
+    "Icon": "/i/057000/057379_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57379"
+  },
+  {
+    "Id": 51863,
+    "Name": "팬텀 환영 타격대 손목덮개 +2",
+    "Icon": "/i/056000/056454_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56454"
+  },
+  {
+    "Id": 51864,
+    "Name": "팬텀 환영 타격대 헐렁바지 +2",
+    "Icon": "/i/057000/057472_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57472"
+  },
+  {
+    "Id": 51865,
+    "Name": "팬텀 환영 타격대 장화 +2",
+    "Icon": "/i/057000/057964_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57964"
+  },
+  {
+    "Id": 51866,
+    "Name": "팬텀 환영 타격대 터번 +3",
+    "Icon": "/i/056000/056950_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56950"
+  },
+  {
+    "Id": 51867,
+    "Name": "팬텀 환영 타격대 로브 +3",
+    "Icon": "/i/057000/057379_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57379"
+  },
+  {
+    "Id": 51868,
+    "Name": "팬텀 환영 타격대 손목덮개 +3",
+    "Icon": "/i/056000/056454_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56454"
+  },
+  {
+    "Id": 51869,
+    "Name": "팬텀 환영 타격대 헐렁바지 +3",
+    "Icon": "/i/057000/057472_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57472"
+  },
+  {
+    "Id": 51870,
+    "Name": "팬텀 환영 타격대 장화 +3",
+    "Icon": "/i/057000/057964_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 65,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57964"
+  },
+  {
+    "Id": 51871,
+    "Name": "팬텀 환영 유격대 터번",
+    "Icon": "/i/056000/056949_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56949"
+  },
+  {
+    "Id": 51872,
+    "Name": "팬텀 환영 유격대 로브",
+    "Icon": "/i/057000/057378_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57378"
+  },
+  {
+    "Id": 51873,
+    "Name": "팬텀 환영 유격대 손목덮개",
+    "Icon": "/i/056000/056453_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56453"
+  },
+  {
+    "Id": 51874,
+    "Name": "팬텀 환영 유격대 헐렁바지",
+    "Icon": "/i/057000/057471_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57471"
+  },
+  {
+    "Id": 51875,
+    "Name": "팬텀 환영 유격대 장화",
+    "Icon": "/i/057000/057963_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57963"
+  },
+  {
+    "Id": 51876,
+    "Name": "팬텀 환영 유격대 터번 +1",
+    "Icon": "/i/056000/056949_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56949"
+  },
+  {
+    "Id": 51877,
+    "Name": "팬텀 환영 유격대 로브 +1",
+    "Icon": "/i/057000/057378_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57378"
+  },
+  {
+    "Id": 51878,
+    "Name": "팬텀 환영 유격대 손목덮개 +1",
+    "Icon": "/i/056000/056453_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56453"
+  },
+  {
+    "Id": 51879,
+    "Name": "팬텀 환영 유격대 헐렁바지 +1",
+    "Icon": "/i/057000/057471_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57471"
+  },
+  {
+    "Id": 51880,
+    "Name": "팬텀 환영 유격대 장화 +1",
+    "Icon": "/i/057000/057963_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57963"
+  },
+  {
+    "Id": 51881,
+    "Name": "팬텀 환영 유격대 터번 +2",
+    "Icon": "/i/056000/056949_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56949"
+  },
+  {
+    "Id": 51882,
+    "Name": "팬텀 환영 유격대 로브 +2",
+    "Icon": "/i/057000/057378_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57378"
+  },
+  {
+    "Id": 51883,
+    "Name": "팬텀 환영 유격대 손목덮개 +2",
+    "Icon": "/i/056000/056453_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56453"
+  },
+  {
+    "Id": 51884,
+    "Name": "팬텀 환영 유격대 헐렁바지 +2",
+    "Icon": "/i/057000/057471_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57471"
+  },
+  {
+    "Id": 51885,
+    "Name": "팬텀 환영 유격대 장화 +2",
+    "Icon": "/i/057000/057963_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57963"
+  },
+  {
+    "Id": 51886,
+    "Name": "팬텀 환영 유격대 터번 +3",
+    "Icon": "/i/056000/056949_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56949"
+  },
+  {
+    "Id": 51887,
+    "Name": "팬텀 환영 유격대 로브 +3",
+    "Icon": "/i/057000/057378_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57378"
+  },
+  {
+    "Id": 51888,
+    "Name": "팬텀 환영 유격대 손목덮개 +3",
+    "Icon": "/i/056000/056453_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56453"
+  },
+  {
+    "Id": 51889,
+    "Name": "팬텀 환영 유격대 헐렁바지 +3",
+    "Icon": "/i/057000/057471_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57471"
+  },
+  {
+    "Id": 51890,
+    "Name": "팬텀 환영 유격대 장화 +3",
+    "Icon": "/i/057000/057963_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 66,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57963"
+  },
+  {
+    "Id": 51891,
+    "Name": "팬텀 환영 정찰대 터번",
+    "Icon": "/i/056000/056951_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56951"
+  },
+  {
+    "Id": 51892,
+    "Name": "팬텀 환영 정찰대 로브",
+    "Icon": "/i/057000/057380_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57380"
+  },
+  {
+    "Id": 51893,
+    "Name": "팬텀 환영 정찰대 손목덮개",
+    "Icon": "/i/056000/056455_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56455"
+  },
+  {
+    "Id": 51894,
+    "Name": "팬텀 환영 정찰대 헐렁바지",
+    "Icon": "/i/057000/057473_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57473"
+  },
+  {
+    "Id": 51895,
+    "Name": "팬텀 환영 정찰대 장화",
+    "Icon": "/i/057000/057965_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57965"
+  },
+  {
+    "Id": 51896,
+    "Name": "팬텀 환영 정찰대 터번 +1",
+    "Icon": "/i/056000/056951_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56951"
+  },
+  {
+    "Id": 51897,
+    "Name": "팬텀 환영 정찰대 로브 +1",
+    "Icon": "/i/057000/057380_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57380"
+  },
+  {
+    "Id": 51898,
+    "Name": "팬텀 환영 정찰대 손목덮개 +1",
+    "Icon": "/i/056000/056455_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56455"
+  },
+  {
+    "Id": 51899,
+    "Name": "팬텀 환영 정찰대 헐렁바지 +1",
+    "Icon": "/i/057000/057473_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57473"
+  },
+  {
+    "Id": 51900,
+    "Name": "팬텀 환영 정찰대 장화 +1",
+    "Icon": "/i/057000/057965_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57965"
+  },
+  {
+    "Id": 51901,
+    "Name": "팬텀 환영 정찰대 터번 +2",
+    "Icon": "/i/056000/056951_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56951"
+  },
+  {
+    "Id": 51902,
+    "Name": "팬텀 환영 정찰대 로브 +2",
+    "Icon": "/i/057000/057380_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57380"
+  },
+  {
+    "Id": 51903,
+    "Name": "팬텀 환영 정찰대 손목덮개 +2",
+    "Icon": "/i/056000/056455_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56455"
+  },
+  {
+    "Id": 51904,
+    "Name": "팬텀 환영 정찰대 헐렁바지 +2",
+    "Icon": "/i/057000/057473_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57473"
+  },
+  {
+    "Id": 51905,
+    "Name": "팬텀 환영 정찰대 장화 +2",
+    "Icon": "/i/057000/057965_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57965"
+  },
+  {
+    "Id": 51906,
+    "Name": "팬텀 환영 정찰대 터번 +3",
+    "Icon": "/i/056000/056951_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56951"
+  },
+  {
+    "Id": 51907,
+    "Name": "팬텀 환영 정찰대 로브 +3",
+    "Icon": "/i/057000/057380_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57380"
+  },
+  {
+    "Id": 51908,
+    "Name": "팬텀 환영 정찰대 손목덮개 +3",
+    "Icon": "/i/056000/056455_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56455"
+  },
+  {
+    "Id": 51909,
+    "Name": "팬텀 환영 정찰대 헐렁바지 +3",
+    "Icon": "/i/057000/057473_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57473"
+  },
+  {
+    "Id": 51910,
+    "Name": "팬텀 환영 정찰대 장화 +3",
+    "Icon": "/i/057000/057965_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 103,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57965"
+  },
+  {
+    "Id": 51911,
+    "Name": "팬텀 환영 치유사 수면모자",
+    "Icon": "/i/056000/056946_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56946"
+  },
+  {
+    "Id": 51912,
+    "Name": "팬텀 환영 치유사 누비옷",
+    "Icon": "/i/057000/057375_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57375"
+  },
+  {
+    "Id": 51913,
+    "Name": "팬텀 환영 치유사 손목덮개",
+    "Icon": "/i/056000/056450_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56450"
+  },
+  {
+    "Id": 51914,
+    "Name": "팬텀 환영 치유사 헐렁바지",
+    "Icon": "/i/057000/057468_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57468"
+  },
+  {
+    "Id": 51915,
+    "Name": "팬텀 환영 치유사 뾰족신",
+    "Icon": "/i/057000/057960_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57960"
+  },
+  {
+    "Id": 51916,
+    "Name": "팬텀 환영 치유사 수면모자 +1",
+    "Icon": "/i/056000/056946_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56946"
+  },
+  {
+    "Id": 51917,
+    "Name": "팬텀 환영 치유사 누비옷 +1",
+    "Icon": "/i/057000/057375_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57375"
+  },
+  {
+    "Id": 51918,
+    "Name": "팬텀 환영 치유사 손목덮개 +1",
+    "Icon": "/i/056000/056450_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56450"
+  },
+  {
+    "Id": 51919,
+    "Name": "팬텀 환영 치유사 헐렁바지 +1",
+    "Icon": "/i/057000/057468_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57468"
+  },
+  {
+    "Id": 51920,
+    "Name": "팬텀 환영 치유사 뾰족신 +1",
+    "Icon": "/i/057000/057960_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57960"
+  },
+  {
+    "Id": 51921,
+    "Name": "팬텀 환영 치유사 수면모자 +2",
+    "Icon": "/i/056000/056946_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56946"
+  },
+  {
+    "Id": 51922,
+    "Name": "팬텀 환영 치유사 누비옷 +2",
+    "Icon": "/i/057000/057375_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57375"
+  },
+  {
+    "Id": 51923,
+    "Name": "팬텀 환영 치유사 손목덮개 +2",
+    "Icon": "/i/056000/056450_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56450"
+  },
+  {
+    "Id": 51924,
+    "Name": "팬텀 환영 치유사 헐렁바지 +2",
+    "Icon": "/i/057000/057468_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57468"
+  },
+  {
+    "Id": 51925,
+    "Name": "팬텀 환영 치유사 뾰족신 +2",
+    "Icon": "/i/057000/057960_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57960"
+  },
+  {
+    "Id": 51926,
+    "Name": "팬텀 환영 치유사 수면모자 +3",
+    "Icon": "/i/056000/056946_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56946"
+  },
+  {
+    "Id": 51927,
+    "Name": "팬텀 환영 치유사 누비옷 +3",
+    "Icon": "/i/057000/057375_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57375"
+  },
+  {
+    "Id": 51928,
+    "Name": "팬텀 환영 치유사 손목덮개 +3",
+    "Icon": "/i/056000/056450_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56450"
+  },
+  {
+    "Id": 51929,
+    "Name": "팬텀 환영 치유사 헐렁바지 +3",
+    "Icon": "/i/057000/057468_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57468"
+  },
+  {
+    "Id": 51930,
+    "Name": "팬텀 환영 치유사 뾰족신 +3",
+    "Icon": "/i/057000/057960_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 64,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57960"
+  },
+  {
+    "Id": 51931,
+    "Name": "팬텀 환영 마술사 수면모자",
+    "Icon": "/i/056000/056945_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56945"
+  },
+  {
+    "Id": 51932,
+    "Name": "팬텀 환영 마술사 누비옷",
+    "Icon": "/i/057000/057374_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57374"
+  },
+  {
+    "Id": 51933,
+    "Name": "팬텀 환영 마술사 손목덮개",
+    "Icon": "/i/056000/056449_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56449"
+  },
+  {
+    "Id": 51934,
+    "Name": "팬텀 환영 마술사 헐렁바지",
+    "Icon": "/i/057000/057467_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57467"
+  },
+  {
+    "Id": 51935,
+    "Name": "팬텀 환영 마술사 뾰족신",
+    "Icon": "/i/057000/057959_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57959"
+  },
+  {
+    "Id": 51936,
+    "Name": "팬텀 환영 마술사 수면모자 +1",
+    "Icon": "/i/056000/056945_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56945"
+  },
+  {
+    "Id": 51937,
+    "Name": "팬텀 환영 마술사 누비옷 +1",
+    "Icon": "/i/057000/057374_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57374"
+  },
+  {
+    "Id": 51938,
+    "Name": "팬텀 환영 마술사 손목덮개 +1",
+    "Icon": "/i/056000/056449_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56449"
+  },
+  {
+    "Id": 51939,
+    "Name": "팬텀 환영 마술사 헐렁바지 +1",
+    "Icon": "/i/057000/057467_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57467"
+  },
+  {
+    "Id": 51940,
+    "Name": "팬텀 환영 마술사 뾰족신 +1",
+    "Icon": "/i/057000/057959_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57959"
+  },
+  {
+    "Id": 51941,
+    "Name": "팬텀 환영 마술사 수면모자 +2",
+    "Icon": "/i/056000/056945_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56945"
+  },
+  {
+    "Id": 51942,
+    "Name": "팬텀 환영 마술사 누비옷 +2",
+    "Icon": "/i/057000/057374_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57374"
+  },
+  {
+    "Id": 51943,
+    "Name": "팬텀 환영 마술사 손목덮개 +2",
+    "Icon": "/i/056000/056449_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56449"
+  },
+  {
+    "Id": 51944,
+    "Name": "팬텀 환영 마술사 헐렁바지 +2",
+    "Icon": "/i/057000/057467_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57467"
+  },
+  {
+    "Id": 51945,
+    "Name": "팬텀 환영 마술사 뾰족신 +2",
+    "Icon": "/i/057000/057959_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57959"
+  },
+  {
+    "Id": 51946,
+    "Name": "팬텀 환영 마술사 수면모자 +3",
+    "Icon": "/i/056000/056945_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56945"
+  },
+  {
+    "Id": 51947,
+    "Name": "팬텀 환영 마술사 누비옷 +3",
+    "Icon": "/i/057000/057374_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57374"
+  },
+  {
+    "Id": 51948,
+    "Name": "팬텀 환영 마술사 손목덮개 +3",
+    "Icon": "/i/056000/056449_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56449"
+  },
+  {
+    "Id": 51949,
+    "Name": "팬텀 환영 마술사 헐렁바지 +3",
+    "Icon": "/i/057000/057467_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57467"
+  },
+  {
+    "Id": 51950,
+    "Name": "팬텀 환영 마술사 뾰족신 +3",
+    "Icon": "/i/057000/057959_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 63,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57959"
+  },
+  {
+    "Id": 51952,
+    "Name": "투르 튜닉",
+    "Icon": "/i/057000/057381_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57381"
+  },
+  {
+    "Id": 51953,
+    "Name": "투르 손등장갑",
+    "Icon": "/i/056000/056456_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56456"
+  },
+  {
+    "Id": 51954,
+    "Name": "투르 긴바지",
+    "Icon": "/i/057000/057474_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57474"
+  },
+  {
+    "Id": 51955,
+    "Name": "투르 긴장화",
+    "Icon": "/i/057000/057966_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57966"
+  },
+  {
+    "Id": 51957,
+    "Name": "토르나 튜닉",
+    "Icon": "/i/057000/057383_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 23,
+    "IconNumber": "57383"
+  },
+  {
+    "Id": 51958,
+    "Name": "토르나 손목장식",
+    "Icon": "/i/056000/056458_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56458"
+  },
+  {
+    "Id": 51960,
+    "Name": "토르나 장화",
+    "Icon": "/i/057000/057968_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57968"
+  },
+  {
+    "Id": 51961,
+    "Name": "카웬 두건",
+    "Icon": "/i/056000/056952_hr1.png",
+    "DyeCount": 1,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56952"
+  },
+  {
+    "Id": 51962,
+    "Name": "카웬 튜닉",
+    "Icon": "/i/057000/057382_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57382"
+  },
+  {
+    "Id": 51963,
+    "Name": "카웬 팔덮개",
+    "Icon": "/i/056000/056457_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56457"
+  },
+  {
+    "Id": 51964,
+    "Name": "카웬 쫄바지",
+    "Icon": "/i/057000/057475_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57475"
+  },
+  {
+    "Id": 51965,
+    "Name": "카웬 장화",
+    "Icon": "/i/057000/057967_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57967"
+  },
+  {
     "Id": 52299,
     "Name": "팔라초 다이아몬드 검",
     "Icon": "/i/030000/030706_hr1.png",
@@ -240577,6 +243133,96 @@
     "ClassJobCategory": 38,
     "EquipSlotCategory": 2,
     "IconNumber": "30295"
+  },
+  {
+    "Id": 52323,
+    "Name": "아발란치 격투가 상의",
+    "Icon": "/i/057000/057372_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57372"
+  },
+  {
+    "Id": 52324,
+    "Name": "아발란치 격투가 손등장갑",
+    "Icon": "/i/056000/056447_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56447"
+  },
+  {
+    "Id": 52325,
+    "Name": "아발란치 격투가 하의",
+    "Icon": "/i/057000/057465_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57465"
+  },
+  {
+    "Id": 52326,
+    "Name": "아발란치 격투가 장화",
+    "Icon": "/i/057000/057957_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57957"
+  },
+  {
+    "Id": 52327,
+    "Name": "아발란치 격투가 귀걸이",
+    "Icon": "/i/055000/055574_hr1.png",
+    "DyeCount": 0,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 9,
+    "IconNumber": "55574"
+  },
+  {
+    "Id": 52328,
+    "Name": "아발란치 리더 선글라스",
+    "Icon": "/i/056000/056944_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 3,
+    "IconNumber": "56944"
+  },
+  {
+    "Id": 52329,
+    "Name": "아발란치 리더 조끼",
+    "Icon": "/i/057000/057373_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57373"
+  },
+  {
+    "Id": 52330,
+    "Name": "아발란치 리더 손등장갑",
+    "Icon": "/i/056000/056448_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56448"
+  },
+  {
+    "Id": 52331,
+    "Name": "아발란치 리더 카고팬츠",
+    "Icon": "/i/057000/057466_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57466"
+  },
+  {
+    "Id": 52332,
+    "Name": "아발란치 리더 장화",
+    "Icon": "/i/057000/057958_hr1.png",
+    "DyeCount": 2,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57958"
   },
   {
     "Id": 52387,
@@ -240975,6 +243621,51 @@
     "IconNumber": "57386"
   },
   {
+    "Id": 52436,
+    "Name": "페스티벌 네오 튜닉",
+    "Icon": "/i/057000/057389_hr1.png",
+    "DyeCount": 1,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57389"
+  },
+  {
+    "Id": 52437,
+    "Name": "오버핏 페스티벌 네오 튜닉",
+    "Icon": "/i/057000/057385_hr1.png",
+    "DyeCount": 1,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57385"
+  },
+  {
+    "Id": 52438,
+    "Name": "슬림핏 페스티벌 네오 튜닉",
+    "Icon": "/i/057000/057387_hr1.png",
+    "DyeCount": 1,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57387"
+  },
+  {
+    "Id": 52439,
+    "Name": "할로네 귀걸이",
+    "Icon": "/i/055000/055572_hr1.png",
+    "DyeCount": 0,
+    "ClassJobCategory": 34,
+    "EquipSlotCategory": 9,
+    "IconNumber": "55572"
+  },
+  {
+    "Id": 52582,
+    "Name": "팬텀 식칼",
+    "Icon": "/i/039000/039718_hr1.png",
+    "DyeCount": 0,
+    "ClassJobCategory": 16,
+    "EquipSlotCategory": 2,
+    "IconNumber": "39718"
+  },
+  {
     "Id": 52606,
     "Name": "다이아몬드 총검",
     "Icon": "/i/036000/036126_hr1.png",
@@ -241189,6 +243880,51 @@
     "ClassJobCategory": 1,
     "EquipSlotCategory": 7,
     "IconNumber": "57489"
+  },
+  {
+    "Id": 52634,
+    "Name": "무역풍 튜닉",
+    "Icon": "/i/057000/057396_hr1.png",
+    "DyeCount": 1,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 4,
+    "IconNumber": "57396"
+  },
+  {
+    "Id": 52635,
+    "Name": "무역풍 손목장갑",
+    "Icon": "/i/056000/056465_hr1.png",
+    "DyeCount": 1,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 5,
+    "IconNumber": "56465"
+  },
+  {
+    "Id": 52636,
+    "Name": "무역풍 무릎바지",
+    "Icon": "/i/057000/057482_hr1.png",
+    "DyeCount": 1,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 7,
+    "IconNumber": "57482"
+  },
+  {
+    "Id": 52637,
+    "Name": "무역풍 신발",
+    "Icon": "/i/057000/057975_hr1.png",
+    "DyeCount": 1,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 8,
+    "IconNumber": "57975"
+  },
+  {
+    "Id": 52647,
+    "Name": "아발란치 리더 귀걸이",
+    "Icon": "/i/055000/055573_hr1.png",
+    "DyeCount": 0,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 9,
+    "IconNumber": "55573"
   },
   {
     "Id": 44259,
@@ -241650,6 +244386,15 @@
     "IconNumber": "26074"
   },
   {
+    "Id": 52441,
+    "Name": "스타일카탈로그: 기본 타원형 안경",
+    "Icon": "/i/026000/026074_hr1.png",
+    "DyeCount": 1,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 24,
+    "IconNumber": "26074"
+  },
+  {
     "Id": 52442,
     "Name": "스타일카탈로그: 가죽띠 눈보호대(왼쪽)",
     "Icon": "/i/026000/026074_hr1.png",
@@ -241679,6 +244424,15 @@
   {
     "Id": 52445,
     "Name": "스타일카탈로그: 금속징 안대(오른쪽)",
+    "Icon": "/i/026000/026074_hr1.png",
+    "DyeCount": 1,
+    "ClassJobCategory": 1,
+    "EquipSlotCategory": 24,
+    "IconNumber": "26074"
+  },
+  {
+    "Id": 52447,
+    "Name": "스타일카탈로그: 굵은테 고글",
     "Icon": "/i/026000/026074_hr1.png",
     "DyeCount": 1,
     "ClassJobCategory": 1,
